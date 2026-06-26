@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ismael Vásquez — Bioestadística aplicada · Evidencia para decidir</title>
+<meta name="description" content="Bioestadístico y analista en Atención Primaria de Salud. Convierto registros clínicos y territoriales en interpretación, evidencia y dirección.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================ TOKENS ============================ */
+:root{
+  --bg:#091316; --panel:#0D1D21; --card:#11262B; --card-h:#16323A;
+  --line:rgba(120,196,189,.12); --line-2:rgba(120,196,189,.22);
+  --ink:#E9F1EE; --dim:#9FB6B1; --faint:#6B847F;
+  --aqua:#3FC9BE; --aqua-d:#2BA89E;
+  --verde:#5FBF8F; --ambar:#E6B252; --rojo:#E07365;
+  --warm:#E6B252;
+  --shadow:0 18px 50px -22px rgba(0,0,0,.7);
+  --maxw:1240px;
+  --f-disp:"Schibsted Grotesk",system-ui,sans-serif;
+  --f-serif:"Newsreader",Georgia,serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+[data-theme="light"]{
+  --bg:#EDF1F0; --panel:#E4EAE8; --card:#FFFFFF; --card-h:#F5F8F7;
+  --line:rgba(16,60,58,.12); --line-2:rgba(16,60,58,.22);
+  --ink:#0F2226; --dim:#496561; --faint:#7A938E;
+  --aqua:#0C8B81; --aqua-d:#0A746B;
+  --verde:#1E9466; --ambar:#B9842B; --rojo:#C75345;
+  --warm:#B9842B;
+  --shadow:0 16px 44px -26px rgba(16,60,58,.35);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:var(--f-disp); font-size:16px; line-height:1.5;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+[data-theme="dark"] body{
+  background:
+    radial-gradient(1100px 600px at 78% -8%, rgba(63,201,190,.10), transparent 60%),
+    radial-gradient(900px 520px at 0% 12%, rgba(230,178,82,.045), transparent 55%),
+    var(--bg);
+}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--aqua);color:#04181a}
+img{max-width:100%}
+
+/* ============================ LAYOUT ============================ */
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+.section{padding:118px 0;position:relative}
+.eyebrow{
+  font-family:var(--f-mono); font-size:12px; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--aqua); display:flex; align-items:center; gap:12px;
+}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--aqua);opacity:.6}
+.s-head{max-width:760px;margin-bottom:54px}
+.s-head h2{
+  font-family:var(--f-disp); font-weight:700; letter-spacing:-.02em;
+  font-size:clamp(30px,4.4vw,50px); line-height:1.04; margin:18px 0 16px;
+}
+.s-head p{font-family:var(--f-serif);font-size:19px;line-height:1.6;color:var(--dim)}
+.s-head h2 em{font-family:var(--f-serif);font-style:italic;font-weight:500;color:var(--aqua)}
+
+/* ============================ NAV ============================ */
+header.nav{
+  position:sticky;top:0;z-index:60;
+  backdrop-filter:blur(14px);
+  background:color-mix(in srgb,var(--bg) 78%,transparent);
+  border-bottom:1px solid var(--line);
+}
+.nav-in{display:flex;align-items:center;gap:20px;height:66px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:-.01em;font-size:15.5px}
+.brand .mark{
+  width:32px;height:32px;border-radius:9px;flex:0 0 auto;display:grid;place-items:center;
+  font-family:var(--f-mono);font-size:13px;font-weight:600;color:#04181a;
+  background:linear-gradient(135deg,var(--aqua),var(--verde));
+}
+.nav-links{display:flex;gap:4px;margin-left:auto}
+.nav-links a{
+  font-size:13.5px;color:var(--dim);padding:8px 13px;border-radius:8px;
+  transition:.18s;font-weight:500;
+}
+.nav-links a:hover{color:var(--ink);background:var(--card)}
+.nav-tools{display:flex;align-items:center;gap:10px}
+.icon-btn{
+  width:38px;height:38px;border-radius:9px;border:1px solid var(--line-2);
+  background:transparent;color:var(--ink);cursor:pointer;display:grid;place-items:center;transition:.18s;
+}
+.icon-btn:hover{border-color:var(--aqua);color:var(--aqua)}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;font-family:var(--f-disp);font-weight:600;
+  font-size:13.5px;padding:9px 16px;border-radius:9px;cursor:pointer;transition:.2s;border:1px solid transparent;
+}
+.btn-pri{background:var(--aqua);color:#04181a}
+.btn-pri:hover{background:var(--aqua-d);transform:translateY(-1px)}
+.btn-ghost{border-color:var(--line-2);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--aqua);color:var(--aqua)}
+.menu-btn{display:none}
+
+/* ============================ HERO ============================ */
+.hero{position:relative;padding:96px 0 84px;overflow:hidden}
+#heroCanvas{position:absolute;inset:0;width:100%;height:100%;opacity:.55;pointer-events:none}
+.hero .wrap{position:relative;z-index:2}
+.hero-eyebrow{margin-bottom:26px}
+.hero h1{
+  font-family:var(--f-disp);font-weight:700;letter-spacing:-.03em;
+  font-size:clamp(40px,6.6vw,86px);line-height:.99;max-width:16ch;margin-bottom:26px;
+}
+.hero h1 .hl{color:var(--aqua)}
+.hero h1 em{font-family:var(--f-serif);font-style:italic;font-weight:500}
+.hero-sub{font-family:var(--f-serif);font-size:clamp(18px,2.1vw,22px);line-height:1.55;color:var(--dim);max-width:60ch;margin-bottom:38px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:64px}
+.hero-cta .btn{padding:13px 22px;font-size:15px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.stat{background:var(--panel);padding:26px 24px}
+.stat .n{font-family:var(--f-disp);font-weight:700;font-size:clamp(30px,3.6vw,42px);letter-spacing:-.02em;line-height:1}
+.stat .n span{color:var(--aqua)}
+.stat .l{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:10px}
+
+/* ============================ SOBRE ============================ */
+.about-grid{display:grid;grid-template-columns:1.35fr .9fr;gap:60px;align-items:start}
+.about-lead p{font-family:var(--f-serif);font-size:21px;line-height:1.62;color:var(--ink);margin-bottom:22px}
+.about-lead p.sm{font-size:18px;color:var(--dim)}
+.about-lead strong{color:var(--aqua);font-weight:600}
+.about-side{border-left:1px solid var(--line);padding-left:34px}
+.about-side h4{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:0 0 16px}
+.about-side h4:not(:first-child){margin-top:32px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:12.5px;font-weight:500;padding:6px 12px;border-radius:20px;border:1px solid var(--line-2);color:var(--dim)}
+.chip.fill{background:var(--card);color:var(--ink)}
+
+/* ============================ LÍNEAS ============================ */
+.area-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.area-card{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 22px 22px;
+  cursor:pointer;transition:.22s;position:relative;overflow:hidden;text-align:left;color:inherit;font-family:inherit;
+}
+.area-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--ac,var(--aqua));opacity:.85}
+.area-card:hover{transform:translateY(-3px);border-color:var(--line-2);background:var(--card-h);box-shadow:var(--shadow)}
+.area-card .idx{font-family:var(--f-mono);font-size:11px;color:var(--faint);letter-spacing:.1em}
+.area-card h3{font-size:18px;font-weight:600;letter-spacing:-.01em;margin:14px 0 9px;line-height:1.18}
+.area-card p{font-size:13.5px;color:var(--dim);line-height:1.5}
+.area-card .cnt{margin-top:16px;font-family:var(--f-mono);font-size:12px;color:var(--ac,var(--aqua));display:flex;align-items:center;gap:7px}
+
+/* ============================ CONSTELACIÓN ============================ */
+.const-shell{position:relative;border:1px solid var(--line);border-radius:20px;background:
+  linear-gradient(180deg,var(--panel),color-mix(in srgb,var(--panel) 70%,var(--bg)));overflow:hidden}
+#graph{display:block;width:100%;height:560px;cursor:grab}
+.legend{display:flex;flex-wrap:wrap;gap:8px;padding:16px 18px;border-top:1px solid var(--line)}
+.lg{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--dim);
+  padding:6px 12px;border-radius:20px;border:1px solid var(--line);cursor:pointer;transition:.18s;user-select:none}
+.lg:hover{border-color:var(--line-2);color:var(--ink)}
+.lg.off{opacity:.34}
+.lg .dot{width:9px;height:9px;border-radius:50%;background:var(--c)}
+#tip{
+  position:absolute;pointer-events:none;opacity:0;transition:opacity .14s;z-index:5;
+  background:var(--bg);border:1px solid var(--line-2);border-radius:10px;padding:10px 13px;max-width:260px;
+  box-shadow:var(--shadow);transform:translate(-50%,-118%);
+}
+#tip .tid{font-family:var(--f-mono);font-size:10.5px;color:var(--aqua);letter-spacing:.06em}
+#tip .ttl{font-size:13px;font-weight:600;margin-top:4px;line-height:1.3}
+.const-hint{font-family:var(--f-mono);font-size:11.5px;color:var(--faint);position:absolute;top:16px;right:18px;letter-spacing:.04em}
+
+/* ============================ BIBLIOTECA ============================ */
+.lib-controls{display:flex;flex-direction:column;gap:18px;margin-bottom:30px}
+.search-box{position:relative;max-width:520px}
+.search-box input{
+  width:100%;background:var(--card);border:1px solid var(--line-2);border-radius:11px;
+  color:var(--ink);font-family:var(--f-disp);font-size:15px;padding:14px 16px 14px 44px;outline:none;transition:.18s;
+}
+.search-box input:focus{border-color:var(--aqua)}
+.search-box svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--faint)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.f-chip{
+  font-family:var(--f-disp);font-size:13px;font-weight:500;padding:8px 14px;border-radius:20px;
+  border:1px solid var(--line-2);color:var(--dim);background:transparent;cursor:pointer;transition:.16s;
+}
+.f-chip:hover{color:var(--ink);border-color:var(--line-2)}
+.f-chip.active{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.f-chip .x{opacity:.6;margin-left:6px;font-family:var(--f-mono)}
+.f-sep{width:1px;height:22px;background:var(--line-2);margin:0 4px}
+.f-label{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-right:2px}
+.lib-meta{font-family:var(--f-mono);font-size:12.5px;color:var(--faint);margin-bottom:20px}
+.lib-meta b{color:var(--ink)}
+.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rcard{
+  background:var(--card);border:1px solid var(--line);border-radius:15px;padding:20px;
+  display:flex;flex-direction:column;transition:.2s;position:relative;
+}
+.rcard:hover{transform:translateY(-3px);border-color:var(--line-2);background:var(--card-h);box-shadow:var(--shadow)}
+.rcard .top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.rcode{font-family:var(--f-mono);font-size:11.5px;color:var(--aqua);letter-spacing:.05em}
+.rtype{font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);
+  border:1px solid var(--line-2);border-radius:5px;padding:3px 7px}
+.rcard h3{font-size:16px;font-weight:600;line-height:1.28;letter-spacing:-.01em;margin-bottom:10px}
+.rcard p{font-size:13px;color:var(--dim);line-height:1.5;flex:1}
+.rtags{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 14px}
+.rtag{font-size:11px;color:var(--dim);background:color-mix(in srgb,var(--card-h) 80%,var(--bg));border:1px solid var(--line);border-radius:6px;padding:3px 8px}
+.rfoot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:13px}
+.rfoot .per{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rfoot a{font-size:13px;font-weight:600;color:var(--aqua);display:inline-flex;align-items:center;gap:5px}
+.rfoot a:hover{gap:8px}
+.r-dot{width:7px;height:7px;border-radius:50%;background:var(--ac);position:absolute;top:20px;right:20px;display:none}
+.more-row{text-align:center;margin-top:34px}
+.empty{padding:60px;text-align:center;color:var(--faint);font-family:var(--f-mono);font-size:13px;border:1px dashed var(--line-2);border-radius:14px}
+
+/* ============================ EVIDENCIA / DASHBOARD ============================ */
+.note{
+  display:flex;gap:14px;align-items:flex-start;background:var(--card);border:1px solid var(--line);
+  border-left:3px solid var(--ambar);border-radius:12px;padding:18px 20px;margin-bottom:34px;
+}
+.note svg{flex:0 0 auto;color:var(--ambar);margin-top:1px}
+.note p{font-size:13.5px;color:var(--dim);line-height:1.55}
+.note b{color:var(--ink);font-weight:600}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:30px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px}
+.kpi .n{font-weight:700;font-size:30px;letter-spacing:-.02em;color:var(--aqua)}
+.kpi .l{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-top:8px;line-height:1.4}
+.dash-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:16px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px}
+.panel.full{grid-column:1/-1}
+.panel h4{font-size:15px;font-weight:600;margin-bottom:4px}
+.panel .ph{font-family:var(--f-mono);font-size:11px;color:var(--faint);letter-spacing:.04em;margin-bottom:20px}
+.bar-row{display:flex;align-items:center;gap:12px;margin-bottom:11px;font-size:12.5px}
+.bar-row .bl{width:148px;flex:0 0 148px;color:var(--dim);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-track{flex:1;height:13px;background:color-mix(in srgb,var(--card) 90%,var(--bg));border-radius:7px;overflow:hidden}
+.bar-fill{height:100%;border-radius:7px;background:linear-gradient(90deg,var(--aqua-d),var(--aqua));transform-origin:left;transform:scaleX(0);transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.bar-row .bv{font-family:var(--f-mono);font-size:11.5px;color:var(--ink);width:42px;text-align:right}
+.heat{display:grid;gap:3px}
+.heat-row{display:grid;grid-template-columns:34px repeat(13,1fr);gap:3px;align-items:center}
+.heat-cell{aspect-ratio:1.5;border-radius:4px;display:grid;place-items:center;font-family:var(--f-mono);font-size:9px;color:rgba(255,255,255,.85)}
+.heat-lbl{font-family:var(--f-mono);font-size:10px;color:var(--faint);text-align:right;padding-right:4px}
+.heat-hours{display:grid;grid-template-columns:34px repeat(13,1fr);gap:3px;margin-top:6px}
+.heat-hours span{font-family:var(--f-mono);font-size:9px;color:var(--faint);text-align:center}
+
+/* ============================ PUBLICACIONES ============================ */
+.post-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pcard{
+  background:linear-gradient(180deg,var(--card),color-mix(in srgb,var(--card) 80%,var(--bg)));
+  border:1px solid var(--line);border-radius:16px;padding:24px;display:flex;flex-direction:column;
+  transition:.2s;position:relative;overflow:hidden;
+}
+.pcard::after{content:"in";position:absolute;top:-8px;right:14px;font-family:var(--f-disp);font-weight:800;font-size:62px;color:var(--line-2);opacity:.5}
+.pcard:hover{transform:translateY(-3px);border-color:var(--aqua);box-shadow:var(--shadow)}
+.pcard .kicker{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--aqua);margin-bottom:14px}
+.pcard h3{font-size:18px;font-weight:600;line-height:1.28;letter-spacing:-.01em;margin-bottom:11px;position:relative;z-index:2}
+.pcard p{font-family:var(--f-serif);font-size:15px;line-height:1.55;color:var(--dim);flex:1;position:relative;z-index:2}
+.pcard .ptags{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0}
+.pcard .lnk{font-size:13.5px;font-weight:600;color:var(--ink);display:inline-flex;gap:6px;align-items:center;border-top:1px solid var(--line);padding-top:14px}
+.pcard .lnk:hover{color:var(--aqua);gap:9px}
+
+/* ============================ CONTACTO ============================ */
+.contact{
+  border:1px solid var(--line-2);border-radius:22px;padding:64px 48px;text-align:center;position:relative;overflow:hidden;
+  background:linear-gradient(180deg,var(--panel),color-mix(in srgb,var(--panel) 60%,var(--bg)));
+}
+.contact h2{font-size:clamp(28px,4vw,44px);font-weight:700;letter-spacing:-.02em;line-height:1.05;margin-bottom:18px;max-width:18ch;margin-inline:auto}
+.contact h2 em{font-family:var(--f-serif);font-style:italic;color:var(--aqua);font-weight:500}
+.contact p{font-family:var(--f-serif);font-size:19px;color:var(--dim);max-width:54ch;margin:0 auto 34px}
+.contact-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.contact-cta .btn{padding:14px 24px;font-size:15px}
+
+/* ============================ FOOTER ============================ */
+footer{border-top:1px solid var(--line);padding:46px 0 60px}
+.foot-grid{display:flex;justify-content:space-between;align-items:flex-start;gap:30px;flex-wrap:wrap}
+.foot-grid .brand{margin-bottom:14px}
+.foot-note{max-width:540px;font-size:12.5px;color:var(--faint);line-height:1.6}
+.counter{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line-2);border-radius:11px;padding:12px 18px}
+.counter .cn{font-family:var(--f-mono);font-weight:600;font-size:20px;color:var(--aqua);letter-spacing:.02em}
+.counter .cl{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.foot-bottom{margin-top:38px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--faint);font-family:var(--f-mono)}
+
+/* ============================ REVEAL / MOTION ============================ */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+}
+
+/* ============================ RESPONSIVE ============================ */
+@media(max-width:1080px){
+  .area-grid{grid-template-columns:repeat(2,1fr)}
+  .card-grid,.post-grid{grid-template-columns:repeat(2,1fr)}
+  .about-grid{grid-template-columns:1fr;gap:40px}
+  .about-side{border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:30px}
+  .dash-grid{grid-template-columns:1fr}
+}
+@media(max-width:720px){
+  .section{padding:80px 0}
+  .wrap{padding:0 20px}
+  .nav-links{display:none}
+  .menu-btn{display:grid}
+  .nav-links.open{display:flex;position:absolute;top:66px;left:0;right:0;flex-direction:column;background:var(--bg);
+    border-bottom:1px solid var(--line);padding:14px 20px;gap:2px}
+  .nav-links.open a{padding:12px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .kpi-row{grid-template-columns:repeat(2,1fr)}
+  .card-grid,.post-grid,.area-grid{grid-template-columns:1fr}
+  .hero-cta .btn{flex:1;justify-content:center}
+  .bar-row .bl{width:96px;flex-basis:96px}
+  .heat-row,.heat-hours{grid-template-columns:28px repeat(13,1fr)}
+  .heat-cell{font-size:0}
+  .contact{padding:46px 22px}
+  #graph{height:460px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href="#top" class="brand"><span class="mark">IV</span><span>Ismael Vásquez</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#sobre">Sobre mí</a>
+      <a href="#lineas">Líneas</a>
+      <a href="#constelacion">Constelación</a>
+      <a href="#informes">Informes</a>
+      <a href="#evidencia">Evidencia</a>
+      <a href="#publicaciones">Publicaciones</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <div class="nav-tools">
+      <button class="icon-btn" id="themeBtn" aria-label="Cambiar tema" title="Tema claro / oscuro">
+        <svg id="themeIcon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <a class="btn btn-pri" id="liTop" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+        LinkedIn
+      </a>
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<a id="top"></a>
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <canvas id="heroCanvas"></canvas>
+  <div class="wrap">
+    <div class="eyebrow hero-eyebrow">Análisis · Bioestadística · Salud Pública APS</div>
+    <h1>Convierto registros en <span class="hl">evidencia</span>, <br>y la evidencia en <em>decisiones</em>.</h1>
+    <p class="hero-sub">Bioestadístico y analista en Atención Primaria de Salud. Hace nueve años leo los datos clínicos, administrativos y territoriales de la red CESFAM Tongoy para transformar cifras dispersas en interpretación útil para la gestión sanitaria.</p>
+    <div class="hero-cta">
+      <a href="#informes" class="btn btn-pri">Explorar informes
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="#evidencia" class="btn btn-ghost">Ver evidencia en vivo</a>
+    </div>
+    <div class="stats reveal">
+      <div class="stat"><div class="n"><span>+60</span></div><div class="l">Informes interpretativos UTT</div></div>
+      <div class="stat"><div class="n">9 <span>años</span></div><div class="l">Análisis en salud y gestión</div></div>
+      <div class="stat"><div class="n">8</div><div class="l">Líneas de análisis</div></div>
+      <div class="stat"><div class="n">2.867</div><div class="l">Atenciones depuradas (caso vivo)</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SOBRE ===================== -->
+<section class="section" id="sobre">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-lead reveal">
+        <div class="eyebrow" style="margin-bottom:26px">Quién hay detrás del dato</div>
+        <p>No produzco estadísticas: produzco <strong>lectura</strong>. Mi trabajo empieza donde termina la planilla, en la pregunta que el dato todavía no responde.</p>
+        <p class="sm">Durante nueve años he depurado, cruzado e interpretado registros clínicos y administrativos de una red de salud rural-costera. El valor no está en el número, sino en el patrón que revela: una brecha de cobertura, un cupo que se pierde, una población que dejó de consultar. Cada informe es un argumento construido con método, no una tabla más.</p>
+        <p class="sm">Trabajo con el lenguaje técnico de la salud pública chilena —IAAPS, Metas Sanitarias, MAIS, ECICEP, REM, CENSO P— y con el lenguaje del análisis moderno: SQL, Python, modelos predictivos. Mi rol es ser el puente entre ambos: traducir la complejidad de los datos en dirección para quien decide.</p>
+      </div>
+      <aside class="about-side reveal">
+        <h4>Stack analítico</h4>
+        <div class="chips">
+          <span class="chip fill">SQL</span><span class="chip fill">Python</span><span class="chip fill">pandas</span>
+          <span class="chip fill">scikit-learn</span><span class="chip fill">Power BI</span><span class="chip fill">Plotly</span>
+          <span class="chip fill">Excel avanzado</span>
+        </div>
+        <h4>Marcos técnicos</h4>
+        <div class="chips">
+          <span class="chip">IAAPS</span><span class="chip">Metas Sanitarias</span><span class="chip">MAIS</span>
+          <span class="chip">ECICEP</span><span class="chip">REM-P</span><span class="chip">CENSO P</span>
+          <span class="chip">FONASA Percápita</span><span class="chip">COMGES</span>
+        </div>
+        <h4>Formación</h4>
+        <div class="chips" id="eduChips"></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== LÍNEAS ===================== -->
+<section class="section" id="lineas" style="padding-top:30px">
+  <div class="wrap">
+    <div class="s-head reveal">
+      <div class="eyebrow">El ecosistema de trabajo</div>
+      <h2>Ocho <em>líneas de análisis</em> que sostienen la gestión local.</h2>
+      <p>Cada informe pertenece a una línea de trabajo. Juntas forman un mapa de cómo se lee, se mide y se mejora un centro de salud. Toca una línea para filtrar su producción.</p>
+    </div>
+    <div class="area-grid" id="areaGrid"></div>
+  </div>
+</section>
+
+<!-- ===================== CONSTELACIÓN ===================== -->
+<section class="section" id="constelacion" style="padding-top:30px">
+  <div class="wrap">
+    <div class="s-head reveal">
+      <div class="eyebrow">Mapa dinámico del conocimiento</div>
+      <h2>Una <em>constelación</em>, no una lista de archivos.</h2>
+      <p>Más de sesenta informes orbitando ocho núcleos temáticos. Cada punto es un análisis; cada grupo, una línea de trabajo. Pasa el cursor para identificarlo y haz clic para abrir su producción.</p>
+    </div>
+    <div class="const-shell reveal">
+      <span class="const-hint">arrastra · pasa el cursor · clic</span>
+      <canvas id="graph"></canvas>
+      <div id="tip"><div class="tid"></div><div class="ttl"></div></div>
+      <div class="legend" id="legend"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== INFORMES ===================== -->
+<section class="section" id="informes" style="padding-top:30px">
+  <div class="wrap">
+    <div class="s-head reveal">
+      <div class="eyebrow">Biblioteca de producción técnica</div>
+      <h2>Todos los informes, <em>filtrables</em> y al alcance.</h2>
+      <p>Busca por palabra, programa o nomenclatura. Filtra por línea de análisis o tipo de documento. Cada tarjeta abre el documento original.</p>
+    </div>
+    <div class="lib-controls reveal">
+      <div class="search-box">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="search" type="text" placeholder="Buscar &quot;PSCV&quot;, &quot;inasistencias&quot;, &quot;UTT059&quot;, &quot;IAAPS&quot;…" autocomplete="off">
+      </div>
+      <div class="filters" id="areaFilters"></div>
+      <div class="filters" id="typeFilters"></div>
+    </div>
+    <div class="lib-meta" id="libMeta"></div>
+    <div class="card-grid" id="cardGrid"></div>
+    <div class="more-row"><button class="btn btn-ghost" id="moreBtn">Mostrar más informes</button></div>
+  </div>
+</section>
+
+<!-- ===================== EVIDENCIA ===================== -->
+<section class="section" id="evidencia" style="padding-top:30px">
+  <div class="wrap">
+    <div class="s-head reveal">
+      <div class="eyebrow">Caso vivo · análisis reproducible</div>
+      <h2>Atenciones fuera de la <em>Hoja Diaria</em>: una brecha de registro, leída.</h2>
+      <p>Un extracto real de mi flujo en Python/Colab: depuración y lectura de 2.867 atenciones no incluidas en el registro formal (jun–sep 2025). Aquí se muestran solo agregados.</p>
+    </div>
+    <div class="note reveal">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+      <p><b>Resguardo de datos.</b> Los datos de origen contienen información personal sensible (nombre, RUT, ficha clínica) protegida por las leyes 19.628 y 20.584. Este panel publica <b>únicamente conteos agregados y anonimizados</b> —sin identificadores de pacientes ni de profesionales— elaborados a partir de mi análisis original.</p>
+    </div>
+    <div class="kpi-row reveal">
+      <div class="kpi"><div class="n" id="kpiTotal">—</div><div class="l">Atenciones no registradas en HD</div></div>
+      <div class="kpi"><div class="n" id="kpiProf">—</div><div class="l">Profesionales involucrados</div></div>
+      <div class="kpi"><div class="n" id="kpiPeak">—</div><div class="l">Mes de mayor brecha</div></div>
+      <div class="kpi"><div class="n" id="kpiHora">—</div><div class="l">Franja horaria crítica</div></div>
+    </div>
+    <div class="dash-grid">
+      <div class="panel reveal"><h4>Brecha por estamento</h4><div class="ph">Atenciones fuera de HD según categoría profesional</div><div id="catChart"></div></div>
+      <div class="panel reveal"><h4>Por ciclo vital</h4><div class="ph">Distribución según grupo etario</div><div id="cicloChart"></div></div>
+      <div class="panel reveal full"><h4>Concentración por día y hora</h4><div class="ph">Mapa de calor — dónde se pierde el registro</div><div class="heat" id="heat"></div><div class="heat-hours" id="heatHours"></div></div>
+      <div class="panel reveal full"><h4>Prestaciones más afectadas</h4><div class="ph">Top 10 de tipos de prestación no incluidos</div><div id="prestChart"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PUBLICACIONES ===================== -->
+<section class="section" id="publicaciones" style="padding-top:30px">
+  <div class="wrap">
+    <div class="s-head reveal">
+      <div class="eyebrow">Pensamiento aplicado</div>
+      <h2>Lo que comparto, <em>en abierto</em>.</h2>
+      <p>Reflexiones publicadas sobre datos, salud pública y gestión de la atención primaria. El mismo criterio de los informes, en formato de divulgación.</p>
+    </div>
+    <div class="post-grid" id="postGrid"></div>
+  </div>
+</section>
+
+<!-- ===================== CONTACTO ===================== -->
+<section class="section" id="contacto" style="padding-top:30px">
+  <div class="wrap">
+    <div class="contact reveal">
+      <div class="eyebrow" style="justify-content:center;margin-bottom:20px">Conversemos</div>
+      <h2>¿Hablamos de <em>datos que deciden</em>?</h2>
+      <p>Abierto a colaboraciones, intercambio técnico y conversaciones sobre analítica aplicada a la salud pública chilena.</p>
+      <div class="contact-cta">
+        <a class="btn btn-pri" id="liContact" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+          Ver perfil de LinkedIn</a>
+        <a class="btn btn-ghost" href="mailto:ismaelvasquezl@gmail.com">ismaelvasquezl@gmail.com</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#top" class="brand"><span class="mark">IV</span><span>Ismael Vásquez</span></a>
+        <p class="foot-note">Bioestadística aplicada a la Atención Primaria de Salud. Este sitio reúne producción técnica interpretativa; el acceso a cada documento queda sujeto a sus permisos de origen y a la autorización institucional correspondiente. No contiene datos personales de pacientes.</p>
+      </div>
+      <div class="counter">
+        <div>
+          <div class="cn" id="visitCount">···</div>
+          <div class="cl">Visitas</div>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> Ismael Vásquez · Tongoy, Región de Coquimbo</span>
+      <span>Diseñado como laboratorio de evidencia territorial</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const DATA = {"areas": [["cardio", "Crónicos & Cardiovascular", "PSCV, compensación metabólica, crónicos respiratorios y seguimiento de riesgo.", "verde"], ["ciclo", "Ciclo Vital & Programas", "Infancia, adolescencia, mujer, personas mayores y salud mental por curso de vida.", "aqua"], ["agenda", "Agenda & Rendimiento", "Inasistencias, sobrecupos, reconversión de cupos y uso real de la oferta.", "ambar"], ["metas", "IAAPS & Metas Sanitarias", "Indicadores APS, metas sanitarias, COMGES, cuenta pública y brechas.", "rojo"], ["poblacion", "Población & Territorio", "Percápita FONASA, demografía, cobertura y lectura territorial rural-costa.", "aqua"], ["prog", "Programación en Red 2026", "Planificación operativa, cartera de prestaciones y oferta por ciclo vital.", "verde"], ["prevencion", "Medicina Preventiva", "EMP, tamizaje, completitud diagnóstica y continuidad del cuidado.", "ambar"], ["gestion", "Registro & Gestión Interna", "Migración AVIS, pautas de registro, perfiles de cargo e inducción.", "rojo"]], "reports": [{"id": "UTT001", "area": "cardio", "title": "Epidemiológico comparativo REM-P — Ciclo Adulto PSCV", "desc": "Comparativa anual de indicadores PSCV entre dos cortes, visibilizando avances y brechas en compensación.", "tags": ["PSCV", "REM-P", "Crónicos"], "type": "Informe", "period": "24/25", "url": "https://docs.google.com/document/d/1hOQfdSwQYCCwXqU90k9-G4_b0orC-mIcZ08fsVG0SfQ/edit"}, {"id": "UTT002", "area": "cardio", "title": "P4 Sección B — Metas de compensación", "desc": "Metas de compensación en HTA, diabetes y riesgo cardiovascular para seguimiento de cumplimiento.", "tags": ["PSCV", "Metas", "REM-P"], "type": "Informe", "period": "24/25", "url": "https://docs.google.com/document/d/1DUYa5Nef3PCH-kRxRKxFqlL3Ue3q9SjmrujMb8tvrHY/edit"}, {"id": "UTT003", "area": "ciclo", "title": "P2 Plan — Estado nutricional infantil", "desc": "Propuesta estratégica para optimizar el estado nutricional infantil basada en CENSO P y normativa vigente.", "tags": ["Infancia", "Nutrición", "CENSO P"], "type": "Plan", "period": "2025", "url": "https://docs.google.com/document/d/1ZIvMqOAwBbLeYxTRWTccEo5YVW-ZTyodIi8G-LV0FN8/edit"}, {"id": "UTT004", "area": "cardio", "title": "P3 Vigilancia — Respiratorias crónicas", "desc": "Fortalecimiento de pesquisa, seguimiento y control de enfermedades respiratorias crónicas en el territorio.", "tags": ["Respiratorio", "Crónicos"], "type": "Plan", "period": "2025", "url": "https://docs.google.com/document/d/13KWy-Sx6CNclTcA8GQZxqSAxNkNIm0yIPW7Iz1-prDw/edit"}, {"id": "UTT005", "area": "ciclo", "title": "P3 Dependencia severa y cuidados paliativos", "desc": "Acciones para optimizar cobertura y calidad de atención a usuarios con dependencia severa.", "tags": ["Dependencia", "Paliativos", "Mayores"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1ErWP9h23uWIRSQywORej9K5Ld_ov_VNWLGSpoqphKEk/edit"}, {"id": "UTT006", "area": "cardio", "title": "P4 Control de riesgo cardiovascular (PSCV)", "desc": "Informe comparativo de desempeño en metas e indicadores de control de riesgo cardiovascular.", "tags": ["PSCV", "RCV"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1EVjdeiINBps8INsN3YL5SumBv-dmszshzC_5Mz3Dpoc/edit"}, {"id": "UTT007", "area": "ciclo", "title": "P9 Programa Adolescente — CENSO P", "desc": "Evaluación de resultados del programa adolescente con énfasis en áreas de riesgo prioritarias.", "tags": ["Adolescente", "CENSO P"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/16CUDWqEsdpO94PVmMt1IEtQaJYxSpX_srqmIezTDXZ0/edit"}, {"id": "UTT007-1", "area": "ciclo", "title": "P9 Adolescente — áreas de riesgo", "desc": "Extensión con análisis detallado de las áreas de riesgo detectadas y propuestas de abordaje integral.", "tags": ["Adolescente", "Riesgo"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1LZf6EAISTyqT1-2It5EuN2Hp7NBaRBo4GxN3oKc_Slc/edit"}, {"id": "UTT008", "area": "ciclo", "title": "P6 Salud Mental — infantil y adolescente", "desc": "Evaluación del programa de salud mental con foco en población infantil y adolescente.", "tags": ["Salud Mental", "Infancia", "Adolescente"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1jrW2sjVw3PLuxMT3STUZyJkayKexQ2rfz1oHDcL5Kp0/edit"}, {"id": "UTT009", "area": "poblacion", "title": "P7 Familia en Control de Salud Familiar", "desc": "Análisis situacional del programa de salud familiar y clasificación de riesgo vigente.", "tags": ["Salud Familiar", "Riesgo", "CENSO P"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1Q0bUEELs62VG4eH5hToJB2FmZrieTOZ7oJO9KnaEwLs/edit"}, {"id": "UTT010", "area": "ciclo", "title": "P5 Salud Integral Personas Mayores", "desc": "Desempeño del programa adulto mayor: funcionalidad, riesgo de dependencia y seguimiento.", "tags": ["Mayores", "Funcionalidad"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1T7o4HJRTf3fFp-C6AVmFSltOtEsBPVBRETYg7gBfPqY/edit"}, {"id": "UTT011", "area": "metas", "title": "Indicadores clave dic 2024 – jun 2025", "desc": "Revisión transversal de indicadores clave: tendencias, brechas y sugerencias de optimización.", "tags": ["Indicadores", "Brechas"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1eeD2XeHBDLmKF0S3SOZfodfbAbB61Nl-WHENX7tpO30/edit"}, {"id": "UTT012", "area": "poblacion", "title": "Percápita 2025 — análisis poblacional", "desc": "Distribución de usuarios percapitados y propuestas para mejorar cobertura en sectores dispersos.", "tags": ["Percápita", "Territorio"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1uK4mvx0j5AKDx7GIXafG97g4ZC6J4oioAwUlNe3xJYw/edit"}, {"id": "UTT013", "area": "cardio", "title": "P4 Sección B — Metas de compensación jun 2025", "desc": "Evaluación técnica de metas de compensación alcanzadas al corte de junio 2025.", "tags": ["PSCV", "Metas"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1j8kvRoBkQ0I6UDbW5-QqHwmq_Ro2lo_xZrij3HN_eoo/edit"}, {"id": "UTT014", "area": "cardio", "title": "P4 Sección C — Seguimiento de hipertensión", "desc": "Variables de seguimiento de hipertensión arterial en PSCV y estrategias de mejora.", "tags": ["HTA", "PSCV", "Seguimiento"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1KAbzwpiIkifGM2CkbuGmtFZOiWzK2Wct0SOcAODUbS4/edit"}, {"id": "UTT015", "area": "ciclo", "title": "P3 Cuidados Paliativos Universales", "desc": "Evaluación integral de la ejecución del programa CPU: recursos, brechas y fortalecimiento.", "tags": ["Paliativos"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1A5zSljWJsrWHWRe8lFC0L6ckCVnq8AYVdIXaaiAoms8/edit"}, {"id": "UTT016", "area": "agenda", "title": "Atenciones no incluidas en Hoja Diaria (jul 2025)", "desc": "Identifica atenciones fuera de registro formal con propuesta de integración en RCE.", "tags": ["Hoja Diaria", "Registro", "RCE"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1NwbQgceIWyu_2LFikRECbpywgtysUAliiSGo9C5pCIM/edit"}, {"id": "UTT017", "area": "gestion", "title": "Perfiles de cargo 2025", "desc": "Perfiles de cargo actualizados, responsabilidades y competencias por programa.", "tags": ["Gestión", "RRHH"], "type": "Documento", "period": "2025", "url": "https://docs.google.com/document/d/1Uoty4W6qBTByxoOy5exF_xxJwBguBcn_Jvaq5NE-Ifs/edit"}, {"id": "UTT018", "area": "poblacion", "title": "Informe poblacional y epidemiológico 2025", "desc": "Análisis consolidado de población percapitada, distribución etaria y acceso a prestaciones.", "tags": ["Epidemiología", "Percápita"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1ff9Y6RX0qX2gw9JuLcWhBepvBa6ze36lI8Q4Kczeyyk/edit"}, {"id": "UTT019", "area": "poblacion", "title": "Población percapitada sin atenciones en 15 meses", "desc": "Caracterización de población sin atenciones y propuestas para mejorar cobertura efectiva.", "tags": ["Cobertura", "Percápita"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1GardnHn1LQtTkT_bs-sa4haCXeQI8km5qvvJn7uavWA/edit"}, {"id": "UTT020", "area": "ciclo", "title": "Diagnóstico participativo MÁS AMA", "desc": "Problemáticas y propuestas de personas mayores con enfoque comunitario y de determinantes (ECICEP).", "tags": ["Mayores", "ECICEP", "Comunitario"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1jjtwX9V0Oi77zkcNxun7rxlKeMWGYEEQYqOKU5fgSps/edit"}, {"id": "UTT021", "area": "metas", "title": "IAAPS comunal — plan operativo sep–dic 2025", "desc": "Estado de cumplimiento IAAPS por programa con plan operativo semanal bajo MAIS.", "tags": ["IAAPS", "MAIS", "Plan"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1Huc7eK8_84NaeQiH4SGzPx_BZ0QVAAfKNOmwYrMVCfg/edit"}, {"id": "UTT022", "area": "metas", "title": "Metas Sanitarias comunal — jul 2025", "desc": "Cumplimiento de metas por establecimiento y líneas de acción para el cierre anual.", "tags": ["Metas Sanitarias", "Brechas"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1PApZGPlkgvatteUC0leb-z98L5lv2Fuuqo4C3I2l62U/edit"}, {"id": "UTT023", "area": "ciclo", "title": "PRAPS Salud Escolar — rural-costa", "desc": "Fundamenta la implementación de Salud Escolar PRAPS con estrategia extramuro en contexto rural.", "tags": ["Escolar", "PRAPS", "Infancia"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1KCpnOlw3qSxKMNGonXc_s8IHwwvg7zBDn0PGwIg_0gU/edit"}, {"id": "UTT024", "area": "ciclo", "title": "Análisis estadístico Programa Infantil", "desc": "777 prestaciones validadas: depuración, control de calidad y segmentación por tramos etarios.", "tags": ["Infancia", "Estadística"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1ZIV83ZqjS2WZaGEVZ2i7Wz3jjJ8KKy9PgWvXc5f2cL8/edit"}, {"id": "UTT025", "area": "prog", "title": "Programación Operativa 2026", "desc": "Alinea oferta de prestaciones con OT MINSAL, enfoque RISS y estrategia MAIS para 2026.", "tags": ["Programación", "RISS", "MAIS"], "type": "Documento", "period": "2026", "url": "https://docs.google.com/document/d/1TWNwswp1jBQMJ-vdUq0MDstPyoKIAgAmSwQB-TQeRxs/edit"}, {"id": "UTT026", "area": "ciclo", "title": "Ejecutivo Programa Infantil — cobertura EDP", "desc": "Cobertura EDP y Meta Sanitaria N.°7, con brechas de continuidad y acceso efectivo.", "tags": ["Infancia", "EDP", "Cobertura"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1t317CKts48hxKbIp6xAHq9eKj6j9zfaEX65UO1aDUpY/edit"}, {"id": "UTT027", "area": "prog", "title": "Planificación en Red 2026 — detallado", "desc": "Análisis de población, ciclo vital, cobertura efectiva y nudos críticos de la red local.", "tags": ["Programación", "Brechas"], "type": "Informe", "period": "2026", "url": "https://docs.google.com/document/d/1jo1kPKQxPRGA3bQmjfj5ZCPQt29G6gHYgGQSdSL__dc/edit"}, {"id": "UTT028", "area": "prog", "title": "Planificación en Red 2026 — narrado", "desc": "Replantea la programación a partir de brechas reales de cobertura, no de la inercia operativa.", "tags": ["Programación", "Narrativa"], "type": "Informe", "period": "2026", "url": "https://docs.google.com/document/d/1TIA93MKMSgrDEshjh4M1BecdqFuuqqmuls7YBbuOZQs/edit"}, {"id": "UTT029", "area": "prog", "title": "Planificación en Red 2026 — general", "desc": "Fundamentos, brechas y criterios operativos para reorganizar la oferta con mirada estratégica.", "tags": ["Programación", "Ciclo Vital"], "type": "Informe", "period": "2026", "url": "https://docs.google.com/document/d/1RnqLKy93l3JP0GTqdKwWOojVr-0VOnBjZJA7PD5dsNU/edit"}, {"id": "UTT030", "area": "agenda", "title": "Inasistencias jun–sep 2025 (AVIS LATAM)", "desc": "Patrones de ausencia por prestación, estamento, profesional y ciclo vital, con impacto en agenda.", "tags": ["Inasistencias", "AVIS"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1gOXN6qmEg6ljPWfq-GTCkyZjNQXjo--OXe3YyaoCa50/edit"}, {"id": "UTT031", "area": "agenda", "title": "Inasistencias ↔ Sobrecupos (1.842 vs 956)", "desc": "Asociación temporal entre ausentismo y sobrecupos; concentración en lunes/viernes y franjas críticas.", "tags": ["Inasistencias", "Sobrecupos", "Patrones"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1rLWPG-XXUy1r9EfaDRrB_S0B-NOVWM8xA4z8yVSviDo/edit"}, {"id": "UTT032", "area": "agenda", "title": "Proyecto — Gestión dinámica de cupos (MAIS)", "desc": "Modelo de reconversión de cupos en tiempo real con figura de triage de demanda bajo MAIS.", "tags": ["Proyecto", "MAIS", "Triage"], "type": "Proyecto", "period": "24/25", "url": "https://docs.google.com/document/d/10pGNjleHTTmqdtEeTZeZ-P96kCtLtKZNVU9KahySCJ0/edit"}, {"id": "UTT033", "area": "agenda", "title": "Flujo operativo — gestión dinámica de cupos", "desc": "Flujo que traduce los principios MAIS en un mecanismo práctico de reasignación de cupos.", "tags": ["Flujo", "Triage", "Cupos"], "type": "Documento", "period": "2025", "url": "https://docs.google.com/document/d/1XZ3kAUkjo2OByErLiDyqhP_yxTYkslpD56CFqf1ObHc/edit"}, {"id": "UTT034", "area": "metas", "title": "Resumen MMSS/IAAPS corte sept c/ REM-P", "desc": "Integra IAAPS y Metas Sanitarias triangulando REM-P2/P4/P5/P6/P9 de junio 2025.", "tags": ["IAAPS", "Metas Sanitarias", "REM-P"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1zhlg76MAWQbpKFN11OdTVFdrWIXrdRuBw1hqPB6E7iY/edit"}, {"id": "UTT035", "area": "metas", "title": "Análisis y propuestas de mejora 2026", "desc": "Hoja de ruta 2026 con enfoque territorial y de riesgo a partir de REM, IAAPS y Metas Sanitarias.", "tags": ["Brechas", "Ciclo Vital", "2026"], "type": "Informe", "period": "2026", "url": "https://docs.google.com/document/d/1ekQJlFuL6kBdRIpc6751Wx7vPxVmbLuQGNwT8NjSP9I/edit"}, {"id": "UTT036", "area": "agenda", "title": "Producción, inasistencias y sobrecupos jul–oct", "desc": "Comportamiento real del sistema de atención con depuración y validación de variables críticas.", "tags": ["Producción", "Inasistencias", "AVIS"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1ic5bhLrL1hptdfkdbT7jZEGSB3_Yu7wJwvDNkeGlQJk/edit"}, {"id": "UTT037", "area": "ciclo", "title": "Salud de la Mujer (REM P1) — jun 2025", "desc": "Población femenina por ciclo vital y criterios de lectura para interpretar el REM P1.", "tags": ["Mujer", "REM", "SSR"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1wYBBHDodWzjIifyuo4DoaqVvr0Ysb4P-zlPOT7a3h80/edit"}, {"id": "UTT038", "area": "ciclo", "title": "Epidemiológico Salud Mental APS 2025", "desc": "Carga potencial de atención en salud mental según estructura poblacional por establecimiento.", "tags": ["Salud Mental", "Epidemiología"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/183ZGqXCqgCJz16a0nY2EtueM3Y6akdICXYLBiOISazo/edit"}, {"id": "UTT039", "area": "cardio", "title": "P3 Otros Programas — crónicos y respiratorios", "desc": "Carga de morbilidad crónica y respiratoria: asma, EPOC, TEA, artrosis, dependencia, paliativos.", "tags": ["Crónicos", "Respiratorio", "Otros"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1XxhMl_tv8IrVFrnBa7APcZOQ-29O0HA_OEC0I4ih6P8/edit"}, {"id": "UTT040", "area": "prog", "title": "Programación Operativa 2026 — horas y metas", "desc": "Asignación de horas, rendimientos y metas por ciclo vital a partir de cobertura observada.", "tags": ["Programación", "Cobertura"], "type": "Informe", "period": "2026", "url": "https://docs.google.com/document/d/12ypNRu4ncGj4YjrPZnq0a0Mg8o222xvu2jAoQTE9Lrc/edit"}, {"id": "UTT041", "area": "poblacion", "title": "Tabla completa Percápita FONASA 2025", "desc": "Insumo base de población inscrita FONASA por ciclo vital y grupos etarios para programación.", "tags": ["Percápita", "FONASA", "Base"], "type": "Base", "period": "2025", "url": "https://docs.google.com/document/d/1BKCxpOqoCBfpKPOMZSQVONZ5Dw28Qrfg5RfLy1lz8zY/edit"}, {"id": "UTT042", "area": "gestion", "title": "Pauta de inducción — registro enfermería AVIS", "desc": "Estandariza el registro correcto, completo y seguro de atenciones de enfermería en AVIS-LATAM.", "tags": ["Registro", "Enfermería", "AVIS"], "type": "Pauta", "period": "2025", "url": "https://docs.google.com/document/d/1M6S3phRrAX_9DC5BjktP_WTtlFq9yeW8OocgLM_QqeQ/edit"}, {"id": "UTT043", "area": "gestion", "title": "Carta de compromiso — registro clínico AVIS", "desc": "Compromiso profesional de calidad, trazabilidad y confidencialidad en el registro clínico.", "tags": ["Registro", "Calidad"], "type": "Pauta", "period": "2025", "url": "https://docs.google.com/document/d/18cnCrpjUzKAgjHEPYYsaUDqsJHlbLDevUT446lB0mVk/edit"}, {"id": "UTT044", "area": "metas", "title": "Complemento IAAPS y Metas — corte nov 2025", "desc": "Lectura integrada con meta numérica anual, realizado global y brecha absoluta por indicador.", "tags": ["IAAPS", "Metas Sanitarias", "Brechas"], "type": "Documento", "period": "2025", "url": "https://docs.google.com/document/d/1WcDWSCg6VkX9Um-aEPWOkDvhd0JLQMVlc71bOujiRXM/edit"}, {"id": "UTT045", "area": "metas", "title": "Resumen IAAPS y Metas — nov 2025", "desc": "Síntesis accionable del corte noviembre con estrategias 2026 y cierre ejecutivo para decisiones.", "tags": ["IAAPS", "Metas Sanitarias", "Síntesis"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1q5UxwaI7tLvcs-RYhc-DCj_27GirixxnSpTINuXnAg4/edit"}, {"id": "UTT046", "area": "agenda", "title": "Inasistencias jul–dic 2025 — Python", "desc": "Análisis con registros RCE de AVIS LATAM y visualizaciones reproducibles en Python/Colab.", "tags": ["Inasistencias", "Python", "Visualización"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1i9GcUPb_V3hFcB8zu_4trfAM2hy44Bec7oTDyVkWy0M/edit"}, {"id": "UTT047", "area": "agenda", "title": "Ejecutivo de Sobrecupos jun–dic 2025", "desc": "Cuantifica sobrecupos como respuesta operativa a inasistencias, demanda y límites de agenda.", "tags": ["Sobrecupos", "Gestión"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1FZT-qULM4BKcqg35Qy8Hli3CXd-NDI9qAPNaw2s8yuA/edit"}, {"id": "UTT048", "area": "ciclo", "title": "Salud de la Mujer — comparativo jun vs dic", "desc": "Evolución del bajo control, estabilidad territorial y continuidad de métodos anticonceptivos.", "tags": ["Mujer", "REM", "Comparativo"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1quILR0JPZ5LntWHdrwpu9y3YY2raDIng6PLKLJN-h1M/edit"}, {"id": "UTT049", "area": "ciclo", "title": "REM-P2 / Censo P2 — Infancia jun vs dic", "desc": "Indicadores del programa infantil: nutrición, DSM, IRA, VDI y riesgo odontológico.", "tags": ["Infancia", "REM-P2", "Comparativo"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1LTkc9E1NSTHOmi9OP1uVEggRpM2DlryxRh_e9l0gJ6w/edit"}, {"id": "UTT050", "area": "cardio", "title": "Comparativo CENSO P3 (REM-P3) jun vs dic", "desc": "Variaciones en población bajo control de otros programas con lectura epidemiológica comparativa.", "tags": ["Otros Programas", "Comparativo"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1B3ZiPG5n-L41HfWD74c4dUd6cO8Y18JbUhN1EYlXN2s/edit"}, {"id": "UTT051", "area": "cardio", "title": "Resumen — Plan de Trabajo PSCV 2026", "desc": "Evalúa solidez programática y brechas de gestión del Plan de Trabajo PSCV 2026.", "tags": ["PSCV", "Plan 2026"], "type": "Informe", "period": "2026", "url": "https://docs.google.com/document/d/1JMqP682dXBh7lfPv7bfAXIUVfNzCqKHOBOU7jplEThg/edit"}, {"id": "UTT052", "area": "cardio", "title": "Retroalimentación — Plan PSCV 2026", "desc": "Recomendaciones de coherencia estratégica, continuidad y cumplimiento IAAPS/Metas del PSCV.", "tags": ["PSCV", "Retroalimentación"], "type": "Pauta", "period": "2026", "url": "https://docs.google.com/document/d/1NS0KFWz5OanXgHknnVgYgIX_TxEhJJZJfM36vl6Mpp8/edit"}, {"id": "UTT053", "area": "prevencion", "title": "Seguimiento EMP — 681 exámenes", "desc": "Brecha entre pesquisa y completitud diagnóstica; perfiles de riesgo cardio-metabólico.", "tags": ["EMP", "Prevención", "Riesgo CV"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1hn8QjNRo6ddXdJuy1Y_LnJ9f9zArOyhBgK7nszxUJqM/edit"}, {"id": "UTT054", "area": "prevencion", "title": "Seguimiento EMP — completitud preventiva", "desc": "Completitud del proceso preventivo y continuidad del cuidado bajo MAIS, ECICEP y PSCV.", "tags": ["EMP", "ECICEP", "PSCV"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1RNek-iENqqrZlPK8FEkelGPpwE0jw63OWihSOPZ1S_4/edit"}, {"id": "UTT055", "area": "agenda", "title": "Rendimiento de agenda 1T 2026 — 109 prof.", "desc": "43,0% de asistencia efectiva sobre 44.319 citas; bloqueos, cupos sin uso y citas no ejecutadas.", "tags": ["Agenda", "Rendimiento", "2026"], "type": "Informe", "period": "2026", "url": "https://docs.google.com/document/d/1DgbFweS-YEVcmdNzUBW66KiL15-IjYXeEds7DFhm2zk/edit"}, {"id": "UTT056", "area": "agenda", "title": "Directivo — rendimiento de agenda 1T 2026", "desc": "Desacople estructural entre oferta programada y demanda efectiva; fallas operacionales y de gestión.", "tags": ["Directivo", "Agenda", "Gestión"], "type": "Informe", "period": "2026", "url": "https://docs.google.com/document/d/1XcJcbv4fm0Tlbrkn2lHvjAvW18DiwqMQ_ZlKE0hLn7k/edit"}, {"id": "UTT057", "area": "metas", "title": "Metas Sanitarias 1er trimestre 2026", "desc": "Lectura no lineal del cumplimiento con estacionalidad, dispersión y brechas de registro.", "tags": ["Metas Sanitarias", "Trimestral"], "type": "Informe", "period": "2026", "url": "https://docs.google.com/document/d/1ZTWyeuLAOXEoIogiFP8cj4kjaKYrPUovIMkfrkUV_TE/edit"}, {"id": "UTT058", "area": "metas", "title": "IAAPS 1er trimestre 2026 — COMGES 1.12", "desc": "Desempeño proporcional (25% del año) bajo criterios técnicos y seguimiento trimestral MAIS.", "tags": ["IAAPS", "COMGES", "Trimestral"], "type": "Informe", "period": "2026", "url": "https://docs.google.com/document/d/1J8TrtJxDIAa3ncZkrnWXrRTzCyh5p3NqZkkqx_gFQm8/edit"}, {"id": "UTT059", "area": "metas", "title": "Desempeño Sanitario 2025 — Cuenta Pública", "desc": "Lectura salubrista con lógica matriz–satélite, criterios de brecha y semaforización COMGES.", "tags": ["Cuenta Pública", "COMGES", "Semaforización"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1l6Ec5MnXieIZpx4o79jjeuLS8L-qLx19/edit"}, {"id": "UTT060", "area": "metas", "title": "Cuenta Pública 2025 — CESFAM Tongoy", "desc": "Síntesis de actividad 2025: riesgo ECICEP, demanda espontánea, odontología y malnutrición por exceso.", "tags": ["Cuenta Pública", "ECICEP"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1P6ZW4uiUoL644tpmyWGcAUrbR2qqowYu/edit"}, {"id": "UTT061", "area": "agenda", "title": "Rendimiento de agendas ago 2025 – may 2026", "desc": "Cuatro enfoques —descriptivo, diagnóstico, predictivo y prescriptivo— sobre el uso real de cupos.", "tags": ["Agenda", "Predictivo", "Prescriptivo"], "type": "Informe", "period": "25/26", "url": "https://docs.google.com/document/d/1UsV1q2iTEAGNi3Q35vHYxxIsAZiFd-KL/edit"}, {"id": "EX01", "area": "agenda", "title": "Optimización del recurso ante inasistencias", "desc": "Estrategias para optimizar recursos humanos y materiales frente a inasistencias de usuarios.", "tags": ["Inasistencias", "Recursos"], "type": "Sugerencia", "period": "2025", "url": "https://docs.google.com/document/d/1v-WZcJMrQV-kZ6DSmrsUb7-amNGWZxokYGI_v-POvMc/edit"}, {"id": "EX02", "area": "metas", "title": "Análisis poblacional orientado al IAAPS", "desc": "Vincula producción registrada con población percapitada para mejorar eficiencia y cobertura.", "tags": ["IAAPS", "Población"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1JTSa5BH294s6geTbyhohaQ1bOcU32jF4aAoT19uskrs/edit"}, {"id": "EX03", "area": "poblacion", "title": "Percapitación y atención de usuarios (may 2025)", "desc": "Población percapitada y frecuencia de atención con foco en brechas de acceso.", "tags": ["Percápita", "Acceso"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1CH8BcYdQAAumOEEAWYphbreT46jwNf8J6hbGCeh-Mjw/edit"}, {"id": "EX04", "area": "poblacion", "title": "Análisis demográfico — Percapitados", "desc": "Revisión demográfica por edad, sexo y riesgo con estrategias adaptadas al territorio rural-costa.", "tags": ["Demografía", "Territorio"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1p_5A2R58zKqtKI1jvUzVwGjVpVoa82LXMCcNmQjrV7g/edit"}, {"id": "EX05", "area": "agenda", "title": "Inasistencias usuarios — descriptivo", "desc": "Frecuencia y patrones de inasistencia a controles, con causas y medidas de adherencia.", "tags": ["Inasistencias", "Adherencia"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1drKZMpAHr8qDX4yK94R0AArlCpkV6kM1WDp3YaKAe9M/edit"}, {"id": "EX06", "area": "metas", "title": "Metas Sanitarias — abril 2025", "desc": "Cumplimiento de metas al corte de abril 2025, áreas críticas y de desempeño óptimo.", "tags": ["Metas Sanitarias", "Corte"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1_Pg1ZRKEoS7BBIoLkgwmYEjLzb33iUGA/edit"}, {"id": "EX07", "area": "cardio", "title": "P4 Sección C — seguimiento diabetes en PSCV", "desc": "Variables de seguimiento para personas con diabetes: adherencia y metas bioquímicas.", "tags": ["Diabetes", "PSCV", "Seguimiento"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/1Clf9XMXhmnyWVAKvAh7XddfO5X88BZJaDklNGZF2RCI/edit"}, {"id": "EX08", "area": "gestion", "title": "Desempeño por instrumento — productividad", "desc": "Productividad y cumplimiento por instrumento clínico, con brechas y optimización de recursos.", "tags": ["Productividad", "Instrumento"], "type": "Informe", "period": "2025", "url": "https://docs.google.com/document/d/17-IQvuypDki9t0nS3PiiGoD4Y2cfZxvhDLTlOqX6Dio/edit"}, {"id": "EX09", "area": "gestion", "title": "Suite de manuales de registro AVIS-LATAM", "desc": "Manuales locales de registro (Infantil, IRA/ERA, PSCV, Salud Mental, Odontología, ECICEP) para la migración RAYEN→AVIS.", "tags": ["Manual", "AVIS", "Migración"], "type": "Manual", "period": "2025", "url": "https://docs.google.com/document/d/1eEMcZSk7Y4-Y1zbjUJJF09u84vFQniqAshLevMbIPmY/edit"}, {"id": "EX10", "area": "gestion", "title": "Guía de inducción — funcionarios administrativos", "desc": "Funcionamiento de la APS y rol administrativo en la experiencia usuaria, AVIS y ECICEP.", "tags": ["Inducción", "MAIS", "ECICEP"], "type": "Manual", "period": "2025", "url": "https://docs.google.com/document/d/1gm1kWkrRRxgh4yuSx3cAGba3ZYDSUwSo6XL_VG_s2qw/edit"}], "posts": [["Salud pública, gestión y APS", "Mirada salubrista sobre cómo la gestión basada en datos fortalece la atención primaria.", ["Salud Pública", "Gestión", "APS"], "https://www.linkedin.com/posts/ismael-v%C3%A1squez-a993bbb9_saludpaeqblica-gestion-aps-activity-7458604365684289536-EluQ"], ["Data Science y bioestadística en APS", "Cómo las técnicas de ciencia de datos se traducen en decisiones clínicas y administrativas reales.", ["Data Science", "Bioestadística", "APS"], "https://www.linkedin.com/posts/ismael-v%C3%A1squez-a993bbb9_datascience-bioestadaedstica-aps-ugcPost-7376698758652207104-tqjx"], ["Salud 2025: atención primaria y data analytics", "Lectura de los desafíos 2025 de la APS desde la analítica de datos territorial.", ["Atención Primaria", "Data Analytics"], "https://www.linkedin.com/posts/ismael-v%C3%A1squez-a993bbb9_salud2025-atenciaejnprimaria-dataanalytics-activity-7379945106143084544-FZPq"], ["Healthcare analytics y salud pública", "Analítica aplicada a problemas de salud pública con foco en evidencia accionable.", ["Healthcare Analytics", "Public Health", "Data Science"], "https://www.linkedin.com/posts/ismael-v%C3%A1squez-a993bbb9_healthcareanalytics-publichealth-datascience-activity-7377336422040641537-Dhwk"], ["Bioestadística aplicada a la gestión clínica", "El valor de interpretar variables clínicas para orientar la gestión del CESFAM.", ["Data Science", "Bioestadística", "APS"], "https://www.linkedin.com/posts/ismael-v%C3%A1squez-a993bbb9_datascience-bioestadaedstica-aps-activity-7376698759927341057-Ofg-"], ["Análisis reproducible con Python y Colab", "Flujos de trabajo reproducibles que transparentan el método detrás de cada hallazgo.", ["Python", "Colab", "Reproducibilidad"], "https://www.linkedin.com/posts/ismael-v%C3%A1squez-a993bbb9_python-google-colab-activity-7373799869079113728-x40e"], ["Innovación en atención primaria", "Ideas para innovar en la APS sin perder de vista el territorio y las personas.", ["Public Health", "Primary Care", "Innovation"], "https://www.linkedin.com/posts/ismael-v%C3%A1squez-a993bbb9_publichealth-primaryhealthcare-healthcareinnovation-activity-7371218754145402880-6TYd"], ["Bioestadística para la salud pública", "Por qué la bioestadística es un puente entre el dato y la decisión sanitaria.", ["Salud Pública", "Atención Primaria", "Bioestadística"], "https://www.linkedin.com/posts/ismael-v%C3%A1squez-a993bbb9_saludpublica-atencionprimaria-bioestadistica-activity-7369375701658951681-m9aZ"], ["Salud rural en la zona costa", "Las particularidades de hacer salud pública en un territorio rural y costero.", ["Salud Rural", "Zona Costa", "APS"], "https://www.linkedin.com/posts/ismael-v%C3%A1squez-a993bbb9_saludrural-zonacosta-aps-activity-7363598700062932992-b84M"]], "hd": {"total": 2867, "rango": ["2025-06-16", "2025-09-03"], "prof": 76, "cat": {"MATRON(A)": 626, "KINESIOLOGO": 518, "MEDICO": 435, "ENFERMERA/O": 376, "TENS": 313, "PSICOLOGÍA": 286, "ASISTENTE SOCIAL": 130, "TERAPEUTA OCUPACIONAL": 57, "ODONTOLOGÍA": 55, "NUTRICIÓN": 43, "PODOLOGO": 17, "TECNICO PARAMEDICO": 5}, "prest": {"CONSULTA ABREVIADA (MATRONA)": 361, "CONTROL DE SALUD MENTAL": 287, "CONSULTAS DE REHABILITACION MUSCULOESQUELETICO": 224, "VISITA DOMICILIARIA INTEGRAL": 220, "CONTROLES DE SALUD CARDIOVASCULAR": 186, "TALLERES": 177, "TOMA DE MUESTRA (extracción de sangre, etc)": 160, "CONSULTAS MEDICAS DE MORBILIDAD": 158, "CONTROL GINECOLOGICO": 148, "CONSULTA ABREVIADA ALTO RENDIMIENTO": 102}, "mes": {"6": 513, "7": 1129, "8": 1117, "9": 108}, "ciclo": {"0–4": 68, "5–9": 115, "10–14": 121, "15–19": 163, "20–64": 1481, "65+": 896}, "horas": [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19], "dias": ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"], "heat": [[20, 60, 73, 83, 99, 57, 0, 93, 51, 44, 4, 1, 5], [14, 63, 90, 91, 92, 52, 20, 180, 72, 50, 10, 10, 7], [15, 61, 56, 44, 57, 45, 4, 93, 78, 60, 5, 6, 6], [18, 65, 84, 79, 69, 30, 5, 94, 52, 39, 12, 10, 6], [10, 42, 60, 48, 63, 52, 0, 61, 36, 7, 4, 0, 3], [0, 0, 13, 9, 13, 9, 1, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0]], "wk": [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36], "wkv": [258, 233, 188, 232, 245, 299, 214, 238, 191, 310, 351, 108], "excl": {"Prestaciones, Indicadores, Examenes, Procedimientos, Vacunas": 2867}}, "linkedin": "https://www.linkedin.com/in/ismael-v%C3%A1squez-a993bbb9/", "timeline": [["2018 — hoy", "Analista de Estadísticas en Salud", "CESFAM Tongoy · Servicio de Salud Coquimbo", "Transformo registros clínicos y administrativos en evidencia para planificación, monitoreo de metas (IAAPS, GES, MAIS) y mejora continua."], ["2023 — 2024", "Georreferenciación en emergencias", "SIAD · Ministerio de Salud", "Gestión de información territorial en emergencias y desastres."], ["2015 — 2017", "Implementación de facturación electrónica", "Fullpernos", "Lideré la implementación tecnológica y el análisis de ventas para optimizar inventarios y rentabilidad."], ["2010 — 2012", "Asistente de bases de datos geológicas", "GeoAtacama · Proyecto Relincho", "Gestión de bases geológicas y cartografía GIS para planificación de sondajes."]], "edu": [["Universidad de Chile", "Data Science · Procesamiento de datos de seguros médicos", "2025"], ["Universidad de Chile", "Machine Learning with Python — Ingeniería de software", "2025"], ["Universidad de Chile", "Análisis de Compromiso y Cultura Organizacional", "2025"], ["Instituto Profesional IACC", "Técnico de Nivel Superior en Informática", "2019–2021"], ["SIAD · MINSAL", "Georreferenciación y gestión de información territorial", "2023–2024"]]};
+const AC = {verde:'var(--verde)', aqua:'var(--aqua)', ambar:'var(--ambar)', rojo:'var(--rojo)'};
+const ACHEX = {verde:'#5FBF8F', aqua:'#3FC9BE', ambar:'#E6B252', rojo:'#E07365'};
+const $ = (s,el=document)=>el.querySelector(s);
+const $$ = (s,el=document)=>[...el.querySelectorAll(s)];
+const areaByKey = Object.fromEntries(DATA.areas.map(a=>[a[0],a]));
+const fmt = n => n.toLocaleString('es-CL');
+
+/* ---------- links ---------- */
+$('#liTop').href = DATA.linkedin; $('#liContact').href = DATA.linkedin;
+$('#year').textContent = new Date().getFullYear();
+
+/* ---------- education chips ---------- */
+$('#eduChips').innerHTML = DATA.edu.map(e=>`<span class="chip" title="${e[2]}">${e[1].split(' — ')[0].split(' · ')[0]}</span>`).join('');
+
+/* ---------- areas ---------- */
+const areaCounts = {};
+DATA.reports.forEach(r=>areaCounts[r.area]=(areaCounts[r.area]||0)+1);
+$('#areaGrid').innerHTML = DATA.areas.map((a,i)=>{
+  const [key,label,desc,role]=a;
+  return `<button class="area-card" data-area="${key}" style="--ac:${AC[role]}">
+    <div class="idx">L0${i+1} / 08</div>
+    <h3>${label}</h3><p>${desc}</p>
+    <div class="cnt"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>${areaCounts[key]||0} documentos</div>
+  </button>`;
+}).join('');
+$$('.area-card').forEach(c=>c.onclick=()=>{ setArea(c.dataset.area); document.getElementById('informes').scrollIntoView({behavior:'smooth'}); });
+
+/* ---------- library state ---------- */
+let state={q:'',area:'todas',type:'todos',limit:24};
+const types=['todos',...[...new Set(DATA.reports.map(r=>r.type))]];
+$('#areaFilters').innerHTML = `<span class="f-label">Línea</span>`+
+  [['todas','Todas'],...DATA.areas.map(a=>[a[0],a[1]])].map(([k,l])=>`<button class="f-chip${k==='todas'?' active':''}" data-af="${k}">${l}</button>`).join('');
+$('#typeFilters').innerHTML = `<span class="f-label">Tipo</span>`+
+  types.map(t=>`<button class="f-chip${t==='todos'?' active':''}" data-tf="${t}">${t[0].toUpperCase()+t.slice(1)}</button>`).join('');
+
+$$('[data-af]').forEach(b=>b.onclick=()=>setArea(b.dataset.af));
+$$('[data-tf]').forEach(b=>b.onclick=()=>{state.type=b.dataset.tf;state.limit=24;$$('[data-tf]').forEach(x=>x.classList.toggle('active',x===b));render();});
+$('#search').oninput=e=>{state.q=e.target.value.toLowerCase().trim();state.limit=24;render();};
+$('#moreBtn').onclick=()=>{state.limit+=24;render();};
+
+function setArea(k){state.area=k;state.limit=24;$$('[data-af]').forEach(x=>x.classList.toggle('active',x.dataset.af===k));render();}
+
+function filtered(){
+  return DATA.reports.filter(r=>{
+    if(state.area!=='todas'&&r.area!==state.area)return false;
+    if(state.type!=='todos'&&r.type!==state.type)return false;
+    if(state.q){
+      const hay=(r.id+' '+r.title+' '+r.desc+' '+r.tags.join(' ')+' '+r.type).toLowerCase();
+      if(!hay.includes(state.q))return false;
+    }
+    return true;
+  });
+}
+function render(){
+  const list=filtered();
+  const shown=list.slice(0,state.limit);
+  const a=areaByKey[state.area];
+  $('#libMeta').innerHTML=`<b>${list.length}</b> documento${list.length!==1?'s':''}${state.area!=='todas'?` · ${a[1]}`:''}${state.q?` · "${state.q}"`:''}`;
+  if(!list.length){$('#cardGrid').innerHTML=`<div class="empty" style="grid-column:1/-1">Sin resultados. Prueba otra palabra o limpia los filtros.</div>`;$('#moreBtn').style.display='none';return;}
+  $('#cardGrid').innerHTML=shown.map(r=>{
+    const role=areaByKey[r.area][3];
+    return `<article class="rcard" style="--ac:${AC[role]}">
+      <span class="r-dot" style="display:block"></span>
+      <div class="top"><span class="rcode">${r.id}</span><span class="rtype">${r.type}</span></div>
+      <h3>${r.title}</h3><p>${r.desc}</p>
+      <div class="rtags">${r.tags.map(t=>`<span class="rtag">${t}</span>`).join('')}</div>
+      <div class="rfoot"><span class="per">${r.period}</span>
+        <a href="${r.url}" target="_blank" rel="noopener">Abrir <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+    </article>`;
+  }).join('');
+  $('#moreBtn').style.display=list.length>state.limit?'inline-flex':'none';
+}
+render();
+
+/* ---------- posts ---------- */
+$('#postGrid').innerHTML=DATA.posts.map(p=>{
+  const[title,blurb,tags,url]=p;
+  return `<article class="pcard">
+    <div class="kicker">Publicación · LinkedIn</div>
+    <h3>${title}</h3><p>${blurb}</p>
+    <div class="ptags">${tags.map(t=>`<span class="rtag">${t}</span>`).join('')}</div>
+    <a class="lnk" href="${url}" target="_blank" rel="noopener">Ver en LinkedIn <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+  </article>`;
+}).join('');
+
+/* ============================ DASHBOARD ============================ */
+const hd=DATA.hd;
+const mesNames={6:'Junio',7:'Julio',8:'Agosto',9:'Septiembre'};
+const peakMes=Object.entries(hd.mes).sort((a,b)=>b[1]-a[1])[0];
+$('#kpiTotal').textContent=fmt(hd.total);
+$('#kpiProf').textContent=hd.prof;
+$('#kpiPeak').textContent=mesNames[peakMes[0]]||peakMes[0];
+// busiest hour overall
+let hourTotals={};hd.horas.forEach((h,i)=>{hourTotals[h]=hd.heat.reduce((s,row)=>s+row[i],0);});
+const peakHour=Object.entries(hourTotals).sort((a,b)=>b[1]-a[1])[0][0];
+$('#kpiHora').textContent=peakHour+':00';
+
+function hbars(obj,el,color){
+  const entries=Object.entries(obj);const max=Math.max(...entries.map(e=>e[1]));
+  el.innerHTML=entries.map(([k,v])=>`<div class="bar-row"><span class="bl" title="${k}">${k}</span>
+    <div class="bar-track"><div class="bar-fill" data-w="${(v/max*100).toFixed(1)}" style="${color?`background:linear-gradient(90deg,${color}99,${color})`:''}"></div></div>
+    <span class="bv">${fmt(v)}</span></div>`).join('');
+}
+hbars(hd.cat,$('#catChart'));
+hbars(hd.prest,$('#prestChart'),ACHEX.ambar);
+// ciclo as bars (ordered)
+hbars(hd.ciclo,$('#cicloChart'),ACHEX.aqua);
+
+// heatmap
+const allHeat=hd.heat.flat();const hmax=Math.max(...allHeat);
+function heatColor(v){
+  if(v===0)return 'color-mix(in srgb,var(--card) 88%,var(--bg))';
+  const t=v/hmax;
+  // aqua -> ambar -> rojo ramp
+  const stops=[[63,201,190],[95,191,143],[230,178,82],[224,115,101]];
+  const seg=t*(stops.length-1);const i=Math.min(Math.floor(seg),stops.length-2);const f=seg-i;
+  const c=stops[i].map((s,j)=>Math.round(s+(stops[i+1][j]-s)*f));
+  return `rgb(${c[0]},${c[1]},${c[2]})`;
+}
+$('#heat').innerHTML=hd.dias.map((d,di)=>{
+  return `<div class="heat-row"><span class="heat-lbl">${d}</span>`+
+    hd.horas.map((h,hi)=>{const v=hd.heat[di][hi];return `<div class="heat-cell" title="${d} ${h}:00 · ${v}" style="background:${heatColor(v)}">${v>hmax*0.45?v:''}</div>`;}).join('')+`</div>`;
+}).join('');
+$('#heatHours').innerHTML=`<span></span>`+hd.horas.map(h=>`<span>${h}</span>`).join('');
+
+/* ============================ HERO CANVAS (ambient) ============================ */
+(function(){
+  const c=$('#heroCanvas');if(!c)return;const ctx=c.getContext('2d');
+  const reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  let pts=[],w,h,raf;
+  function size(){const r=c.getBoundingClientRect();w=c.width=r.width*devicePixelRatio;h=c.height=r.height*devicePixelRatio;
+    pts=Array.from({length:Math.min(60,Math.floor(r.width/22))},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.12,vy:(Math.random()-.5)*.12,r:(Math.random()*1.6+.6)*devicePixelRatio}));}
+  function draw(){ctx.clearRect(0,0,w,h);
+    const aqua=getComputedStyle(document.documentElement).getPropertyValue('--aqua').trim();
+    for(let i=0;i<pts.length;i++){const p=pts[i];p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;
+      for(let j=i+1;j<pts.length;j++){const q=pts[j];const dx=p.x-q.x,dy=p.y-q.y,d=Math.hypot(dx,dy);
+        if(d<120*devicePixelRatio){ctx.globalAlpha=(1-d/(120*devicePixelRatio))*.25;ctx.strokeStyle=aqua;ctx.lineWidth=devicePixelRatio*.5;ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();}}
+      ctx.globalAlpha=.7;ctx.fillStyle=aqua;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,7);ctx.fill();}
+    ctx.globalAlpha=1;raf=requestAnimationFrame(draw);}
+  size();if(!reduce)draw();else{draw();cancelAnimationFrame(raf);}
+  window.addEventListener('resize',()=>{cancelAnimationFrame(raf);size();if(!reduce)draw();});
+})();
+
+/* ============================ CONSTELLATION ============================ */
+(function(){
+  const c=$('#graph');const ctx=c.getContext('2d');const tip=$('#tip');const shell=c.parentElement;
+  const reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  let W,H,DPR=Math.min(devicePixelRatio,2),nodes=[],hubs=[],raf,t=0;
+  let off={x:0,y:0},drag=false,dragStart=null,moved=false;
+  const activeAreas=new Set(DATA.areas.map(a=>a[0]));
+
+  // legend
+  $('#legend').innerHTML=DATA.areas.map(a=>`<span class="lg" data-k="${a[0]}" style="--c:${ACHEX[a[3]]}"><span class="dot"></span>${a[1]}</span>`).join('');
+  $$('.lg').forEach(l=>l.onclick=()=>{const k=l.dataset.k;if(activeAreas.has(k)){activeAreas.delete(k);l.classList.add('off');}else{activeAreas.add(k);l.classList.remove('off');}});
+
+  function layout(){
+    const r=c.getBoundingClientRect();W=c.width=r.width*DPR;H=c.height=r.height*DPR;
+    const cx=W/2,cy=H/2;const R=Math.min(W,H)*0.33;
+    hubs=DATA.areas.map((a,i)=>{const ang=(i/DATA.areas.length)*Math.PI*2-Math.PI/2;
+      return {key:a[0],label:a[1],color:ACHEX[a[3]],x:cx+Math.cos(ang)*R,y:cy+Math.sin(ang)*R,ang};});
+    const hubMap=Object.fromEntries(hubs.map(h=>[h.key,h]));
+    nodes=DATA.reports.map((rp)=>{const hub=hubMap[rp.area];
+      const a=Math.random()*Math.PI*2;const dist=(Math.random()*0.5+0.28)*Math.min(W,H)*0.16;
+      return {rp,hub,bx:hub.x+Math.cos(a)*dist,by:hub.y+Math.sin(a)*dist,
+        ph:Math.random()*Math.PI*2,amp:(Math.random()*6+3)*DPR,x:0,y:0,rad:(Math.random()*2+3)*DPR};});
+  }
+  let hover=null;
+  function draw(){
+    t+=reduce?0:0.012;ctx.clearRect(0,0,W,H);
+    ctx.save();ctx.translate(off.x,off.y);
+    // links node->hub
+    nodes.forEach(n=>{if(!activeAreas.has(n.rp.area))return;
+      n.x=n.bx+Math.sin(t+n.ph)*n.amp;n.y=n.by+Math.cos(t*0.9+n.ph)*n.amp;
+      ctx.globalAlpha=0.13;ctx.strokeStyle=n.hub.color;ctx.lineWidth=DPR*0.6;
+      ctx.beginPath();ctx.moveTo(n.x,n.y);ctx.lineTo(n.hub.x,n.hub.y);ctx.stroke();});
+    // hubs
+    hubs.forEach(h=>{if(!activeAreas.has(h.key))return;
+      ctx.globalAlpha=0.16;ctx.fillStyle=h.color;ctx.beginPath();ctx.arc(h.x,h.y,18*DPR,0,7);ctx.fill();
+      ctx.globalAlpha=0.9;ctx.fillStyle=h.color;ctx.beginPath();ctx.arc(h.x,h.y,5*DPR,0,7);ctx.fill();
+      ctx.globalAlpha=0.85;ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--ink').trim();
+      ctx.font=`600 ${11*DPR}px "Schibsted Grotesk",sans-serif`;ctx.textAlign='center';
+      const short=h.label.replace(' & ',' / ');ctx.fillText(short,h.x,h.y+30*DPR);});
+    // nodes
+    nodes.forEach(n=>{if(!activeAreas.has(n.rp.area))return;
+      const hov=hover===n;ctx.globalAlpha=hov?1:0.82;ctx.fillStyle=n.hub.color;
+      ctx.beginPath();ctx.arc(n.x,n.y,hov?n.rad*1.7:n.rad,0,7);ctx.fill();
+      if(hov){ctx.globalAlpha=0.3;ctx.beginPath();ctx.arc(n.x,n.y,n.rad*3.2,0,7);ctx.fill();}});
+    ctx.restore();ctx.globalAlpha=1;raf=requestAnimationFrame(draw);
+  }
+  function pick(mx,my){let best=null,bd=18*DPR;
+    nodes.forEach(n=>{if(!activeAreas.has(n.rp.area))return;const d=Math.hypot(mx-(n.x+off.x),my-(n.y+off.y));if(d<bd){bd=d;best=n;}});return best;}
+  c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();const mx=(e.clientX-r.left)*DPR,my=(e.clientY-r.top)*DPR;
+    if(drag){off.x+=(e.clientX-dragStart.x)*DPR;off.y+=(e.clientY-dragStart.y)*DPR;dragStart={x:e.clientX,y:e.clientY};moved=true;return;}
+    const n=pick(mx,my);hover=n;c.style.cursor=n?'pointer':'grab';
+    if(n){tip.style.opacity=1;tip.style.left=(n.x+off.x)/DPR+'px';tip.style.top=(n.y+off.y)/DPR+'px';
+      $('.tid',tip).textContent=n.rp.id+' · '+n.hub.label;$('.ttl',tip).textContent=n.rp.title;}
+    else tip.style.opacity=0;});
+  c.addEventListener('mousedown',e=>{drag=true;moved=false;dragStart={x:e.clientX,y:e.clientY};c.style.cursor='grabbing';});
+  window.addEventListener('mouseup',()=>{drag=false;c.style.cursor='grab';});
+  c.addEventListener('click',e=>{if(moved)return;const r=c.getBoundingClientRect();const mx=(e.clientX-r.left)*DPR,my=(e.clientY-r.top)*DPR;
+    const n=pick(mx,my);if(n){setArea(n.rp.area);$('#search').value=n.rp.id;state.q=n.rp.id.toLowerCase();render();document.getElementById('informes').scrollIntoView({behavior:'smooth'});}
+    else{const hub=hubs.find(h=>Math.hypot(mx-(h.x+off.x),my-(h.y+off.y))<24*DPR&&activeAreas.has(h.key));if(hub){setArea(hub.key);document.getElementById('informes').scrollIntoView({behavior:'smooth'});}}});
+  c.addEventListener('mouseleave',()=>{tip.style.opacity=0;hover=null;});
+  layout();draw();
+  window.addEventListener('resize',()=>{cancelAnimationFrame(raf);off={x:0,y:0};layout();draw();});
+})();
+
+/* ============================ THEME ============================ */
+const themeBtn=$('#themeBtn');
+function setTheme(th){document.documentElement.dataset.theme=th;
+  try{localStorage.setItem('iv-theme',th);}catch(e){}
+  $('#themeIcon').innerHTML = th==='light'
+    ? '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/>'
+    : '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';}
+let savedTheme='dark';try{savedTheme=localStorage.getItem('iv-theme')||'dark';}catch(e){}
+setTheme(savedTheme);
+themeBtn.onclick=()=>setTheme(document.documentElement.dataset.theme==='light'?'dark':'light');
+
+/* ============================ MENU + NAV ============================ */
+$('#menuBtn').onclick=()=>$('#navLinks').classList.toggle('open');
+$$('#navLinks a').forEach(a=>a.onclick=()=>$('#navLinks').classList.remove('open'));
+
+/* ============================ REVEAL + BAR ANIM ============================ */
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');
+  $$('.bar-fill',e.target).forEach(b=>b.style.transform=`scaleX(${(+b.dataset.w)/100})`);io.unobserve(e.target);}});},{threshold:.12});
+$$('.reveal').forEach(el=>io.observe(el));
+
+/* ============================ VISIT COUNTER ============================ */
+/* Contador de visitas. Por defecto usa CounterAPI (sin registro) con respaldo
+   local. Para un contador global propio, cambia NAMESPACE/KEY o reemplázalo
+   por GoatCounter/Plausible al publicar el sitio. */
+(async function(){
+  const el=$('#visitCount');
+  const NAMESPACE='ismael-vasquez-portfolio', KEY='visitas';
+  try{
+    const res=await fetch(`https://api.counterapi.dev/v1/${NAMESPACE}/${KEY}/up`,{cache:'no-store'});
+    if(!res.ok)throw 0;const d=await res.json();
+    const n=d.count??d.value??d.Count;if(typeof n!=='number')throw 0;
+    el.textContent=fmt(n);return;
+  }catch(e){
+    let n=0;try{n=parseInt(localStorage.getItem('iv-visits')||'0',10)+1;localStorage.setItem('iv-visits',n);}catch(_){n=1;}
+    el.textContent=fmt(n);el.title='Conteo local (este navegador). Conecta un servicio para conteo global.';
+  }
+})();
+</script>
+</body>
+</html>

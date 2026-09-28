@@ -1,0 +1,211 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pie Diabético · Resultados</title>
+<meta name="description" content="Presentación de resultados — Evaluación de Pie Diabético, Red APS Tongoy.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{--bg:#0c1a2b;--bg2:#12233a;--surf:#16293f;--ink:#eef4fb;--ink2:#9fb3ca;--line:#274058;--brand:#4f9cf0;
+ --s1:#5b9be8;--s3:#38c793;--good:#3fc255;--warn:#f5c04a;--serious:#f2895a;--crit:#ef6d6c;
+ --r-bajo:#38c793;--r-mod:#f5c04a;--r-alto:#f2895a;--r-max:#ef6d6c;}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;overflow:hidden;letter-spacing:-.006em}
+.disp{font-family:"Space Grotesk","Inter",sans-serif;letter-spacing:-.02em}
+#deck{height:100vh;width:100vw;position:relative}
+.slide{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;padding:clamp(28px,6vw,90px);opacity:0;transition:opacity .5s ease}
+.slide.on{display:flex;opacity:1}
+.slide.dark{background:radial-gradient(1200px 700px at 75% 15%,#173456 0%,var(--bg) 60%)}
+.eyebrow{font-size:clamp(11px,1.3vw,14px);text-transform:uppercase;letter-spacing:.16em;color:var(--brand);font-weight:700;margin-bottom:14px}
+h1{font-family:"Space Grotesk";font-size:clamp(30px,5.6vw,68px);line-height:1.03;font-weight:700;margin-bottom:18px}
+h2{font-family:"Space Grotesk";font-size:clamp(24px,3.6vw,44px);line-height:1.08;font-weight:700;margin-bottom:14px}
+.lead{font-size:clamp(15px,1.9vw,23px);color:var(--ink2);max-width:60ch;line-height:1.5}
+.lead b{color:var(--ink)}
+.big{font-family:"Space Grotesk";font-size:clamp(56px,13vw,150px);font-weight:700;line-height:.9;letter-spacing:-.03em}
+.grad{background:linear-gradient(100deg,var(--s3),var(--brand));-webkit-background-clip:text;background-clip:text;color:transparent}
+.gradW{background:linear-gradient(100deg,var(--warn),var(--serious));-webkit-background-clip:text;background-clip:text;color:transparent}
+.row{display:flex;gap:clamp(16px,3vw,40px);flex-wrap:wrap;align-items:center}
+.kcard{background:var(--surf);border:1px solid var(--line);border-radius:18px;padding:clamp(16px,2.2vw,26px);flex:1;min-width:170px}
+.kcard .n{font-family:"Space Grotesk";font-size:clamp(30px,4.6vw,56px);font-weight:700;line-height:1}
+.kcard .l{font-size:clamp(11px,1.2vw,14px);color:var(--ink2);margin-top:8px;text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+.kcard.acc-good{border-left:4px solid var(--good)} .kcard.acc-warn{border-left:4px solid var(--warn)}
+.kcard.acc-crit{border-left:4px solid var(--crit)} .kcard.acc-brand{border-left:4px solid var(--brand)}
+.chip{display:inline-block;background:var(--bg2);border:1px solid var(--line);border-radius:30px;padding:6px 16px;font-size:clamp(12px,1.4vw,15px);color:var(--ink2);margin:5px 8px 0 0}
+.chip b{color:var(--ink)}
+.arrow{font-family:"Space Grotesk";font-size:clamp(28px,5vw,60px);color:var(--ink2);font-weight:600}
+.pill{display:inline-flex;align-items:center;gap:8px;font-size:clamp(13px,1.5vw,17px);font-weight:600;padding:7px 16px;border-radius:30px;margin:6px 8px 0 0}
+.pill.g{background:rgba(63,194,85,.14);color:var(--good)} .pill.w{background:rgba(245,192,74,.16);color:var(--warn)} .pill.c{background:rgba(239,109,108,.15);color:var(--crit)}
+.chartwrap{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:clamp(16px,2.4vw,28px);flex:1;min-width:min(440px,90vw)}
+.chartbox{position:relative;height:clamp(240px,42vh,420px)}
+ul.steps{list-style:none;display:grid;gap:14px;margin-top:10px}
+ul.steps li{display:flex;gap:16px;align-items:flex-start;background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:16px 20px}
+ul.steps .num{font-family:"Space Grotesk";font-weight:700;font-size:clamp(20px,2.4vw,30px);color:var(--brand);min-width:34px}
+ul.steps .tx{font-size:clamp(14px,1.6vw,19px);line-height:1.45}
+ul.steps .tx b{color:var(--ink)}
+.foot{position:fixed;bottom:16px;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:0 clamp(20px,4vw,44px);font-size:12px;color:var(--ink2);z-index:10}
+.nav{display:flex;gap:8px}
+.nav button{background:var(--surf);border:1px solid var(--line);color:var(--ink);border-radius:9px;padding:7px 13px;font:inherit;font-size:13px;cursor:pointer;font-weight:600}
+.nav button:hover{border-color:var(--brand)}
+.dots{display:flex;gap:6px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--line)}
+.dot.on{background:var(--brand);width:20px;border-radius:4px}
+.src{font-size:clamp(10px,1.1vw,12px);color:var(--ink2);margin-top:18px;opacity:.8}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,36px);align-items:center}
+@media(max-width:860px){.two{grid-template-columns:1fr}}
+.progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--s3),var(--brand));z-index:20;transition:width .4s}
+</style></head>
+<body>
+<div class="progress" id="prog"></div>
+<div id="deck">
+
+ <section class="slide dark on">
+  <div class="eyebrow">Resultados · Red APS Tongoy · septiembre 2026</div>
+  <h1>El pie que hoy<br>caminamos <span class="grad">juntos</span>.</h1>
+  <p class="lead">Evaluación de <b>Pie Diabético</b> en CESFAM Tongoy y PSR Guanaqueros. Una historia de datos que hicieron ustedes — y de lo que viene ahora.</p>
+  <div style="margin-top:26px"><span class="chip">Serie P · hoja P4</span><span class="chip">Cortes 2024 → 2026</span><span class="chip"><b>Foco: personas con diabetes</b></span></div>
+ </section>
+
+ <section class="slide">
+  <div class="eyebrow">Por qué cada pie cuenta</div>
+  <h2>En lo rural, revisar un pie<br>es <span class="grad">adelantarse</span> a una amputación.</h2>
+  <p class="lead">Cada persona con diabetes que vive lejos, que depende de un traslado costoso, tiene en su pie una señal temprana. <b>Detectarla a tiempo cambia el desenlace.</b> No es un trámite de la ficha: es prevención que se juega en el propio control.</p>
+  <div style="margin-top:22px"><span class="pill g">✓ Evaluar temprano</span><span class="pill w">→ Clasificar el riesgo</span><span class="pill c">✕ Evitar la úlcera y la amputación</span></div>
+ </section>
+
+ <section class="slide dark" data-chart="cob">
+  <div class="eyebrow">El gran logro del equipo</div>
+  <div class="two">
+   <div>
+    <h2>Pasamos de <span class="gradW">11%</span><br>a <span class="grad">82%</span> de cobertura.</h2>
+    <p class="lead">En un año, el equipo <b>instaló la evaluación del pie</b> como práctica de todos los días. Eso no lo hace un formulario: lo hace un equipo que decidió mirar cada pie. <b>Es el mayor avance del proceso.</b></p>
+    <p class="src">* jun-2026 es corte de medio año (P06), no comparable directo con los cierres de diciembre.</p>
+   </div>
+   <div class="chartwrap"><div class="chartbox"><canvas id="cCob"></canvas></div></div>
+  </div>
+ </section>
+
+ <section class="slide">
+  <div class="eyebrow">Dónde estamos hoy · corte jun-2026 · Consolidado</div>
+  <h2>La foto actual, en números claros.</h2>
+  <div class="row" style="margin-top:20px">
+   <div class="kcard acc-brand"><div class="n" id="k-dm"></div><div class="l">personas con DM2 bajo control</div></div>
+   <div class="kcard acc-warn"><div class="n" id="k-cob"></div><div class="l">con evaluación de pie vigente</div></div>
+   <div class="kcard acc-warn"><div class="n" id="k-am"></div><div class="l">en riesgo alto + máximo</div></div>
+   <div class="kcard acc-crit"><div class="n" id="k-amp"></div><div class="l">con amputación registrada</div></div>
+  </div>
+  <p class="lead" style="margin-top:24px">Buenos cimientos y un objetivo claro: <b>cerrar la brecha que aún falta</b> para que ninguna persona con diabetes se quede sin su pie evaluado.</p>
+ </section>
+
+ <section class="slide dark" data-chart="risk">
+  <div class="eyebrow">Dónde poner la energía</div>
+  <div class="two">
+   <div>
+    <h2>La <span class="gradW">cola de riesgo</span><br>es donde ganamos vidas.</h2>
+    <p class="lead">De cada persona evaluada, <b id="t-ampPct"></b> está en riesgo <b>alto o máximo</b>. Ese grupo — y no el promedio — es donde la podología oportuna, la curación avanzada y la descarga <b>marcan la diferencia real</b>.</p>
+    <p class="lead" style="margin-top:10px">Sumemos a quienes tienen <b id="t-ge9"></b> con HbA1c ≥ 9%: el pie y el azúcar son el mismo desafío.</p>
+   </div>
+   <div class="chartwrap"><div class="chartbox"><canvas id="cRisk"></canvas></div></div>
+  </div>
+ </section>
+
+ <section class="slide">
+  <div class="eyebrow">Dos equipos, una red</div>
+  <h2>CESFAM y PSR, cada uno<br>aportando lo suyo.</h2>
+  <div class="row" style="margin-top:22px">
+   <div class="kcard acc-brand" style="min-width:240px"><div class="l" style="margin-top:0;margin-bottom:10px">CESFAM Tongoy · jun-2026</div><div class="n" id="c-cob"></div><div class="l" id="c-ev" style="text-transform:none;letter-spacing:0"></div></div>
+   <div class="kcard acc-good" style="min-width:240px"><div class="l" style="margin-top:0;margin-bottom:10px">PSR Guanaqueros · jun-2026</div><div class="n" id="p-cob"></div><div class="l" id="p-ev" style="text-transform:none;letter-spacing:0"></div></div>
+  </div>
+  <p class="lead" style="margin-top:24px">La posta de Guanaqueros muestra que <b>estar cerca del territorio</b> también acerca el cuidado. Aprendamos de lo que cada equipo hace bien.</p>
+ </section>
+
+ <section class="slide dark">
+  <div class="eyebrow">Con los pies en la tierra</div>
+  <h2>Lo que miramos de frente.</h2>
+  <div class="row" style="margin-top:16px">
+   <div class="kcard acc-crit"><div class="n gradW" id="w-amp"></div><div class="l">amputaciones al corte jun-2026 (eran 3 en dic-2025)</div></div>
+   <div class="kcard acc-warn"><div class="n">dic-25</div><div class="l">la podología vigente cayó de forma atípica: revisar registro/recurso</div></div>
+  </div>
+  <p class="lead" style="margin-top:22px">Cada amputación es un <b>evento centinela</b>: merece una mirada caso a caso. Y un dato que baja de golpe suele hablar del <b>registro</b> antes que de la actividad. Nombrarlo es el primer paso para cuidarlo.</p>
+ </section>
+
+ <section class="slide">
+  <div class="eyebrow">El plan · nuestro próximo paso</div>
+  <h2>Cuatro focos, mucho impacto.</h2>
+  <ul class="steps">
+   <li><span class="num">1</span><span class="tx"><b>Cerrar la brecha:</b> barrido a los diabéticos sin evaluación vigente, partiendo por los de peor control metabólico. Meta a la vista: acercarnos al 90%.</span></li>
+   <li><span class="num">2</span><span class="tx"><b>Cuidar la cola de riesgo:</b> agenda protegida de podología, curación avanzada y descarga para riesgo alto/máximo, con rescate telefónico y rondas a la posta.</span></li>
+   <li><span class="num">3</span><span class="tx"><b>Unir pie y azúcar:</b> evaluar el pie junto al manejo intensificado de quienes tienen HbA1c ≥ 9%.</span></li>
+   <li><span class="num">4</span><span class="tx"><b>Registro impecable:</b> estandarizar el llenado de la P4 para que el dato refleje todo lo que ya hacemos.</span></li>
+  </ul>
+ </section>
+
+ <section class="slide dark">
+  <div class="eyebrow">Cierre</div>
+  <h1>Cada pie evaluado<br>es una historia que<br><span class="grad">sigue caminando</span>.</h1>
+  <p class="lead">Ustedes transformaron un registro en un cuidado real. Ahora, cerremos la brecha juntos — persona a persona, pie a pie.</p>
+  <p class="src">Fuente: REM Serie P (hoja P4) · DEIS-MINSAL · CESFAM Tongoy 105321 + PSR Guanaqueros 105405 · Cortes dic-2024, dic-2025, jun-2026. Extracción con anclaje por etiqueta. Metas referenciales (Ley 19.813 / GES).</p>
+ </section>
+
+</div>
+
+<div class="foot">
+ <div class="nav"><button onclick="go(-1)">‹ Anterior</button><button onclick="go(1)">Siguiente ›</button></div>
+ <div class="dots" id="dots"></div>
+ <div id="counter"></div>
+</div>
+
+<script>
+const D={"cob": [11, 82, 62], "dm": [1098, 983, 850], "ev": [122, 807, 531], "corte": ["dic-2024", "dic-2025", "jun-2026"], "risk": {"bajo": 380, "mod": 55, "alto": 64, "max": 32}, "amp": [3, 3, 7], "ulc": [14, 20, 7], "kpi": {"dm": 850, "cob": 62, "ev": 531, "am": 96, "amp": 7, "comp": 273, "compP": 32, "ge9": 153, "amPct": 18}, "cesfam": {"dm": 639, "ev": 370, "cob": 58}, "psr": {"dm": 211, "ev": 161, "cob": 76}};
+const nf=new Intl.NumberFormat('es-CL');
+const cssv=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const slides=[...document.querySelectorAll('.slide')];
+let cur=0, charts={};
+// dots
+const dots=document.getElementById('dots');
+slides.forEach((_,k)=>{const d=document.createElement('div');d.className='dot'+(k===0?' on':'');d.onclick=()=>show(k);dots.appendChild(d);});
+function fill(){
+ document.getElementById('k-dm').textContent=nf.format(D.kpi.dm);
+ document.getElementById('k-cob').textContent=D.kpi.cob+'%';
+ document.getElementById('k-am').textContent=nf.format(D.kpi.am);
+ document.getElementById('k-amp').textContent=nf.format(D.kpi.amp);
+ document.getElementById('t-ampPct').textContent=D.kpi.amPct+'%';
+ document.getElementById('t-ge9').textContent=nf.format(D.kpi.ge9)+' personas';
+ document.getElementById('c-cob').textContent=D.cesfam.cob+'%';
+ document.getElementById('c-ev').textContent=nf.format(D.cesfam.ev)+' de '+nf.format(D.cesfam.dm)+' evaluados';
+ document.getElementById('p-cob').textContent=D.psr.cob+'%';
+ document.getElementById('p-ev').textContent=nf.format(D.psr.ev)+' de '+nf.format(D.psr.dm)+' evaluados';
+ document.getElementById('w-amp').textContent=nf.format(D.kpi.amp);
+}
+function hatch(color){const c=document.createElement('canvas');c.width=c.height=8;const x=c.getContext('2d');
+ x.strokeStyle=color;x.lineWidth=2;x.beginPath();x.moveTo(0,8);x.lineTo(8,0);x.moveTo(-2,2);x.lineTo(2,-2);x.moveTo(6,10);x.lineTo(10,6);x.stroke();return x.createPattern(c,'repeat');}
+function drawCob(){
+ if(charts.cob)return;
+ const cG=cssv('--s3');
+ charts.cob=new Chart(document.getElementById('cCob'),{type:'bar',
+  data:{labels:D.corte,datasets:[{data:D.cob,backgroundColor:D.cob.map((v,i)=>i===2?hatch(cG):cG),borderColor:cG,borderWidth:1.5,borderRadius:6,maxBarThickness:100}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'Cobertura '+c.parsed.y+'%'+(c.dataIndex===2?' (parcial)':'')}}},
+   scales:{x:{grid:{display:false},ticks:{color:cssv('--ink2'),font:{size:14}}},y:{beginAtZero:true,max:100,grid:{color:cssv('--line')},ticks:{color:cssv('--ink2'),callback:v=>v+'%'}}}}});
+}
+function drawRisk(){
+ if(charts.risk)return;
+ const rv=[D.risk.bajo,D.risk.mod,D.risk.alto,D.risk.max];
+ const rc=[cssv('--r-bajo'),cssv('--r-mod'),cssv('--r-alto'),cssv('--r-max')];
+ charts.risk=new Chart(document.getElementById('cRisk'),{type:'doughnut',
+  data:{labels:['Bajo','Moderado','Alto','Máximo'],datasets:[{data:rv,backgroundColor:rc,borderColor:cssv('--surf'),borderWidth:3}]},
+  options:{responsive:true,maintainAspectRatio:false,cutout:'56%',plugins:{legend:{position:'right',labels:{color:cssv('--ink'),font:{size:14},boxWidth:12,padding:12,generateLabels:ch=>{const t=rv.reduce((a,b)=>a+b,0);return ch.data.labels.map((l,k)=>({text:l+' · '+nf.format(rv[k])+' ('+Math.round(rv[k]/t*100)+'%)',fillStyle:rc[k],strokeStyle:rc[k],index:k}));}}},tooltip:{callbacks:{label:c=>c.label+': '+nf.format(c.parsed)}}}}});
+}
+function show(k){
+ cur=Math.max(0,Math.min(slides.length-1,k));
+ slides.forEach((s,j)=>s.classList.toggle('on',j===cur));
+ [...dots.children].forEach((d,j)=>d.classList.toggle('on',j===cur));
+ document.getElementById('counter').textContent=(cur+1)+' / '+slides.length;
+ document.getElementById('prog').style.width=((cur+1)/slides.length*100)+'%';
+ const ch=slides[cur].dataset.chart;
+ if(ch==='cob')setTimeout(drawCob,60); if(ch==='risk')setTimeout(drawRisk,60);
+}
+function go(d){show(cur+d);}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){go(1);e.preventDefault();}if(e.key==='ArrowLeft'||e.key==='PageUp'){go(-1);e.preventDefault();}if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1);});
+fill();show(0);
+</script>
+</body></html>

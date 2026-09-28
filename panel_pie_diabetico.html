@@ -1,0 +1,278 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pie Diabético · Tongoy</title>
+<meta name="description" content="Panel de evaluación de pie diabético (Serie P REM) — CESFAM Tongoy y PSR Guanaqueros.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+ --bg:#f4f6f9;--surf:#ffffff;--surf2:#f7f9fc;--ink:#1a2230;--ink2:#5a6678;--line:#e4e9f0;--brand:#0d5fbf;
+ --s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#eda100;--s5:#e87ba4;--s6:#2e93bd;--s7:#4a3aa7;--s8:#e34948;
+ --good:#0ca30c;--warn:#fab219;--serious:#ec835a;--crit:#d03b3b;
+ --r-bajo:#1baf7a;--r-mod:#eda100;--r-alto:#ec835a;--r-max:#d03b3b;
+}
+:root[data-theme=dark]{
+ --bg:#0f141b;--surf:#171e28;--surf2:#1c2530;--ink:#e8edf4;--ink2:#9aa7b8;--line:#28323f;--brand:#4f9cf0;
+ --s1:#5b9be8;--s2:#f2895a;--s3:#3fc793;--s4:#f5c04a;--s5:#f09ec0;--s6:#54b3d8;--s7:#8a7de0;--s8:#ef6d6c;
+ --good:#3fc255;--warn:#f5c04a;--serious:#f2895a;--crit:#ef6d6c;
+ --r-bajo:#3fc793;--r-mod:#f5c04a;--r-alto:#f2895a;--r-max:#ef6d6c;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;font-feature-settings:"cv11","ss01";letter-spacing:-.005em;line-height:1.5}
+.disp{font-family:"Space Grotesk","Inter",sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px 60px}
+header{background:linear-gradient(135deg,var(--brand),#0a4a96);color:#fff;padding:26px 20px}
+header .in{max-width:1180px;margin:0 auto}
+header h1{font-family:"Space Grotesk";font-size:26px;margin:0 0 4px;font-weight:700;letter-spacing:-.02em}
+header p{margin:2px 0;opacity:.92;font-size:13.5px;max-width:780px}
+.tag{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:2px 11px;font-size:11.5px;margin-top:8px;margin-right:6px}
+.bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:18px 0 6px}
+.seg{display:inline-flex;background:var(--surf);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.seg button{border:0;background:transparent;color:var(--ink2);padding:8px 15px;font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--brand);color:#fff}
+.spacer{flex:1}
+.tbtn{border:1px solid var(--line);background:var(--surf);color:var(--ink);border-radius:9px;padding:8px 12px;font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+.grid{display:grid;gap:14px}
+.k5{grid-template-columns:repeat(5,1fr)}.k4{grid-template-columns:repeat(4,1fr)}.k2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:900px){.k5,.k4{grid-template-columns:repeat(2,1fr)}.k2{grid-template-columns:1fr}}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:16px 17px;box-shadow:0 1px 2px rgba(20,30,50,.04)}
+.kpi{border-left:4px solid var(--s1);position:relative}
+.kpi .lab{font-size:10.5px;text-transform:uppercase;letter-spacing:.055em;color:var(--ink2);font-weight:600}
+.kpi .val{font-family:"Space Grotesk";font-size:30px;font-weight:700;margin:4px 0 2px;letter-spacing:-.02em}
+.kpi .sub{font-size:12px;color:var(--ink2)}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:20px;margin-left:2px;vertical-align:middle}
+.b-good{background:color-mix(in srgb,var(--good) 15%,transparent);color:var(--good)}
+.b-warn{background:color-mix(in srgb,var(--warn) 20%,transparent);color:#8a6400}
+.b-crit{background:color-mix(in srgb,var(--crit) 15%,transparent);color:var(--crit)}
+:root[data-theme=dark] .b-warn{color:var(--warn)}
+.sec{margin-top:26px}
+.sec h2{font-family:"Space Grotesk";font-size:18px;margin:0 0 3px;letter-spacing:-.01em}
+.sec .d{color:var(--ink2);font-size:13px;margin:0 0 12px}
+.chartbox{position:relative;height:300px}
+.chartbox.sm{height:250px}
+.note{background:var(--surf2);border:1px solid var(--line);border-left:3px solid var(--s4);border-radius:10px;padding:12px 15px;font-size:12.5px;color:var(--ink2)}
+.rep{background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:8px 22px 20px}
+.rep h3{font-family:"Space Grotesk";font-size:15px;margin:18px 0 6px;color:var(--brand)}
+.rep p{font-size:13.5px;margin:7px 0;color:var(--ink)}
+.rep ul{margin:6px 0;padding-left:20px}.rep li{font-size:13.5px;margin:5px 0}
+.rep b{color:var(--ink)}
+table.map{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}
+table.map th,table.map td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+table.map th{background:var(--surf2);font-weight:600;color:var(--ink2);text-transform:uppercase;font-size:10.5px;letter-spacing:.04em}
+table.map td.n{font-family:"Space Grotesk";font-variant-numeric:tabular-nums}
+.foot{margin-top:26px;color:var(--ink2);font-size:11.5px;text-align:center}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--ink2);margin:2px 0 4px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+</style></head>
+<body>
+<header><div class="in">
+ <h1>Evaluación de Pie Diabético — Red APS Tongoy</h1>
+ <p>Mapeo del proceso y análisis de la población diabética bajo control, a partir de la <b>Serie P (hoja P4)</b> de los Registros Estadísticos Mensuales (REM · DEIS/MINSAL).</p>
+ <p>CESFAM Tongoy (105321) + PSR Guanaqueros (105405) = APS rural costera. Cortes de población bajo control: dic-2024, dic-2025 y jun-2026.</p>
+ <span class="tag">Serie P · Población bajo control</span><span class="tag">Progresión 2024 → 2026</span><span class="tag">Foco: personas con diabetes</span>
+</div></header>
+<div class="wrap">
+ <div class="bar">
+  <div class="seg" id="cen" role="group" aria-label="Centro">
+   <button data-c="consolidado" aria-pressed="true">Consolidado</button>
+   <button data-c="105321" aria-pressed="false">CESFAM</button>
+   <button data-c="105405" aria-pressed="false">PSR</button>
+  </div>
+  <div class="spacer"></div>
+  <button class="tbtn" id="theme">◐ Tema</button>
+ </div>
+
+ <div class="grid k5" id="kpis"></div>
+
+ <div class="sec">
+  <h2>Cobertura de evaluación del pie · progresión Serie P</h2>
+  <p class="d">Personas con DM2 bajo control con evaluación vigente del pie (pauta de estimación de riesgo de ulceración) sobre el total DM2 PBC de cada corte. La línea marca una <b>meta referencial del 90%</b> (editable).</p>
+  <div class="card"><div class="chartbox"><canvas id="cCob"></canvas></div>
+   <div class="note" style="margin-top:10px">jun-2026 es un corte de <b>medio año</b> (P06): no es directamente comparable con los cierres de diciembre. Se muestra tal cual, rotulado.</div></div>
+ </div>
+
+ <div class="grid k2 sec">
+  <div class="card"><h2 style="font-size:16px;margin:0 0 2px" class="disp">Estratificación del riesgo de ulceración</h2>
+   <p class="d">Distribución de las personas evaluadas según riesgo (corte más reciente del centro seleccionado).</p>
+   <div class="chartbox sm"><canvas id="cRisk"></canvas></div></div>
+  <div class="card"><h2 style="font-size:16px;margin:0 0 2px" class="disp">Riesgo alto + máximo en el tiempo</h2>
+   <p class="d">Subpoblación prioritaria: quienes concentran el riesgo de úlcera y amputación.</p>
+   <div class="chartbox sm"><canvas id="cRiskTr"></canvas></div></div>
+ </div>
+
+ <div class="grid k2 sec">
+  <div class="card"><h2 style="font-size:16px;margin:0 0 2px" class="disp">Cascada de cuidado del pie (corte reciente)</h2>
+   <p class="d">De la población DM2 bajo control a la evaluada y a la de mayor riesgo.</p>
+   <div class="chartbox sm"><canvas id="cFunnel"></canvas></div></div>
+  <div class="card"><h2 style="font-size:16px;margin:0 0 2px" class="disp">Resultados adversos y manejo</h2>
+   <p class="d">Úlceras con curación avanzada y amputaciones por pie diabético (personas bajo control, por corte).</p>
+   <div class="chartbox sm"><canvas id="cAdv"></canvas></div></div>
+ </div>
+
+ <div class="sec">
+  <h2>Lectura salubrista <span id="repCen" style="font-weight:400;color:var(--ink2);font-size:14px"></span></h2>
+  <p class="d">Interpretación con mirada de salud pública en APS rural. Generada desde los datos del centro seleccionado.</p>
+  <div class="rep" id="rep"></div>
+ </div>
+
+ <div class="sec">
+  <h2>Mapeo del proceso en el REM</h2>
+  <p class="d">Dónde vive cada dato del proceso de pie diabético dentro de la Serie P, hoja P4 (población bajo control cardiovascular).</p>
+  <div class="card"><table class="map">
+   <thead><tr><th>Dato del proceso</th><th>Serie / Hoja</th><th>Ubicación (anclaje por etiqueta)</th><th>Rol</th></tr></thead>
+   <tbody>
+   <tr><td>Personas con DM2 bajo control</td><td>P · P4</td><td>Sección "Personas bajo control según patología" → "Diabetes Mellitus tipo 2"</td><td>Denominador</td></tr>
+   <tr><td>Compensación (HbA1c &lt; 7%)</td><td>P · P4</td><td>"Personas bajo control por Diabetes Mellitus" → "HbA1c&lt;7%"</td><td>Control metabólico</td></tr>
+   <tr><td>Evaluación vigente del pie (riesgo bajo/mod/alto/máx)</td><td>P · P4</td><td>"Con evaluación vigente del pie según pauta de estimación del riesgo de ulceración" + subfilas de riesgo</td><td>Proceso central</td></tr>
+   <tr><td>Atención podológica vigente</td><td>P · P4</td><td>Sección "Personas con diabetes en PSCV" → "Con atención podológica vigente"</td><td>Cuidado preventivo</td></tr>
+   <tr><td>Úlceras activas (curación convencional/avanzada), ayuda de descarga</td><td>P · P4</td><td>"Con úlceras activas de pie diabético tratadas con curación" + subfilas</td><td>Resultado / manejo</td></tr>
+   <tr><td>Amputación por pie diabético</td><td>P · P4</td><td>"Con amputación por pie diabético"</td><td>Resultado adverso</td></tr>
+   <tr><td>HbA1c ≥ 9%, insulina, retinopatía, fondo de ojo</td><td>P · P4</td><td>Sección "Personas con diabetes en PSCV"</td><td>Factores de riesgo asociados</td></tr>
+   </tbody>
+  </table>
+  <div class="note" style="margin-top:12px"><b>Nota metodológica.</b> Todo el proceso de pie diabético se registra en la <b>Serie P (población bajo control)</b>, no en la producción mensual (Serie A). Por eso su seguimiento es por <b>cortes</b> (P06 junio / P12 diciembre) y no se suman entre sí. La extracción usa <b>anclaje por etiqueta</b> para resistir los cambios de versión del formulario entre años (verificado 2024–2026). El DM2 bajo control consolidado jun-2026 (850) coincide con el PSCV del dashboard REM, validando la extracción.</div>
+ </div>
+
+ <div class="note" style="margin-top:22px"><b>Calidad del dato.</b> (1) La <b>evaluación del pie</b> pasó de 11% (dic-2024) a 82% (dic-2025): el salto refleja la <b>puesta en marcha del registro/proceso</b>, más que un cambio clínico real — interpretar el 2024 como línea base de implementación. (2) La <b>atención podológica vigente</b> cae a 89 en dic-2025 (vs 488 y 493 en los otros cortes) en ambos centros: patrón atípico, probable <b>subregistro o brecha de recurso podológico</b> ese corte → verificar con el equipo. (3) HbA1c ≥ 9% no está disponible en el formato 2024 (s/i). (4) Metas mostradas como <b>referenciales</b> (Ley 19.813 / GES) hasta confirmar el valor oficial del año. Fuente: REM Serie P4, DEIS-MINSAL.</div>
+
+ <div class="foot">Fuente: REM Serie P (hoja P4) · DEIS-MINSAL · CESFAM Tongoy 105321 + PSR Guanaqueros 105405 · Cortes dic-2024, dic-2025, jun-2026.</div>
+</div>
+
+<script>
+const DATA={"yrs": [2024, 2025, 2026], "corte": ["dic-2024", "dic-2025", "jun-2026"], "cen": {"consolidado": "Consolidado (CESFAM + PSR)", "105321": "CESFAM Tongoy", "105405": "PSR Guanaqueros"}, "d": {"consolidado": {"dm2_pbc": [1098, 983, 850], "comp": [317, 432, 273], "ge9": [null, 291, 153], "insulina": [165, 199, 186], "retino": [108, 87, 93], "fondo": [649, 344, 252], "podo": [488, 89, 493], "bajo": [95, 562, 380], "mod": [2, 100, 55], "alto": [16, 124, 64], "max": [9, 21, 32], "ev": [122, 807, 531], "amp": [3, 3, 7], "ulcAv": [14, 20, 7]}, "105321": {"dm2_pbc": [887, 709, 639], "comp": [214, 312, 211], "ge9": [null, 152, 121], "insulina": [118, 144, 144], "retino": [83, 57, 84], "fondo": [474, 252, 206], "podo": [364, 43, 384], "bajo": [59, 401, 257], "mod": [2, 83, 41], "alto": [9, 100, 47], "max": [9, 15, 25], "ev": [79, 599, 370], "amp": [3, 3, 4], "ulcAv": [11, 12, 2]}, "105405": {"dm2_pbc": [211, 274, 211], "comp": [103, 120, 62], "ge9": [null, 139, 32], "insulina": [47, 55, 42], "retino": [25, 30, 9], "fondo": [175, 92, 46], "podo": [124, 46, 109], "bajo": [36, 161, 123], "mod": [0, 17, 14], "alto": [7, 24, 17], "max": [0, 6, 7], "ev": [43, 208, 161], "amp": [0, 0, 3], "ulcAv": [3, 8, 5]}}};
+let centro='consolidado';
+const $=s=>document.querySelector(s);
+const nf=new Intl.NumberFormat('es-CL');
+const cssv=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const pct=(a,b)=>b?Math.round(a/b*100):0;
+let charts={};
+function hatch(color){const c=document.createElement('canvas');c.width=c.height=8;const x=c.getContext('2d');
+ x.strokeStyle=color;x.lineWidth=2;x.beginPath();x.moveTo(0,8);x.lineTo(8,0);x.moveTo(-2,2);x.lineTo(2,-2);x.moveTo(6,10);x.lineTo(10,6);x.stroke();
+ return x.createPattern(c,'repeat');}
+
+function kpi(lab,val,sub,color,badge){
+ return `<div class="card kpi" style="border-left-color:${color}"><div class="lab">${lab}</div>
+  <div class="val">${val}${badge||''}</div><div class="sub">${sub}</div></div>`;}
+function bg(kind,txt){const m={good:'b-good',warn:'b-warn',crit:'b-crit'}[kind];const ic={good:'✓',warn:'!',crit:'▲'}[kind];
+ return `<span class="badge ${m}">${ic} ${txt}</span>`;}
+
+function lastIdx(d){for(let i=d.dm2_pbc.length-1;i>=0;i--)if(d.dm2_pbc[i]!=null)return i;return d.dm2_pbc.length-1;}
+
+function renderKPI(){
+ const d=DATA.d[centro],i=lastIdx(d);
+ const dm=d.dm2_pbc[i], ev=d.ev[i], comp=d.comp[i];
+ const cob=pct(ev,dm), compP=pct(comp,dm);
+ const altomax=(d.alto[i]||0)+(d.max[i]||0), amp=d.amp[i];
+ const cobB=cob>=90?bg('good','meta'):cob>=70?bg('warn','bajo meta'):bg('crit','crítico');
+ const compB=compP>=50?bg('good',''):compP>=40?bg('warn',''):bg('crit','');
+ const h=[
+  kpi('DM2 bajo control',nf.format(dm),'corte '+DATA.corte[i],'var(--s1)'),
+  kpi('Evaluación de pie',cob+'%',nf.format(ev)+' de '+nf.format(dm)+' evaluados','var(--s3)',cobB),
+  kpi('Riesgo alto + máximo',nf.format(altomax),pct(altomax,ev)+'% de los evaluados','var(--serious)',bg('warn','prioritario')),
+  kpi('Amputación por pie DM',nf.format(amp),'personas bajo control','var(--crit)',amp>0?bg('crit','vigilar'):''),
+  kpi('Compensación HbA1c<7%',compP+'%','meta ref. 50%','var(--s6)',compB),
+ ].join('');
+ $('#kpis').innerHTML=h;
+}
+
+function baseOpts(extra){return Object.assign({responsive:true,maintainAspectRatio:false,
+ plugins:{legend:{display:false},tooltip:{callbacks:{}}},
+ scales:{x:{grid:{display:false},ticks:{color:cssv('--ink2'),font:{size:12}}},
+  y:{beginAtZero:true,grid:{color:cssv('--line')},ticks:{color:cssv('--ink2'),font:{size:11}}}}},extra||{});}
+function mk(id,cfg){charts[id]?.destroy();charts[id]=new Chart($('#'+id),cfg);}
+
+function chartCob(){
+ const d=DATA.d[centro];
+ const cob=DATA.yrs.map((y,i)=>d.dm2_pbc[i]?Math.round(d.ev[i]/d.dm2_pbc[i]*100):null);
+ const labels=DATA.corte.slice();
+ const cA=cssv('--s3');
+ const bgc=cob.map((v,i)=>i===2?hatch(cA):cA);
+ const META=90;
+ const metaPlug={id:'metaCob',afterDatasetsDraw(c){const sc=c.scales.y;if(!sc)return;const yy=sc.getPixelForValue(META);const a=c.chartArea;const ctx=c.ctx;
+   ctx.save();ctx.strokeStyle=cssv('--crit');ctx.setLineDash([5,4]);ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(a.left,yy);ctx.lineTo(a.right,yy);ctx.stroke();
+   ctx.setLineDash([]);ctx.fillStyle=cssv('--crit');ctx.font='600 10px Inter';ctx.fillText('meta ref. '+META+'%',a.left+4,yy-4);ctx.restore();}};
+ charts['cCob']?.destroy();
+ charts['cCob']=new Chart($('#cCob'),{type:'bar',plugins:[metaPlug],
+  data:{labels,datasets:[{label:'Cobertura %',data:cob,backgroundColor:bgc,borderColor:cA,borderWidth:1.5,borderRadius:5,maxBarThickness:90}]},
+  options:baseOpts({scales:{x:{grid:{display:false},ticks:{color:cssv('--ink2')}},y:{beginAtZero:true,max:100,grid:{color:cssv('--line')},ticks:{color:cssv('--ink2'),callback:v=>v+'%'}}},
+   plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'Cobertura '+c.parsed.y+'%'+(c.dataIndex===2?' (parcial jun)':'')}}}}) });
+}
+
+function chartRisk(){
+ const d=DATA.d[centro],i=lastIdx(d);
+ const vals=[d.bajo[i]||0,d.mod[i]||0,d.alto[i]||0,d.max[i]||0];
+ const cols=[cssv('--r-bajo'),cssv('--r-mod'),cssv('--r-alto'),cssv('--r-max')];
+ mk('cRisk',{type:'doughnut',data:{labels:['Bajo','Moderado','Alto','Máximo'],datasets:[{data:vals,backgroundColor:cols,borderColor:cssv('--surf'),borderWidth:2}]},
+  options:{responsive:true,maintainAspectRatio:false,cutout:'58%',
+   plugins:{legend:{position:'right',labels:{color:cssv('--ink'),font:{size:12},boxWidth:12,padding:10,generateLabels:ch=>{
+     const t=vals.reduce((a,b)=>a+b,0);return ch.data.labels.map((l,k)=>({text:l+' — '+nf.format(vals[k])+' ('+pct(vals[k],t)+'%)',fillStyle:cols[k],strokeStyle:cols[k],index:k}));}}},
+    tooltip:{callbacks:{label:c=>c.label+': '+nf.format(c.parsed)}}}}});
+}
+
+function chartRiskTr(){
+ const d=DATA.d[centro];
+ const am=DATA.yrs.map((y,i)=>(d.alto[i]||0)+(d.max[i]||0));
+ const cA=cssv('--serious');
+ mk('cRiskTr',{type:'line',data:{labels:DATA.corte.slice(),datasets:[{label:'Alto+Máximo',data:am,borderColor:cA,backgroundColor:'transparent',borderWidth:2.5,tension:.25,pointRadius:5,pointBackgroundColor:cA,pointBorderColor:cssv('--surf'),pointBorderWidth:2}]},
+  options:baseOpts({plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'Alto+Máximo: '+nf.format(c.parsed.y)+(c.dataIndex===2?' (jun)':'')}}}})});
+}
+
+function chartFunnel(){
+ const d=DATA.d[centro],i=lastIdx(d);
+ const stages=['DM2 bajo control','Con evaluación de pie','Riesgo alto+máximo'];
+ const vals=[d.dm2_pbc[i]||0,d.ev[i]||0,(d.alto[i]||0)+(d.max[i]||0)];
+ const cols=[cssv('--s1'),cssv('--s3'),cssv('--serious')];
+ mk('cFunnel',{type:'bar',data:{labels:stages,datasets:[{data:vals,backgroundColor:cols,borderRadius:5,maxBarThickness:40}]},
+  options:Object.assign(baseOpts(),{indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>nf.format(c.parsed.x)}}},
+   scales:{x:{beginAtZero:true,grid:{color:cssv('--line')},ticks:{color:cssv('--ink2')}},y:{grid:{display:false},ticks:{color:cssv('--ink'),font:{size:12}}}}})});
+}
+
+function chartAdv(){
+ const d=DATA.d[centro];
+ const c2=cssv('--s2'),c8=cssv('--crit');
+ mk('cAdv',{type:'bar',data:{labels:DATA.corte.slice(),datasets:[
+   {label:'Úlcera (curación avanzada)',data:d.ulcAv,backgroundColor:c2,borderRadius:4,maxBarThickness:34},
+   {label:'Amputación por pie DM',data:d.amp,backgroundColor:c8,borderRadius:4,maxBarThickness:34}]},
+  options:baseOpts({plugins:{legend:{display:true,position:'top',labels:{color:cssv('--ink'),font:{size:11.5},boxWidth:12}}}})});
+}
+
+function report(){
+ const d=DATA.d[centro],i=lastIdx(d);
+ const nom=DATA.cen[centro];
+ const dm=d.dm2_pbc[i],ev=d.ev[i],cob=pct(ev,dm),comp=pct(d.comp[i],dm);
+ const alto=d.alto[i]||0,mx=d.max[i]||0,am=alto+mx,amp=d.amp[i],ulc=d.ulcAv[i],ge9=d.ge9[i];
+ // progresión cobertura
+ const cob24=pct(d.ev[0],d.dm2_pbc[0]),cob25=pct(d.ev[1],d.dm2_pbc[1]);
+ $('#repCen').textContent='· '+nom+' · '+DATA.corte[i];
+ let tono,accion;
+ if(cob>=90){tono='La cobertura de evaluación del pie está en un nivel de excelencia';accion='sostener el ritmo y no descuidar la calidad de la estratificación.';}
+ else if(cob>=70){tono='La cobertura de evaluación del pie es buena pero aún bajo la meta referencial';accion='cerrar la brecha con un barrido dirigido a los diabéticos sin evaluación vigente.';}
+ else if(cob>=40){tono='La cobertura de evaluación del pie está a medio camino';accion='priorizar la evaluación en el segundo semestre, empezando por los de peor control metabólico.';}
+ else {tono='La cobertura de evaluación del pie es baja';accion='instalar la evaluación como parte fija del control cardiovascular, no como acto separado.';}
+ let h='';
+ h+='<h3>Situación actual</h3>';
+ h+=`<p>En <b>${nom}</b>, al corte <b>${DATA.corte[i]}</b>, hay <b>${nf.format(dm)}</b> personas con diabetes tipo 2 bajo control. De ellas, <b>${nf.format(ev)}</b> (<b>${cob}%</b>) tienen evaluación vigente del pie con estimación de riesgo de ulceración, y <b>${comp}%</b> están compensadas (HbA1c &lt; 7%). Del grupo evaluado, <b>${nf.format(am)}</b> personas (<b>${pct(am,ev)}%</b>) están en riesgo <b>alto o máximo</b> de úlcera.</p>`;
+ h+='<h3>Lectura salubrista (APS rural costera)</h3>';
+ h+=`<p>${tono}. El proceso de evaluación del pie se consolidó con fuerza en la red: pasó de <b>${cob24}%</b> (dic-2024) a <b>${cob25}%</b> (dic-2025), lo que habla de un equipo que <b>instaló la pauta</b> como práctica sistemática. En un territorio rural y disperso como Tongoy–Guanaqueros, donde el costo de traslado a especialidad es alto y la continuidad depende del vínculo local, la evaluación del pie en el propio control es una de las intervenciones más costo-efectivas para <b>anticipar la úlcera antes de que se convierta en amputación</b>.</p>`;
+ h+=`<p>El punto de atención no es el promedio, sino la <b>cola de riesgo</b>: las <b>${nf.format(am)}</b> personas en riesgo alto/máximo y las <b>${nf.format(amp)}</b> con amputación concentran el daño evitable. ${amp>=5?'El número de amputaciones registradas al corte merece una revisión caso a caso con el equipo: cada una es un evento centinela.':'Mantener la vigilancia activa sobre este grupo evita que el daño escale.'} A esto se suma que <b>${ge9!=null?nf.format(ge9)+' personas tienen HbA1c ≥ 9%':'un grupo con muy mal control metabólico'}</b>, el perfil que más rápido evoluciona a lesión.</p>`;
+ h+='<h3>Recomendaciones</h3><ul>';
+ h+=`<li><b>Cerrar cobertura:</b> ${accion}</li>`;
+ h+='<li><b>Priorizar la cola de riesgo:</b> agendar podología, curación avanzada y ayuda de descarga a los de riesgo alto/máximo, con rescate telefónico y rondas a la posta para evitar inasistencias por traslado.</li>';
+ h+='<li><b>Unir pie y metabolismo:</b> vincular la evaluación del pie con el manejo intensificado de quienes tienen HbA1c ≥ 9%, que son los de mayor probabilidad de ulcerarse.</li>';
+ h+='<li><b>Registro:</b> auditar la atención podológica del corte dic-2025 (caída atípica) y estandarizar el llenado de la P4 para que el dato refleje la actividad real.</li>';
+ h+='</ul>';
+ $('#rep').innerHTML=h;
+}
+
+function renderAll(){renderKPI();chartCob();chartRisk();chartRiskTr();chartFunnel();chartAdv();report();}
+
+document.querySelectorAll('#cen button').forEach(b=>b.onclick=()=>{
+ centro=b.dataset.c;
+ document.querySelectorAll('#cen button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.c===centro));
+ renderAll();});
+$('#theme').onclick=()=>{const r=document.documentElement;r.setAttribute('data-theme',r.getAttribute('data-theme')==='dark'?'light':'dark');renderAll();};
+renderAll();
+</script>
+</body></html>

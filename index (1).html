@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estadística para la práctica clínica · Guía visual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060911;
+  --bg2:#0b1120;
+  --panel:rgba(16,24,43,.72);
+  --line:rgba(120,160,220,.16);
+  --txt:#dbe6f5;
+  --dim:#8ea0bd;
+  --cy:#22d3ee;
+  --vi:#a78bfa;
+  --mg:#f472b6;
+  --li:#a3e635;
+  --am:#fbbf24;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:86px}
+body{
+  margin:0;background:var(--bg);color:var(--txt);
+  font-family:'Inter',system-ui,sans-serif;line-height:1.65;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;
+  background:
+   radial-gradient(900px 600px at 12% -5%, rgba(34,211,238,.13), transparent 60%),
+   radial-gradient(800px 600px at 88% 8%, rgba(167,139,250,.13), transparent 60%),
+   radial-gradient(900px 700px at 50% 110%, rgba(244,114,182,.09), transparent 60%),
+   var(--bg);
+}
+#neuro{position:fixed;inset:0;z-index:-1;opacity:.5}
+h1,h2,h3,h4{font-family:'Sora',sans-serif;line-height:1.2;margin:0 0 .5em}
+a{color:var(--cy)}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+
+/* ---------- HERO ---------- */
+header.hero{padding:72px 0 48px;text-align:center;position:relative}
+.kicker{font-family:var(--mono);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--cy);margin-bottom:18px}
+header.hero h1{font-size:clamp(2.1rem,7vw,3.4rem);font-weight:800;letter-spacing:-.02em;
+  background:linear-gradient(100deg,#fff 10%,var(--cy) 45%,var(--vi) 80%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-sub{color:var(--dim);font-size:1.05rem;max-width:580px;margin:0 auto 26px}
+.dedic{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);
+  background:rgba(16,24,43,.6);padding:10px 18px;border-radius:999px;font-size:.88rem;color:var(--dim)}
+.dedic b{color:var(--txt);font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:30px}
+.chip{font-size:.74rem;font-family:var(--mono);padding:6px 12px;border-radius:999px;
+  border:1px solid var(--line);color:var(--dim);background:rgba(255,255,255,.02)}
+
+/* ---------- NAV ---------- */
+nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);
+  background:rgba(6,9,17,.82);border-bottom:1px solid var(--line)}
+.progress{height:2px;background:linear-gradient(90deg,var(--cy),var(--vi),var(--mg));width:0%;transition:width .15s}
+.navscroll{display:flex;gap:4px;overflow-x:auto;padding:10px 14px;scrollbar-width:none}
+.navscroll::-webkit-scrollbar{display:none}
+.navscroll a{white-space:nowrap;font-size:.78rem;color:var(--dim);text-decoration:none;
+  padding:6px 11px;border-radius:8px;border:1px solid transparent}
+.navscroll a:hover,.navscroll a.on{color:var(--txt);border-color:var(--line);background:rgba(255,255,255,.04)}
+
+/* ---------- MODULOS ---------- */
+section.mod{padding:56px 0 10px;border-top:1px solid var(--line);margin-top:40px}
+section.mod:first-of-type{border-top:none}
+.modhead{display:flex;gap:16px;align-items:flex-start;margin-bottom:26px}
+.modnum{flex:none;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;
+  font-family:var(--mono);font-weight:700;font-size:.95rem;color:#060911;
+  background:linear-gradient(140deg,var(--cy),var(--vi));box-shadow:0 0 28px rgba(34,211,238,.3)}
+.modhead h2{font-size:clamp(1.35rem,4.5vw,1.85rem);margin:0}
+.modtag{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--vi);margin-top:4px}
+
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin:20px 0}
+.card h3{font-size:1.02rem;margin:0 0 10px;display:flex;align-items:center;gap:9px}
+.card h3 .dot{width:8px;height:8px;border-radius:50%;flex:none}
+
+.escena{border-left:3px solid var(--mg);background:linear-gradient(90deg,rgba(244,114,182,.09),transparent 70%)}
+.escena h3 .dot{background:var(--mg);box-shadow:0 0 12px var(--mg)}
+.escena p{font-size:.99rem}
+.idea{border:1px solid rgba(34,211,238,.35);background:rgba(34,211,238,.07);border-radius:14px;
+  padding:16px 20px;margin:20px 0;font-size:1.02rem}
+.idea b{color:var(--cy)}
+.trampa{border-left:3px solid var(--am);background:linear-gradient(90deg,rgba(251,191,36,.08),transparent 70%)}
+.trampa h3 .dot{background:var(--am);box-shadow:0 0 12px var(--am)}
+.excel{border-left:3px solid var(--li);background:linear-gradient(90deg,rgba(163,230,53,.07),transparent 70%)}
+.excel h3 .dot{background:var(--li);box-shadow:0 0 12px var(--li)}
+
+/* pasos */
+.pasos{counter-reset:p;margin:22px 0}
+.paso{position:relative;padding:0 0 22px 46px;border-left:2px dashed rgba(120,160,220,.22);margin-left:17px}
+.paso:last-child{border-left-color:transparent}
+.paso::before{counter-increment:p;content:counter(p);position:absolute;left:-17px;top:-2px;
+  width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+  font-family:var(--mono);font-size:.82rem;font-weight:700;color:var(--cy);
+  background:#0b1120;border:1px solid rgba(34,211,238,.45);box-shadow:0 0 16px rgba(34,211,238,.22)}
+.paso h4{font-size:.95rem;margin:4px 0 8px;color:#fff}
+.calc{font-family:var(--mono);font-size:.88rem;background:#070c16;border:1px solid var(--line);
+  border-radius:10px;padding:12px 14px;overflow-x:auto;white-space:pre;color:#cfe4f7;margin:8px 0}
+.res{font-family:var(--mono);font-weight:700;color:var(--li);background:rgba(163,230,53,.09);
+  border:1px solid rgba(163,230,53,.3);border-radius:8px;padding:3px 9px;display:inline-block}
+
+/* tablas */
+.tw{overflow-x:auto;margin:16px 0;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:.84rem;min-width:420px}
+th,td{padding:8px 10px;text-align:center;border-bottom:1px solid rgba(120,160,220,.1)}
+th{background:rgba(255,255,255,.035);font-family:var(--mono);font-size:.74rem;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--dim);position:sticky;top:0}
+tbody tr:hover{background:rgba(34,211,238,.06)}
+td.k{font-family:var(--mono);color:var(--cy);font-weight:700}
+.hl{background:rgba(244,114,182,.18)!important;color:#fff;font-weight:700}
+
+/* retrieval */
+details.q{border:1px solid rgba(167,139,250,.35);background:rgba(167,139,250,.07);
+  border-radius:14px;padding:14px 18px;margin:20px 0}
+details.q summary{cursor:pointer;font-weight:600;color:var(--vi);list-style:none;font-size:.95rem}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary::before{content:"◆ ";color:var(--vi)}
+details.q[open] summary{margin-bottom:10px}
+details.q p{margin:0;font-size:.94rem;color:var(--txt)}
+
+/* interactivos */
+.lab{border:1px solid rgba(34,211,238,.3);border-radius:18px;padding:20px;margin:24px 0;
+  background:linear-gradient(160deg,rgba(34,211,238,.06),rgba(167,139,250,.05))}
+.lab .labttl{font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cy);margin-bottom:14px}
+.ctrls{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:14px}
+.ctrl{flex:1 1 120px}
+.ctrl label{display:block;font-size:.72rem;color:var(--dim);margin-bottom:5px;font-family:var(--mono)}
+.ctrl input,.ctrl select{width:100%;background:#070c16;border:1px solid var(--line);color:var(--txt);
+  border-radius:9px;padding:9px 11px;font-family:var(--mono);font-size:.9rem}
+.out{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.out div{flex:1 1 100px;background:#070c16;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.out span{display:block;font-size:.68rem;color:var(--dim);font-family:var(--mono);text-transform:uppercase;letter-spacing:.1em}
+.out b{font-family:var(--mono);font-size:1.12rem;color:var(--cy)}
+button.go{background:linear-gradient(120deg,var(--cy),var(--vi));color:#060911;border:none;
+  border-radius:10px;padding:11px 20px;font-weight:700;font-family:'Sora';cursor:pointer;font-size:.9rem}
+button.go:active{transform:translateY(1px)}
+svg.plot{width:100%;height:auto;display:block}
+
+ul.neo{list-style:none;padding:0;margin:14px 0}
+ul.neo li{position:relative;padding-left:24px;margin-bottom:9px;font-size:.96rem}
+ul.neo li::before{content:"";position:absolute;left:4px;top:.62em;width:8px;height:8px;border-radius:50%;
+  background:var(--cy);box-shadow:0 0 10px var(--cy)}
+.formula{font-family:var(--mono);text-align:center;font-size:1.05rem;color:#fff;
+  background:#070c16;border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0;overflow-x:auto}
+.small{font-size:.86rem;color:var(--dim)}
+footer{margin-top:70px;padding:40px 0 60px;border-top:1px solid var(--line);text-align:center;color:var(--dim);font-size:.85rem}
+mark{background:rgba(34,211,238,.22);color:#fff;padding:1px 4px;border-radius:4px}
+</style>
+</head>
+<body>
+<canvas id="neuro"></canvas>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Guía visual · Bioestadística aplicada</div>
+    <h1>Estadística para la práctica clínica</h1>
+    <p class="hero-sub">Nueve módulos para entender —de verdad— qué estás calculando cuando mides, comparas y decides en rehabilitación.</p>
+    <div class="dedic">🧠 Hecha para <b>Natalia</b> · terapia ocupacional &amp; rehabilitación comunitaria</div>
+    <div class="chips">
+      <span class="chip">descriptiva</span><span class="chip">probabilidad</span><span class="chip">DE vs EE</span>
+      <span class="chip">z-score</span><span class="chip">TCL</span><span class="chip">tabla t</span>
+      <span class="chip">IC 95%</span><span class="chip">valor p</span><span class="chip">Excel</span>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="progress" id="prog"></div>
+  <div class="navscroll" id="navs">
+    <a href="#inicio">Cómo usarla</a>
+    <a href="#m1">1 · Descriptiva</a>
+    <a href="#m2">2 · Probabilidad</a>
+    <a href="#m3">3 · DE vs EE</a>
+    <a href="#m4">4 · z y tabla normal</a>
+    <a href="#m5">5 · TCL</a>
+    <a href="#m6">6 · Tabla t</a>
+    <a href="#m7">7 · Intervalos</a>
+    <a href="#m8">8 · Inferencia y p</a>
+    <a href="#m9">9 · Excel</a>
+    <a href="#glos">Glosario</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ================= INICIO ================= -->
+<section class="mod" id="inicio" style="border-top:none">
+  <div class="modhead">
+    <div class="modnum">00</div>
+    <div><h2>Cómo está construida esta guía</h2><div class="modtag">Neurociencia del aprendizaje</div></div>
+  </div>
+
+  <p>No está escrita como un libro. Está escrita como aprende el cerebro, que es bastante más desordenado y bastante más terco.</p>
+
+  <ul class="neo">
+    <li><b>Trozos pequeños (chunking).</b> La memoria de trabajo sostiene ~4 elementos a la vez. Cada módulo entrega una sola idea central y la repite en tres formatos distintos.</li>
+    <li><b>Doble codificación.</b> Cada concepto aparece en palabras <i>y</i> en forma visual o numérica. Dos rutas de entrada = dos caminos para recuperarlo después.</li>
+    <li><b>Recuperación activa.</b> Al final de cada módulo hay una pregunta con la respuesta escondida. <mark>Intenta responder antes de abrirla, aunque falles.</mark> El esfuerzo de recordar consolida más que releer.</li>
+    <li><b>Dificultad deseable.</b> Los cálculos están paso a paso, pero no masticados. Si en algún punto tienes que parar a pensar, está funcionando.</li>
+    <li><b>Espaciado.</b> No la leas entera de una. Dos módulos por sesión, y vuelve a las preguntas tres días después. El olvido parcial es parte del proceso, no un fracaso.</li>
+  </ul>
+
+  <div class="idea">
+    <b>Promesa realista:</b> al terminar no vas a ser estadística. Vas a entender qué significa cada número que aparece en un informe, vas a poder calcularlo a mano una vez, y vas a saber qué función de Excel lo hace por ti el resto de las veces.
+  </div>
+
+  <h3 style="margin-top:34px">El mapa: cómo se conectan los nueve temas</h3>
+  <p class="small">Casi todo lo que viene es una sola cadena lógica. Si entiendes la cadena, los nombres dejan de dar miedo.</p>
+
+  <svg class="plot" viewBox="0 0 860 300" xmlns="http://www.w3.org/2000/svg" style="margin:10px 0 6px">
+    <defs>
+      <linearGradient id="gl" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#a78bfa"/>
+      </linearGradient>
+      <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+        <path d="M0,0 L7,3 L0,6 z" fill="#5f7fa8"/>
+      </marker>
+    </defs>
+    <g font-family="Inter" font-size="12.5" fill="#dbe6f5" text-anchor="middle">
+      <g>
+        <rect x="18" y="26" width="150" height="54" rx="12" fill="rgba(34,211,238,.1)" stroke="#22d3ee"/>
+        <text x="93" y="48">Datos de tus</text><text x="93" y="66">usuarios</text>
+      </g>
+      <g>
+        <rect x="218" y="26" width="150" height="54" rx="12" fill="rgba(255,255,255,.04)" stroke="#5f7fa8"/>
+        <text x="293" y="48">Descriptiva</text><text x="293" y="66" font-size="11" fill="#8ea0bd">media · DE</text>
+      </g>
+      <g>
+        <rect x="418" y="26" width="150" height="54" rx="12" fill="rgba(255,255,255,.04)" stroke="#5f7fa8"/>
+        <text x="493" y="48">Error estándar</text><text x="493" y="66" font-size="11" fill="#8ea0bd">DE ÷ √n</text>
+      </g>
+      <g>
+        <rect x="618" y="26" width="150" height="54" rx="12" fill="rgba(255,255,255,.04)" stroke="#5f7fa8"/>
+        <text x="693" y="48">Teorema Central</text><text x="693" y="66" font-size="11" fill="#8ea0bd">del Límite</text>
+      </g>
+      <g>
+        <rect x="618" y="140" width="150" height="54" rx="12" fill="rgba(255,255,255,.04)" stroke="#5f7fa8"/>
+        <text x="693" y="162">Curva normal</text><text x="693" y="180" font-size="11" fill="#8ea0bd">z · tabla t</text>
+      </g>
+      <g>
+        <rect x="418" y="140" width="150" height="54" rx="12" fill="rgba(167,139,250,.12)" stroke="#a78bfa"/>
+        <text x="493" y="162">Intervalo de</text><text x="493" y="180">confianza</text>
+      </g>
+      <g>
+        <rect x="218" y="140" width="150" height="54" rx="12" fill="rgba(167,139,250,.12)" stroke="#a78bfa"/>
+        <text x="293" y="162">Prueba de</text><text x="293" y="180">hipótesis · p</text>
+      </g>
+      <g>
+        <rect x="18" y="140" width="150" height="54" rx="12" fill="rgba(244,114,182,.12)" stroke="#f472b6"/>
+        <text x="93" y="162">Decisión</text><text x="93" y="180">clínica</text>
+      </g>
+      <g>
+        <rect x="300" y="240" width="260" height="42" rx="12" fill="rgba(163,230,53,.08)" stroke="#a3e635"/>
+        <text x="430" y="266" fill="#a3e635">Excel hace todo esto en 1 línea</text>
+      </g>
+    </g>
+    <g stroke="#5f7fa8" stroke-width="1.6" fill="none" marker-end="url(#ar)">
+      <path d="M168,53 L212,53"/><path d="M368,53 L412,53"/><path d="M568,53 L612,53"/>
+      <path d="M693,80 L693,134"/><path d="M618,167 L574,167"/>
+      <path d="M418,167 L374,167"/><path d="M218,167 L174,167"/>
+    </g>
+    <path d="M430,240 L430,205" stroke="#a3e635" stroke-width="1.4" stroke-dasharray="4 4" fill="none"/>
+  </svg>
+
+  <div class="card trampa">
+    <h3><span class="dot"></span>Antes de partir</h3>
+    <p>Si en algún momento sientes que "no entiendes nada", revisa si el problema es el <b>concepto</b> o la <b>notación</b>. El 80% de las veces es la notación: σ, s, x̄, μ, n, gl. Son solo etiquetas. En el glosario del final están todas traducidas a castellano.</p>
+  </div>
+</section>
+
+<!-- ================= M1 DESCRIPTIVA ================= -->
+<section class="mod" id="m1">
+  <div class="modhead">
+    <div class="modnum">01</div>
+    <div><h2>Bioestadística descriptiva</h2><div class="modtag">Describir antes de concluir</div></div>
+  </div>
+
+  <div class="card escena">
+    <h3><span class="dot"></span>La escena</h3>
+    <p>Fin de mes en el CCR. Te piden "un resumen" de cómo están los usuarios del programa de marcha. Tienes nueve tiempos del test <b>Timed Up and Go</b> anotados en una hoja. Nueve números sueltos no le dicen nada a nadie. El trabajo de la descriptiva es convertir esos nueve números en <i>dos o tres</i> que cuenten la historia completa.</p>
+  </div>
+
+  <div class="idea">
+    <b>La idea en una frase:</b> toda descripción necesita <b>un centro</b> (¿alrededor de qué valor están?) y <b>una dispersión</b> (¿qué tan parecidos son entre sí?). Un centro sin dispersión es una mentira a medias.
+  </div>
+
+  <p><b>Los datos (TUG en segundos, n = 9):</b></p>
+  <div class="calc">8,2   9,5   10,1   11,0   11,4   11,4   12,3   14,6   21,8</div>
+  <p class="small">Fíjate desde ya en el 21,8. Ese dato va a hacer travesuras.</p>
+
+  <h3 style="margin-top:30px">Paso a paso: las medidas de centro</h3>
+  <div class="pasos">
+    <div class="paso">
+      <h4>Ordenar los datos de menor a mayor</h4>
+      <p class="small">Ya están ordenados arriba. Sin este paso, mediana y cuartiles salen mal. Es el paso que más se salta la gente.</p>
+    </div>
+    <div class="paso">
+      <h4>Media (x̄): el punto de equilibrio</h4>
+      <div class="calc">x̄ = (8,2 + 9,5 + 10,1 + 11,0 + 11,4 + 11,4 + 12,3 + 14,6 + 21,8) ÷ 9
+x̄ = 110,3 ÷ 9</div>
+      <span class="res">x̄ = 12,26 s</span>
+    </div>
+    <div class="paso">
+      <h4>Mediana: el dato que parte la fila en dos</h4>
+      <p class="small">Con n = 9 (impar), la posición es (n+1)/2 = 5. El quinto dato de la lista ordenada.</p>
+      <div class="calc">8,2 · 9,5 · 10,1 · 11,0 · [11,4] · 11,4 · 12,3 · 14,6 · 21,8</div>
+      <span class="res">Mediana = 11,4 s</span>
+      <p class="small" style="margin-top:8px">Si n fuera par, se promedian los dos del centro.</p>
+    </div>
+    <div class="paso">
+      <h4>Moda: el valor que más se repite</h4>
+      <span class="res">Moda = 11,4 s</span>
+    </div>
+    <div class="paso">
+      <h4>Leer las tres juntas</h4>
+      <p>Media 12,26 &gt; mediana 11,4. Esa diferencia no es casualidad: <b>la media se arrastra hacia la cola</b>. El usuario de 21,8 s tira el promedio hacia arriba y hace parecer que el grupo completo está peor de lo que está.</p>
+      <p class="small">Regla práctica: si media y mediana se parecen, usa la media. Si se separan mucho, reporta la mediana (o las dos, y explica por qué).</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:34px">Paso a paso: la dispersión</h3>
+  <p>La desviación estándar responde: <i>en promedio, ¿cuánto se aleja cada usuario del promedio?</i></p>
+  <div class="formula">s = √[ Σ(xᵢ − x̄)² ÷ (n − 1) ]</div>
+
+  <div class="pasos">
+    <div class="paso">
+      <h4>Restar la media a cada dato y elevar al cuadrado</h4>
+      <p class="small">Se eleva al cuadrado para que las distancias negativas no se cancelen con las positivas.</p>
+      <div class="tw"><table>
+        <thead><tr><th>xᵢ</th><th>xᵢ − x̄</th><th>(xᵢ − x̄)²</th></tr></thead>
+        <tbody>
+          <tr><td class="k">8,2</td><td>−4,06</td><td>16,45</td></tr>
+          <tr><td class="k">9,5</td><td>−2,76</td><td>7,59</td></tr>
+          <tr><td class="k">10,1</td><td>−2,16</td><td>4,65</td></tr>
+          <tr><td class="k">11,0</td><td>−1,26</td><td>1,58</td></tr>
+          <tr><td class="k">11,4</td><td>−0,86</td><td>0,73</td></tr>
+          <tr><td class="k">11,4</td><td>−0,86</td><td>0,73</td></tr>
+          <tr><td class="k">12,3</td><td>+0,04</td><td>0,00</td></tr>
+          <tr><td class="k">14,6</td><td>+2,34</td><td>5,50</td></tr>
+          <tr class="hl"><td>21,8</td><td>+9,54</td><td>91,10</td></tr>
+          <tr><td colspan="2" style="text-align:right"><b>Σ =</b></td><td><b>128,32</b></td></tr>
+        </tbody>
+      </table></div>
+      <p class="small">Mira la fila rosada: <b>un solo dato aporta el 71% de toda la variabilidad.</b> Eso es lo que hace un outlier.</p>
+    </div>
+    <div class="paso">
+      <h4>Dividir por (n − 1) → varianza</h4>
+      <div class="calc">s² = 128,32 ÷ (9 − 1) = 128,32 ÷ 8</div>
+      <span class="res">s² = 16,04 s²</span>
+      <p class="small" style="margin-top:8px"><b>¿Por qué n−1 y no n?</b> Porque estimaste la media con los mismos datos. Eso "consume" un grado de libertad y hace que las distancias salgan artificialmente chicas. Dividir por n−1 corrige ese sesgo. En Excel: <code>DESVEST.M</code> (muestra) vs <code>DESVEST.P</code> (población completa).</p>
+    </div>
+    <div class="paso">
+      <h4>Sacar raíz → desviación estándar</h4>
+      <div class="calc">s = √16,04</div>
+      <span class="res">s = 4,01 s</span>
+      <p class="small" style="margin-top:8px">La raíz devuelve la unidad original. La varianza está en "segundos al cuadrado", que no significa nada clínico. La DE está en segundos y sí se puede interpretar.</p>
+    </div>
+    <div class="paso">
+      <h4>Complementos útiles</h4>
+      <div class="calc">Rango = 21,8 − 8,2 = 13,6 s
+Q1 = 9,8   Q3 = 13,45   RIC = Q3 − Q1 = 3,65 s
+CV = (4,01 ÷ 12,26) × 100 = 32,7 %</div>
+      <p class="small">El <b>RIC</b> (rango intercuartílico) ignora las colas: dice que el 50% central del grupo cabe en apenas 3,65 segundos. El <b>CV</b> permite comparar dispersión entre variables con unidades distintas.</p>
+    </div>
+  </div>
+
+  <div class="card trampa">
+    <h3><span class="dot"></span>Trampa frecuente</h3>
+    <p>Reportar "media ± DE" sin mirar la forma de los datos. Con este grupo, "12,26 ± 4,01 s" sugiere un rango de 8,2 a 16,3 s, cuando en realidad hay alguien en 21,8. <b>Siempre grafica antes de resumir</b> — aunque sea un punteo rápido en papel.</p>
+  </div>
+
+  <div class="card excel">
+    <h3><span class="dot"></span>En Excel</h3>
+    <div class="calc">=PROMEDIO(A2:A10)      =MEDIANA(A2:A10)
+=MODA.UNO(A2:A10)      =DESVEST.M(A2:A10)
+=VAR.M(A2:A10)         =CUARTIL.INC(A2:A10;1)
+=MAX(A2:A10)-MIN(A2:A10)</div>
+  </div>
+
+  <details class="q">
+    <summary>Recupera antes de seguir: tu media es 12,26 y tu mediana 11,4. ¿Qué te está diciendo esa diferencia y qué reportarías?</summary>
+    <p>Que la distribución está sesgada a la derecha: hay valores altos que estiran la cola y arrastran la media. Reportaría la <b>mediana</b> como medida de centro (11,4 s) y el <b>RIC</b> como dispersión, mencionando aparte que existe un caso extremo de 21,8 s —que probablemente merece revisión clínica individual, no estadística.</p>
+  </details>
+</section>
+
+<!-- ================= M2 PROBABILIDAD ================= -->
+<section class="mod" id="m2">
+  <div class="modhead">
+    <div class="modnum">02</div>
+    <div><h2>Probabilidades</h2><div class="modtag">El lenguaje de la incertidumbre</div></div>
+  </div>
+
+  <div class="card escena">
+    <h3><span class="dot"></span>La escena</h3>
+    <p>Una usuaria te pregunta, con esa mezcla de susto y pudor: <i>"¿y yo me voy a volver a caer?"</i>. No puedes responder sí o no. Pero sí puedes responder <b>cuán probable</b> es, y eso —bien dicho— tranquiliza mucho más que un "quédese tranquila".</p>
+  </div>
+
+  <div class="idea">
+    <b>La idea en una frase:</b> una probabilidad es una <b>proporción de casos favorables sobre casos posibles</b>, expresada entre 0 y 1. Nada más místico que eso.
+  </div>
+
+  <p><b>Los datos:</b> 200 usuarios del CCR seguidos durante 12 meses, clasificados según si tenían caída previa y si cayeron durante el seguimiento.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th></th><th>Cayó</th><th>No cayó</th><th>Total</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Con caída previa</td><td>36</td><td>44</td><td><b>80</b></td></tr>
+      <tr><td class="k">Sin caída previa</td><td>18</td><td>102</td><td><b>120</b></td></tr>
+      <tr><td class="k">Total</td><td><b>54</b></td><td><b>146</b></td><td><b>200</b></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="pasos">
+    <div class="paso">
+      <h4>Probabilidad simple: P(A)</h4>
+      <div class="calc">P(caída) = 54 ÷ 200</div>
+      <span class="res">P = 0,27 → 27 %</span>
+      <p class="small" style="margin-top:8px">27 de cada 100 usuarios del programa cayeron en el año.</p>
+    </div>
+    <div class="paso">
+      <h4>Complemento: P(no A) = 1 − P(A)</h4>
+      <div class="calc">P(no caída) = 1 − 0,27 = 0,73</div>
+      <p class="small">Siempre suman 1. Si te da 1,04, hay un error de cuentas.</p>
+    </div>
+    <div class="paso">
+      <h4>Probabilidad condicional: P(A | B)</h4>
+      <p class="small">Se lee "probabilidad de A <b>dado que</b> ocurrió B". Cambias el denominador: ya no miras los 200, miras solo el subgrupo.</p>
+      <div class="calc">P(caída | caída previa)   = 36 ÷ 80  = 0,45
+P(caída | sin caída previa) = 18 ÷ 120 = 0,15</div>
+      <span class="res">45 % vs 15 %</span>
+      <p style="margin-top:10px">Esta es, clínicamente, la línea más importante de todo el módulo. <b>El antecedente triplica el riesgo.</b> Y lo puedes decir con un número.</p>
+    </div>
+    <div class="paso">
+      <h4>Regla de la multiplicación: P(A y B)</h4>
+      <div class="calc">P(caída Y caída previa) = P(caída previa) × P(caída | caída previa)
+                       = 0,40 × 0,45 = 0,18</div>
+      <p class="small">Comprobación directa: 36 ÷ 200 = 0,18 ✓</p>
+    </div>
+    <div class="paso">
+      <h4>Regla de la suma: P(A o B)</h4>
+      <div class="calc">P(caída O caída previa) = P(caída) + P(previa) − P(ambas)
+                        = 0,27 + 0,40 − 0,18 = 0,49</div>
+      <p class="small">Se resta la intersección porque si no, los 36 que están en ambos grupos se cuentan dos veces.</p>
+    </div>
+    <div class="paso">
+      <h4>¿Son independientes?</h4>
+      <p class="small">Dos eventos son independientes si P(A y B) = P(A) × P(B).</p>
+      <div class="calc">Observado: 0,18
+Si fueran independientes: 0,27 × 0,40 = 0,108
+0,18 ≠ 0,108  →  NO son independientes</div>
+      <p>Traducción: tener una caída previa <b>sí cambia</b> la probabilidad de volver a caer. Que es exactamente la pregunta de la usuaria.</p>
+    </div>
+    <div class="paso">
+      <h4>Riesgo relativo y odds ratio</h4>
+      <div class="calc">RR = 0,45 ÷ 0,15 = 3,0
+OR = (36/44) ÷ (18/102) = 0,818 ÷ 0,176 = 4,64</div>
+      <p class="small"><b>RR = 3:</b> el riesgo es 3 veces mayor. Es la medida que se entiende sola y la que conviene usar al hablar con equipo o familia. El <b>OR</b> aparece en papers (regresión logística, casos y controles) y siempre exagera respecto al RR cuando el evento es frecuente.</p>
+    </div>
+  </div>
+
+  <div class="card trampa">
+    <h3><span class="dot"></span>Trampa frecuente</h3>
+    <p>Confundir P(A|B) con P(B|A). <i>"La probabilidad de haber caído dado que es adulto mayor"</i> no es lo mismo que <i>"la probabilidad de ser adulto mayor dado que cayó"</i>. Es el mismo error que confundir sensibilidad con valor predictivo positivo en un test. Pregúntate siempre: <b>¿cuál es mi denominador?</b></p>
+  </div>
+
+  <details class="q">
+    <summary>Recupera: de los 54 que cayeron, ¿qué proporción tenía antecedente previo? ¿Es la misma pregunta que antes?</summary>
+    <p>36 ÷ 54 = 0,67 → 67 %. Y <b>no</b> es la misma pregunta. Antes el denominador era "los que tenían antecedente" (80); ahora es "los que cayeron" (54). Misma tabla, pregunta invertida, número distinto. 0,45 vs 0,67.</p>
+  </details>
+</section>
+
+<!-- ================= M3 DE vs EE ================= -->
+<section class="mod" id="m3">
+  <div class="modhead">
+    <div class="modnum">03</div>
+    <div><h2>Desviación estándar vs error estándar</h2><div class="modtag">Los dos se escriben parecido y miden cosas opuestas</div></div>
+  </div>
+
+  <div class="card escena">
+    <h3><span class="dot"></span>La escena</h3>
+    <p>Dos informes sobre el mismo programa. Uno dice "12,26 ± 4,01". El otro dice "12,26 ± 1,34". Nadie mintió. Están midiendo cosas distintas, y si no sabes cuál es cuál, vas a leer mal los dos.</p>
+  </div>
+
+  <div class="idea">
+    <b>La idea en una frase:</b> la <b>DE describe a las personas</b> (qué tan distintas son entre sí). El <b>EE describe a tu promedio</b> (qué tan confiable es tu estimación). La DE es un hecho del grupo; el EE es un hecho de tu muestreo.
+  </div>
+
+  <div class="formula">EE = s ÷ √n</div>
+
+  <div class="pasos">
+    <div class="paso">
+      <h4>Calcular el EE de nuestro grupo TUG</h4>
+      <div class="calc">s = 4,01 s     n = 9     √9 = 3
+EE = 4,01 ÷ 3</div>
+      <span class="res">EE = 1,34 s</span>
+    </div>
+    <div class="paso">
+      <h4>Entender qué acaba de pasar</h4>
+      <p>La DE siguió valiendo 4,01: los usuarios del CCR son así de distintos entre sí, y eso no cambia por más gente que midas. Pero el EE dice: <i>"si repitiera este muestreo muchas veces, mis promedios se moverían alrededor de ±1,34 s"</i>.</p>
+    </div>
+    <div class="paso">
+      <h4>El efecto del tamaño muestral</h4>
+      <div class="tw"><table>
+        <thead><tr><th>n</th><th>√n</th><th>DE (s)</th><th>EE = s/√n</th></tr></thead>
+        <tbody>
+          <tr><td class="k">9</td><td>3,0</td><td>4,01</td><td>1,34</td></tr>
+          <tr><td class="k">36</td><td>6,0</td><td>4,01</td><td>0,67</td></tr>
+          <tr><td class="k">100</td><td>10,0</td><td>4,01</td><td>0,40</td></tr>
+          <tr><td class="k">400</td><td>20,0</td><td>4,01</td><td>0,20</td></tr>
+        </tbody>
+      </table></div>
+      <p><b>Columna DE: inmóvil. Columna EE: se derrumba.</b> Y fíjate en la ley cruel del √n: para reducir el EE a la mitad necesitas <b>cuadruplicar</b> la muestra. De 9 a 36 usuarios para ganar la mitad de precisión. De 36 a 144 para la otra mitad.</p>
+      <p class="small">Esa es, literalmente, la razón económica por la que los estudios grandes son caros y los chicos son imprecisos.</p>
+    </div>
+  </div>
+
+  <div class="card trampa">
+    <h3><span class="dot"></span>Trampa frecuente</h3>
+    <p>Usar el EE en los gráficos porque "las barras salen más chiquititas y se ve mejor". Se ve mejor, sí, pero responde otra pregunta. Si quieres mostrar <b>cómo son tus usuarios</b>, usa DE. Si quieres mostrar <b>cuán precisa es tu estimación</b>, usa EE o IC 95%. Y declara cuál usaste en el pie del gráfico — siempre.</p>
+  </div>
+
+  <details class="q">
+    <summary>Recupera: duplicas la muestra de 50 a 100 usuarios. ¿Qué pasa con la DE y qué pasa con el EE?</summary>
+    <p>La <b>DE se queda prácticamente igual</b> (la variabilidad entre personas es una característica del grupo, no de cuántos midas). El <b>EE baja</b>, pero no a la mitad: se divide por √2 ≈ 1,41, o sea queda en ~71% del original. Para la mitad habrías necesitado llegar a 200.</p>
+  </details>
+</section>
+
+<!-- ================= M4 Z-SCORE ================= -->
+<section class="mod" id="m4">
+  <div class="modhead">
+    <div class="modnum">04</div>
+    <div><h2>Estandarización: z-score y tabla normal</h2><div class="modtag">Traducir cualquier escala a un idioma común</div></div>
+  </div>
+
+  <div class="card escena">
+    <h3><span class="dot"></span>La escena</h3>
+    <p>Una usuaria saca 36 en la Escala de Berg. Otra saca 112 en un test de marcha con escala totalmente distinta. ¿Cuál está peor? No se pueden comparar manzanas con peras... a menos que conviertas ambas a la misma unidad universal: <b>"cuántas desviaciones estándar por debajo del promedio"</b>. Eso es un z-score.</p>
+  </div>
+
+  <div class="idea">
+    <b>La idea en una frase:</b> el z-score borra las unidades. Deja de importar si eran segundos, puntos o metros: el z dice <b>a qué distancia del centro está ese dato, medida en desviaciones estándar</b>.
+  </div>
+
+  <div class="formula">z = (x − μ) ÷ σ</div>
+  <p class="small">x = el dato individual · μ = media de referencia · σ = desviación estándar de referencia</p>
+
+  <p style="margin-top:24px"><b>Referencia poblacional (Escala de Berg, adultos mayores comunitarios):</b> μ = 45 puntos, σ = 6 puntos.</p>
+
+  <div class="pasos">
+    <div class="paso">
+      <h4>Caso A — usuaria con 36 puntos</h4>
+      <div class="calc">z = (36 − 45) ÷ 6 = −9 ÷ 6</div>
+      <span class="res">z = −1,50</span>
+      <p class="small" style="margin-top:8px">Está una desviación y media <b>por debajo</b> del promedio. El signo negativo es información clínica.</p>
+    </div>
+    <div class="paso">
+      <h4>Buscar el z en la tabla normal</h4>
+      <p class="small">La tabla entrega Φ(z): la proporción acumulada <b>a la izquierda</b> de ese z. Para z = −1,50 → 0,0668.</p>
+      <span class="res">Percentil 6,7</span>
+      <p style="margin-top:10px">Traducción para el informe: <i>"solo el 6,7% de sus pares está igual o peor que ella"</i>. Eso justifica priorización. Eso es un número que mueve agendas.</p>
+    </div>
+    <div class="paso">
+      <h4>Caso B — usuario con 51 puntos</h4>
+      <div class="calc">z = (51 − 45) ÷ 6 = +1,00
+Φ(1,00) = 0,8413</div>
+      <span class="res">Percentil 84,1</span>
+    </div>
+    <div class="paso">
+      <h4>Proporción ENTRE dos valores</h4>
+      <p class="small">¿Qué porcentaje está entre 39 y 51 puntos?</p>
+      <div class="calc">z₁ = (39 − 45)/6 = −1,00  →  Φ = 0,1587
+z₂ = (51 − 45)/6 = +1,00  →  Φ = 0,8413
+Proporción = 0,8413 − 0,1587</div>
+      <span class="res">0,6826 → 68,3 %</span>
+      <p class="small" style="margin-top:8px">Acabas de demostrar la famosa <b>regla 68–95–99,7</b>: dentro de ±1σ cae el 68%, dentro de ±2σ el 95%, dentro de ±3σ el 99,7%.</p>
+    </div>
+    <div class="paso">
+      <h4>El camino inverso: del percentil al puntaje</h4>
+      <p class="small">¿Qué puntaje marca el percentil 90?</p>
+      <div class="calc">Busco en la tabla el z con Φ ≈ 0,90  →  z = 1,28
+Despejo:  x = μ + z·σ
+x = 45 + (1,28 × 6) = 45 + 7,68</div>
+      <span class="res">x = 52,7 puntos</span>
+    </div>
+  </div>
+
+  <!-- LAB Z -->
+  <div class="lab">
+    <div class="labttl">Laboratorio · calculadora z en vivo</div>
+    <div class="ctrls">
+      <div class="ctrl"><label>Media μ</label><input type="number" id="zmu" value="45" step="any"></div>
+      <div class="ctrl"><label>Desv. est. σ</label><input type="number" id="zsd" value="6" step="any"></div>
+      <div class="ctrl"><label>Dato x</label><input type="number" id="zx" value="36" step="any"></div>
+    </div>
+    <svg class="plot" id="zplot" viewBox="0 0 620 230"></svg>
+    <div class="out">
+      <div><span>z-score</span><b id="zout">—</b></div>
+      <div><span>Percentil</span><b id="pout">—</b></div>
+      <div><span>Por encima</span><b id="aout">—</b></div>
+    </div>
+    <p class="small" style="margin-top:10px">Mueve los valores y observa cómo se desplaza el corte. Ese sombreado <b>es</b> el número que lees en la tabla.</p>
+  </div>
+
+  <h3 style="margin-top:34px">Tabla normal estándar Φ(z)</h3>
+  <p class="small">Fila = primer decimal de z. Columna = segundo decimal. El valor es la proporción acumulada a la <b>izquierda</b>. Para z negativos: Φ(−z) = 1 − Φ(z).</p>
+  <div class="tw" id="ztable"></div>
+
+  <div class="card trampa">
+    <h3><span class="dot"></span>Trampa frecuente</h3>
+    <p>Aplicar z-scores a datos que <b>no</b> siguen una distribución normal. El TUG del módulo 1, con su cola a la derecha, no es normal: un z calculado ahí da percentiles falsos. Antes de estandarizar, mira el histograma. Si está muy torcido, usa percentiles empíricos directamente.</p>
+  </div>
+
+  <div class="card excel">
+    <h3><span class="dot"></span>En Excel</h3>
+    <div class="calc">=NORMALIZACION(36;45;6)           → el z-score (−1,5)
+=DISTR.NORM.ESTAND.N(-1,5;VERDADERO) → Φ(z) = 0,0668
+=DISTR.NORM.N(36;45;6;VERDADERO)   → lo mismo, en un paso
+=INV.NORM.ESTAND(0,90)            → el z del percentil 90 (1,2816)
+=INV.NORM(0,90;45;6)              → el puntaje del percentil 90 (52,69)</div>
+    <p class="small">El argumento VERDADERO pide la <i>acumulada</i>. Con FALSO devuelve la altura de la curva, que casi nunca te sirve.</p>
+  </div>
+
+  <details class="q">
+    <summary>Recupera: un usuario tiene z = +2,0 en una escala donde más puntaje es mejor. ¿Qué le dirías a su familia?</summary>
+    <p>Que está 2 desviaciones estándar por sobre el promedio, lo que corresponde al <b>percentil 97,7</b>: aproximadamente 98 de cada 100 pares obtienen un resultado igual o menor. Es un desempeño muy por encima de lo esperado para su grupo de referencia.</p>
+  </details>
+</section>
+
+<!-- ================= M5 TCL ================= -->
+<section class="mod" id="m5">
+  <div class="modhead">
+    <div class="modnum">05</div>
+    <div><h2>Teorema Central del Límite</h2><div class="modtag">El motor oculto de toda la inferencia</div></div>
+  </div>
+
+  <div class="card escena">
+    <h3><span class="dot"></span>La escena</h3>
+    <p>Acabamos de decir que el TUG no es normal —tiene cola, tiene outliers, es feo. Entonces, ¿cómo diablos puede alguien calcular intervalos de confianza y valores p sobre datos así? Aquí está la respuesta, y es probablemente el resultado más elegante de toda la estadística.</p>
+  </div>
+
+  <div class="idea">
+    <b>La idea en una frase:</b> aunque los <b>datos individuales</b> tengan cualquier forma, la distribución de los <b>promedios de muestras</b> tiende a ser normal a medida que n crece. No necesitas que tus pacientes sean normales. Necesitas que tus promedios lo sean.
+  </div>
+
+  <p>El TCL afirma tres cosas sobre la distribución de medias muestrales:</p>
+  <ul class="neo">
+    <li>Su <b>centro</b> es el mismo que el de la población: μ.</li>
+    <li>Su <b>dispersión</b> es σ ÷ √n — es decir, el error estándar del módulo 3.</li>
+    <li>Su <b>forma</b> se aproxima a la normal cuando n crece, sin importar la forma original. Con n ≥ 30 suele bastar; con poblaciones muy sesgadas se necesita más.</li>
+  </ul>
+
+  <!-- LAB TCL -->
+  <div class="lab">
+    <div class="labttl">Laboratorio · ver ocurrir el teorema</div>
+    <p class="small" style="margin-top:-6px">Población de tiempos TUG claramente sesgada a la derecha (como la real). Tomamos 500 muestras de tamaño n y graficamos sus promedios.</p>
+    <div class="ctrls">
+      <div class="ctrl"><label>Tamaño de muestra n</label>
+        <select id="tcln"><option value="1">n = 1 (datos crudos)</option><option value="2">n = 2</option><option value="5">n = 5</option><option value="10">n = 10</option><option value="30" selected>n = 30</option><option value="100">n = 100</option></select>
+      </div>
+      <div class="ctrl" style="display:flex;align-items:flex-end"><button class="go" id="tclgo">Simular de nuevo</button></div>
+    </div>
+    <svg class="plot" id="tclplot" viewBox="0 0 620 240"></svg>
+    <div class="out">
+      <div><span>Media de medias</span><b id="tm">—</b></div>
+      <div><span>DE observada</span><b id="ts">—</b></div>
+      <div><span>σ/√n esperado</span><b id="te">—</b></div>
+    </div>
+    <p class="small" style="margin-top:10px">Parte en <b>n = 1</b> y mira la cola fea. Luego sube a <b>n = 30</b>. La campana aparece sola, y la DE observada se pega al σ/√n predicho. Nadie la obligó.</p>
+  </div>
+
+  <h3 style="margin-top:30px">Paso a paso: usar el TCL para responder algo útil</h3>
+  <p><b>Pregunta:</b> si la población de usuarios tiene μ = 12,5 s y σ = 4,2 s, ¿qué probabilidad hay de que un grupo de 36 usuarios tenga un promedio mayor a 13,5 s?</p>
+
+  <div class="pasos">
+    <div class="paso">
+      <h4>Identificar que la pregunta es sobre un PROMEDIO, no sobre una persona</h4>
+      <p class="small">Esto cambia todo: significa que trabajo con el error estándar, no con σ.</p>
+    </div>
+    <div class="paso">
+      <h4>Calcular el error estándar</h4>
+      <div class="calc">EE = σ ÷ √n = 4,2 ÷ √36 = 4,2 ÷ 6</div>
+      <span class="res">EE = 0,70 s</span>
+    </div>
+    <div class="paso">
+      <h4>Estandarizar el promedio</h4>
+      <div class="calc">z = (x̄ − μ) ÷ EE = (13,5 − 12,5) ÷ 0,70 = 1 ÷ 0,70</div>
+      <span class="res">z = 1,43</span>
+    </div>
+    <div class="paso">
+      <h4>Buscar en la tabla y restar</h4>
+      <div class="calc">Φ(1,43) = 0,9236
+P(x̄ > 13,5) = 1 − 0,9236</div>
+      <span class="res">0,0764 → 7,6 %</span>
+      <p style="margin-top:10px">Lectura clínica: un promedio grupal de 13,5 s ocurriría por puro azar solo en 8 de cada 100 grupos de 36. Si tu grupo da eso, <b>probablemente no es azar</b>: hay algo distinto en él. Esa frase es, en el fondo, una prueba de hipótesis.</p>
+    </div>
+  </div>
+
+  <div class="card trampa">
+    <h3><span class="dot"></span>Trampa frecuente</h3>
+    <p>Creer que el TCL "normaliza los datos". No. Tus datos siguen igual de torcidos que siempre. Lo que se vuelve normal es la <b>distribución teórica de los promedios</b>, que es un objeto distinto. Por eso no puedes usar el TCL para justificar un z-score sobre un paciente individual.</p>
+  </div>
+
+  <details class="q">
+    <summary>Recupera: ¿por qué el TCL es la condición que hace posible todo lo que viene después (IC y valor p)?</summary>
+    <p>Porque ambos necesitan saber <b>cómo se comportaría tu promedio si repitieras el estudio muchas veces</b>. El TCL te regala esa distribución —normal, centrada en μ, con dispersión σ/√n— sin tener que repetir nada ni conocer la forma original de los datos. Sin TCL, no habría tabla que consultar.</p>
+  </details>
+</section>
+
+<!-- ================= M6 TABLA T ================= -->
+<section class="mod" id="m6">
+  <div class="modhead">
+    <div class="modnum">06</div>
+    <div><h2>Leer la tabla t de Student</h2><div class="modtag">Tres decisiones y listo</div></div>
+  </div>
+
+  <div class="card escena">
+    <h3><span class="dot"></span>La escena</h3>
+    <p>La tabla t intimida porque es un muro de números sin instrucciones. Pero solo necesitas responder tres preguntas para encontrar tu celda. Una vez que las sabes, la tabla se lee en diez segundos.</p>
+  </div>
+
+  <div class="idea">
+    <b>La idea en una frase:</b> la t es la normal <b>con las colas engordadas</b>, para castigarte por no conocer σ y tener que estimarla con pocos datos. Mientras menos datos, más gordas las colas, más exigente el valor crítico.
+  </div>
+
+  <h3 style="margin-top:28px">Las tres preguntas</h3>
+  <div class="pasos">
+    <div class="paso">
+      <h4>¿Cuántos grados de libertad (gl) tengo?</h4>
+      <p class="small">Para una media o para datos pareados: <b>gl = n − 1</b>. Para comparar dos grupos independientes: gl = n₁ + n₂ − 2. Eso te da la <b>fila</b>.</p>
+      <div class="calc">n = 10 usuarios pareados  →  gl = 10 − 1 = 9</div>
+    </div>
+    <div class="paso">
+      <h4>¿Qué nivel de significancia α uso?</h4>
+      <p class="small">Casi siempre α = 0,05. Eso te da la <b>columna</b>.</p>
+    </div>
+    <div class="paso">
+      <h4>¿Una cola o dos colas?</h4>
+      <p class="small">Dos colas si tu hipótesis es "hay diferencia" (sin decir en qué dirección). Una cola solo si tienes razón teórica fuerte para esperar una dirección específica, y lo declaraste <b>antes</b> de ver los datos. <mark>En duda: dos colas.</mark> Es la opción conservadora.</p>
+    </div>
+    <div class="paso">
+      <h4>Cruzar fila y columna</h4>
+      <div class="calc">gl = 9 · α = 0,05 · bilateral</div>
+      <span class="res">t crítico = 2,262</span>
+    </div>
+  </div>
+
+  <h3 style="margin-top:30px">Tabla t — valores críticos</h3>
+  <p class="small">Las columnas están en <b>dos colas</b>. Para una cola, usa la columna del doble de α (ej.: una cola al 0,05 → columna 0,10).</p>
+  <div class="tw"><table>
+    <thead><tr><th>gl</th><th>α = 0,10</th><th>α = 0,05</th><th>α = 0,01</th></tr></thead>
+    <tbody>
+      <tr><td class="k">1</td><td>6,314</td><td>12,706</td><td>63,657</td></tr>
+      <tr><td class="k">2</td><td>2,920</td><td>4,303</td><td>9,925</td></tr>
+      <tr><td class="k">3</td><td>2,353</td><td>3,182</td><td>5,841</td></tr>
+      <tr><td class="k">4</td><td>2,132</td><td>2,776</td><td>4,604</td></tr>
+      <tr><td class="k">5</td><td>2,015</td><td>2,571</td><td>4,032</td></tr>
+      <tr><td class="k">6</td><td>1,943</td><td>2,447</td><td>3,707</td></tr>
+      <tr><td class="k">7</td><td>1,895</td><td>2,365</td><td>3,499</td></tr>
+      <tr><td class="k">8</td><td>1,860</td><td>2,306</td><td>3,355</td></tr>
+      <tr><td class="k">9</td><td>1,833</td><td class="hl">2,262</td><td>3,250</td></tr>
+      <tr><td class="k">10</td><td>1,812</td><td>2,228</td><td>3,169</td></tr>
+      <tr><td class="k">11</td><td>1,796</td><td>2,201</td><td>3,106</td></tr>
+      <tr><td class="k">12</td><td>1,782</td><td>2,179</td><td>3,055</td></tr>
+      <tr><td class="k">13</td><td>1,771</td><td>2,160</td><td>3,012</td></tr>
+      <tr><td class="k">14</td><td>1,761</td><td>2,145</td><td>2,977</td></tr>
+      <tr><td class="k">15</td><td>1,753</td><td>2,131</td><td>2,947</td></tr>
+      <tr><td class="k">16</td><td>1,746</td><td>2,120</td><td>2,921</td></tr>
+      <tr><td class="k">17</td><td>1,740</td><td>2,110</td><td>2,898</td></tr>
+      <tr><td class="k">18</td><td>1,734</td><td>2,101</td><td>2,878</td></tr>
+      <tr><td class="k">19</td><td>1,729</td><td>2,093</td><td>2,861</td></tr>
+      <tr><td class="k">20</td><td>1,725</td><td>2,086</td><td>2,845</td></tr>
+      <tr><td class="k">22</td><td>1,717</td><td>2,074</td><td>2,819</td></tr>
+      <tr><td class="k">24</td><td>1,711</td><td>2,064</td><td>2,797</td></tr>
+      <tr><td class="k">26</td><td>1,706</td><td>2,056</td><td>2,779</td></tr>
+      <tr><td class="k">28</td><td>1,701</td><td>2,048</td><td>2,763</td></tr>
+      <tr><td class="k">30</td><td>1,697</td><td>2,042</td><td>2,750</td></tr>
+      <tr><td class="k">40</td><td>1,684</td><td>2,021</td><td>2,704</td></tr>
+      <tr><td class="k">60</td><td>1,671</td><td>2,000</td><td>2,660</td></tr>
+      <tr><td class="k">120</td><td>1,658</td><td>1,980</td><td>2,617</td></tr>
+      <tr><td class="k">∞ (z)</td><td>1,645</td><td>1,960</td><td>2,576</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--vi);box-shadow:0 0 12px var(--vi)"></span>Lee la columna de α = 0,05 de arriba abajo</h3>
+    <p>12,706 → 4,303 → 2,776 → 2,262 → 2,042 → 2,000 → <b>1,960</b>.</p>
+    <p>Con gl = 1 necesitas un t absurdo de 12,7 para concluir algo. Con gl = 30 ya basta con 2,04. Y en el infinito, la t <b>se convierte</b> en el z de 1,96 que viste en el módulo 4. No son dos distribuciones distintas: la t es la normal pidiendo disculpas por tener pocos datos.</p>
+    <p class="small">Esa es también la razón práctica de que, con n grande, dé casi lo mismo usar t o z.</p>
+  </div>
+
+  <div class="card excel">
+    <h3><span class="dot"></span>En Excel</h3>
+    <div class="calc">=INV.T.2C(0,05;9)      → t crítico bilateral = 2,262
+=INV.T(0,95;9)         → t crítico unilateral = 1,833
+=DISTR.T.2C(4,35;9)    → valor p bilateral a partir de un t</div>
+  </div>
+
+  <details class="q">
+    <summary>Recupera: comparas dos grupos independientes de 15 y 17 usuarios, α = 0,05, bilateral. ¿Cuál es tu t crítico?</summary>
+    <p>gl = 15 + 17 − 2 = <b>30</b>. En la columna α = 0,05 bilateral, fila 30: <b>t crítico = 2,042</b>. Si tu t calculado supera 2,042 en valor absoluto, rechazas H₀.</p>
+  </details>
+</section>
+
+<!-- ================= M7 IC ================= -->
+<section class="mod" id="m7">
+  <div class="modhead">
+    <div class="modnum">07</div>
+    <div><h2>Intervalos de confianza</h2><div class="modtag">Honestidad con números</div></div>
+  </div>
+
+  <div class="card escena">
+    <h3><span class="dot"></span>La escena</h3>
+    <p>Pones en el informe: "el TUG promedio del programa es 12,26 s". Alguien pregunta: <i>"¿y eso es exacto?"</i>. No lo es. Mediste 9 personas de muchas posibles. El intervalo de confianza es la forma elegante de decir "este es mi mejor número, <b>y este es mi margen de error</b>" sin que suene a excusa.</p>
+  </div>
+
+  <div class="idea">
+    <b>La idea en una frase:</b> estimación puntual ± (valor crítico × error estándar). Los tres ingredientes ya los tienes de los módulos 3, 5 y 6.
+  </div>
+
+  <div class="formula">IC 95% = x̄ ± t<sub>(gl; 0,05)</sub> × (s ÷ √n)</div>
+
+  <h3 style="margin-top:28px">Paso a paso: IC para una media</h3>
+  <div class="pasos">
+    <div class="paso">
+      <h4>Reunir los ingredientes</h4>
+      <div class="calc">x̄ = 12,26 s     s = 4,01 s     n = 9</div>
+    </div>
+    <div class="paso">
+      <h4>Calcular el error estándar</h4>
+      <div class="calc">EE = 4,01 ÷ √9 = 4,01 ÷ 3</div>
+      <span class="res">EE = 1,336</span>
+    </div>
+    <div class="paso">
+      <h4>Buscar el valor crítico en la tabla t</h4>
+      <div class="calc">gl = 9 − 1 = 8     α = 0,05     bilateral</div>
+      <span class="res">t = 2,306</span>
+      <p class="small" style="margin-top:8px">Uso t y no 1,96 porque n es chico y estimé σ con los mismos datos.</p>
+    </div>
+    <div class="paso">
+      <h4>Calcular el margen de error</h4>
+      <div class="calc">margen = 2,306 × 1,336</div>
+      <span class="res">margen = 3,08 s</span>
+    </div>
+    <div class="paso">
+      <h4>Construir el intervalo</h4>
+      <div class="calc">Límite inferior = 12,26 − 3,08 = 9,18
+Límite superior = 12,26 + 3,08 = 15,34</div>
+      <span class="res">IC 95% = [9,18 ; 15,34] s</span>
+    </div>
+    <div class="paso">
+      <h4>Redactarlo para el informe</h4>
+      <p>"El tiempo promedio de TUG fue 12,3 s (IC 95%: 9,2 – 15,3; n = 9)."</p>
+      <p class="small">Ese intervalo es ancho, y eso es <b>información</b>: con 9 usuarios, el promedio real podría andar entre 9 y 15 segundos. Si necesitas más precisión, el camino no es calcular distinto, es medir más gente.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:34px">Paso a paso: IC para una proporción</h3>
+  <p class="small">Volvamos a los 54 caídos de 200 usuarios del módulo 2.</p>
+  <div class="pasos">
+    <div class="paso">
+      <h4>Calcular la proporción</h4>
+      <div class="calc">p̂ = 54 ÷ 200 = 0,27</div>
+    </div>
+    <div class="paso">
+      <h4>Error estándar de una proporción</h4>
+      <div class="calc">EE = √[ p̂(1 − p̂) ÷ n ]
+EE = √[ (0,27 × 0,73) ÷ 200 ]
+EE = √[ 0,1971 ÷ 200 ] = √0,00098</div>
+      <span class="res">EE = 0,0314</span>
+    </div>
+    <div class="paso">
+      <h4>Con n grande se usa z = 1,96</h4>
+      <div class="calc">margen = 1,96 × 0,0314 = 0,0615</div>
+    </div>
+    <div class="paso">
+      <h4>Intervalo</h4>
+      <div class="calc">0,27 ± 0,0615</div>
+      <span class="res">IC 95% = [0,209 ; 0,332] → 20,9 % a 33,2 %</span>
+    </div>
+  </div>
+
+  <div class="card trampa">
+    <h3><span class="dot"></span>Trampa frecuente — la más común de todas</h3>
+    <p>Decir: <i>"hay 95% de probabilidad de que la media real esté entre 9,18 y 15,34"</i>. Suena perfecto. Es incorrecto.</p>
+    <p>La media poblacional real es un número fijo: o está dentro o no está, no tiene probabilidad. El 95% describe el <b>procedimiento</b>: si repitieras el estudio 100 veces y construyeras 100 intervalos así, <b>95 de esos intervalos</b> contendrían la media real. La confianza está en el método, no en este intervalo particular.</p>
+    <p class="small">En un informe clínico nadie te va a corregir. Pero en una defensa de tesis, sí.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--cy);box-shadow:0 0 12px var(--cy)"></span>El atajo que vale oro</h3>
+    <p>Un IC 95% te ahorra hacer la prueba de hipótesis del módulo siguiente:</p>
+    <ul class="neo">
+      <li>IC de una <b>diferencia</b> que <b>no incluye el 0</b> → hay diferencia significativa (p &lt; 0,05).</li>
+      <li>IC de un <b>RR u OR</b> que <b>no incluye el 1</b> → asociación significativa.</li>
+    </ul>
+    <p class="small">Y además el IC te dice <b>cuánta</b> diferencia, que es lo que el valor p nunca te dice.</p>
+  </div>
+
+  <div class="card excel">
+    <h3><span class="dot"></span>En Excel</h3>
+    <div class="calc">=INTERVALO.CONFIANZA.T(0,05;4,01;9)    → margen = 3,08
+=INTERVALO.CONFIANZA.NORM(0,05;4,01;9) → versión con z (muestras grandes)
+
+Luego:  límite inferior = PROMEDIO - margen
+        límite superior = PROMEDIO + margen</div>
+  </div>
+
+  <details class="q">
+    <summary>Recupera: un estudio informa una mejora promedio de 1,8 s con IC 95% de [−0,4 ; 4,0]. ¿Qué concluyes?</summary>
+    <p>Que la mejora <b>no es estadísticamente significativa</b>: el intervalo incluye el 0, es decir, "ninguna mejora" sigue siendo un valor plausible. Pero cuidado con rematarlo como "no sirve": el intervalo también incluye mejoras de hasta 4 s, que serían clínicamente relevantes. La lectura correcta es <b>"estudio no concluyente, probablemente con muestra insuficiente"</b>, no "la intervención no funciona".</p>
+  </details>
+</section>
+
+<!-- ================= M8 INFERENCIA ================= -->
+<section class="mod" id="m8">
+  <div class="modhead">
+    <div class="modnum">08</div>
+    <div><h2>Inferencia: hipótesis y valor p</h2><div class="modtag">Donde se junta todo lo anterior</div></div>
+  </div>
+
+  <div class="card escena">
+    <h3><span class="dot"></span>La escena</h3>
+    <p>Doce semanas de intervención en el CCR. Diez usuarios, medidos antes y después. Los tiempos bajaron. Pero los tiempos <i>siempre</i> se mueven un poco entre dos mediciones. La pregunta real es: <b>¿bajaron más de lo que el azar explicaría?</b></p>
+  </div>
+
+  <div class="idea">
+    <b>La idea en una frase:</b> asumes que <b>no pasó nada</b> (H₀), calculas qué tan raro sería tu resultado bajo ese supuesto, y si resulta demasiado raro, abandonas el supuesto. Es una demostración por absurdo con números.
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--vi);box-shadow:0 0 12px var(--vi)"></span>Las hipótesis</h3>
+    <p><b>H₀ (nula):</b> la diferencia promedio pre-post es 0. La intervención no cambió nada.<br>
+    <b>H₁ (alternativa):</b> la diferencia promedio es distinta de 0.</p>
+    <p class="small">H₀ siempre es la del aburrimiento: no hay efecto, no hay diferencia, no hay asociación. Es la que se pone a prueba.</p>
+  </div>
+
+  <p><b>Los datos (TUG en segundos, 10 usuarios, muestras pareadas):</b></p>
+  <div class="tw"><table>
+    <thead><tr><th>Usuario</th><th>Pre</th><th>Post</th><th>d = Pre − Post</th></tr></thead>
+    <tbody>
+      <tr><td class="k">1</td><td>14,2</td><td>12,8</td><td>+1,4</td></tr>
+      <tr><td class="k">2</td><td>12,6</td><td>11,9</td><td>+0,7</td></tr>
+      <tr><td class="k">3</td><td>16,0</td><td>13,5</td><td>+2,5</td></tr>
+      <tr><td class="k">4</td><td>11,8</td><td>11,5</td><td>+0,3</td></tr>
+      <tr><td class="k">5</td><td>13,4</td><td>12,0</td><td>+1,4</td></tr>
+      <tr><td class="k">6</td><td>15,1</td><td>13,3</td><td>+1,8</td></tr>
+      <tr><td class="k">7</td><td>12,0</td><td>12,2</td><td>−0,2</td></tr>
+      <tr><td class="k">8</td><td>17,3</td><td>14,4</td><td>+2,9</td></tr>
+      <tr><td class="k">9</td><td>13,9</td><td>12,6</td><td>+1,3</td></tr>
+      <tr><td class="k">10</td><td>14,5</td><td>13,6</td><td>+0,9</td></tr>
+    </tbody>
+  </table></div>
+  <p class="small">Al ser pareado, el truco es trabajar con <b>una sola columna</b>: las diferencias. Cada usuario es su propio control, lo que elimina la variabilidad entre personas.</p>
+
+  <div class="pasos">
+    <div class="paso">
+      <h4>Promedio de las diferencias</h4>
+      <div class="calc">Σd = 1,4+0,7+2,5+0,3+1,4+1,8−0,2+2,9+1,3+0,9 = 13,0
+d̄ = 13,0 ÷ 10</div>
+      <span class="res">d̄ = 1,30 s</span>
+    </div>
+    <div class="paso">
+      <h4>Desviación estándar de las diferencias</h4>
+      <div class="calc">Σ(dᵢ − d̄)² = 8,04
+s²d = 8,04 ÷ (10 − 1) = 0,893
+s d = √0,893</div>
+      <span class="res">s_d = 0,945 s</span>
+    </div>
+    <div class="paso">
+      <h4>Error estándar de la diferencia</h4>
+      <div class="calc">EE = 0,945 ÷ √10 = 0,945 ÷ 3,162</div>
+      <span class="res">EE = 0,299</span>
+    </div>
+    <div class="paso">
+      <h4>Estadístico t</h4>
+      <p class="small">La fórmula de siempre: "qué tan lejos estoy de lo esperado bajo H₀, medido en errores estándar".</p>
+      <div class="calc">t = (d̄ − 0) ÷ EE = 1,30 ÷ 0,299</div>
+      <span class="res">t = 4,35</span>
+    </div>
+    <div class="paso">
+      <h4>Grados de libertad y valor crítico</h4>
+      <div class="calc">gl = 10 − 1 = 9
+t crítico (α = 0,05; bilateral) = 2,262</div>
+    </div>
+    <div class="paso">
+      <h4>Decidir</h4>
+      <div class="calc">4,35 > 2,262   →   se rechaza H₀</div>
+      <span class="res">p ≈ 0,002</span>
+      <p style="margin-top:10px">El resultado está 4,35 errores estándar lejos del "no pasó nada". Bajo H₀, algo así ocurriría en 2 de cada 1.000 estudios. Es lo bastante raro como para dejar de creer en H₀.</p>
+    </div>
+    <div class="paso">
+      <h4>Y ahora lo importante: ¿cuánto mejoró?</h4>
+      <div class="calc">IC 95% = 1,30 ± (2,262 × 0,299)
+       = 1,30 ± 0,68</div>
+      <span class="res">IC 95% = [0,62 ; 1,98] s</span>
+      <p class="small" style="margin-top:8px">Tamaño del efecto (d de Cohen) = 1,30 ÷ 0,945 = <b>1,38</b>, un efecto grande (referencia: 0,2 pequeño · 0,5 medio · 0,8 grande).</p>
+    </div>
+    <div class="paso">
+      <h4>Redacción final para el informe</h4>
+      <p>"Tras 12 semanas, el tiempo de TUG se redujo en promedio 1,3 s (IC 95%: 0,6 – 2,0; t(9) = 4,35; p = 0,002; d = 1,38; n = 10)."</p>
+      <p class="small">Esa línea tiene las cuatro cosas que un buen informe necesita: <b>magnitud, precisión, significancia y relevancia</b>. El valor p solo, no.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--mg);box-shadow:0 0 12px var(--mg)"></span>Qué es y qué NO es el valor p</h3>
+    <p><b>Es:</b> la probabilidad de observar un resultado igual o más extremo que el tuyo, <i>suponiendo que H₀ es verdadera</i>.</p>
+    <ul class="neo">
+      <li><b>No</b> es la probabilidad de que H₀ sea verdadera.</li>
+      <li><b>No</b> es la probabilidad de haberte equivocado.</li>
+      <li><b>No</b> mide el tamaño del efecto. Un p = 0,001 con n = 5.000 puede corresponder a una mejora clínicamente irrelevante.</li>
+      <li>p = 0,049 y p = 0,051 <b>no</b> son mundos distintos. El 0,05 es una convención, no una ley natural.</li>
+    </ul>
+  </div>
+
+  <div class="card trampa">
+    <h3><span class="dot"></span>Los dos errores que puedes cometer</h3>
+    <div class="tw"><table>
+      <thead><tr><th></th><th>H₀ es verdadera</th><th>H₀ es falsa</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Rechazas H₀</td><td style="color:#fbbf24">Error tipo I (α)<br><span class="small">dices que funciona y no</span></td><td style="color:#a3e635">Correcto (potencia)</td></tr>
+        <tr><td class="k">No rechazas H₀</td><td style="color:#a3e635">Correcto</td><td style="color:#fbbf24">Error tipo II (β)<br><span class="small">funciona y no lo viste</span></td></tr>
+      </tbody>
+    </table></div>
+    <p><b>Potencia = 1 − β</b>, convencionalmente ≥ 0,80. Con muestras chicas la potencia es baja, y por eso "no significativo" en un estudio de 10 personas casi nunca significa "no funciona": significa <b>"no alcancé a verlo"</b>. Ausencia de evidencia ≠ evidencia de ausencia.</p>
+  </div>
+
+  <div class="card excel">
+    <h3><span class="dot"></span>En Excel</h3>
+    <div class="calc">=PRUEBA.T(B2:B11;C2:C11;2;1)
+   ↑ rango1 ; rango2 ; colas(2) ; tipo(1=pareada)
+   devuelve directamente el valor p = 0,0018
+
+tipo 1 = pareada · 2 = dos muestras varianza igual
+tipo 3 = dos muestras varianza distinta (Welch)
+
+=DISTR.T.2C(4,35;9)   → p desde un t ya calculado</div>
+    <p class="small">Para la salida completa: <b>Datos → Análisis de datos → Prueba t</b>. Si no aparece, actívalo en Archivo → Opciones → Complementos → Herramientas para análisis.</p>
+  </div>
+
+  <details class="q">
+    <summary>Recupera: obtienes p = 0,21 en un estudio con 8 usuarios. ¿Puedes concluir que la intervención no sirve?</summary>
+    <p>No. Con n = 8 la potencia es muy baja: aunque exista un efecto real, es probable que no alcances a detectarlo (error tipo II). La conclusión honesta es <b>"no encontré evidencia suficiente"</b>, no "no hay efecto". Mira el IC: si es ancho e incluye valores clínicamente relevantes, lo que te falta es muestra, no efecto.</p>
+  </details>
+</section>
+
+<!-- ================= M9 EXCEL ================= -->
+<section class="mod" id="m9">
+  <div class="modhead">
+    <div class="modnum">09</div>
+    <div><h2>Excel sin sufrir</h2><div class="modtag">Lo que realmente usas el 95% del tiempo</div></div>
+  </div>
+
+  <div class="card escena">
+    <h3><span class="dot"></span>La escena</h3>
+    <p>Excel se siente hostil porque tiene 500 funciones y nadie te dijo cuáles son las doce que importan. Esta es la lista corta. Todo lo que calculaste a mano en esta guía, está aquí en una línea.</p>
+  </div>
+
+  <div class="idea">
+    <b>Antes que nada — la regla de oro:</b> una fila por usuario, una columna por variable, <b>una sola fila de encabezado</b>, sin celdas combinadas, sin filas en blanco, sin colores como dato. Una planilla bien armada se analiza sola. Una mal armada no se arregla con fórmulas.
+  </div>
+
+  <h3 style="margin-top:28px">Descriptiva</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Qué quieres</th><th>Fórmula (ES)</th><th>Inglés</th></tr></thead>
+    <tbody>
+      <tr><td>Media</td><td class="k">=PROMEDIO(A2:A50)</td><td>AVERAGE</td></tr>
+      <tr><td>Mediana</td><td class="k">=MEDIANA(A2:A50)</td><td>MEDIAN</td></tr>
+      <tr><td>Moda</td><td class="k">=MODA.UNO(A2:A50)</td><td>MODE.SNGL</td></tr>
+      <tr><td>DE muestral</td><td class="k">=DESVEST.M(A2:A50)</td><td>STDEV.S</td></tr>
+      <tr><td>DE poblacional</td><td class="k">=DESVEST.P(A2:A50)</td><td>STDEV.P</td></tr>
+      <tr><td>Varianza</td><td class="k">=VAR.M(A2:A50)</td><td>VAR.S</td></tr>
+      <tr><td>Error estándar</td><td class="k">=DESVEST.M(A2:A50)/RAIZ(CONTAR(A2:A50))</td><td>—</td></tr>
+      <tr><td>Cuartil 1</td><td class="k">=CUARTIL.INC(A2:A50;1)</td><td>QUARTILE.INC</td></tr>
+      <tr><td>Percentil 90</td><td class="k">=PERCENTIL.INC(A2:A50;0,9)</td><td>PERCENTILE.INC</td></tr>
+      <tr><td>N° de casos</td><td class="k">=CONTAR(A2:A50)</td><td>COUNT</td></tr>
+      <tr><td>Contar con condición</td><td class="k">=CONTAR.SI(B2:B50;"Sí")</td><td>COUNTIF</td></tr>
+      <tr><td>Promedio condicional</td><td class="k">=PROMEDIO.SI(B2:B50;"Mujer";A2:A50)</td><td>AVERAGEIF</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 style="margin-top:28px">Normal, z y percentiles</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Qué quieres</th><th>Fórmula (ES)</th></tr></thead>
+    <tbody>
+      <tr><td>z-score de un dato</td><td class="k">=NORMALIZACION(x;media;de)</td></tr>
+      <tr><td>Percentil desde z</td><td class="k">=DISTR.NORM.ESTAND.N(z;VERDADERO)</td></tr>
+      <tr><td>Percentil desde el dato</td><td class="k">=DISTR.NORM.N(x;media;de;VERDADERO)</td></tr>
+      <tr><td>z desde un percentil</td><td class="k">=INV.NORM.ESTAND(0,95)</td></tr>
+      <tr><td>Dato desde un percentil</td><td class="k">=INV.NORM(0,95;media;de)</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 style="margin-top:28px">Inferencia</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Qué quieres</th><th>Fórmula (ES)</th></tr></thead>
+    <tbody>
+      <tr><td>Margen del IC 95% (t)</td><td class="k">=INTERVALO.CONFIANZA.T(0,05;de;n)</td></tr>
+      <tr><td>Margen del IC 95% (z)</td><td class="k">=INTERVALO.CONFIANZA.NORM(0,05;de;n)</td></tr>
+      <tr><td>t crítico bilateral</td><td class="k">=INV.T.2C(0,05;gl)</td></tr>
+      <tr><td>Valor p desde un t</td><td class="k">=DISTR.T.2C(t;gl)</td></tr>
+      <tr><td>t pareada (p directo)</td><td class="k">=PRUEBA.T(rango1;rango2;2;1)</td></tr>
+      <tr><td>t independiente</td><td class="k">=PRUEBA.T(rango1;rango2;2;3)</td></tr>
+      <tr><td>Chi-cuadrado</td><td class="k">=PRUEBA.CHICUAD(observado;esperado)</td></tr>
+      <tr><td>Correlación de Pearson</td><td class="k">=COEF.DE.CORREL(A2:A50;B2:B50)</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="card excel">
+    <h3><span class="dot"></span>Tres cosas que valen más que cualquier fórmula</h3>
+    <ul class="neo">
+      <li><b>Tablas dinámicas.</b> Seleccionar datos → Insertar → Tabla dinámica. Resume por grupo, por mes, por sexo, en cinco segundos y sin escribir nada. Es la herramienta más subvalorada de Excel.</li>
+      <li><b>Convertir el rango en Tabla</b> (Ctrl+T). Las fórmulas se autocompletan, los filtros aparecen solos y los rangos se expanden cuando agregas filas. Deja de romperse todo al agregar datos.</li>
+      <li><b>Análisis de datos</b> (Archivo → Opciones → Complementos → Herramientas para análisis). Te da pruebas t, ANOVA, regresión y descriptivos completos con salida tipo software estadístico.</li>
+    </ul>
+  </div>
+
+  <div class="card trampa">
+    <h3><span class="dot"></span>Trampa frecuente</h3>
+    <p>Las celdas vacías y los ceros <b>no son lo mismo</b>. <code>PROMEDIO</code> ignora las vacías pero sí cuenta los ceros. Si pusiste 0 donde en realidad faltaba el dato, tu promedio está mal y no te vas a dar cuenta. Deja vacío lo que falta, o marca con una columna "perdido".</p>
+  </div>
+
+  <details class="q">
+    <summary>Recupera: tienes los TUG en A2:A50 y quieres el límite inferior del IC 95%. ¿Qué escribes?</summary>
+    <p><code>=PROMEDIO(A2:A50)-INTERVALO.CONFIANZA.T(0,05;DESVEST.M(A2:A50);CONTAR(A2:A50))</code><br>Y para el superior, lo mismo con <code>+</code>. Nota que <code>CONTAR</code> cuenta solo celdas con números, que es exactamente tu n real.</p>
+  </details>
+</section>
+
+<!-- ================= GLOSARIO ================= -->
+<section class="mod" id="glos">
+  <div class="modhead">
+    <div class="modnum">★</div>
+    <div><h2>Glosario de notación</h2><div class="modtag">Los símbolos, traducidos</div></div>
+  </div>
+  <div class="tw"><table>
+    <thead><tr><th>Símbolo</th><th>Se lee</th><th>Qué es</th></tr></thead>
+    <tbody>
+      <tr><td class="k">x̄</td><td>"equis barra"</td><td>Media de tu <b>muestra</b></td></tr>
+      <tr><td class="k">μ</td><td>"mu"</td><td>Media de la <b>población</b> (casi nunca la conoces)</td></tr>
+      <tr><td class="k">s</td><td>"ese"</td><td>Desviación estándar de la muestra</td></tr>
+      <tr><td class="k">σ</td><td>"sigma"</td><td>Desviación estándar poblacional</td></tr>
+      <tr><td class="k">s²  σ²</td><td>—</td><td>Varianza (la DE al cuadrado)</td></tr>
+      <tr><td class="k">n</td><td>—</td><td>Número de observaciones</td></tr>
+      <tr><td class="k">Σ</td><td>"sumatoria"</td><td>Suma todo lo que viene después</td></tr>
+      <tr><td class="k">EE / SE</td><td>—</td><td>Error estándar = s ÷ √n</td></tr>
+      <tr><td class="k">gl / df</td><td>—</td><td>Grados de libertad (normalmente n − 1)</td></tr>
+      <tr><td class="k">α</td><td>"alfa"</td><td>Nivel de significancia; riesgo de error tipo I (0,05)</td></tr>
+      <tr><td class="k">β</td><td>"beta"</td><td>Riesgo de error tipo II; potencia = 1 − β</td></tr>
+      <tr><td class="k">p̂</td><td>"p gorro"</td><td>Proporción observada en la muestra</td></tr>
+      <tr><td class="k">H₀ / H₁</td><td>—</td><td>Hipótesis nula / alternativa</td></tr>
+      <tr><td class="k">Φ(z)</td><td>"fi de zeta"</td><td>Proporción acumulada a la izquierda de z</td></tr>
+      <tr><td class="k">IC</td><td>—</td><td>Intervalo de confianza</td></tr>
+      <tr><td class="k">RIC / IQR</td><td>—</td><td>Rango intercuartílico (Q3 − Q1)</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="idea" style="margin-top:30px">
+    <b>Si solo te llevas una cosa de toda la guía, que sea esta cadena:</b><br>
+    mido → describo con media y DE → divido la DE por √n y obtengo el EE → el TCL me dice que los promedios son normales → la tabla z o t me dice cuán raro es mi resultado → eso se vuelve un intervalo de confianza o un valor p → decido.<br><br>
+    Todo lo demás son detalles de esa misma historia.
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>🧠 Guía visual de bioestadística aplicada · construida con ejemplos de rehabilitación comunitaria en APS</p>
+    <p class="small">Los datos de los ejemplos son ilustrativos y fueron creados para esta guía. No corresponden a usuarios reales.</p>
+  </div>
+</footer>
+
+<script>
+/* ---------- fondo neuronal ---------- */
+(function(){
+  const c=document.getElementById('neuro'),x=c.getContext('2d');
+  let w,h,N=[];
+  function size(){w=c.width=innerWidth;h=c.height=innerHeight;}
+  size();addEventListener('resize',size);
+  const n = innerWidth<700?26:46;
+  for(let i=0;i<n;i++)N.push({x:Math.random(),y:Math.random(),vx:(Math.random()-.5)*.00022,vy:(Math.random()-.5)*.00022,r:Math.random()*1.6+.7});
+  function draw(){
+    x.clearRect(0,0,w,h);
+    for(const p of N){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>1)p.vx*=-1;if(p.y<0||p.y>1)p.vy*=-1;}
+    for(let i=0;i<N.length;i++)for(let j=i+1;j<N.length;j++){
+      const dx=(N[i].x-N[j].x)*w,dy=(N[i].y-N[j].y)*h,d=Math.hypot(dx,dy);
+      if(d<150){x.strokeStyle='rgba(120,180,230,'+(.12*(1-d/150))+')';x.lineWidth=.7;
+        x.beginPath();x.moveTo(N[i].x*w,N[i].y*h);x.lineTo(N[j].x*w,N[j].y*h);x.stroke();}
+    }
+    for(const p of N){x.fillStyle='rgba(120,200,235,.4)';x.beginPath();x.arc(p.x*w,p.y*h,p.r,0,7);x.fill();}
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ---------- barra de progreso + nav activa ---------- */
+(function(){
+  const bar=document.getElementById('prog'),links=[...document.querySelectorAll('#navs a')];
+  function up(){
+    const t=document.body.scrollHeight-innerHeight;
+    bar.style.width=Math.min(100,(scrollY/t)*100)+'%';
+    let cur=null;
+    document.querySelectorAll('section.mod').forEach(s=>{if(s.getBoundingClientRect().top<160)cur=s.id;});
+    links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+cur));
+  }
+  addEventListener('scroll',up,{passive:true});up();
+})();
+
+/* ---------- normal ---------- */
+function erf(x){const s=x<0?-1:1;x=Math.abs(x);
+  const a1=.254829592,a2=-.284496736,a3=1.421413741,a4=-1.453152027,a5=1.061405429,p=.3275911;
+  const t=1/(1+p*x);
+  const y=1-((((a5*t+a4)*t+a3)*t+a2)*t+a1)*t*Math.exp(-x*x);
+  return s*y;}
+function Phi(z){return .5*(1+erf(z/Math.SQRT2));}
+function pdf(z){return Math.exp(-z*z/2)/Math.sqrt(2*Math.PI);}
+const nf=(v,d)=>v.toFixed(d).replace('.',',');
+
+/* ---------- tabla Z ---------- */
+(function(){
+  let h='<table><thead><tr><th>z</th>';
+  for(let c=0;c<10;c++)h+='<th>0,0'+c+'</th>';
+  h+='</tr></thead><tbody>';
+  for(let r=0;r<=34;r++){
+    h+='<tr><td class="k">'+nf(r/10,1)+'</td>';
+    for(let c=0;c<10;c++)h+='<td>'+Phi(r/10+c/100).toFixed(4).replace('.',',')+'</td>';
+    h+='</tr>';
+  }
+  document.getElementById('ztable').innerHTML=h+'</tbody></table>';
+})();
+
+/* ---------- lab z ---------- */
+(function(){
+  const mu=document.getElementById('zmu'),sd=document.getElementById('zsd'),xv=document.getElementById('zx');
+  const sv=document.getElementById('zplot');
+  function draw(){
+    const M=+mu.value,S=+sd.value,X=+xv.value;
+    if(!isFinite(M)||!isFinite(S)||S<=0||!isFinite(X)){return;}
+    const z=(X-M)/S,p=Phi(z);
+    document.getElementById('zout').textContent=nf(z,2);
+    document.getElementById('pout').textContent=nf(p*100,1)+'%';
+    document.getElementById('aout').textContent=nf((1-p)*100,1)+'%';
+    const W=620,H=230,PL=30,PB=38,PT=14,gw=W-2*PL,gh=H-PB-PT;
+    const zx=t=>PL+((t+4)/8)*gw, zy=v=>PT+gh-(v/.4)*gh;
+    let fill='',line='';
+    const zc=Math.max(-4,Math.min(4,z));
+    for(let t=-4;t<=zc+1e-9;t+=.02){fill+=(fill?'L':'M')+zx(t)+','+zy(pdf(t));}
+    if(fill)fill+='L'+zx(zc)+','+zy(0)+'L'+zx(-4)+','+zy(0)+'Z';
+    for(let t=-4;t<=4;t+=.02){line+=(line?'L':'M')+zx(t)+','+zy(pdf(t));}
+    let ticks='';
+    for(let t=-3;t<=3;t++){
+      ticks+='<line x1="'+zx(t)+'" y1="'+zy(0)+'" x2="'+zx(t)+'" y2="'+(zy(0)+5)+'" stroke="#5f7fa8"/>'+
+      '<text x="'+zx(t)+'" y="'+(zy(0)+19)+'" fill="#8ea0bd" font-size="10" text-anchor="middle" font-family="JetBrains Mono">'+t+'</text>'+
+      '<text x="'+zx(t)+'" y="'+(zy(0)+32)+'" fill="#5f7fa8" font-size="9" text-anchor="middle" font-family="JetBrains Mono">'+nf(M+t*S,1)+'</text>';
+    }
+    sv.innerHTML=
+      '<defs><linearGradient id="zg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#22d3ee" stop-opacity=".55"/><stop offset="1" stop-color="#a78bfa" stop-opacity=".1"/></linearGradient></defs>'+
+      '<path d="'+fill+'" fill="url(#zg)"/>'+
+      '<path d="'+line+'" fill="none" stroke="#dbe6f5" stroke-width="1.8"/>'+
+      '<line x1="'+zx(-4)+'" y1="'+zy(0)+'" x2="'+zx(4)+'" y2="'+zy(0)+'" stroke="#5f7fa8"/>'+ticks+
+      '<line x1="'+zx(zc)+'" y1="'+PT+'" x2="'+zx(zc)+'" y2="'+zy(0)+'" stroke="#f472b6" stroke-width="2" stroke-dasharray="5 4"/>'+
+      '<text x="'+zx(zc)+'" y="'+(PT-2)+'" fill="#f472b6" font-size="11" text-anchor="middle" font-family="JetBrains Mono">x='+nf(X,1)+'</text>'+
+      '<text x="'+PL+'" y="'+(H-4)+'" fill="#5f7fa8" font-size="9" font-family="JetBrains Mono">z / valor original</text>';
+  }
+  [mu,sd,xv].forEach(e=>e.addEventListener('input',draw));draw();
+})();
+
+/* ---------- lab TCL ---------- */
+(function(){
+  const sel=document.getElementById('tcln'),btn=document.getElementById('tclgo'),sv=document.getElementById('tclplot');
+  // poblacion sesgada: 7,5 + exponencial(media 5) truncada
+  const POPM=7.5+5, POPSD=5;
+  function one(){let u=Math.random();if(u<1e-9)u=1e-9;return 7.5-5*Math.log(u);}
+  function run(){
+    const n=+sel.value,R=500,means=[];
+    for(let i=0;i<R;i++){let s=0;for(let j=0;j<n;j++)s+=one();means.push(s/n);}
+    const mn=Math.min(...means),mx=Math.max(...means);
+    const B=24,bw=(mx-mn)/B||1,bins=new Array(B).fill(0);
+    means.forEach(v=>{let k=Math.floor((v-mn)/bw);if(k>=B)k=B-1;if(k<0)k=0;bins[k]++;});
+    const m=means.reduce((a,b)=>a+b,0)/R;
+    const sdv=Math.sqrt(means.reduce((a,b)=>a+(b-m)*(b-m),0)/(R-1));
+    document.getElementById('tm').textContent=nf(m,2);
+    document.getElementById('ts').textContent=nf(sdv,2);
+    document.getElementById('te').textContent=nf(POPSD/Math.sqrt(n),2);
+    const W=620,H=240,PL=34,PB=34,PT=12,gw=W-2*PL,gh=H-PB-PT,top=Math.max(...bins);
+    let bars='';
+    for(let i=0;i<B;i++){
+      const bh=(bins[i]/top)*gh, x0=PL+(i/B)*gw, w0=gw/B-2;
+      bars+='<rect x="'+x0+'" y="'+(PT+gh-bh)+'" width="'+w0+'" height="'+bh+'" rx="2" fill="url(#tg)"/>';
+    }
+    let ax='';
+    for(let i=0;i<=4;i++){
+      const v=mn+(mx-mn)*i/4, x0=PL+(i/4)*gw;
+      ax+='<line x1="'+x0+'" y1="'+(PT+gh)+'" x2="'+x0+'" y2="'+(PT+gh+5)+'" stroke="#5f7fa8"/>'+
+      '<text x="'+x0+'" y="'+(PT+gh+18)+'" fill="#8ea0bd" font-size="10" text-anchor="middle" font-family="JetBrains Mono">'+nf(v,1)+'</text>';
+    }
+    sv.innerHTML='<defs><linearGradient id="tg" x1="0" y1="0" x2="0" y2="1">'+
+      '<stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#a78bfa" stop-opacity=".35"/></linearGradient></defs>'+
+      bars+'<line x1="'+PL+'" y1="'+(PT+gh)+'" x2="'+(PL+gw)+'" y2="'+(PT+gh)+'" stroke="#5f7fa8"/>'+ax+
+      '<text x="'+(W-PL)+'" y="'+(H-4)+'" fill="#5f7fa8" font-size="9" text-anchor="end" font-family="JetBrains Mono">500 promedios de muestras de n='+n+' (segundos)</text>';
+  }
+  sel.addEventListener('change',run);btn.addEventListener('click',run);run();
+})();
+</script>
+</body>
+</html>

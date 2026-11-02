@@ -160,12 +160,17 @@ mark{background:rgba(34,211,238,.22);color:#fff;padding:1px 4px;border-radius:4p
   <div class="wrap">
     <div class="kicker">Guía visual · Bioestadística aplicada</div>
     <h1>Estadística para la práctica clínica</h1>
-    <p class="hero-sub">Nueve módulos para entender —de verdad— qué estás calculando cuando mides, comparas y decides en rehabilitación.</p>
+    <p class="hero-sub">Catorce módulos en dos bloques: primero entender qué <b style="color:var(--txt)">calculas</b>, luego aprender a <b style="color:var(--txt)">decidir y a dudar</b> cuando mides, comparas y concluyes en rehabilitación.</p>
     <div class="dedic">🧠 Hecha para <b>Natalia</b> · terapia ocupacional &amp; rehabilitación comunitaria</div>
     <div class="chips">
       <span class="chip">descriptiva</span><span class="chip">probabilidad</span><span class="chip">DE vs EE</span>
       <span class="chip">z-score</span><span class="chip">TCL</span><span class="chip">tabla t</span>
       <span class="chip">IC 95%</span><span class="chip">valor p</span><span class="chip">Excel</span>
+      <span class="chip" style="border-color:rgba(244,114,182,.4);color:var(--mg)">escalas de medición</span>
+      <span class="chip" style="border-color:rgba(244,114,182,.4);color:var(--mg)">qué prueba uso</span>
+      <span class="chip" style="border-color:rgba(244,114,182,.4);color:var(--mg)">plantear hipótesis</span>
+      <span class="chip" style="border-color:rgba(244,114,182,.4);color:var(--mg)">los dos errores</span>
+      <span class="chip" style="border-color:rgba(244,114,182,.4);color:var(--mg)">criterio sobre el p</span>
     </div>
   </div>
 </header>
@@ -183,6 +188,12 @@ mark{background:rgba(34,211,238,.22);color:#fff;padding:1px 4px;border-radius:4p
     <a href="#m7">7 · Intervalos</a>
     <a href="#m8">8 · Inferencia y p</a>
     <a href="#m9">9 · Excel</a>
+    <a href="#b2" style="color:var(--mg)">● Semana 2</a>
+    <a href="#m10">10 · Escalas</a>
+    <a href="#m11">11 · Qué prueba uso</a>
+    <a href="#m12">12 · Plantear H₀</a>
+    <a href="#m13">13 · Los dos errores</a>
+    <a href="#m14">14 · Trampa del p</a>
     <a href="#glos">Glosario</a>
   </div>
 </nav>
@@ -1132,6 +1143,373 @@ tipo 3 = dos muestras varianza distinta (Welch)
   </details>
 </section>
 
+<!-- ================= DIVISOR BLOQUE 2 ================= -->
+<section class="mod" id="b2" style="border-top:1px solid var(--mg);margin-top:60px">
+  <div style="text-align:center;padding:30px 0 10px">
+    <div class="kicker" style="color:var(--mg)">Semana 2 · del cálculo al criterio</div>
+    <h2 style="font-size:clamp(1.6rem,5.5vw,2.3rem);background:linear-gradient(100deg,#fff,var(--mg) 70%);-webkit-background-clip:text;background-clip:text;color:transparent">Ahora: pensar, no solo calcular</h2>
+    <p class="hero-sub" style="margin:14px auto 0">La primera parte te enseñó a <b style="color:var(--txt)">sacar los números</b>. Esta te enseña lo que de verdad separa a quien aplica un paquete estadístico de quien entiende lo que hace: <b style="color:var(--txt)">elegir la prueba correcta, plantear bien la pregunta, y desconfiar del valor p</b>.</p>
+  </div>
+
+  <div class="idea" style="border-color:rgba(244,114,182,.35);background:rgba(244,114,182,.07)">
+    <b style="color:var(--mg)">El giro de esta semana:</b> la estadística no es el destino, es un intermediario. Tu pregunta nunca es estadística —siempre es clínica: <i>¿este usuario mejoró? ¿esta técnica sirve? ¿vale la pena el esfuerzo?</i>. Los módulos que siguen te devuelven esa pregunta a las manos.
+  </div>
+
+  <svg class="plot" viewBox="0 0 860 150" xmlns="http://www.w3.org/2000/svg" style="margin:20px 0 0">
+    <defs>
+      <marker id="ar2" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#f472b6"/></marker>
+    </defs>
+    <g font-family="Inter" font-size="12" fill="#dbe6f5" text-anchor="middle">
+      <g><rect x="12" y="50" width="150" height="50" rx="12" fill="rgba(244,114,182,.1)" stroke="#f472b6"/><text x="87" y="72">¿Qué tipo de</text><text x="87" y="90">variable es?</text></g>
+      <g><rect x="188" y="50" width="150" height="50" rx="12" fill="rgba(255,255,255,.04)" stroke="#5f7fa8"/><text x="263" y="72">¿Qué prueba</text><text x="263" y="90">corresponde?</text></g>
+      <g><rect x="364" y="50" width="150" height="50" rx="12" fill="rgba(255,255,255,.04)" stroke="#5f7fa8"/><text x="439" y="72">¿Cómo planteo</text><text x="439" y="90">H₀ y H₁?</text></g>
+      <g><rect x="540" y="50" width="150" height="50" rx="12" fill="rgba(255,255,255,.04)" stroke="#5f7fa8"/><text x="615" y="72">¿Qué error</text><text x="615" y="90">puedo cometer?</text></g>
+      <g><rect x="716" y="50" width="132" height="50" rx="12" fill="rgba(163,230,53,.1)" stroke="#a3e635"/><text x="782" y="72" fill="#a3e635">¿Es relevante</text><text x="782" y="90" fill="#a3e635">de verdad?</text></g>
+    </g>
+    <g stroke="#f472b6" stroke-width="1.6" fill="none" marker-end="url(#ar2)">
+      <path d="M162,75 L184,75"/><path d="M338,75 L360,75"/><path d="M514,75 L536,75"/><path d="M690,75 L712,75"/>
+    </g>
+  </svg>
+</section>
+
+<!-- ================= M10 ESCALAS ================= -->
+<section class="mod" id="m10">
+  <div class="modhead">
+    <div class="modnum" style="background:linear-gradient(140deg,var(--mg),var(--vi))">10</div>
+    <div><h2>Escalas de medición: el ADN de tus datos</h2><div class="modtag" style="color:var(--mg)">El tipo de número decide todo lo demás</div></div>
+  </div>
+
+  <div class="card escena">
+    <h3><span class="dot"></span>La escena</h3>
+    <p>Abres tu planilla del CCR y tienes seis columnas: diagnóstico, sexo, Ashworth de espasticidad, grados de flexión de rodilla, puntaje FIM y tiempo TUG. Tentación natural: sacarle el promedio a todo. <b>Error.</b> Cada columna es un tipo distinto de número, y el tipo decide qué cálculo tiene sentido y cuál es pura ilusión.</p>
+  </div>
+
+  <div class="idea">
+    <b>La idea en una frase:</b> un mismo número puede significar cuatro cosas distintas según la regla con que se asignó. La ley de Stevens, traducida: <mark>no hagas con los números nada que no puedas hacer con lo que representan</mark>. Si "2" en Ashworth no es "el doble" de "1", entonces promediarlos es mentir con decimales.
+  </div>
+
+  <p>Un instrumento que usas todos los días cae en una de estas cuatro escalas. Reconocerla es el primer gesto de todo análisis:</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Escala</th><th>Qué permite</th><th>Ejemplo en rehabilitación</th><th>Centro</th><th>Dispersión</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Nominal</td><td>Clasificar (sin orden)</td><td>Diagnóstico (ACV, Parkinson, artrosis), sexo, previsión (Fonasa/Isapre)</td><td>Moda</td><td>Razón de variación</td></tr>
+      <tr><td class="k">Ordinal</td><td>Ordenar (sin distancias iguales)</td><td>Ashworth (0·1·1+·2·3·4), fuerza muscular manual 0–5, ítems del FIM/Barthel, EVA del dolor*</td><td>Mediana</td><td>RIC · desv. semi-intercuartil</td></tr>
+      <tr><td class="k">Intervalo</td><td>Medir distancias (cero arbitrario)</td><td>Temperatura °C, fecha del calendario</td><td>Media</td><td>DE</td></tr>
+      <tr><td class="k">Razón</td><td>Todo (cero real, se puede dividir)</td><td>Grados de rango articular (ROM), tiempo TUG, fuerza en kg, metros caminados, frecuencia cardíaca</td><td>Media (o geométrica)</td><td>DE · CV</td></tr>
+    </tbody>
+  </table></div>
+  <p class="small">*La EVA del dolor se trata con frecuencia como intervalo por conveniencia, pero formalmente es ordinal: el salto de 2 a 3 no "duele lo mismo" que el de 7 a 8. Es una simplificación que conviene conocer.</p>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--mg);box-shadow:0 0 12px var(--mg)"></span>La analogía del kinesiólogo: el goniómetro vs la escala de asistencia</h3>
+    <p>Cuando mides <b>rango articular con goniómetro</b>, 90° es exactamente el doble de 45°, y la diferencia entre 30° y 40° es la misma que entre 80° y 90°. Es una escala de <b>razón</b>: los grados son "reales", puedes promediar, dividir, sacar porcentajes de avance.</p>
+    <p>Cuando registras <b>nivel de asistencia</b> ("independiente / supervisión / asistencia mínima / máxima / dependiente"), el orden existe pero las distancias no. Pasar de "máxima" a "mínima" asistencia no es el mismo salto funcional que pasar de "supervisión" a "independiente". Es <b>ordinal</b>: puedes decir cuál está mejor, pero el "promedio de asistencia = 2,7" no describe a nadie.</p>
+    <p class="small">Misma planilla, dos columnas, dos mundos matemáticos. Confundirlos es el error de medición más silencioso de la rehabilitación.</p>
+  </div>
+
+  <h3 style="margin-top:30px">Paso a paso: la dispersión de una escala nominal</h3>
+  <p class="small">¿Cómo mides "qué tan variado" es un grupo cuando la variable no tiene orden (p. ej. diagnóstico)? Con la <b>razón de variación (V)</b>: qué proporción de casos NO cae en la categoría más frecuente.</p>
+  <div class="pasos">
+    <div class="paso">
+      <h4>Identificar la categoría modal</h4>
+      <p class="small">250 usuarios en rehabilitación. El diagnóstico más frecuente es "secuela de ACV" con 150 casos.</p>
+    </div>
+    <div class="paso">
+      <h4>Contar los que quedan fuera de la moda</h4>
+      <div class="calc">250 − 150 = 100 casos fuera de la categoría modal</div>
+    </div>
+    <div class="paso">
+      <h4>Dividir y convertir a porcentaje</h4>
+      <div class="calc">V = (100 ÷ 250) × 100</div>
+      <span class="res">V = 40 %</span>
+      <p class="small" style="margin-top:8px">Si la moda tuviera 200 de 250, V = 20%: un grupo más homogéneo (casi todos el mismo diagnóstico). Mientras mayor es V, más mezclado está tu grupo.</p>
+    </div>
+  </div>
+
+  <div class="card trampa">
+    <h3><span class="dot"></span>Trampa frecuente</h3>
+    <p>Tratar la columna de Ashworth (o de FIM por ítem) como si fuera de razón: "la espasticidad promedio del grupo bajó de 2,8 a 2,1". Suena científico, pero asume que los peldaños de la escala son iguales, y no lo son. Para un cambio en escala ordinal, la lectura honesta es la <b>mediana</b> y el <b>porcentaje que mejoró al menos un nivel</b>, no el decimal del promedio.</p>
+  </div>
+
+  <details class="q">
+    <summary>Recupera: tienes la columna "fuerza muscular manual (0–5)" de 20 usuarios. ¿Qué medida de centro usas y cuál evitas?</summary>
+    <p>Es una escala <b>ordinal</b> (el salto de 2 a 3 no equivale al de 4 a 5). Usa la <b>mediana</b>; evita la media. Y si quieres mostrar cambio tras la intervención, reporta cuántos subieron al menos un grado, no "la fuerza promedio pasó de 3,2 a 3,8".</p>
+  </details>
+</section>
+
+<!-- ================= M11 QUE PRUEBA ================= -->
+<section class="mod" id="m11">
+  <div class="modhead">
+    <div class="modnum" style="background:linear-gradient(140deg,var(--mg),var(--vi))">11</div>
+    <div><h2>¿Qué prueba uso? El tipo de asociación decide</h2><div class="modtag" style="color:var(--mg)">No memorices pruebas, memoriza la grilla</div></div>
+  </div>
+
+  <div class="card escena">
+    <h3><span class="dot"></span>La escena</h3>
+    <p>Natalia quiere saber si la telerehabilitación da resultados distintos a la presencial. Abre internet, ve "t-test, chi-cuadrado, ANOVA, correlación" y se bloquea. El bloqueo viene de buscar la prueba por la <i>pregunta clínica</i>. La prueba no se elige por la pregunta: se elige por el <b>tipo de las dos variables que estás cruzando</b>.</p>
+  </div>
+
+  <div class="idea">
+    <b>La idea en una frase:</b> toda pregunta de asociación cruza exactamente dos variables. Clasifica cada una como <b>categórica</b> (grupos) o <b>numérica</b> (cantidades) y la grilla te entrega la prueba. Son cuatro combinaciones, no cuatrocientas.
+  </div>
+
+  <h3 style="margin-top:26px">La grilla maestra</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Variable Y</th><th>Variable X</th><th>Qué comparas</th><th>Prueba</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Categórica</td><td class="k">Categórica</td><td>Proporciones (%)</td><td>Chi-cuadrado (χ²)</td></tr>
+      <tr><td class="k">Numérica</td><td class="k">Categórica (2 grupos)</td><td>Dos medias</td><td>t de Student</td></tr>
+      <tr><td class="k">Numérica</td><td class="k">Categórica (3+ grupos)</td><td>Tres o más medias</td><td>ANOVA (F)</td></tr>
+      <tr><td class="k">Numérica</td><td class="k">Numérica</td><td>Si suben juntas</td><td>Correlación (r de Pearson)</td></tr>
+    </tbody>
+  </table></div>
+
+  <!-- LAB SELECTOR -->
+  <div class="lab" style="border-color:rgba(244,114,182,.35);background:linear-gradient(160deg,rgba(244,114,182,.07),rgba(167,139,250,.05))">
+    <div class="labttl" style="color:var(--mg)">Laboratorio · selector de prueba</div>
+    <p class="small" style="margin-top:-6px">Elige el tipo de cada variable y te digo qué prueba corresponde, con un ejemplo de rehabilitación.</p>
+    <div class="ctrls">
+      <div class="ctrl"><label>Variable Y (el resultado)</label>
+        <select id="syY"><option value="num">Numérica (TUG, ROM, kg…)</option><option value="cat">Categórica (cayó sí/no, mejoró sí/no…)</option></select>
+      </div>
+      <div class="ctrl"><label>Variable X (el grupo o factor)</label>
+        <select id="syX"><option value="cat2">Categórica · 2 grupos</option><option value="cat3">Categórica · 3+ grupos</option><option value="num">Numérica</option></select>
+      </div>
+    </div>
+    <div class="out" style="flex-direction:column">
+      <div style="flex:1 1 100%"><span>Prueba recomendada</span><b id="syTest" style="color:var(--mg);font-size:1.25rem">—</b></div>
+      <div style="flex:1 1 100%;background:transparent;border:none;padding:4px 0"><span style="margin-bottom:6px">Ejemplo</span><span id="syEx" style="color:var(--txt);text-transform:none;letter-spacing:0;font-family:Inter;font-size:.92rem">—</span></div>
+      <div style="flex:1 1 100%;background:transparent;border:none;padding:0"><span style="margin-bottom:6px">En Excel</span><span id="syXl" style="color:var(--li);text-transform:none;letter-spacing:0;font-size:.85rem">—</span></div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:30px">Entrenamiento: clasifica estos cruces</h3>
+  <p class="small">Tu planilla del CCR. Para cada par, pregúntate "¿categórica o numérica?" antes de mirar la respuesta.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Pregunta clínica</th><th>Tipo de relación</th><th>Prueba</th></tr></thead>
+    <tbody>
+      <tr><td style="text-align:left">¿Caen más las mujeres que los hombres? (sexo → cayó sí/no)</td><td>categórica–categórica</td><td class="k">χ²</td></tr>
+      <tr><td style="text-align:left">¿Difiere el TUG entre dos grupos etarios? (grupo → TUG)</td><td>numérica–categórica (2)</td><td class="k">t</td></tr>
+      <tr><td style="text-align:left">¿El TUG cambia según nivel de actividad (baja/media/alta)?</td><td>numérica–categórica (3)</td><td class="k">ANOVA</td></tr>
+      <tr><td style="text-align:left">¿La edad se relaciona con el tiempo de TUG?</td><td>numérica–numérica</td><td class="k">r de Pearson</td></tr>
+      <tr><td style="text-align:left">¿La adherencia (alta/baja) se asocia a haber mejorado (sí/no)?</td><td>categórica–categórica</td><td class="k">χ²</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="card trampa">
+    <h3><span class="dot"></span>Trampa frecuente</h3>
+    <p>Usar <b>varias pruebas t</b> para comparar tres o más grupos ("presencial vs tele", "presencial vs mixto", "tele vs mixto"). Cada t extra vuelve a arriesgar el error tipo I, así que el riesgo total se infla muy por encima del 0,05 que creías. Para 3+ grupos la respuesta es <b>ANOVA</b>, que los compara todos de una vez con un solo α.</p>
+  </div>
+
+  <div class="card excel">
+    <h3><span class="dot"></span>En Excel</h3>
+    <div class="calc">χ²        =PRUEBA.CHICUAD(rango_observado; rango_esperado)
+t         =PRUEBA.T(rango1; rango2; 2; 2)    (2 grupos independientes)
+ANOVA     Datos → Análisis de datos → Análisis de varianza de un factor
+Pearson   =COEF.DE.CORREL(rango_x; rango_y)</div>
+  </div>
+
+  <details class="q">
+    <summary>Recupera: quieres saber si el puntaje de Barthel (0–100, tratado como numérico) difiere entre tres diagnósticos. ¿Qué prueba?</summary>
+    <p>Y = numérica (Barthel), X = categórica con 3 grupos (diagnóstico) → <b>ANOVA</b>. Nunca tres t separadas: inflarías el error tipo I. Y ojo: si tratas el Barthel con rigor ordinal, la versión no paramétrica equivalente sería Kruskal-Wallis, pero la lógica de "numérica vs categórica 3+" es la misma.</p>
+  </details>
+</section>
+
+<!-- ================= M12 PLANTEAR HIPOTESIS ================= -->
+<section class="mod" id="m12">
+  <div class="modhead">
+    <div class="modnum" style="background:linear-gradient(140deg,var(--mg),var(--vi))">12</div>
+    <div><h2>Plantear la hipótesis como corresponde</h2><div class="modtag" style="color:var(--mg)">Dos frases antes de cualquier cálculo</div></div>
+  </div>
+
+  <div class="card escena">
+    <h3><span class="dot"></span>La escena</h3>
+    <p>Antes de correr una sola prueba, hay que escribir dos frases: H₀ y H₁. Parece trámite, pero si las escribes mal, todo lo que viene después —el t, el p, el IC— responde a una pregunta equivocada. Es como tomar la presión con el manguito en el brazo contrario: el número sale, pero no sirve.</p>
+  </div>
+
+  <div class="idea">
+    <b>La idea en una frase:</b> H₀ siempre afirma <b>"no hay diferencia / no hay asociación"</b> —es la hipótesis del aburrimiento—. H₁ afirma que sí la hay. Pruebas H₀ con la intención de romperla: si los datos la vuelven increíble, te quedas con H₁. Es una demostración por reducción al absurdo.
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--vi);box-shadow:0 0 12px var(--vi)"></span>Lo griego y lo latino</h3>
+    <p>Los promedios que ves en tu tabla (x̄, p̂) son <b>muestrales</b> —latinos—: lo que mediste. La hipótesis nunca es sobre ellos; es sobre los <b>parámetros poblacionales</b> (μ, P) —griegos—: la verdad que no viste. Todo el juego de la inferencia es usar lo latino para apostar sobre lo griego.</p>
+  </div>
+
+  <h3 style="margin-top:28px">Caso A — variable numérica: comparar dos medias</h3>
+  <p><b>Pregunta:</b> ¿el TUG promedio difiere entre el grupo presencial y el de telerehabilitación?</p>
+  <div class="pasos">
+    <div class="paso">
+      <h4>Identificar el parámetro</h4>
+      <p class="small">TUG es numérico → la pregunta es sobre <b>medias</b> → el parámetro es μ.</p>
+    </div>
+    <div class="paso">
+      <h4>Escribir las hipótesis (bilateral por defecto)</h4>
+      <div class="calc">H₀:  μ_presencial = μ_tele      (no hay diferencia)
+H₁:  μ_presencial ≠ μ_tele      (sí la hay)</div>
+    </div>
+    <div class="paso">
+      <h4>Leerlas en voz alta</h4>
+      <p class="small">"Supongo que ambas modalidades dan el mismo TUG promedio en la población; si mis datos vuelven esa idea demasiado improbable, concluyo que difieren." Nada más, nada menos.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:30px">Caso B — variable categórica: comparar dos proporciones</h3>
+  <p><b>Pregunta:</b> ¿la proporción de usuarios que cae difiere entre ambas modalidades?</p>
+  <div class="pasos">
+    <div class="paso">
+      <h4>Identificar el parámetro</h4>
+      <p class="small">"Cayó sí/no" es categórico → la pregunta es sobre <b>proporciones</b> → el parámetro es P. Las hipótesis con μ aquí no son válidas.</p>
+    </div>
+    <div class="paso">
+      <h4>Escribir las hipótesis</h4>
+      <div class="calc">H₀:  P_presencial = P_tele      (misma tasa de caídas)
+H₁:  P_presencial ≠ P_tele</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--cy);box-shadow:0 0 12px var(--cy)"></span>¿Una cola o dos? (otra vez, porque importa)</h3>
+    <p>Por defecto, <b>bilateral</b> (≠): estás abierta a que la diferencia vaya en cualquier dirección. Solo usa unilateral (&gt; o &lt;) si tienes una razón teórica fuerte, declarada <b>antes</b> de ver los datos, para esperar una sola dirección. Decidir la dirección después de mirar los resultados es hacer trampa, aunque no lo parezca.</p>
+  </div>
+
+  <div class="card trampa">
+    <h3><span class="dot"></span>Trampa frecuente</h3>
+    <p>Mirar primero la tabla ("el grupo presencial salió mejor") y recién entonces escribir <code>H₁: μ_presencial &lt; μ_tele</code>. Eso convierte el azar en "hallazgo" y duplica tu riesgo real de error tipo I. La dirección se compromete antes; los datos no eligen la hipótesis que ellos mismos van a juzgar.</p>
+  </div>
+
+  <details class="q">
+    <summary>Recupera: quieres comparar el % de adherentes al programa entre CESFAM Tongoy y la posta de Guanaqueros. ¿Cómo planteas H₀ y H₁?</summary>
+    <p>"Adherente sí/no" es categórico → proporciones. <b>H₀: P_Tongoy = P_Guanaqueros</b> vs <b>H₁: P_Tongoy ≠ P_Guanaqueros</b>, bilateral. Si no tienes una razón previa y declarada para esperar que uno sea mayor, no uses &gt; ni &lt;.</p>
+  </details>
+</section>
+
+<!-- ================= M13 LOS DOS ERRORES ================= -->
+<section class="mod" id="m13">
+  <div class="modhead">
+    <div class="modnum" style="background:linear-gradient(140deg,var(--mg),var(--vi))">13</div>
+    <div><h2>Los dos errores: la caja de pistolas y el cazador</h2><div class="modtag" style="color:var(--mg)">No puedes minimizar ambos a la vez</div></div>
+  </div>
+
+  <div class="card escena">
+    <h3><span class="dot"></span>La escena</h3>
+    <p>Toda decisión estadística puede fallar de dos maneras <b>opuestas</b>, y bajar el riesgo de una sube el de la otra. Es un balancín, no una palanca. Dos historias clásicas lo dejan más claro que cualquier tabla —y las dos se traducen directo a tu trabajo clínico.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--am);box-shadow:0 0 12px var(--am)"></span>Historia 1 · La caja de 100 pistolas</h3>
+    <p>Frente a ti hay 100 pistolas; sabes que 5 están cargadas. Tomas una al azar. La probabilidad de que esté cargada es 5/100 = <b>0,05</b> — exactamente tu α.</p>
+    <p>¿Actúas como si estuviera cargada? Depende de <b>las consecuencias</b>, no solo de la probabilidad:</p>
+    <ul class="neo">
+      <li>Si te pidieran apuntártela a la cabeza y apretar el gatillo → actuarías como si estuviera cargada (el costo de equivocarte es la muerte).</li>
+      <li>Si fuera tu única defensa en un duelo a muerte → actuarías como si NO lo estuviera (necesitas disparar).</li>
+    </ul>
+    <p>Misma probabilidad de 0,05. Decisiones opuestas. <b>Moraleja:</b> el umbral α no es sagrado. Debería depender de qué está en juego, no copiarse del "0,05 de siempre".</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--am);box-shadow:0 0 12px var(--am)"></span>Historia 2 · El cazador y el tigre</h3>
+    <p>Primera noche solo en la selva. Oyes ruidos. Dos formas de equivocarte:</p>
+    <ul class="neo">
+      <li><b>Jurar que hay un tigre cuando es el viento</b> → te agotas huyendo de sombras. Eso es el <b>error tipo I</b>: ver algo que no está.</li>
+      <li><b>Taparte los oídos con la manta</b> para no sobresaltarte, y no oír al tigre real que sí viene → el <b>error tipo II</b>: no ver lo que sí está.</li>
+    </ul>
+    <p>Cuanta más manta (α más chico), menos falsas alarmas... pero más riesgo de no oír al tigre verdadero. No puedes tener las dos cosas: la manta que te protege de una te expone a la otra.</p>
+  </div>
+
+  <h3 style="margin-top:30px">La traducción a rehabilitación</h3>
+  <div class="tw"><table>
+    <thead><tr><th></th><th>La terapia NO sirve (H₀ verdadera)</th><th>La terapia SÍ sirve (H₀ falsa)</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Concluyes que sirve</td><td style="color:#fbbf24"><b>Error tipo I (α)</b><br><span class="small">adoptas una técnica inútil: gastas sesiones, das falsas esperanzas, expones a riesgo</span></td><td style="color:#a3e635">Correcto ✓<br><span class="small">(potencia)</span></td></tr>
+      <tr><td class="k">Concluyes que no sirve</td><td style="color:#a3e635">Correcto ✓</td><td style="color:#fbbf24"><b>Error tipo II (β)</b><br><span class="small">descartas una técnica efectiva: el usuario se queda sin un beneficio real</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="idea" style="border-color:rgba(244,114,182,.35);background:rgba(244,114,182,.07)">
+    <b style="color:var(--mg)">Lo que esto significa para rehabilitación:</b> en el CCR las muestras <b>siempre</b> son chicas, y muestra chica = <b>poca potencia</b> = mucho error tipo II encubierto. Por eso un "p &gt; 0,05" con 10 usuarios casi nunca significa "la terapia no sirve". Significa <b>"no tuve suficientes datos para oír al tigre"</b>. Potencia = 1 − β; lo convencional es apuntar a ≥ 0,80, algo difícil con grupos pequeños.
+  </div>
+
+  <div class="card trampa">
+    <h3><span class="dot"></span>Trampa frecuente</h3>
+    <p>Leer un "no significativo" de un estudio pequeño como prueba de que algo no funciona, y descartar una técnica que quizá sí ayuda. <b>Ausencia de evidencia no es evidencia de ausencia.</b> Antes de enterrar una intervención por un p alto, mira el IC: si es ancho e incluye mejoras clínicamente valiosas, lo que falta es muestra, no efecto.</p>
+  </div>
+
+  <details class="q">
+    <summary>Recupera: en rehabilitación, ¿qué error suele ser más costoso para el usuario, y cómo lo controlas?</summary>
+    <p>Depende de la situación —esa es la lección de la caja de pistolas—. El tipo I (adoptar algo inútil o riesgoso) pesa cuando la intervención tiene costos o efectos adversos; el tipo II (descartar algo que ayudaba) pesa cuando se niega un beneficio real y de bajo riesgo. El α controla el tipo I; el tipo II se controla sobre todo <b>aumentando la muestra</b> (y con ello la potencia). No existe el almuerzo gratis: ajustar uno mueve el otro.</p>
+  </details>
+</section>
+
+<!-- ================= M14 TRAMPA DEL P ================= -->
+<section class="mod" id="m14">
+  <div class="modhead">
+    <div class="modnum" style="background:linear-gradient(140deg,var(--mg),var(--vi))">14</div>
+    <div><h2>La trampa del valor p: pensar en vez de ritualizar</h2><div class="modtag" style="color:var(--mg)">El módulo que te vuelve crítica</div></div>
+  </div>
+
+  <div class="card escena">
+    <h3><span class="dot"></span>La escena</h3>
+    <p>Llega un paper a la reunión clínica. Dice: "mejora significativa (p &lt; 0,001)". El equipo asiente, satisfecho. Pero esa sola frase <b>no te dice si la terapia sirve</b> para tus usuarios. Aprender a no dejarte deslumbrar por un p chiquito es, literalmente, la señal de madurez estadística que te separa del resto.</p>
+  </div>
+
+  <div class="idea">
+    <b>La idea en una frase:</b> el valor p responde <b>una</b> pregunta, y muy estrecha: <i>"si no estuviera pasando nada, ¿qué tan raros serían mis datos?"</i>. No responde ninguna de las que de verdad te importan: ¿cuánto mejora? ¿le cambia la vida al usuario? ¿qué tan segura estoy?
+  </div>
+
+  <h3 style="margin-top:26px">Cinco cosas que el valor p NO es</h3>
+  <div class="pasos">
+    <div class="paso">
+      <h4>No es la probabilidad de que H₀ sea verdadera</h4>
+      <p class="small">El p es P(datos | H₀), no P(H₀ | datos). Es la probabilidad de tus datos <i>suponiendo</i> que no pasa nada — no la probabilidad de que no pase nada. La inversa, que es la que querrías, el p no te la da.</p>
+    </div>
+    <div class="paso">
+      <h4>No mide el tamaño del efecto</h4>
+      <p class="small">Con n enorme, una mejora ridícula da p &lt; 0,001. "Significativo" no es "grande" ni "importante". Un p chico puede esconder un efecto que a nadie le cambia la vida.</p>
+    </div>
+    <div class="paso">
+      <h4>"Significativo" (estadístico) ≠ "relevante" (clínico)</h4>
+      <p class="small">Es un accidente del idioma: en estadística "significativo" solo quiere decir "probablemente no es azar". Que una mejora sea real no implica que valga el esfuerzo, el costo o el riesgo. Para eso existe el <b>MCID</b> (abajo).</p>
+    </div>
+    <div class="paso">
+      <h4>El umbral 0,05 es arbitrario</h4>
+      <p class="small">p = 0,049 y p = 0,051 no describen mundos distintos, pero el ritual los trata como el día y la noche. El propio Fisher pedía elegir α según el problema, no clavarlo en 0,05 para siempre.</p>
+    </div>
+    <div class="paso">
+      <h4>"No significativo" no prueba que no hay efecto</h4>
+      <p class="small">Puede ser simplemente muestra chica (error tipo II). Y la excusa "con más muestra habría salido significativo" es <b>siempre</b> cierta —con suficiente n, casi cualquier diferencia alcanza significación—, por eso no prueba nada.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--cy);box-shadow:0 0 12px var(--cy)"></span>Por qué el intervalo de confianza es superior</h3>
+    <p>El IC responde lo que el p calla. Donde el p entrega un sí/no, el IC entrega <b>magnitud + precisión</b> en una sola línea:</p>
+    <ul class="neo">
+      <li>Si el IC de una diferencia <b>no incluye el 0</b> → hay diferencia significativa... <b>y además</b> te dice de qué tamaño.</li>
+      <li>Un IC estrecho = estimación precisa. Uno ancho = te falta muestra. El p no distingue esos dos casos; el IC sí.</li>
+      <li>No te obliga a dicotomizar en "significativo / no significativo". Te deja pensar.</li>
+    </ul>
+    <p class="small">Por esto las revistas de referencia (el Grupo de Vancouver, BMJ, The Lancet, entre otras) piden desde los años 80 reportar intervalos de confianza en lugar de —o además de— valores p.</p>
+  </div>
+
+  <div class="card" style="border-color:rgba(163,230,53,.35);background:rgba(163,230,53,.06)">
+    <h3><span class="dot" style="background:var(--li);box-shadow:0 0 12px var(--li)"></span>El puente que te importa como clínica: el MCID</h3>
+    <p>La significación estadística te dice que el efecto <b>probablemente es real</b>. El <b>MCID</b> (mínima diferencia clínicamente importante) te dice si es <b>lo bastante grande como para importarle al usuario</b>. Necesitas las dos, y son preguntas distintas.</p>
+    <p>Recuerda la mejora de <b>1,3 s en el TUG</b> del módulo 8, con p = 0,002: estadísticamente sólida. ¿Pero cruza el umbral clínico? En varias poblaciones de adultos mayores, el cambio mínimo clínicamente importante del TUG se ha estimado en torno a unos pocos segundos (el valor exacto depende de la población y de cómo se mida). Así que esa mejora podría ser <b>real pero modesta</b>: un p hermoso no te exime de preguntarte si el usuario de verdad camina distinto.</p>
+    <p class="small">Regla para toda la vida profesional: reporta siempre <b>efecto + IC</b>, y contrástalo contra un umbral clínico, no solo contra el 0,05.</p>
+  </div>
+
+  <div class="idea" style="border-color:rgba(244,114,182,.35);background:rgba(244,114,182,.07)">
+    <b style="color:var(--mg)">El cierre de toda la guía:</b> la estadística es un intermediario, no el veredicto. Tu pregunta nunca fue estadística —fue clínica—. El valor p es un dato más en el expediente, junto al efecto, el IC, los efectos adversos y lo que ya sabías de antes. Quien convierte un p pequeño en una conclusión dejó de pensar justo cuando empezaba lo interesante.
+  </div>
+
+  <details class="q">
+    <summary>Recupera: un estudio con 2.000 usuarios reporta que una app mejora el Barthel en 0,8 puntos (de 100), p &lt; 0,001. ¿La implementarías?</summary>
+    <p>Estadísticamente significativo, sí —pero con n = 2.000 casi cualquier cosa lo es—. La pregunta real es clínica: 0,8 puntos en una escala de 100 casi con certeza queda <b>por debajo del MCID</b>: no cambia la independencia de nadie. Significativo ≠ relevante. Antes de implementar, pide el tamaño del efecto, su IC y el costo. El p, aquí, es un espejismo.</p>
+  </details>
+</section>
+
 <!-- ================= GLOSARIO ================= -->
 <section class="mod" id="glos">
   <div class="modhead">
@@ -1157,13 +1535,27 @@ tipo 3 = dos muestras varianza distinta (Welch)
       <tr><td class="k">Φ(z)</td><td>"fi de zeta"</td><td>Proporción acumulada a la izquierda de z</td></tr>
       <tr><td class="k">IC</td><td>—</td><td>Intervalo de confianza</td></tr>
       <tr><td class="k">RIC / IQR</td><td>—</td><td>Rango intercuartílico (Q3 − Q1)</td></tr>
+      <tr><td class="k">V</td><td>—</td><td>Razón de variación (dispersión de una escala nominal)</td></tr>
+      <tr><td class="k">χ²</td><td>"ji / chi cuadrado"</td><td>Prueba para asociación categórica–categórica</td></tr>
+      <tr><td class="k">ANOVA / F</td><td>—</td><td>Compara 3 o más medias a la vez</td></tr>
+      <tr><td class="k">r</td><td>"erre"</td><td>Correlación de Pearson (numérica–numérica)</td></tr>
+      <tr><td class="k">MCID</td><td>—</td><td>Mínima diferencia clínicamente importante (umbral de relevancia, no de significación)</td></tr>
+      <tr><td class="k">P</td><td>"pe mayúscula"</td><td>Proporción poblacional (parámetro); p̂ es su versión muestral</td></tr>
     </tbody>
   </table></div>
 
   <div class="idea" style="margin-top:30px">
-    <b>Si solo te llevas una cosa de toda la guía, que sea esta cadena:</b><br>
-    mido → describo con media y DE → divido la DE por √n y obtengo el EE → el TCL me dice que los promedios son normales → la tabla z o t me dice cuán raro es mi resultado → eso se vuelve un intervalo de confianza o un valor p → decido.<br><br>
-    Todo lo demás son detalles de esa misma historia.
+    <b>Cadena 1 — cómo se calcula (semana 1):</b><br>
+    mido → describo con media y DE → divido la DE por √n y obtengo el EE → el TCL me dice que los promedios son normales → la tabla z o t me dice cuán raro es mi resultado → eso se vuelve un intervalo de confianza o un valor p → decido.
+  </div>
+
+  <div class="idea" style="margin-top:18px;border-color:rgba(244,114,182,.35);background:rgba(244,114,182,.07)">
+    <b style="color:var(--mg)">Cadena 2 — cómo se piensa (semana 2):</b><br>
+    miro qué <b>tipo de variable</b> tengo → eso decide la <b>prueba</b> → planteo bien <b>H₀ y H₁</b> → sé qué <b>error</b> arriesgo (y que muestra chica = poca potencia) → y nunca me quedo con el valor p: pregunto <b>cuánto</b> (efecto + IC) y <b>si le importa al usuario</b> (MCID).
+  </div>
+
+  <div class="card" style="margin-top:18px;text-align:center;border-color:rgba(163,230,53,.3)">
+    <p style="margin:0;font-size:1.05rem">La semana 1 te enseñó a <b style="color:var(--cy)">obtener el número</b>.<br>La semana 2 te enseñó a <b style="color:var(--mg)">no confundir el número con la respuesta</b>.</p>
   </div>
 </section>
 
@@ -1306,6 +1698,35 @@ const nf=(v,d)=>v.toFixed(d).replace('.',',');
       '<text x="'+(W-PL)+'" y="'+(H-4)+'" fill="#5f7fa8" font-size="9" text-anchor="end" font-family="JetBrains Mono">500 promedios de muestras de n='+n+' (segundos)</text>';
   }
   sel.addEventListener('change',run);btn.addEventListener('click',run);run();
+})();
+
+/* ---------- lab selector de prueba ---------- */
+(function(){
+  const Y=document.getElementById('syY'),X=document.getElementById('syX');
+  if(!Y||!X)return;
+  const T=document.getElementById('syTest'),E=document.getElementById('syEx'),L=document.getElementById('syXl');
+  function run(){
+    const y=Y.value,x=X.value;let test,ex,xl;
+    if(y==='cat'){
+      test='Chi-cuadrado (χ²)';
+      ex='Relación categórica–categórica. Ej.: ¿la adherencia (alta/baja) se asocia a haber mejorado (sí/no)? Compara proporciones.';
+      xl='=PRUEBA.CHICUAD(observado; esperado)';
+    } else if(x==='cat2'){
+      test='t de Student';
+      ex='Numérica vs 2 grupos. Ej.: ¿difiere el TUG entre presencial y telerehabilitación? Compara dos medias.';
+      xl='=PRUEBA.T(rango1; rango2; 2; 2)';
+    } else if(x==='cat3'){
+      test='ANOVA (prueba F)';
+      ex='Numérica vs 3+ grupos. Ej.: ¿cambia el TUG según actividad baja/media/alta? Compara varias medias de una vez (nunca t repetidas).';
+      xl='Datos → Análisis de datos → Análisis de varianza de un factor';
+    } else {
+      test='Correlación de Pearson (r)';
+      ex='Numérica vs numérica. Ej.: ¿la edad se relaciona con el tiempo de TUG? Mide si suben o bajan juntas.';
+      xl='=COEF.DE.CORREL(rango_x; rango_y)';
+    }
+    T.textContent=test;E.textContent=ex;L.textContent=xl;
+  }
+  Y.addEventListener('change',run);X.addEventListener('change',run);run();
 })();
 </script>
 </body>

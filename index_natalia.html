@@ -160,7 +160,7 @@ mark{background:rgba(34,211,238,.22);color:#fff;padding:1px 4px;border-radius:4p
   <div class="wrap">
     <div class="kicker">Guía visual · Bioestadística aplicada</div>
     <h1>Estadística para la práctica clínica</h1>
-    <p class="hero-sub">Catorce módulos en dos bloques: primero entender qué <b style="color:var(--txt)">calculas</b>, luego aprender a <b style="color:var(--txt)">decidir y a dudar</b> cuando mides, comparas y concluyes en rehabilitación.</p>
+    <p class="hero-sub">Veintidós módulos en tres bloques: entender qué <b style="color:var(--txt)">calculas</b>, aprender a <b style="color:var(--txt)">decidir y a dudar</b>, y por fin <b style="color:var(--txt)">leer un estudio real</b> de principio a fin, con ejemplos de rehabilitación.</p>
     <div class="dedic">🧠 Hecha para <b>Natalia</b> · terapia ocupacional &amp; rehabilitación comunitaria</div>
     <div class="chips">
       <span class="chip">descriptiva</span><span class="chip">probabilidad</span><span class="chip">DE vs EE</span>
@@ -171,6 +171,13 @@ mark{background:rgba(34,211,238,.22);color:#fff;padding:1px 4px;border-radius:4p
       <span class="chip" style="border-color:rgba(244,114,182,.4);color:var(--mg)">plantear hipótesis</span>
       <span class="chip" style="border-color:rgba(244,114,182,.4);color:var(--mg)">los dos errores</span>
       <span class="chip" style="border-color:rgba(244,114,182,.4);color:var(--mg)">criterio sobre el p</span>
+      <span class="chip" style="border-color:rgba(163,230,53,.4);color:var(--li)">chi-cuadrado</span>
+      <span class="chip" style="border-color:rgba(163,230,53,.4);color:var(--li)">OR y RR</span>
+      <span class="chip" style="border-color:rgba(163,230,53,.4);color:var(--li)">sensibilidad y especificidad</span>
+      <span class="chip" style="border-color:rgba(163,230,53,.4);color:var(--li)">curva ROC</span>
+      <span class="chip" style="border-color:rgba(163,230,53,.4);color:var(--li)">tamaño muestral</span>
+      <span class="chip" style="border-color:rgba(163,230,53,.4);color:var(--li)">regresión logística</span>
+      <span class="chip" style="border-color:rgba(163,230,53,.4);color:var(--li)">leer un paper</span>
     </div>
   </div>
 </header>
@@ -194,6 +201,15 @@ mark{background:rgba(34,211,238,.22);color:#fff;padding:1px 4px;border-radius:4p
     <a href="#m12">12 · Plantear H₀</a>
     <a href="#m13">13 · Los dos errores</a>
     <a href="#m14">14 · Trampa del p</a>
+    <a href="#b3" style="color:var(--li)">● Semanas 6–8</a>
+    <a href="#m15">15 · Chi-cuadrado</a>
+    <a href="#m16">16 · OR y RR</a>
+    <a href="#m17">17 · Test diagnóstico</a>
+    <a href="#m18">18 · Curva ROC</a>
+    <a href="#m19">19 · Tamaño muestral</a>
+    <a href="#m20">20 · Regresión logística</a>
+    <a href="#m21">21 · t vs Mann-Whitney</a>
+    <a href="#m22">22 · Leer un paper</a>
     <a href="#glos">Glosario</a>
   </div>
 </nav>
@@ -1501,12 +1517,571 @@ H₁:  P_presencial ≠ P_tele</div>
   </div>
 
   <div class="idea" style="border-color:rgba(244,114,182,.35);background:rgba(244,114,182,.07)">
-    <b style="color:var(--mg)">El cierre de toda la guía:</b> la estadística es un intermediario, no el veredicto. Tu pregunta nunca fue estadística —fue clínica—. El valor p es un dato más en el expediente, junto al efecto, el IC, los efectos adversos y lo que ya sabías de antes. Quien convierte un p pequeño en una conclusión dejó de pensar justo cuando empezaba lo interesante.
+    <b style="color:var(--mg)">El cierre del segundo bloque:</b> la estadística es un intermediario, no el veredicto. Tu pregunta nunca fue estadística —fue clínica—. El valor p es un dato más en el expediente, junto al efecto, el IC, los efectos adversos y lo que ya sabías de antes. Quien convierte un p pequeño en una conclusión dejó de pensar justo cuando empezaba lo interesante.
   </div>
 
   <details class="q">
     <summary>Recupera: un estudio con 2.000 usuarios reporta que una app mejora el Barthel en 0,8 puntos (de 100), p &lt; 0,001. ¿La implementarías?</summary>
     <p>Estadísticamente significativo, sí —pero con n = 2.000 casi cualquier cosa lo es—. La pregunta real es clínica: 0,8 puntos en una escala de 100 casi con certeza queda <b>por debajo del MCID</b>: no cambia la independencia de nadie. Significativo ≠ relevante. Antes de implementar, pide el tamaño del efecto, su IC y el costo. El p, aquí, es un espejismo.</p>
+  </details>
+</section>
+
+<!-- ================= DIVISOR BLOQUE 3 ================= -->
+<section class="mod" id="b3" style="border-top:1px solid var(--li);margin-top:60px">
+  <div style="text-align:center;padding:30px 0 10px">
+    <div class="kicker" style="color:var(--li)">Semanas 6–8 · del dato al paper</div>
+    <h2 style="font-size:clamp(1.6rem,5.5vw,2.3rem);background:linear-gradient(100deg,#fff,var(--li) 70%);-webkit-background-clip:text;background-clip:text;color:transparent">Ahora: leer un estudio real, completo</h2>
+    <p class="hero-sub" style="margin:14px auto 0">Este bloque toma un <b style="color:var(--txt)">artículo publicado de verdad</b> y lo recorre entero: cómo se mide una asociación, cómo se evalúa un test diagnóstico, cómo se decide el tamaño de la muestra y cómo se separa lo que realmente influye de lo que solo parecía influir.</p>
+  </div>
+
+  <div class="card" style="border-color:rgba(163,230,53,.3);background:rgba(163,230,53,.05)">
+    <h3><span class="dot" style="background:var(--li);box-shadow:0 0 12px var(--li)"></span>El caso que recorre todo el bloque</h3>
+    <p>Trabajaremos sobre <b>Morales-Luengo et al. (2020)</b>, <i>«Desarrollo psicomotor en prematuros tardíos a los cinco años»</i> (An Pediatr, Barcelona). Es un <b>estudio de casos y controles</b> que compara prematuros tardíos (PT, nacidos entre las 34 y 37 semanas) con recién nacidos a término (RNAT), usando el cuestionario <b>ASQ3</b> para detectar riesgo de déficit en el desarrollo psicomotor (DPM).</p>
+    <p class="small">Un terreno distinto al del CCR, pero exactamente la misma caja de herramientas: tablas 2×2, OR, sensibilidad, curvas ROC y regresión. Donde reconstruyo cifras a partir de los porcentajes del paper (no entrega los conteos crudos), lo digo de forma explícita: lo que importa es el <b>método</b>, no el segundo decimal.</p>
+  </div>
+
+  <div class="idea" style="border-color:rgba(163,230,53,.35);background:rgba(163,230,53,.07)">
+    <b style="color:var(--li)">El giro de este bloque:</b> hasta aquí calculabas y decidías sobre <i>tus</i> datos. Ahora te sientas del otro lado de la mesa: frente a un paper que ya viene con sus tablas, sus p y sus OR, y tu trabajo es <b>auditarlo</b> — saber de dónde salió cada número y si la conclusión se sostiene.
+  </div>
+</section>
+
+<!-- ================= M15 CHI-CUADRADO ================= -->
+<section class="mod" id="m15">
+  <div class="modhead">
+    <div class="modnum" style="background:linear-gradient(140deg,var(--li),var(--cy))">15</div>
+    <div><h2>Chi-cuadrado paso a paso</h2><div class="modtag" style="color:var(--li)">Asociación categórica–categórica, con datos reales</div></div>
+  </div>
+
+  <div class="card escena">
+    <h3><span class="dot"></span>La escena</h3>
+    <p>El paper afirma que los prematuros tardíos tienen más <b>patología materna</b> en el embarazo que los de término. En la Tabla 2 aparece: PT 40%, RNAT 21,5%, y al lado un "p &lt; 0,001". ¿De dónde sale ese p? Del test que compara dos porcentajes: el <b>chi-cuadrado</b>. Vamos a reconstruirlo desde cero.</p>
+  </div>
+
+  <div class="idea">
+    <b>La idea en una frase:</b> el χ² compara lo que <b>observaste</b> con lo que <b>esperarías si no hubiera ninguna asociación</b>. Mientras más se despeguen las dos cosas, mayor el χ², y más increíble se vuelve la hipótesis de "aquí no pasa nada".
+  </div>
+
+  <h3 style="margin-top:26px">Paso 0 — las hipótesis</h3>
+  <div class="calc">H₀:  P(patología materna | PT) = P(patología materna | RNAT)   (no hay asociación)
+H₁:  las dos proporciones son distintas                        (sí hay asociación)
+α = 0,05   ·   bilateral</div>
+
+  <div class="pasos">
+    <div class="paso">
+      <h4>Construir la tabla de contingencia 2×2</h4>
+      <p class="small">El paper da porcentajes, no conteos. Los reconstruyo: 40% de 195 PT = 78; 21,5% de 390 RNAT ≈ 84. (Valores aproximados, suficientes para el procedimiento.)</p>
+      <div class="tw"><table>
+        <thead><tr><th></th><th>Con patología</th><th>Sin patología</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td class="k">PT</td><td>78</td><td>117</td><td><b>195</b></td></tr>
+          <tr><td class="k">RNAT</td><td>84</td><td>306</td><td><b>390</b></td></tr>
+          <tr><td class="k">Total</td><td><b>162</b></td><td><b>423</b></td><td><b>585</b></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="paso">
+      <h4>Calcular las frecuencias esperadas bajo H₀</h4>
+      <p class="small">Esperado de cada celda = (total de su fila × total de su columna) ÷ total general. Es "cuántos habría si el grupo no importara".</p>
+      <div class="calc">E(PT, con)   = 195 × 162 ÷ 585 = 54,0
+E(PT, sin)   = 195 × 423 ÷ 585 = 141,0
+E(RNAT, con) = 390 × 162 ÷ 585 = 108,0
+E(RNAT, sin) = 390 × 423 ÷ 585 = 282,0</div>
+    </div>
+    <div class="paso">
+      <h4>Sumar (observado − esperado)² ÷ esperado</h4>
+      <div class="tw"><table>
+        <thead><tr><th>Celda</th><th>O</th><th>E</th><th>(O−E)²/E</th></tr></thead>
+        <tbody>
+          <tr><td class="k">PT · con</td><td>78</td><td>54,0</td><td>10,67</td></tr>
+          <tr><td class="k">PT · sin</td><td>117</td><td>141,0</td><td>4,09</td></tr>
+          <tr><td class="k">RNAT · con</td><td>84</td><td>108,0</td><td>5,33</td></tr>
+          <tr><td class="k">RNAT · sin</td><td>306</td><td>282,0</td><td>2,04</td></tr>
+          <tr><td colspan="3" style="text-align:right"><b>χ² =</b></td><td class="hl">22,13</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="paso">
+      <h4>Comparar con el valor crítico</h4>
+      <div class="calc">gl = (filas − 1) × (columnas − 1) = (2−1) × (2−1) = 1
+χ² crítico (gl = 1, α = 0,05) = 3,84</div>
+      <div class="calc">22,13 > 3,84   →   se rechaza H₀</div>
+      <span class="res">Asociación significativa (p &lt; 0,001)</span>
+      <p style="margin-top:10px">Conclusión en contexto: la patología materna <b>no se reparte por igual</b> entre PT y RNAT. Ser prematuro tardío se asocia a haber tenido más problemas maternos en el embarazo. Justo lo que reporta la Tabla 2.</p>
+    </div>
+  </div>
+
+  <div class="card trampa">
+    <h3><span class="dot"></span>Trampa frecuente — la regla de los 5</h3>
+    <p>El χ² deja de ser confiable si alguna <b>celda esperada</b> es menor que 5. Por eso el propio paper dice: <i>«o la prueba de Fisher si el número de efectivos esperados era menor de cinco»</i>. En variables raras (mortalidad: solo 2 casos) se usa <b>test exacto de Fisher</b>, no χ². Mirar los esperados antes de decidir el test es parte del oficio.</p>
+  </div>
+
+  <div class="card excel">
+    <h3><span class="dot"></span>En Excel</h3>
+    <div class="calc">1) Arma la tabla de observados y la de esperados (fila×col÷total)
+2) =PRUEBA.CHICUAD(rango_observados; rango_esperados)   → te da el valor p directo
+   (en inglés: CHISQ.TEST)</div>
+  </div>
+
+  <details class="q">
+    <summary>Recupera: en la tabla reconstruida, ¿cuál celda aporta más al χ² y qué significa?</summary>
+    <p>La celda <b>PT · con patología</b> (10,67): se observaron 78 cuando bajo H₀ se esperaban 54. Ese exceso de patología materna en los PT es el que más "empuja" el χ² hacia el rechazo. Leer qué celda manda te dice <b>dónde</b> está la asociación, no solo que existe.</p>
+  </details>
+</section>
+
+<!-- ================= M16 OR y RR ================= -->
+<section class="mod" id="m16">
+  <div class="modhead">
+    <div class="modnum" style="background:linear-gradient(140deg,var(--li),var(--cy))">16</div>
+    <div><h2>OR y RR: la magnitud del efecto</h2><div class="modtag" style="color:var(--li)">El χ² dice "hay asociación"; el OR dice "de qué tamaño"</div></div>
+  </div>
+
+  <div class="card escena">
+    <h3><span class="dot"></span>La escena</h3>
+    <p>El chi-cuadrado del módulo anterior te dijo que la asociación existe, pero no <b>cuán fuerte</b> es. Para eso están el <b>odds ratio (OR)</b> y el <b>riesgo relativo (RR)</b>: traducen la tabla 2×2 a un número que responde "¿cuántas veces más?".</p>
+  </div>
+
+  <div class="idea">
+    <b>La idea en una frase:</b> el χ² y el p contestan <i>¿hay asociación?</i> (sí/no). El OR contesta <i>¿de qué tamaño?</i> — y esa es la pregunta que de verdad le importa a la clínica.
+  </div>
+
+  <h3 style="margin-top:26px">Paso a paso: el OR crudo de patología materna</h3>
+  <p class="small">Misma tabla reconstruida del módulo 15.</p>
+  <div class="pasos">
+    <div class="paso">
+      <h4>Los "odds" (chances) de cada grupo</h4>
+      <p class="small">Odds = con ÷ sin, dentro de cada fila.</p>
+      <div class="calc">Odds(patología | PT)   = 78 ÷ 117 = 0,667
+Odds(patología | RNAT) = 84 ÷ 306 = 0,275</div>
+    </div>
+    <div class="paso">
+      <h4>Dividir un odds por el otro</h4>
+      <div class="calc">OR = 0,667 ÷ 0,275 = 2,43
+
+Atajo (productos cruzados):
+OR = (78 × 306) ÷ (117 × 84) = 23.868 ÷ 9.828 = 2,43</div>
+      <span class="res">OR ≈ 2,4</span>
+    </div>
+    <div class="paso">
+      <h4>Leerlo en palabras</h4>
+      <p>Las madres de prematuros tardíos tuvieron <b>2,4 veces las chances</b> de presentar patología en el embarazo, comparadas con las de término. OR = 1 sería "ninguna diferencia"; 2,4 es una asociación clara.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--vi);box-shadow:0 0 12px var(--vi)"></span>OR vs RR: no son lo mismo</h3>
+    <ul class="neo">
+      <li><b>RR (riesgo relativo)</b> = razón de <i>probabilidades</i> (riesgo de un grupo ÷ riesgo del otro). Es el que se entiende solo: "el triple de riesgo". Se usa en estudios de cohorte y ensayos.</li>
+      <li><b>OR (odds ratio)</b> = razón de <i>odds</i>. Aparece en casos y controles y en regresión logística (como esta Tabla 6). Cuando el evento es frecuente, el OR <b>exagera</b> respecto al RR; cuando es raro, se le parecen.</li>
+    </ul>
+    <p class="small">Regla práctica: si en un paper ves OR grandes sobre un evento común, no los leas como si fueran RR — estarías sobreestimando el efecto.</p>
+  </div>
+
+  <h3 style="margin-top:28px">Lo decisivo: leer el OR con su intervalo de confianza</h3>
+  <p>En la Tabla 6 el OR crudo de <b>Sexo (varón)</b> para riesgo de déficit del DPM fue <b>4,4 [IC 95%: 1,1 – 19,7]</b>. ¿Cómo se lee?</p>
+  <div class="pasos">
+    <div class="paso">
+      <h4>El estimador puntual (4,4)</h4>
+      <p class="small">Los varones tendrían 4,4 veces las chances de riesgo de déficit del DPM. Magnitud aparentemente grande.</p>
+    </div>
+    <div class="paso">
+      <h4>El intervalo [1,1 – 19,7] y la regla del 1</h4>
+      <p>La línea de oro de todo OR: <mark>si el IC 95% incluye el 1, la asociación no es significativa</mark> (el 1 = "sin efecto"). Aquí el intervalo va de 1,1 a 19,7: <b>no</b> incluye el 1 (apenas), así que es significativo — concuerda con su p = 0,04.</p>
+    </div>
+    <div class="paso">
+      <h4>Pero mira el ancho: de 1,1 a 19,7</h4>
+      <p>Ese intervalo es <b>enorme</b>. Con solo 11 niños con déficit en todo el estudio, el dato es significativo pero <b>muy impreciso</b>: el verdadero OR podría ser casi 1 o rozar 20. "Significativo" aquí no equivale a "estimación confiable". El ancho del IC es una alarma de muestra pequeña.</p>
+    </div>
+  </div>
+
+  <div class="card excel">
+    <h3><span class="dot"></span>En Excel</h3>
+    <div class="calc">OR = (a*d)/(b*c)           con a,b,c,d las cuatro celdas de la 2×2
+IC del OR (95%): se calcula sobre ln(OR) ± 1,96·√(1/a+1/b+1/c+1/d)
+   y luego se aplica EXP() a los dos límites.
+=EXP(LN(OR) - 1,96*RAIZ(1/a+1/b+1/c+1/d))   → límite inferior
+=EXP(LN(OR) + 1,96*RAIZ(1/a+1/b+1/c+1/d))   → límite superior</div>
+  </div>
+
+  <details class="q">
+    <summary>Recupera: un OR de 0,6 con IC 95% [0,4 – 0,9]. ¿Qué dice sobre riesgo y es significativo?</summary>
+    <p>OR &lt; 1 → <b>factor protector</b>: reduce las chances del evento (a un 60%). El IC [0,4–0,9] <b>no incluye el 1</b>, así que es significativo. Si el intervalo hubiera sido [0,4–1,2], cruzaría el 1 y no podrías afirmar que protege.</p>
+  </details>
+</section>
+
+<!-- ================= M17 TEST DIAGNOSTICO ================= -->
+<section class="mod" id="m17">
+  <div class="modhead">
+    <div class="modnum" style="background:linear-gradient(140deg,var(--li),var(--cy))">17</div>
+    <div><h2>Pruebas diagnósticas: ¿qué tan bueno es el test?</h2><div class="modtag" style="color:var(--li)">Sensibilidad, especificidad y valores predictivos</div></div>
+  </div>
+
+  <div class="card escena">
+    <h3><span class="dot"></span>La escena</h3>
+    <p>El ASQ3 es un <b>test de cribado</b>: un cuestionario barato que intenta detectar niños con riesgo de déficit del DPM, para derivar a una evaluación completa. ¿Cómo se sabe si un test de cribado "sirve"? No con un valor p, sino con cuatro números que miden qué tan bien clasifica. (Esta es la pregunta de la Semana 7: <i>interpretar los resultados de un test diagnóstico</i>.)</p>
+  </div>
+
+  <div class="idea">
+    <b>La idea en una frase:</b> todo test se juzga contra un <b>patrón de oro</b> (la verdad). De ese choque salen cuatro casillas —verdaderos y falsos, positivos y negativos— y de esas cuatro casillas sale todo lo demás.
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--vi);box-shadow:0 0 12px var(--vi)"></span>La analogía del detector de humo</h3>
+    <p>Un test diagnóstico es un <b>detector de humo</b>. La <b>sensibilidad</b> es qué tan bueno es para sonar cuando <i>de verdad</i> hay fuego (no se le escapa ninguno). La <b>especificidad</b> es qué tan bueno es para quedarse callado cuando solo estás cocinando (no te despierta en vano).</p>
+    <p>Un detector hipersensible suena con cualquier tostada (muchos <b>falsos positivos</b>): no te pierdes ningún incendio, pero vives sobresaltado. Uno poco sensible casi nunca molesta, pero puede no sonar en un incendio real (<b>falsos negativos</b>). Para <b>cribado</b> —no perder casos— quieres alta sensibilidad, asumiendo más falsas alarmas. Esa es la lógica del ASQ3.</p>
+  </div>
+
+  <h3 style="margin-top:28px">Paso a paso con una tabla 2×2</h3>
+  <p class="small">Ejemplo de rehabilitación (datos ilustrativos): un cribado rápido de riesgo de deterioro funcional en 200 adultos mayores, contrastado con la evaluación completa (patrón de oro).</p>
+  <div class="tw"><table>
+    <thead><tr><th></th><th>Deterioro real (+)</th><th>Sin deterioro (−)</th><th>Total</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Test +</td><td>40 <span class="small">(VP)</span></td><td>30 <span class="small">(FP)</span></td><td>70</td></tr>
+      <tr><td class="k">Test −</td><td>10 <span class="small">(FN)</span></td><td>120 <span class="small">(VN)</span></td><td>130</td></tr>
+      <tr><td class="k">Total</td><td><b>50</b></td><td><b>150</b></td><td><b>200</b></td></tr>
+    </tbody>
+  </table></div>
+  <div class="pasos">
+    <div class="paso">
+      <h4>Sensibilidad — de los enfermos, ¿cuántos detecta?</h4>
+      <div class="calc">Se = VP ÷ (VP + FN) = 40 ÷ 50</div>
+      <span class="res">Se = 0,80 → 80 %</span>
+      <p class="small" style="margin-top:8px">Se lee por <b>columna</b> de enfermos. Detecta 8 de cada 10 con deterioro real.</p>
+    </div>
+    <div class="paso">
+      <h4>Especificidad — de los sanos, ¿cuántos descarta bien?</h4>
+      <div class="calc">Sp = VN ÷ (VN + FP) = 120 ÷ 150</div>
+      <span class="res">Sp = 0,80 → 80 %</span>
+    </div>
+    <div class="paso">
+      <h4>Valor predictivo positivo — si el test da +, ¿qué chance hay de estar enfermo?</h4>
+      <div class="calc">VPP = VP ÷ (VP + FP) = 40 ÷ 70</div>
+      <span class="res">VPP = 0,571 → 57,1 %</span>
+      <p class="small" style="margin-top:8px">Se lee por <b>fila</b>. Ojo: un test + solo acierta el 57% de las veces, pese a Se y Sp del 80%.</p>
+    </div>
+    <div class="paso">
+      <h4>Valor predictivo negativo — si da −, ¿qué chance hay de estar sano?</h4>
+      <div class="calc">VPN = VN ÷ (VN + FN) = 120 ÷ 130</div>
+      <span class="res">VPN = 0,923 → 92,3 %</span>
+    </div>
+    <div class="paso">
+      <h4>Razones de verosimilitud (LR) — las que no dependen de la prevalencia</h4>
+      <div class="calc">LR+ = Se ÷ (1 − Sp) = 0,80 ÷ 0,20 = 4,0
+LR− = (1 − Se) ÷ Sp = 0,20 ÷ 0,80 = 0,25</div>
+      <p class="small">LR+ de 4 = un test positivo hace 4 veces más probable el diagnóstico. Son la medida más robusta porque <b>no cambian con la prevalencia</b>.</p>
+    </div>
+  </div>
+
+  <div class="card trampa">
+    <h3><span class="dot"></span>Trampa frecuente — Se/Sp son del test; VPP/VPN dependen de a quién se lo apliques</h3>
+    <p>Sensibilidad y especificidad son propiedades <b>del test</b>: no cambian. Pero el VPP sí cambia con la <b>prevalencia</b>. Mismo test (Se 80%, Sp 80%) en una población con solo 5% de enfermos:</p>
+    <div class="calc">1.000 personas, 5% enfermos → 50 enfermos, 950 sanos
+VP = 0,80 × 50 = 40      FP = 0,20 × 950 = 190
+VPP = 40 ÷ (40 + 190) = 40 ÷ 230 = 17,4 %</div>
+    <p>El VPP se desplomó del 57% al <b>17%</b> sin tocar el test. Por eso un cribado poblacional (prevalencia baja) genera muchos falsos positivos: casi todos los "positivos" resultan sanos. Es exactamente la precaución a tener con el ASQ3 aplicado a toda una población.</p>
+  </div>
+
+  <!-- LAB DIAGNOSTICO -->
+  <div class="lab" style="border-color:rgba(163,230,53,.35);background:linear-gradient(160deg,rgba(163,230,53,.07),rgba(34,211,238,.05))">
+    <div class="labttl" style="color:var(--li)">Laboratorio · calculadora de test diagnóstico 2×2</div>
+    <p class="small" style="margin-top:-6px">Cambia las cuatro casillas y mira cómo se mueven todos los indicadores.</p>
+    <div class="ctrls">
+      <div class="ctrl"><label>VP (test+ / enfermo)</label><input type="number" id="dvp" value="40" min="0" step="1"></div>
+      <div class="ctrl"><label>FP (test+ / sano)</label><input type="number" id="dfp" value="30" min="0" step="1"></div>
+      <div class="ctrl"><label>FN (test− / enfermo)</label><input type="number" id="dfn" value="10" min="0" step="1"></div>
+      <div class="ctrl"><label>VN (test− / sano)</label><input type="number" id="dvn" value="120" min="0" step="1"></div>
+    </div>
+    <div class="out">
+      <div><span>Sensibilidad</span><b id="dSe">—</b></div>
+      <div><span>Especificidad</span><b id="dSp">—</b></div>
+      <div><span>VPP</span><b id="dVpp">—</b></div>
+      <div><span>VPN</span><b id="dVpn">—</b></div>
+    </div>
+    <div class="out" style="margin-top:10px">
+      <div><span>Prevalencia</span><b id="dPrev">—</b></div>
+      <div><span>LR+</span><b id="dLrp">—</b></div>
+      <div><span>LR−</span><b id="dLrn">—</b></div>
+      <div><span>Exactitud</span><b id="dAcc">—</b></div>
+    </div>
+  </div>
+
+  <details class="q">
+    <summary>Recupera: un test tiene Se 95% y Sp 95%. Lo usas en un cribado donde solo el 1% tiene la enfermedad. ¿Confías en un resultado positivo?</summary>
+    <p>Poco. Con prevalencia 1% en 10.000 personas: 100 enfermos (95 VP) y 9.900 sanos (495 FP). VPP = 95 ÷ (95+495) = <b>16%</b>. Aun con un test excelente, un positivo en cribado de baja prevalencia acierta solo 1 de cada 6 veces. Por eso el positivo de un cribado se <b>confirma</b>, no se trata directo.</p>
+  </details>
+</section>
+
+<!-- ================= M18 CURVA ROC ================= -->
+<section class="mod" id="m18">
+  <div class="modhead">
+    <div class="modnum" style="background:linear-gradient(140deg,var(--li),var(--cy))">18</div>
+    <div><h2>Curva ROC y punto de corte</h2><div class="modtag" style="color:var(--li)">Elegir dónde poner la raya</div></div>
+  </div>
+
+  <div class="card escena">
+    <h3><span class="dot"></span>La escena</h3>
+    <p>El ASQ3 da un puntaje continuo (de 0 a 300). Pero la decisión clínica es binaria: ¿derivo a este niño o no? Hay que elegir un <b>punto de corte</b>. El paper lo fijó en <b>253 puntos</b> mediante un análisis ROC, con sensibilidad &gt; 81%. ¿Qué es esa curva y por qué 253?</p>
+  </div>
+
+  <div class="idea">
+    <b>La idea en una frase:</b> cada punto de corte posible da una pareja (sensibilidad, especificidad). La curva ROC dibuja <b>todas</b> esas parejas a la vez, y te deja ver el precio de cada decisión: ganar sensibilidad siempre cuesta especificidad.</b>
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--vi);box-shadow:0 0 12px var(--vi)"></span>El balancín del punto de corte</h3>
+    <p>Dos grupos de niños se solapan en el puntaje: los de desarrollo típico puntúan alto, los de riesgo puntúan más bajo, pero hay una zona gris donde se mezclan. Donde pongas la raya:</p>
+    <ul class="neo">
+      <li><b>Corte alto</b> (exigente, "casi todos son riesgo") → atrapas a todos los de riesgo (<b>↑sensibilidad</b>) pero marcas a muchos sanos (<b>↓especificidad</b>).</li>
+      <li><b>Corte bajo</b> (laxo) → pocos falsos positivos (<b>↑especificidad</b>) pero se te escapan casos (<b>↓sensibilidad</b>).</li>
+    </ul>
+    <p class="small">Para un <b>cribado</b> conviene privilegiar sensibilidad: es peor dejar pasar un niño con riesgo que citar de más a uno sano. Por eso el corte de 253 busca Se &gt; 81%.</p>
+  </div>
+
+  <!-- LAB ROC -->
+  <div class="lab" style="border-color:rgba(163,230,53,.35);background:linear-gradient(160deg,rgba(163,230,53,.07),rgba(34,211,238,.05))">
+    <div class="labttl" style="color:var(--li)">Laboratorio · mueve el punto de corte</div>
+    <p class="small" style="margin-top:-6px">Dos distribuciones de puntaje que se solapan (riesgo = más bajo). Desliza el corte y observa el canje sensibilidad ↔ especificidad.</p>
+    <svg class="plot" id="rocplot" viewBox="0 0 620 250"></svg>
+    <div class="ctrls" style="margin-top:6px">
+      <div class="ctrl" style="flex:1 1 100%"><label>Punto de corte (puntaje) — <span id="rocCutLbl">253</span></label>
+        <input type="range" id="rocCut" min="220" max="300" value="253" step="1" style="padding:4px">
+      </div>
+    </div>
+    <div class="out">
+      <div><span>Sensibilidad</span><b id="rocSe">—</b></div>
+      <div><span>Especificidad</span><b id="rocSp">—</b></div>
+      <div><span>Falsos positivos</span><b id="rocFp">—</b></div>
+      <div><span>Falsos negativos</span><b id="rocFn">—</b></div>
+    </div>
+    <p class="small" style="margin-top:10px">Lleva el corte a la derecha (más exigente): la sensibilidad sube pero la especificidad baja. Ese canje <b>es</b> la curva ROC.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--cy);box-shadow:0 0 12px var(--cy)"></span>El AUC: el test en un solo número</h3>
+    <p>El <b>área bajo la curva ROC (AUC)</b> resume el poder discriminador del test, de 0,5 a 1:</p>
+    <div class="tw"><table>
+      <thead><tr><th>AUC</th><th>Lectura</th></tr></thead>
+      <tbody>
+        <tr><td class="k">0,5</td><td>Inútil: como lanzar una moneda</td></tr>
+        <tr><td class="k">0,7 – 0,8</td><td>Aceptable</td></tr>
+        <tr><td class="k">0,8 – 0,9</td><td>Bueno</td></tr>
+        <tr><td class="k">&gt; 0,9</td><td>Excelente</td></tr>
+      </tbody>
+    </table></div>
+    <p class="small">Interpretación elegante del AUC: es la probabilidad de que, tomando un enfermo y un sano al azar, el test le dé peor puntaje al enfermo. Un AUC de 0,85 = acierta ese orden el 85% de las veces.</p>
+  </div>
+
+  <div class="card trampa">
+    <h3><span class="dot"></span>Trampa frecuente</h3>
+    <p>Creer que existe "el" punto de corte óptimo universal. No existe: el mejor corte depende de <b>qué error te cuesta más</b>. En cribado neonatal (no perder casos) corres el corte hacia la sensibilidad; en un test que lleva a una intervención cara o riesgosa, lo corres hacia la especificidad. Es la misma lógica de la caja de pistolas del módulo 13, aplicada a un número.</p>
+  </div>
+
+  <details class="q">
+    <summary>Recupera: un test A tiene AUC 0,92 y uno B, AUC 0,71, para lo mismo. ¿Cuál discrimina mejor y qué más preguntarías?</summary>
+    <p>A discrimina mejor (0,92 "excelente" vs 0,71 "aceptable"). Pero antes de elegirlo preguntaría por el <b>costo, el tiempo y la factibilidad</b>: si B es un cuestionario de 15 minutos que completan los padres y A requiere un profesional una hora, para cribado masivo B podría ganar igual. El AUC no es lo único que decide.</p>
+  </details>
+</section>
+
+<!-- ================= M19 TAMAÑO MUESTRAL ================= -->
+<section class="mod" id="m19">
+  <div class="modhead">
+    <div class="modnum" style="background:linear-gradient(140deg,var(--li),var(--cy))">19</div>
+    <div><h2>Tamaño muestral y potencia</h2><div class="modtag" style="color:var(--li)">Por qué "con más casos habría salido significativo"</div></div>
+  </div>
+
+  <div class="card escena">
+    <h3><span class="dot"></span>La escena</h3>
+    <p>El paper encontró 2 muertes, ambas en prematuros tardíos, y 0 en los de término. Suena alarmante, pero el test dio no significativo (p = 0,1) y los autores escriben: <i>«una muestra mayor probablemente mostraría resultados más concluyentes»</i>. ¿Es una excusa o tiene fundamento estadístico? Tiene fundamento, y se llama <b>potencia</b>.</p>
+  </div>
+
+  <div class="idea">
+    <b>La idea en una frase:</b> la potencia (1 − β) es la capacidad de tu estudio de <b>ver un efecto que sí existe</b>. Con pocos casos, aunque el efecto sea real, el estudio está casi ciego — y "no significativo" solo quiere decir "no alcancé a verlo".
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--vi);box-shadow:0 0 12px var(--vi)"></span>Los cuatro diales del tamaño muestral</h3>
+    <p>Calcular cuántos sujetos necesitas (Semana 7) depende de cuatro cosas que se tironean entre sí:</p>
+    <ul class="neo">
+      <li><b>Tamaño del efecto que quieres detectar.</b> Diferencias chicas exigen muestras grandes; las grandes se ven con pocos.</li>
+      <li><b>Variabilidad de los datos (DE).</b> Más dispersión → más ruido → más n para oír la señal.</li>
+      <li><b>Nivel de significancia (α), normalmente 0,05.</b> Ser más exigente con los falsos positivos cuesta muestra.</li>
+      <li><b>Potencia deseada (1 − β), habitualmente 0,80.</b> Querer un 90% de probabilidad de detectar el efecto pide más n que un 80%.</li>
+    </ul>
+    <p class="small">Fijas tres y el cuarto queda determinado. Por eso el tamaño muestral se calcula <b>antes</b> del estudio, no después.</p>
+  </div>
+
+  <h3 style="margin-top:28px">Por qué el evento raro es el peor escenario</h3>
+  <p>Con 2 muertes en ~585 niños, la tabla tiene celdas de 0 y 2. Cualquier intervalo de confianza sobre una proporción tan chica es <b>enorme</b> y abarca el "sin diferencia". Mira cómo, con la misma diferencia aparente de proporciones, solo crecer la muestra estrecha el IC hasta poder concluir:</p>
+  <div class="tw"><table>
+    <thead><tr><th>n por grupo</th><th>Eventos observados</th><th>Precisión (IC del %)</th><th>¿Concluyente?</th></tr></thead>
+    <tbody>
+      <tr><td class="k">~195</td><td>2 vs 0</td><td>Muy ancho (cruza el 0)</td><td>No (p = 0,1)</td></tr>
+      <tr><td class="k">~600</td><td>6 vs 0</td><td>Ancho</td><td>Probablemente no</td></tr>
+      <tr><td class="k">~2.000</td><td>20 vs 0</td><td>Más estrecho</td><td>Empieza a serlo</td></tr>
+    </tbody>
+  </table></div>
+  <p class="small">Recuerda la ley del √n (módulo 3): la precisión mejora con la <b>raíz</b> de la muestra. Cuadruplicar los casos solo duplica la precisión. Por eso detectar eventos raros es tan caro.</p>
+
+  <div class="idea" style="border-color:rgba(163,230,53,.35);background:rgba(163,230,53,.07)">
+    <b style="color:var(--li)">La lección que se lleva a la práctica:</b> un "no significativo" de un estudio pequeño <b>no prueba</b> que no haya efecto. Casi siempre significa potencia insuficiente. Antes de concluir "no pasa nada", pregunta: ¿cuántos eventos hubo? ¿qué tan ancho es el IC? — Ausencia de evidencia ≠ evidencia de ausencia.
+  </div>
+
+  <details class="q">
+    <summary>Recupera: un ensayo de 20 usuarios no encuentra diferencia entre dos terapias (p = 0,3). ¿Conclusión válida?</summary>
+    <p>No concluyente, no "son iguales". Con n = 20 la potencia es baja: un efecto real moderado probablemente no se detecta (error tipo II). La lectura correcta es <b>"el estudio no tuvo potencia para detectar diferencias"</b>, y lo que se necesita es una muestra mayor, no descartar las terapias.</p>
+  </details>
+</section>
+
+<!-- ================= M20 REGRESION LOGISTICA ================= -->
+<section class="mod" id="m20">
+  <div class="modhead">
+    <div class="modnum" style="background:linear-gradient(140deg,var(--li),var(--cy))">20</div>
+    <div><h2>Regresión logística: crudo vs ajustado</h2><div class="modtag" style="color:var(--li)">Separar lo que influye de lo que solo parecía</div></div>
+  </div>
+
+  <div class="card escena">
+    <h3><span class="dot"></span>La escena</h3>
+    <p>En el análisis <b>univariante</b> (de a una variable), el <b>sexo varón</b> salió asociado al riesgo de déficit del DPM. Pero en el <b>multivariante</b> (todas juntas), esa asociación se desvaneció y solo quedó el <b>CIR</b>. ¿El sexo "dejó de importar"? No: nunca importó por sí solo. Esto es lo más sofisticado —y lo más clínico— de todo el curso.</p>
+  </div>
+
+  <div class="idea">
+    <b>La idea en una frase:</b> el análisis crudo mira cada factor <b>solo</b>; el ajustado los mira <b>a todos a la vez</b> y pregunta cuáles siguen aportando <i>después de descontar a los demás</i>. Lo que sobrevive al ajuste es un factor independiente de verdad.
+  </div>
+
+  <h3 style="margin-top:26px">Los números del paper (Tabla 6)</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Variable</th><th>OR crudo (univariante)</th><th>OR ajustado (multivariante)</th><th>¿Sobrevive?</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Sexo (varón)</td><td>4,4 [1,1 – 19,7] · p=0,04 <b>sig.</b></td><td>4,1 [0,8 – 19,9] · p=0,08 <b>no sig.</b></td><td style="color:#fbbf24">No</td></tr>
+      <tr><td class="k">CIR</td><td>7,4 [1,7 – 32,3] · p&lt;0,01 <b>sig.</b></td><td>5,3 [1,1 – 26,4] · p=0,04 <b>sig.</b></td><td style="color:#a3e635">Sí</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--mg);box-shadow:0 0 12px var(--mg)"></span>Qué pasó con el sexo varón (la pregunta 8 de la tarea)</h3>
+    <p>Fíjate: el estimador puntual <b>casi no cambió</b> (4,4 → 4,1), pero el intervalo pasó de [1,1–19,7] a [1,1<b>0,8</b>–19,9]: ahora <b>incluye el 1</b>. Resultado: pierde la significación (p 0,04 → 0,08).</p>
+    <p>La explicación clínica es la <b>confusión (confounding)</b>: casi todos los niños con déficit y CIR eran varones. El sexo parecía predecir el riesgo, pero en realidad "viajaba a caballo" del CIR. Cuando el modelo descuenta el CIR, al sexo no le queda efecto propio que explicar.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--cy);box-shadow:0 0 12px var(--cy)"></span>Analogía: el crédito del gol</h3>
+    <p>En el análisis crudo, el delantero que mete el gol se lleva todo el crédito. En el multivariante entra el video: resulta que el pase que lo dejó solo frente al arco lo dio otro. Al "ajustar" por el pase, el mérito del delantero se achica. <b>CIR es quien dio el pase</b>; el sexo varón solo estaba en el lugar correcto. La variable que de verdad explica el riesgo, la de mayor magnitud de efecto que sobrevive al ajuste, es el <b>CIR</b> (pregunta 7 de la tarea).</p>
+  </div>
+
+  <div class="card trampa">
+    <h3><span class="dot"></span>Trampa frecuente</h3>
+    <p>Quedarse con los OR crudos y declarar "el sexo es factor de riesgo". Sin ajuste, confundes <b>asociación</b> con <b>efecto independiente</b>. El multivariante existe precisamente para no recomendar intervenciones sobre un factor que, aislado, no hace nada. Y recuerda: ni siquiera el ajuste prueba <b>causalidad</b> — solo depura asociaciones.</p>
+  </div>
+
+  <details class="q">
+    <summary>Recupera: una variable tiene OR crudo 3,0 [1,4–6,2] y OR ajustado 1,2 [0,6–2,4]. ¿Qué concluyes?</summary>
+    <p>Que su asociación cruda era en buena parte <b>confusión</b>: al ajustar por el resto, el efecto cae a casi nada (OR≈1) y el IC pasa a incluir el 1 (no significativo). No es un factor independiente; su aparente efecto lo explicaban otras variables del modelo.</p>
+  </details>
+</section>
+
+<!-- ================= M21 t vs MANN-WHITNEY ================= -->
+<section class="mod" id="m21">
+  <div class="modhead">
+    <div class="modnum" style="background:linear-gradient(140deg,var(--li),var(--cy))">21</div>
+    <div><h2>t de Student vs U de Mann-Whitney</h2><div class="modtag" style="color:var(--li)">La forma de los datos decide la prueba</div></div>
+  </div>
+
+  <div class="card escena">
+    <h3><span class="dot"></span>La escena</h3>
+    <p>En Métodos, el paper dice: <i>«Las variables numéricas se compararon mediante la prueba t de Student... Si la distribución no era normal se utilizó la prueba U de Mann-Whitney»</i>. ¿Por qué dos pruebas para lo mismo? ¿No es hacerse trampa elegir? (Es la pregunta 2 de la tarea final.) La respuesta: no es trampa, es lo correcto — y la razón es la <b>forma</b> de los datos.</p>
+  </div>
+
+  <div class="idea">
+    <b>La idea en una frase:</b> la t de Student <b>asume que los datos son más o menos normales</b>. Cuando no lo son, esa suposición se rompe y la t puede mentir; entonces se usa Mann-Whitney, que no pide normalidad porque trabaja con el <b>orden</b> (rangos), no con los valores crudos.</b>
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--vi);box-shadow:0 0 12px var(--vi)"></span>Paramétrica vs no paramétrica</h3>
+    <ul class="neo">
+      <li><b>t de Student (paramétrica):</b> compara <b>medias</b>. Potente y precisa <i>cuando</i> los datos son aproximadamente normales (o la muestra es grande y el TCL ayuda, módulo 5).</li>
+      <li><b>U de Mann-Whitney (no paramétrica):</b> compara <b>distribuciones/medianas</b> ordenando todos los datos y sumando rangos. No asume normalidad; resiste colas y valores extremos. Es la versión de dos grupos independientes del mismo problema.</li>
+    </ul>
+  </div>
+
+  <h3 style="margin-top:26px">Cómo se decide (lo que hizo el paper)</h3>
+  <div class="pasos">
+    <div class="paso">
+      <h4>Testear la normalidad primero</h4>
+      <p class="small">El paper usó la prueba de <b>Shapiro-Wilk</b>. Su H₀ es "los datos son normales": si p &lt; 0,05, se <b>rechaza</b> la normalidad.</p>
+    </div>
+    <div class="paso">
+      <h4>Elegir según el resultado</h4>
+      <div class="calc">¿Normal (Shapiro p ≥ 0,05)?  →  t de Student   → reportar media ± DE
+¿No normal (Shapiro p < 0,05)? →  Mann-Whitney   → reportar mediana [IQR]</div>
+    </div>
+    <div class="paso">
+      <h4>Por qué el descriptor acompaña a la prueba</h4>
+      <p>No es casual que el paper reporte unas variables como <b>media ± DE</b> y otras como <b>mediana [IQR]</b>: el descriptor delata qué prueba se usó. Media/DE → fue normal → t. Mediana/IQR → no fue normal → Mann-Whitney.</p>
+    </div>
+  </div>
+
+  <div class="card trampa">
+    <h3><span class="dot"></span>Trampa frecuente</h3>
+    <p>Aplicar t de Student a cualquier variable "porque es la de siempre". En muestras chicas y no normales, la t puede dar valores p equivocados. Por eso <b>no es trampa</b> cambiar de prueba según la distribución: al contrario, usar la misma prueba para todo <i>ignorando</i> sus supuestos es el error. La respuesta a la tarea: sí, es necesario y correcto distinguir según la distribución.</p>
+  </div>
+
+  <details class="q">
+    <summary>Recupera: comparas el puntaje total ASQ3 (mediana 285 [275-290], tope en 300) entre PT y RNAT. ¿t o Mann-Whitney, y por qué?</summary>
+    <p><b>Mann-Whitney</b>. El puntaje tiene techo en 300 y la mayoría se amontona cerca del máximo (mediana 285, IQR estrecho): la distribución está <b>sesgada</b>, no es normal. Que el paper lo reporte como mediana [IQR] lo confirma. La t sobre datos así no sería fiable.</p>
+  </details>
+</section>
+
+<!-- ================= M22 LEER UN PAPER ================= -->
+<section class="mod" id="m22">
+  <div class="modhead">
+    <div class="modnum" style="background:linear-gradient(140deg,var(--li),var(--cy))">22</div>
+    <div><h2>Leer un paper con ojo crítico</h2><div class="modtag" style="color:var(--li)">Integrar todo: fortalezas, límites y sesgos</div></div>
+  </div>
+
+  <div class="card escena">
+    <h3><span class="dot"></span>La escena</h3>
+    <p>La tarea final pide lo más difícil y lo más útil: tomar el estudio completo y <b>juzgarlo</b>. No "¿está bien hecho?" como un sí/no, sino saber dónde es fuerte, dónde es frágil, y qué tan lejos llegan de verdad sus conclusiones. Aquí se juntan los 21 módulos anteriores.</p>
+  </div>
+
+  <div class="idea">
+    <b>La idea en una frase:</b> todo estudio es una cadena, y vale lo que vale su eslabón más débil. Leer críticamente es recorrer la cadena —diseño, muestra, medición, análisis, conclusión— buscando dónde se adelgaza.</b>
+  </div>
+
+  <h3 style="margin-top:26px">Dos conceptos que la tarea pregunta directo</h3>
+  <div class="card">
+    <h3><span class="dot" style="background:var(--am);box-shadow:0 0 12px var(--am)"></span>Sesgo de no respuesta (Tabla 4)</h3>
+    <p>Solo respondieron el ASQ3 el <b>47% de los PT</b> y el <b>35% de los RNAT</b>. El problema no es solo "poca muestra": es <i>quién</i> dejó de responder. Si los padres que contestaron fueron, sobre todo, los <b>preocupados por el desarrollo</b> de su hijo —como advierten los propios autores—, la proporción de niños con riesgo observada estaría <b>inflada</b>, porque los tranquilos (hijos sin problemas) no mandaron el cuestionario. Eso es <b>sesgo de selección por no respuesta</b>: la muestra que queda ya no representa a la población.</p>
+  </div>
+  <div class="card">
+    <h3><span class="dot" style="background:var(--am);box-shadow:0 0 12px var(--am)"></span>Simetría / asimetría del puntaje total (Fig. 1 y Tabla 5)</h3>
+    <p>El ASQ3 total tiene <b>techo en 300</b>. Media 277 ± 30 pero mediana 285 [275–290]: la media es <b>menor</b> que la mediana y los datos se apelotonan cerca del máximo, con una cola que se estira hacia los puntajes bajos. Es una distribución <b>asimétrica</b> (sesgada a la izquierda). Consecuencia directa (y lo que la tarea busca): al no ser normal, el valor p de esa comparación se obtuvo con <b>Mann-Whitney</b>, no con t. La forma de los datos ya te dice qué prueba hubo detrás.</p>
+  </div>
+
+  <h3 style="margin-top:28px">La checklist para leer cualquier estudio</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Mira…</th><th>Pregúntate…</th><th>En este paper</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Diseño</td><td>¿Casos-controles, cohorte, ensayo?</td><td>Casos y controles con controles pareados (mismo sexo, nacidos ≤48 h) — buen control de confusores</td></tr>
+      <tr><td class="k">Muestra</td><td>¿Cuántos? ¿Representativa?</td><td>Débil: baja respuesta (47%/35%), solo 11 eventos</td></tr>
+      <tr><td class="k">Medición</td><td>¿Instrumento válido? ¿Punto de corte justificado?</td><td>Fuerte: ASQ3 validado, corte por ROC</td></tr>
+      <tr><td class="k">Análisis</td><td>¿La prueba va con el tipo y la forma del dato?</td><td>Fuerte: χ²/Fisher, t/Mann-Whitney según normalidad, multivariante</td></tr>
+      <tr><td class="k">Conclusión</td><td>¿No estira más allá de los datos? ¿Asociación o causa?</td><td>Prudente: habla de "parece influir", no afirma causalidad</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="card" style="border-color:rgba(163,230,53,.3)">
+    <h3><span class="dot" style="background:var(--li);box-shadow:0 0 12px var(--li)"></span>Veredicto balanceado del estudio</h3>
+    <p><b>Fortalezas:</b> diseño con controles pareados; instrumento validado; punto de corte derivado por ROC; pruebas estadísticas correctamente elegidas según tipo y distribución del dato; uso de multivariante para controlar confusión.</p>
+    <p><b>Limitaciones:</b> baja tasa de respuesta (sesgo de no respuesta); muy pocos eventos → baja potencia e intervalos de confianza anchísimos; un solo centro; no se registró la terapia de atención temprana recibida (posible confusor no medido).</p>
+    <p class="small">Conclusión honesta del lector crítico: sus hallazgos (sexo varón y CIR como señales de riesgo) son <b>plausibles pero no concluyentes</b> — exactamente el tono mesurado que usan los autores. Un buen paper no es el que "da significativo", sino el que sabe hasta dónde puede afirmar.</p>
+  </div>
+
+  <div class="idea" style="border-color:rgba(163,230,53,.35);background:rgba(163,230,53,.07)">
+    <b style="color:var(--li)">El cierre de toda la guía:</b> ya no solo calculas ni solo decides sobre tus datos — ahora puedes <b>sentarte frente a cualquier estudio y auditarlo</b>. Sabes de dónde sale cada p, cada OR y cada curva, y sabes cuándo un número impresionante esconde una muestra frágil. Eso, y no memorizar fórmulas, es pensar estadísticamente.
+  </div>
+
+  <details class="q">
+    <summary>Recupera: un estudio con 30% de respuesta concluye que "la mayoría de los usuarios está satisfecha". ¿Qué sesgo sospechas?</summary>
+    <p><b>Sesgo de no respuesta.</b> Quienes responden encuestas de satisfacción suelen ser los extremos (muy contentos o muy enojados), y con 70% de silencio la muestra no representa a la población. "La mayoría de los que respondieron" ≠ "la mayoría de los usuarios". Antes de creer el titular, preguntaría quién se quedó fuera.</p>
   </details>
 </section>
 
@@ -1541,6 +2116,17 @@ H₁:  P_presencial ≠ P_tele</div>
       <tr><td class="k">r</td><td>"erre"</td><td>Correlación de Pearson (numérica–numérica)</td></tr>
       <tr><td class="k">MCID</td><td>—</td><td>Mínima diferencia clínicamente importante (umbral de relevancia, no de significación)</td></tr>
       <tr><td class="k">P</td><td>"pe mayúscula"</td><td>Proporción poblacional (parámetro); p̂ es su versión muestral</td></tr>
+      <tr><td class="k">OR</td><td>—</td><td>Odds ratio (razón de chances); OR=1 → sin asociación</td></tr>
+      <tr><td class="k">RR</td><td>—</td><td>Riesgo relativo (razón de riesgos); RR=1 → sin asociación</td></tr>
+      <tr><td class="k">Se / Sp</td><td>—</td><td>Sensibilidad (detecta enfermos) / Especificidad (descarta sanos)</td></tr>
+      <tr><td class="k">VPP / VPN</td><td>—</td><td>Valor predictivo positivo / negativo (dependen de la prevalencia)</td></tr>
+      <tr><td class="k">LR+ / LR−</td><td>—</td><td>Razones de verosimilitud (no dependen de la prevalencia)</td></tr>
+      <tr><td class="k">ROC / AUC</td><td>—</td><td>Curva sensibilidad vs 1−especificidad / área bajo ella (0,5 a 1)</td></tr>
+      <tr><td class="k">VP·FP·FN·VN</td><td>—</td><td>Verdaderos/falsos positivos y negativos (las 4 casillas del test)</td></tr>
+      <tr><td class="k">crudo / ajustado</td><td>—</td><td>OR univariante (solo) vs multivariante (descontando otras variables)</td></tr>
+      <tr><td class="k">confusión</td><td>confounding</td><td>Un factor que hace parecer efecto propio lo que es de otra variable</td></tr>
+      <tr><td class="k">Mann-Whitney</td><td>U</td><td>Prueba no paramétrica (sin supuesto de normalidad) para 2 grupos</td></tr>
+      <tr><td class="k">Shapiro-Wilk</td><td>—</td><td>Prueba de normalidad; p&lt;0,05 → los datos NO son normales</td></tr>
     </tbody>
   </table></div>
 
@@ -1554,8 +2140,13 @@ H₁:  P_presencial ≠ P_tele</div>
     miro qué <b>tipo de variable</b> tengo → eso decide la <b>prueba</b> → planteo bien <b>H₀ y H₁</b> → sé qué <b>error</b> arriesgo (y que muestra chica = poca potencia) → y nunca me quedo con el valor p: pregunto <b>cuánto</b> (efecto + IC) y <b>si le importa al usuario</b> (MCID).
   </div>
 
+  <div class="idea" style="margin-top:18px;border-color:rgba(163,230,53,.35);background:rgba(163,230,53,.07)">
+    <b style="color:var(--li)">Cadena 3 — cómo se audita un estudio (semanas 6–8):</b><br>
+    leo la tabla 2×2 → <b>χ²</b> dice si hay asociación y el <b>OR</b> de qué tamaño (con su IC) → si es un test, lo juzgo con <b>sensibilidad, especificidad y ROC</b> → reviso si la <b>muestra</b> tenía potencia → uso el <b>multivariante</b> para ver qué factor sobrevive al ajuste → y cierro juzgando <b>sesgos, fortalezas y límites</b>.
+  </div>
+
   <div class="card" style="margin-top:18px;text-align:center;border-color:rgba(163,230,53,.3)">
-    <p style="margin:0;font-size:1.05rem">La semana 1 te enseñó a <b style="color:var(--cy)">obtener el número</b>.<br>La semana 2 te enseñó a <b style="color:var(--mg)">no confundir el número con la respuesta</b>.</p>
+    <p style="margin:0;font-size:1.05rem">Bloque 1: <b style="color:var(--cy)">obtener el número</b>.<br>Bloque 2: <b style="color:var(--mg)">no confundir el número con la respuesta</b>.<br>Bloque 3: <b style="color:var(--li)">auditar el estudio entero de otros</b>.</p>
   </div>
 </section>
 
@@ -1727,6 +2318,71 @@ const nf=(v,d)=>v.toFixed(d).replace('.',',');
     T.textContent=test;E.textContent=ex;L.textContent=xl;
   }
   Y.addEventListener('change',run);X.addEventListener('change',run);run();
+})();
+
+/* ---------- lab test diagnóstico 2x2 ---------- */
+(function(){
+  const ids=['dvp','dfp','dfn','dvn'];
+  const els=ids.map(i=>document.getElementById(i));
+  if(els.some(e=>!e))return;
+  const pct=v=>isFinite(v)?nf(v*100,1)+'%':'—';
+  const num=v=>isFinite(v)?nf(v,2):'—';
+  function run(){
+    const [vp,fp,fn,vn]=els.map(e=>Math.max(0,+e.value||0));
+    const se = (vp+fn)? vp/(vp+fn):NaN;
+    const sp = (vn+fp)? vn/(vn+fp):NaN;
+    const vpp= (vp+fp)? vp/(vp+fp):NaN;
+    const vpn= (vn+fn)? vn/(vn+fn):NaN;
+    const tot=vp+fp+fn+vn;
+    const prev=tot? (vp+fn)/tot:NaN;
+    const acc =tot? (vp+vn)/tot:NaN;
+    const lrp=(isFinite(se)&&isFinite(sp)&&(1-sp)>0)? se/(1-sp):NaN;
+    const lrn=(isFinite(se)&&isFinite(sp)&&sp>0)? (1-se)/sp:NaN;
+    const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+    set('dSe',pct(se));set('dSp',pct(sp));set('dVpp',pct(vpp));set('dVpn',pct(vpn));
+    set('dPrev',pct(prev));set('dLrp',num(lrp));set('dLrn',num(lrn));set('dAcc',pct(acc));
+  }
+  els.forEach(e=>e.addEventListener('input',run));run();
+})();
+
+/* ---------- lab ROC: punto de corte ---------- */
+(function(){
+  const sv=document.getElementById('rocplot'),cut=document.getElementById('rocCut');
+  if(!sv||!cut)return;
+  const rm=241,rs=14,hm=270,hs=13;           // riesgo (bajo) y típico (alto)
+  const x0=220,x1=300;
+  function npdf(x,mu,sd){return Math.exp(-Math.pow((x-mu)/sd,2)/2)/(sd*Math.sqrt(2*Math.PI));}
+  function draw(){
+    const C=+cut.value;
+    document.getElementById('rocCutLbl').textContent=C;
+    const se=Phi((C-rm)/rs);                  // P(puntaje < corte | riesgo)
+    const sp=1-Phi((C-hm)/hs);                // P(puntaje >= corte | típico)
+    document.getElementById('rocSe').textContent=nf(se*100,0)+'%';
+    document.getElementById('rocSp').textContent=nf(sp*100,0)+'%';
+    document.getElementById('rocFp').textContent=nf((1-sp)*100,0)+'%';
+    document.getElementById('rocFn').textContent=nf((1-se)*100,0)+'%';
+    const W=620,H=250,PL=18,PB=36,PT=16,gw=W-2*PL,gh=H-PB-PT;
+    const px=x=>PL+((x-x0)/(x1-x0))*gw;
+    const maxp=Math.max(npdf(rm,rm,rs),npdf(hm,hm,hs));
+    const py=v=>PT+gh-(v/maxp)*gh*0.9;
+    const curve=(mu,sd)=>{let d='';for(let x=x0;x<=x1;x+=1)d+=(d?'L':'M')+px(x).toFixed(1)+','+py(npdf(x,mu,sd)).toFixed(1);return d;};
+    const area=(mu,sd,a,b)=>{let d='M'+px(a).toFixed(1)+','+py(0).toFixed(1);for(let x=a;x<=b;x+=1)d+='L'+px(x).toFixed(1)+','+py(npdf(x,mu,sd)).toFixed(1);return d+'L'+px(b).toFixed(1)+','+py(0).toFixed(1)+'Z';};
+    let ticks='';
+    for(let x=220;x<=300;x+=20)ticks+='<line x1="'+px(x)+'" y1="'+py(0)+'" x2="'+px(x)+'" y2="'+(py(0)+5)+'" stroke="#5f7fa8"/>'+
+      '<text x="'+px(x)+'" y="'+(py(0)+18)+'" fill="#8ea0bd" font-size="10" text-anchor="middle" font-family="JetBrains Mono">'+x+'</text>';
+    sv.innerHTML=
+      '<path d="'+area(rm,rs,x0,C)+'" fill="rgba(163,230,53,.30)"/>'+        /* VP: riesgo detectado */
+      '<path d="'+area(hm,hs,x0,C)+'" fill="rgba(251,191,36,.35)"/>'+        /* FP: típico marcado */
+      '<path d="'+curve(rm,rs)+'" fill="none" stroke="#f472b6" stroke-width="2"/>'+
+      '<path d="'+curve(hm,hs)+'" fill="none" stroke="#22d3ee" stroke-width="2"/>'+
+      '<line x1="'+px(x0)+'" y1="'+py(0)+'" x2="'+px(x1)+'" y2="'+py(0)+'" stroke="#5f7fa8"/>'+ticks+
+      '<line x1="'+px(C)+'" y1="'+PT+'" x2="'+px(C)+'" y2="'+py(0)+'" stroke="#fff" stroke-width="2" stroke-dasharray="5 4"/>'+
+      '<text x="'+px(C)+'" y="'+(PT-3)+'" fill="#fff" font-size="11" text-anchor="middle" font-family="JetBrains Mono">corte '+C+'</text>'+
+      '<text x="'+px(rm)+'" y="'+(py(npdf(rm,rm,rs))-6)+'" fill="#f472b6" font-size="10" text-anchor="middle">riesgo</text>'+
+      '<text x="'+px(hm)+'" y="'+(py(npdf(hm,hm,hs))-6)+'" fill="#22d3ee" font-size="10" text-anchor="middle">típico</text>'+
+      '<text x="'+px(x0)+'" y="'+(H-4)+'" fill="#5f7fa8" font-size="9" font-family="JetBrains Mono">← test + (riesgo)   |   test − (típico) →</text>';
+  }
+  cut.addEventListener('input',draw);draw();
 })();
 </script>
 </body>

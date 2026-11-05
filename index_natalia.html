@@ -160,7 +160,7 @@ mark{background:rgba(34,211,238,.22);color:#fff;padding:1px 4px;border-radius:4p
   <div class="wrap">
     <div class="kicker">Guía visual · Bioestadística aplicada</div>
     <h1>Estadística para la práctica clínica</h1>
-    <p class="hero-sub">Veintidós módulos en tres bloques: entender qué <b style="color:var(--txt)">calculas</b>, aprender a <b style="color:var(--txt)">decidir y a dudar</b>, y por fin <b style="color:var(--txt)">leer un estudio real</b> de principio a fin, con ejemplos de rehabilitación.</p>
+    <p class="hero-sub">Veintidós módulos en tres bloques —y una caja de preguntas que crece—: entender qué <b style="color:var(--txt)">calculas</b>, aprender a <b style="color:var(--txt)">decidir y a dudar</b>, y por fin <b style="color:var(--txt)">leer un estudio real</b> de principio a fin, con ejemplos de rehabilitación.</p>
     <div class="dedic">🧠 Hecha para <b>Natalia</b> · terapia ocupacional &amp; rehabilitación comunitaria</div>
     <div class="chips">
       <span class="chip">descriptiva</span><span class="chip">probabilidad</span><span class="chip">DE vs EE</span>
@@ -178,6 +178,7 @@ mark{background:rgba(34,211,238,.22);color:#fff;padding:1px 4px;border-radius:4p
       <span class="chip" style="border-color:rgba(163,230,53,.4);color:var(--li)">tamaño muestral</span>
       <span class="chip" style="border-color:rgba(163,230,53,.4);color:var(--li)">regresión logística</span>
       <span class="chip" style="border-color:rgba(163,230,53,.4);color:var(--li)">leer un paper</span>
+      <span class="chip" style="border-color:rgba(34,211,238,.4);color:var(--cy)">cómo leer tablas</span>
     </div>
   </div>
 </header>
@@ -210,6 +211,8 @@ mark{background:rgba(34,211,238,.22);color:#fff;padding:1px 4px;border-radius:4p
     <a href="#m20">20 · Regresión logística</a>
     <a href="#m21">21 · t vs Mann-Whitney</a>
     <a href="#m22">22 · Leer un paper</a>
+    <a href="#b4" style="color:var(--cy)">● Caja de preguntas</a>
+    <a href="#m23">23 · Afuera o adentro</a>
     <a href="#glos">Glosario</a>
   </div>
 </nav>
@@ -1823,7 +1826,7 @@ VPP = 40 ÷ (40 + 190) = 40 ÷ 230 = 17,4 %</div>
   </div>
 
   <div class="idea">
-    <b>La idea en una frase:</b> cada punto de corte posible da una pareja (sensibilidad, especificidad). La curva ROC dibuja <b>todas</b> esas parejas a la vez, y te deja ver el precio de cada decisión: ganar sensibilidad siempre cuesta especificidad.</b>
+    <b>La idea en una frase:</b> cada punto de corte posible da una pareja (sensibilidad, especificidad). La curva ROC dibuja <b>todas</b> esas parejas a la vez, y te deja ver el precio de cada decisión: ganar sensibilidad siempre cuesta especificidad.
   </div>
 
   <div class="card">
@@ -1958,7 +1961,7 @@ VPP = 40 ÷ (40 + 190) = 40 ÷ 230 = 17,4 %</div>
 
   <div class="card">
     <h3><span class="dot" style="background:var(--mg);box-shadow:0 0 12px var(--mg)"></span>Qué pasó con el sexo varón (la pregunta 8 de la tarea)</h3>
-    <p>Fíjate: el estimador puntual <b>casi no cambió</b> (4,4 → 4,1), pero el intervalo pasó de [1,1–19,7] a [1,1<b>0,8</b>–19,9]: ahora <b>incluye el 1</b>. Resultado: pierde la significación (p 0,04 → 0,08).</p>
+    <p>Fíjate: el estimador puntual <b>casi no cambió</b> (4,4 → 4,1), pero el intervalo pasó de [1,1–19,7] a [0,8–19,9]: ahora <b>incluye el 1</b>. Resultado: pierde la significación (p 0,04 → 0,08).</p>
     <p>La explicación clínica es la <b>confusión (confounding)</b>: casi todos los niños con déficit y CIR eran varones. El sexo parecía predecir el riesgo, pero en realidad "viajaba a caballo" del CIR. Cuando el modelo descuenta el CIR, al sexo no le queda efecto propio que explicar.</p>
   </div>
 
@@ -1991,7 +1994,7 @@ VPP = 40 ÷ (40 + 190) = 40 ÷ 230 = 17,4 %</div>
   </div>
 
   <div class="idea">
-    <b>La idea en una frase:</b> la t de Student <b>asume que los datos son más o menos normales</b>. Cuando no lo son, esa suposición se rompe y la t puede mentir; entonces se usa Mann-Whitney, que no pide normalidad porque trabaja con el <b>orden</b> (rangos), no con los valores crudos.</b>
+    <b>La idea en una frase:</b> la t de Student <b>asume que los datos son más o menos normales</b>. Cuando no lo son, esa suposición se rompe y la t puede mentir; entonces se usa Mann-Whitney, que no pide normalidad porque trabaja con el <b>orden</b> (rangos), no con los valores crudos.
   </div>
 
   <div class="card">
@@ -2043,7 +2046,7 @@ VPP = 40 ÷ (40 + 190) = 40 ÷ 230 = 17,4 %</div>
   </div>
 
   <div class="idea">
-    <b>La idea en una frase:</b> todo estudio es una cadena, y vale lo que vale su eslabón más débil. Leer críticamente es recorrer la cadena —diseño, muestra, medición, análisis, conclusión— buscando dónde se adelgaza.</b>
+    <b>La idea en una frase:</b> todo estudio es una cadena, y vale lo que vale su eslabón más débil. Leer críticamente es recorrer la cadena —diseño, muestra, medición, análisis, conclusión— buscando dónde se adelgaza.
   </div>
 
   <h3 style="margin-top:26px">Dos conceptos que la tarea pregunta directo</h3>
@@ -2076,12 +2079,190 @@ VPP = 40 ÷ (40 + 190) = 40 ÷ 230 = 17,4 %</div>
   </div>
 
   <div class="idea" style="border-color:rgba(163,230,53,.35);background:rgba(163,230,53,.07)">
-    <b style="color:var(--li)">El cierre de toda la guía:</b> ya no solo calculas ni solo decides sobre tus datos — ahora puedes <b>sentarte frente a cualquier estudio y auditarlo</b>. Sabes de dónde sale cada p, cada OR y cada curva, y sabes cuándo un número impresionante esconde una muestra frágil. Eso, y no memorizar fórmulas, es pensar estadísticamente.
+    <b style="color:var(--li)">El cierre del tercer bloque:</b> ya no solo calculas ni solo decides sobre tus datos — ahora puedes <b>sentarte frente a cualquier estudio y auditarlo</b>. Sabes de dónde sale cada p, cada OR y cada curva, y sabes cuándo un número impresionante esconde una muestra frágil. Eso, y no memorizar fórmulas, es pensar estadísticamente.
   </div>
 
   <details class="q">
     <summary>Recupera: un estudio con 30% de respuesta concluye que "la mayoría de los usuarios está satisfecha". ¿Qué sesgo sospechas?</summary>
     <p><b>Sesgo de no respuesta.</b> Quienes responden encuestas de satisfacción suelen ser los extremos (muy contentos o muy enojados), y con 70% de silencio la muestra no representa a la población. "La mayoría de los que respondieron" ≠ "la mayoría de los usuarios". Antes de creer el titular, preguntaría quién se quedó fuera.</p>
+  </details>
+</section>
+
+<!-- ================= DIVISOR BLOQUE 4 · CAJA DE PREGUNTAS ================= -->
+<section class="mod" id="b4" style="border-top:1px solid var(--cy);margin-top:60px">
+  <div style="text-align:center;padding:30px 0 6px">
+    <div class="kicker" style="color:var(--cy)">Caja de preguntas · dudas que llegan de la práctica</div>
+    <h2 style="font-size:clamp(1.5rem,5vw,2.1rem);background:linear-gradient(100deg,#fff,var(--cy) 70%);-webkit-background-clip:text;background-clip:text;color:transparent">Las preguntas reales, resueltas</h2>
+    <p class="hero-sub" style="margin:12px auto 0">Un anexo que crece: cada duda concreta que surge al estudiar se convierte en un módulo corto, con su analogía y su paso a paso.</p>
+  </div>
+</section>
+
+<!-- ================= M23 AFUERA O ADENTRO ================= -->
+<section class="mod" id="m23" style="border-top:none;padding-top:20px">
+  <div class="modhead">
+    <div class="modnum" style="background:linear-gradient(140deg,var(--cy),var(--vi))">23</div>
+    <div><h2>¿Afuera o adentro? Cómo entrar a una tabla</h2><div class="modtag" style="color:var(--cy)">La duda más común con las tablas Z y t</div></div>
+  </div>
+
+  <div class="card escena">
+    <h3><span class="dot"></span>La pregunta</h3>
+    <p><i>«Cuando busco el valor crítico Z o t en la tabla, ¿se busca <b>afuera</b> —por los bordes, con los decimales— o <b>adentro</b> de la tabla?»</i></p>
+    <p class="small">Es una de las mejores preguntas que se pueden hacer, porque la respuesta corta —"depende de la tabla"— esconde justo el detalle que confunde a todo el mundo: <b>la tabla Z y la tabla t están construidas al revés una de la otra</b>.</p>
+  </div>
+
+  <div class="idea">
+    <b>La regla que nunca falla:</b> <mark>entras a la tabla por lo que YA SABES, y sales por lo que BUSCAS.</mark> Cuando buscas un <b>valor crítico</b>, lo que sabes es la <b>probabilidad</b> (el α o la confianza) y lo que buscas es el <b>puntaje</b> (z o t). Así que, para un valor crítico, <b>entras por donde la tabla guarda las probabilidades</b>.
+  </div>
+
+  <div class="card trampa" style="border-left-color:var(--cy);background:linear-gradient(90deg,rgba(34,211,238,.08),transparent 70%)">
+    <h3><span class="dot" style="background:var(--cy);box-shadow:0 0 12px var(--cy)"></span>Antes que nada: lee la leyenda de TU tabla</h3>
+    <p>Existen varias versiones de la tabla Z (área a la izquierda, área central 0→z, área de cola…) y varias de la t. Lo primero, siempre, es mirar qué guarda el <b>cuerpo</b> de la tabla que te pasaron. Esa sola pregunta —"¿el cuerpo tiene probabilidades o tiene puntajes?"— resuelve el 90% de la confusión. Lo que sigue es el caso clásico (y el de este sitio).</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--vi);box-shadow:0 0 12px var(--vi)"></span>La analogía del mapa con coordenadas</h3>
+    <p>Un mapa de ciudad tiene letras y números en los <b>bordes</b> (A, B, C… / 1, 2, 3…) y las calles <b>adentro</b>. Con el mismo mapa puedes ir en dos direcciones:</p>
+    <ul class="neo">
+      <li>Si el índice te dice <i>"la plaza está en D-4"</i> → entras por los <b>bordes</b> (D y 4) y la encuentras <b>adentro</b>.</li>
+      <li>Si estás parada en una plaza y quieres anotar su ubicación → la ves <b>adentro</b> y lees su coordenada en los <b>bordes</b>.</li>
+    </ul>
+    <p>Las tablas estadísticas son ese mapa. Lo que cambia entre la tabla Z y la t es <b>qué pusieron en los bordes y qué adentro</b> — y por eso a veces "entras por el borde" y a veces "buscas adentro". No es contradicción: son dos mapas ordenados distinto.</p>
+  </div>
+
+  <h3 style="margin-top:30px">El momento clave: el mismo 1,96 vive en las dos tablas del sitio</h3>
+  <p class="small">A la izquierda, la tabla Z del módulo 4 (probabilidades adentro). A la derecha, la tabla t del módulo 6 (su fila ∞ son los valores z). Mira cómo se llega al <b>mismo</b> 1,96 desde lados opuestos.</p>
+
+  <svg class="plot" viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" style="margin:8px 0 4px">
+    <defs>
+      <marker id="arin" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#a3e635"/></marker>
+      <marker id="arout" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#22d3ee"/></marker>
+    </defs>
+    <!-- ===== TABLA Z (izquierda) ===== -->
+    <text x="162" y="30" text-anchor="middle" fill="#dbe6f5" font-family="Sora,sans-serif" font-size="13" font-weight="700">Tabla Z acumulada</text>
+    <text x="162" y="46" text-anchor="middle" fill="#8ea0bd" font-size="10" font-family="Inter">probabilidades ADENTRO</text>
+    <rect x="40" y="58" width="244" height="150" rx="10" fill="rgba(16,24,43,.72)" stroke="rgba(120,160,220,.3)"/>
+    <line x1="40" y1="86" x2="284" y2="86" stroke="rgba(120,160,220,.3)"/>
+    <line x1="86" y1="58" x2="86" y2="208" stroke="rgba(120,160,220,.3)"/>
+    <text x="63" y="78" text-anchor="middle" fill="#8ea0bd" font-size="9" font-family="JetBrains Mono">z</text>
+    <!-- column headers (segundo decimal) -->
+    <text x="119" y="78" text-anchor="middle" fill="#8ea0bd" font-size="10" font-family="JetBrains Mono">,05</text>
+    <text x="185" y="78" text-anchor="middle" fill="#22d3ee" font-size="10" font-family="JetBrains Mono" font-weight="700">,06</text>
+    <text x="251" y="78" text-anchor="middle" fill="#8ea0bd" font-size="10" font-family="JetBrains Mono">,07</text>
+    <!-- row headers -->
+    <text x="63" y="118" text-anchor="middle" fill="#8ea0bd" font-size="10" font-family="JetBrains Mono">1,8</text>
+    <text x="63" y="150" text-anchor="middle" fill="#22d3ee" font-size="10" font-family="JetBrains Mono" font-weight="700">1,9</text>
+    <text x="63" y="182" text-anchor="middle" fill="#8ea0bd" font-size="10" font-family="JetBrains Mono">2,0</text>
+    <!-- body hint cells -->
+    <text x="119" y="150" text-anchor="middle" fill="#5f7fa8" font-size="9" font-family="JetBrains Mono">,9744</text>
+    <text x="251" y="150" text-anchor="middle" fill="#5f7fa8" font-size="9" font-family="JetBrains Mono">,9756</text>
+    <rect x="156" y="136" width="58" height="26" rx="5" fill="rgba(163,230,53,.22)" stroke="#a3e635"/>
+    <text x="185" y="153" text-anchor="middle" fill="#fff" font-size="11" font-family="JetBrains Mono" font-weight="700">,9750</text>
+    <!-- arrows OUT to the edges -->
+    <line x1="156" y1="149" x2="90" y2="149" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#arout)"/>
+    <line x1="185" y1="136" x2="185" y2="90" stroke="#22d3ee" stroke-width="1.6" marker-end="url(#arout)"/>
+    <text x="162" y="230" text-anchor="middle" fill="#dbe6f5" font-size="10" font-family="Inter">Tienes 0,975 → lo buscas <tspan fill="#a3e635" font-weight="700">ADENTRO</tspan></text>
+    <text x="162" y="246" text-anchor="middle" fill="#dbe6f5" font-size="10" font-family="Inter">→ lees <tspan fill="#22d3ee" font-weight="700">z = 1,96</tspan> en los BORDES (1,9 + ,06)</text>
+
+    <!-- ===== TABLA t (derecha) ===== -->
+    <text x="478" y="30" text-anchor="middle" fill="#dbe6f5" font-family="Sora,sans-serif" font-size="13" font-weight="700">Tabla t (fila ∞ = z)</text>
+    <text x="478" y="46" text-anchor="middle" fill="#8ea0bd" font-size="10" font-family="Inter">probabilidades en el BORDE</text>
+    <rect x="356" y="58" width="244" height="150" rx="10" fill="rgba(16,24,43,.72)" stroke="rgba(120,160,220,.3)"/>
+    <line x1="356" y1="86" x2="600" y2="86" stroke="rgba(120,160,220,.3)"/>
+    <line x1="402" y1="58" x2="402" y2="208" stroke="rgba(120,160,220,.3)"/>
+    <text x="379" y="78" text-anchor="middle" fill="#8ea0bd" font-size="9" font-family="JetBrains Mono">gl</text>
+    <!-- column headers (alfa) -->
+    <text x="435" y="78" text-anchor="middle" fill="#8ea0bd" font-size="10" font-family="JetBrains Mono">,10</text>
+    <text x="501" y="78" text-anchor="middle" fill="#fbbf24" font-size="10" font-family="JetBrains Mono" font-weight="700">,05</text>
+    <text x="567" y="78" text-anchor="middle" fill="#8ea0bd" font-size="10" font-family="JetBrains Mono">,01</text>
+    <!-- row headers -->
+    <text x="379" y="118" text-anchor="middle" fill="#8ea0bd" font-size="10" font-family="JetBrains Mono">30</text>
+    <text x="379" y="150" text-anchor="middle" fill="#8ea0bd" font-size="10" font-family="JetBrains Mono">120</text>
+    <text x="379" y="182" text-anchor="middle" fill="#fbbf24" font-size="11" font-family="JetBrains Mono" font-weight="700">∞</text>
+    <!-- body hint cells -->
+    <text x="435" y="182" text-anchor="middle" fill="#5f7fa8" font-size="9" font-family="JetBrains Mono">1,645</text>
+    <text x="567" y="182" text-anchor="middle" fill="#5f7fa8" font-size="9" font-family="JetBrains Mono">2,576</text>
+    <rect x="472" y="168" width="58" height="26" rx="5" fill="rgba(163,230,53,.22)" stroke="#a3e635"/>
+    <text x="501" y="185" text-anchor="middle" fill="#fff" font-size="11" font-family="JetBrains Mono" font-weight="700">1,960</text>
+    <!-- arrows IN from the edges -->
+    <line x1="406" y1="181" x2="470" y2="181" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#arin)"/>
+    <line x1="501" y1="90" x2="501" y2="166" stroke="#fbbf24" stroke-width="1.6" marker-end="url(#arin)"/>
+    <text x="478" y="230" text-anchor="middle" fill="#dbe6f5" font-size="10" font-family="Inter">Entras por <tspan fill="#fbbf24" font-weight="700">gl=∞ y α=,05</tspan> en los BORDES</text>
+    <text x="478" y="246" text-anchor="middle" fill="#dbe6f5" font-size="10" font-family="Inter">→ lees <tspan fill="#a3e635" font-weight="700">1,96</tspan> ADENTRO</text>
+
+    <text x="320" y="282" text-anchor="middle" fill="#a78bfa" font-size="11" font-family="Inter" font-weight="700">Es el MISMO 1,96 — alcanzado desde lados opuestos</text>
+  </svg>
+
+  <h3 style="margin-top:30px">Paso a paso A — valor crítico z (tabla Z acumulada, módulo 4)</h3>
+  <p class="small">Caso: el z crítico para un IC del 95% (bilateral).</p>
+  <div class="pasos">
+    <div class="paso">
+      <h4>Traduce la confianza a una probabilidad acumulada</h4>
+      <p class="small">95% bilateral → queda 5% repartido en dos colas → 2,5% en cada una. El área a la izquierda del z que buscas es 1 − 0,025 = <b>0,975</b>.</p>
+    </div>
+    <div class="paso">
+      <h4>Busca 0,975 ADENTRO (en el cuerpo)</h4>
+      <p class="small">El cuerpo de la tabla Z guarda Φ(z) = área a la izquierda. Recorres los números de adentro hasta dar con 0,9750.</p>
+    </div>
+    <div class="paso">
+      <h4>Lee el puntaje en los BORDES</h4>
+      <div class="calc">fila 1,9  +  columna ,06   →   z = 1,96</div>
+      <span class="res">z crítico = 1,96</span>
+      <p class="small" style="margin-top:8px">Aquí el valor que <b>buscas</b> (1,96) está <b>afuera</b>, y lo que ya <b>sabías</b> (0,975) estaba <b>adentro</b>. Entraste por adentro, saliste por el borde.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:28px">Paso a paso B — valor crítico t (tabla t, módulo 6)</h3>
+  <p class="small">Caso: el t crítico para gl = 9, α = 0,05, bilateral.</p>
+  <div class="pasos">
+    <div class="paso">
+      <h4>Entra por los BORDES: fila y columna</h4>
+      <p class="small">La tabla t pone los gl en el borde izquierdo y el α en el borde superior. Localizas la fila <b>gl = 9</b> y la columna <b>α = 0,05</b> (bilateral).</p>
+    </div>
+    <div class="paso">
+      <h4>Lee el valor ADENTRO (en el cruce)</h4>
+      <div class="calc">fila 9  ×  columna 0,05   →   t = 2,262</div>
+      <span class="res">t crítico = 2,262</span>
+      <p class="small" style="margin-top:8px">Aquí es al revés: lo que <b>sabías</b> (gl y α) estaba en los <b>bordes</b>, y el valor que <b>buscabas</b> (2,262) apareció <b>adentro</b>. Entraste por el borde, saliste por adentro.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--cy);box-shadow:0 0 12px var(--cy)"></span>Por qué parecen contradictorias (y no lo son)</h3>
+    <p>Las dos tablas guardan <b>la misma relación</b> probabilidad ↔ puntaje, pero ordenada al revés:</p>
+    <ul class="neo">
+      <li><b>Tabla Z acumulada:</b> puntajes (z) en los bordes, probabilidades <b>adentro</b>. Para un valor crítico, la probabilidad es tu dato → entras <b>adentro</b>.</li>
+      <li><b>Tabla t:</b> probabilidades (α) en los bordes, puntajes (t) <b>adentro</b>. Para un valor crítico, la probabilidad es tu dato → entras <b>por el borde</b>.</li>
+    </ul>
+    <p class="small">La misma lógica, "entra por la probabilidad", te manda adentro en una y afuera en la otra. Por eso Natalia sentía la contradicción: no estaba equivocada, estaba viendo dos tablas espejo.</p>
+  </div>
+
+  <h3 style="margin-top:28px">La tabla que lo resuelve todo</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Quiero…</th><th>Conozco…</th><th>En la tabla Z acumulada</th><th>En la tabla t</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Valor crítico (z/t)</td><td>la probabilidad (α / confianza)</td><td>busco la prob. <b>ADENTRO</b>, leo z en el <b>BORDE</b></td><td>entro por gl+α en el <b>BORDE</b>, leo t <b>ADENTRO</b></td></tr>
+      <tr><td class="k">Un valor p</td><td>el estadístico (z/t ya calculado)</td><td>entro por z en el <b>BORDE</b>, leo la prob. <b>ADENTRO</b></td><td>acoto el p entre columnas; el exacto, con software</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="card trampa">
+    <h3><span class="dot"></span>Trampa frecuente — una cola vs dos colas</h3>
+    <p>Al entrar por el α, confirma si la columna es de <b>una o dos colas</b>. Para un IC 95% o una hipótesis bilateral necesitas dos colas: en una tabla Z eso es Φ = 0,975 (no 0,95); en una tabla t, la columna "0,05 bilateral". Usar la columna equivocada te da 1,64 en vez de 1,96, y el error se arrastra a todo el intervalo.</p>
+  </div>
+
+  <div class="card excel">
+    <h3><span class="dot"></span>En Excel — donde la duda "afuera/adentro" desaparece</h3>
+    <p class="small">El nombre de la función ya te dice la dirección: <b>INV.*</b> va de probabilidad → valor (valor crítico); <b>DISTR.*</b> va de valor → probabilidad (valor p).</p>
+    <div class="calc">=INV.NORM.ESTAND(0,975)   → 1,96     (z crítico, IC 95% bilateral)
+=INV.T.2C(0,05; 9)        → 2,262   (t crítico, gl 9, bilateral)
+
+=DISTR.NORM.ESTAND.N(1,96; VERDADERO) → 0,975   (dirección inversa: el p)
+=DISTR.T.2C(2,262; 9)                 → 0,05</div>
+  </div>
+
+  <details class="q">
+    <summary>Recupera: necesitas el z crítico para un IC del 99% (bilateral). ¿Qué probabilidad buscas adentro de la tabla Z y qué valor deberías obtener?</summary>
+    <p>99% bilateral → 1% en dos colas → 0,5% por cola. El área a la izquierda es 1 − 0,005 = <b>0,995</b>. Buscas 0,995 en el cuerpo y lees en los bordes <b>z ≈ 2,58</b> (fila 2,5 + columna ,08). Entraste por la probabilidad (adentro), saliste por el puntaje (borde).</p>
   </details>
 </section>
 
@@ -2127,6 +2308,8 @@ VPP = 40 ÷ (40 + 190) = 40 ÷ 230 = 17,4 %</div>
       <tr><td class="k">confusión</td><td>confounding</td><td>Un factor que hace parecer efecto propio lo que es de otra variable</td></tr>
       <tr><td class="k">Mann-Whitney</td><td>U</td><td>Prueba no paramétrica (sin supuesto de normalidad) para 2 grupos</td></tr>
       <tr><td class="k">Shapiro-Wilk</td><td>—</td><td>Prueba de normalidad; p&lt;0,05 → los datos NO son normales</td></tr>
+      <tr><td class="k">Φ(z) acum.</td><td>"fi de zeta"</td><td>Lo que guarda el CUERPO de la tabla Z clásica (área a la izquierda)</td></tr>
+      <tr><td class="k">valor crítico</td><td>—</td><td>El z o t que deja α en la(s) cola(s); lo buscas entrando por la probabilidad</td></tr>
     </tbody>
   </table></div>
 

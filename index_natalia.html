@@ -2211,6 +2211,54 @@ VPP = 40 ÷ (40 + 190) = 40 ÷ 230 = 17,4 %</div>
     </div>
   </div>
 
+  <div class="idea" style="border-color:rgba(34,211,238,.35);background:rgba(34,211,238,.07)">
+    <b style="color:var(--cy)">Afinando la pregunta de Natalia:</b> «¿busco el número con los decimales completos <b>adentro</b>, y de ahí saco el valor de la <b>columna de afuera</b>?» → <b>Sí</b> a lo primero; a lo segundo, casi: el z no sale de <i>una</i> columna, se <b>arma juntando dos bordes</b> (la fila y la columna).
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--cy);box-shadow:0 0 12px var(--cy)"></span>Cómo se "arma" el z: fila + columna</h3>
+    <p>Lo que buscas <b>adentro</b> es la <b>probabilidad con sus cuatro decimales</b> (ej. 0,9750). Cuando la encuentras en el cuerpo, caíste en un <b>cruce</b>. Para leer el z no copias un solo número del borde: lees <b>dos</b> y los pegas.</p>
+
+    <svg class="plot" viewBox="0 0 620 170" xmlns="http://www.w3.org/2000/svg" style="margin:6px 0">
+      <text x="310" y="24" text-anchor="middle" fill="#8ea0bd" font-size="11" font-family="Inter">El 0,9750 que buscaste vive <tspan fill="#a3e635" font-weight="700">ADENTRO</tspan>, en el cruce. El z se arma con los dos bordes:</text>
+      <!-- fila -->
+      <rect x="36" y="58" width="110" height="54" rx="10" fill="rgba(34,211,238,.1)" stroke="#22d3ee"/>
+      <text x="91" y="92" text-anchor="middle" fill="#fff" font-size="22" font-family="JetBrains Mono" font-weight="700">1,9</text>
+      <text x="91" y="132" text-anchor="middle" fill="#22d3ee" font-size="9" font-family="JetBrains Mono">FILA · borde izq.</text>
+      <text x="170" y="92" text-anchor="middle" fill="#8ea0bd" font-size="22" font-family="Sora">+</text>
+      <!-- columna -->
+      <rect x="196" y="58" width="110" height="54" rx="10" fill="rgba(34,211,238,.1)" stroke="#22d3ee"/>
+      <text x="251" y="92" text-anchor="middle" fill="#fff" font-size="22" font-family="JetBrains Mono" font-weight="700">,06</text>
+      <text x="251" y="132" text-anchor="middle" fill="#22d3ee" font-size="9" font-family="JetBrains Mono">COLUMNA · borde sup.</text>
+      <text x="330" y="92" text-anchor="middle" fill="#8ea0bd" font-size="22" font-family="Sora">=</text>
+      <!-- z -->
+      <rect x="356" y="58" width="130" height="54" rx="10" fill="rgba(163,230,53,.18)" stroke="#a3e635"/>
+      <text x="421" y="92" text-anchor="middle" fill="#fff" font-size="22" font-family="JetBrains Mono" font-weight="700">1,96</text>
+      <text x="421" y="132" text-anchor="middle" fill="#a3e635" font-size="9" font-family="JetBrains Mono">z CRÍTICO</text>
+      <!-- nota adentro -->
+      <text x="556" y="80" text-anchor="middle" fill="#5f7fa8" font-size="9" font-family="JetBrains Mono">adentro:</text>
+      <text x="556" y="94" text-anchor="middle" fill="#a3e635" font-size="12" font-family="JetBrains Mono" font-weight="700">0,9750</text>
+    </svg>
+
+    <ul class="neo">
+      <li><b>0,9750</b> → la <b>probabilidad</b>, adentro. Es lo que fuiste a buscar (tu dato conocido).</li>
+      <li><b>1,9</b> → el <b>borde izquierdo</b> (la fila): te da el entero y el primer decimal del z.</li>
+      <li><b>,06</b> → el <b>borde de arriba</b> (la columna): te da el segundo decimal.</li>
+      <li><b>1,96</b> → tu z crítico = <b>fila + columna</b> = 1,9 + 0,06. Ese es el número que "sacas".</li>
+    </ul>
+    <p class="small">Por eso tu intuición era correcta pero incompleta: no es "la columna de afuera", son <b>las dos etiquetas de afuera</b> —la de la fila y la de la columna— sumadas. La fila pone casi todo; la columna solo afina el último decimal.</p>
+  </div>
+
+  <div class="card" style="border-color:rgba(34,211,238,.25)">
+    <h3><span class="dot" style="background:var(--cy);box-shadow:0 0 12px var(--cy)"></span>Un ejemplo más para fijarlo</h3>
+    <p class="small">Quieres el z cuya área a la izquierda es 0,9850.</p>
+    <div class="calc">1) Busco 0,9850 ADENTRO (en el cuerpo)  →  lo encuentro en un cruce
+2) Leo la FILA de ese cruce      →  2,1
+3) Leo la COLUMNA de ese cruce   →  ,07
+4) Los junto:  z = 2,1 + 0,07</div>
+    <span class="res">z = 2,17</span>
+  </div>
+
   <h3 style="margin-top:28px">Paso a paso B — valor crítico t (tabla t, módulo 6)</h3>
   <p class="small">Caso: el t crítico para gl = 9, α = 0,05, bilateral.</p>
   <div class="pasos">

@@ -213,6 +213,7 @@ mark{background:rgba(34,211,238,.22);color:#fff;padding:1px 4px;border-radius:4p
     <a href="#m22">22 · Leer un paper</a>
     <a href="#b4" style="color:var(--cy)">● Caja de preguntas</a>
     <a href="#m23">23 · Afuera o adentro</a>
+    <a href="#m24">24 · ¿El 0,05 es el error?</a>
     <a href="#glos">Glosario</a>
   </div>
 </nav>
@@ -2314,6 +2315,98 @@ VPP = 40 ÷ (40 + 190) = 40 ÷ 230 = 17,4 %</div>
   </details>
 </section>
 
+<!-- ================= M24 ¿EL 0,05 ES EL ERROR? ================= -->
+<section class="mod" id="m24" style="border-top:none;padding-top:20px">
+  <div class="modhead">
+    <div class="modnum" style="background:linear-gradient(140deg,var(--cy),var(--vi))">24</div>
+    <div><h2>¿El 0,05 es "el error"? Qué es α y qué es 1,96</h2><div class="modtag" style="color:var(--cy)">Confianza, error y valor crítico, por fin juntos</div></div>
+  </div>
+
+  <div class="card escena">
+    <h3><span class="dot"></span>La pregunta</h3>
+    <p><i>«Entras por α = 0,05 en los bordes → lees 1,96 adentro… eso, finalmente, ¿es el error o no? ¿lo que queda fuera del área de confianza? ¿o nada que ver?» 😀</i></p>
+    <p class="small">Tu intuición está <b>muy bien encaminada</b>. Hay que separar solo dos cosas que están pegadas en esa frase: un <b>área</b> y una <b>posición</b>.</p>
+  </div>
+
+  <div class="idea">
+    <b>La respuesta en una frase:</b> el <b>0,05 sí es "lo que queda afuera"</b> del área de confianza — y eso es exactamente el <b>error</b> (el riesgo que aceptas). Pero el <b>1,96 no es el error</b>: es la <b>frontera</b> que encierra el 95%. Uno es un área (α); el otro es un punto en el eje (z).
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--vi);box-shadow:0 0 12px var(--vi)"></span>La analogía de la plaza cercada</h3>
+    <p>Imagina una plaza con un cerco:</p>
+    <ul class="neo">
+      <li>El <b>pasto adentro del cerco</b> = tu <b>nivel de confianza</b> (95%). La zona donde esperas que caiga lo normal.</li>
+      <li>Lo que <b>queda afuera del cerco</b> = <b>α = 0,05 = el error</b>. Lo raro, lo mejorable, el riesgo que asumes de equivocarte.</li>
+      <li>El <b>cerco mismo</b> (la reja) = <b>z = 1,96</b>. No es ni el pasto ni el afuera: es <b>dónde está la línea</b> que los separa.</li>
+    </ul>
+    <p class="small">Por eso tu pregunta mezclaba dos cosas ciertas: el 0,05 <i>sí</i> es "lo de afuera" y <i>sí</i> es el error. El 1,96 es la reja que marca ese límite. Preguntar "¿el 1,96 es el error?" es como preguntar "¿la reja es el pasto?": no, la reja <b>encierra</b> el pasto.</p>
+  </div>
+
+  <!-- LAB CONFIANZA -->
+  <div class="lab">
+    <div class="labttl">Laboratorio · confianza, error y frontera</div>
+    <p class="small" style="margin-top:-6px">Cambia el nivel de confianza y mira cómo el <b>área de afuera</b> (el error, en ámbar) crece o se achica, y cómo la <b>reja</b> (±z) se mueve.</p>
+    <div class="ctrls">
+      <div class="ctrl" style="flex:1 1 100%"><label>Nivel de confianza</label>
+        <select id="confSel"><option value="90">90%</option><option value="95" selected>95%</option><option value="99">99%</option></select>
+      </div>
+    </div>
+    <svg class="plot" id="confplot" viewBox="0 0 620 250"></svg>
+    <div class="out">
+      <div><span>Confianza (adentro)</span><b id="cfConf">—</b></div>
+      <div><span>α = error (afuera)</span><b id="cfAlpha">—</b></div>
+      <div><span>Error por cola</span><b id="cfTail">—</b></div>
+      <div><span>z crítico (la reja)</span><b id="cfZ">—</b></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--li);box-shadow:0 0 12px var(--li)"></span>Confirmando tus dos corazonadas</h3>
+    <div class="tw"><table>
+      <thead><tr><th>Lo que preguntaste</th><th>Respuesta</th></tr></thead>
+      <tbody>
+        <tr><td style="text-align:left">¿El 0,05 es "lo que queda fuera del área de confianza"?</td><td style="color:#a3e635"><b>Sí</b>, exacto</td></tr>
+        <tr><td style="text-align:left">¿Ese 0,05 es "el error"?</td><td style="color:#a3e635"><b>Sí</b> — es el riesgo de error tipo I</td></tr>
+        <tr><td style="text-align:left">¿El 1,96 es el error?</td><td style="color:#fbbf24"><b>No</b> — es la frontera, no el área</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <h3 style="margin-top:28px">Cómo encaja todo</h3>
+  <div class="formula">nivel de confianza + α = 100%&nbsp;&nbsp;&nbsp;→&nbsp;&nbsp;&nbsp;95% + 5% = 100%</div>
+  <p>El α (el error) se reparte en las <b>dos colas</b> (porque el IC es bilateral): 2,5% a cada lado. La reja se planta donde empieza cada cola: en <b>±1,96</b>. Ese 5% es, literalmente, la proporción de intervalos que <i>fallarían</i> si repitieras el estudio muchas veces (como vimos en el módulo 7) — el error que asumes a cambio de no exigir certeza absoluta.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Confianza (adentro)</th><th>α = error (afuera)</th><th>Error por cola</th><th>z crítico (la reja)</th></tr></thead>
+    <tbody>
+      <tr><td class="k">90%</td><td>10%</td><td>5%</td><td>1,645</td></tr>
+      <tr><td class="k">95%</td><td>5%</td><td>2,5%</td><td class="hl">1,96</td></tr>
+      <tr><td class="k">99%</td><td>1%</td><td>0,5%</td><td>2,576</td></tr>
+    </tbody>
+  </table></div>
+  <p class="small">Lee la tabla de arriba abajo: <b>más confianza → menos error → la reja se aleja</b> (z más grande). Y una reja más lejos = intervalo más ancho = menos preciso. Nada es gratis.</p>
+
+  <div class="card" style="border-color:rgba(34,211,238,.25)">
+    <h3><span class="dot" style="background:var(--cy);box-shadow:0 0 12px var(--cy)"></span>Un ejemplo nuevo: al 90% de confianza</h3>
+    <div class="calc">Confianza = 90%   →   α (error) = 1 − 0,90 = 0,10  (10%)
+α por cola = 0,10 ÷ 2 = 0,05   →   área a la izquierda = 0,95
+Busco 0,95 ADENTRO → leo en los bordes la reja:</div>
+    <span class="res">z crítico = ±1,645</span>
+    <p class="small" style="margin-top:8px">Fíjate: al bajar la confianza de 95% a 90%, el <b>error subió</b> de 5% a 10% (aceptas equivocarte más seguido), pero la <b>reja se acercó</b> (de 1,96 a 1,645), así que el intervalo es <b>más angosto</b>: más preciso, pero más arriesgado.</p>
+  </div>
+
+  <div class="card trampa">
+    <h3><span class="dot"></span>Trampa frecuente — confundir el área con la posición</h3>
+    <p>El error más común es mezclar las dos cosas que separamos: creer que "1,96 = 5%". No. El <b>5% es un área</b> (lo de afuera, el error); el <b>1,96 es una posición</b> en el eje horizontal (dónde se corta). Son dos lenguajes del mismo dibujo: α habla de <i>cuánta</i> cola queda, z habla de <i>dónde</i> empieza. Y recuerda del módulo 13: ese α es el <b>error tipo I</b>, el riesgo de "ver un tigre que no estaba".</p>
+  </div>
+
+  <details class="q">
+    <summary>Recupera: subes la confianza de 95% a 99%. ¿Qué pasa con el error, con la reja (z) y con el ancho del intervalo?</summary>
+    <p>El <b>error baja</b> (de 5% a 1%): aceptas equivocarte menos. La <b>reja se aleja</b> (z de 1,96 a 2,576): exiges más para cortar. Y el <b>intervalo se ensancha</b>: ganas seguridad a costa de precisión. Por eso 99% no es "mejor" por defecto — es más seguro pero menos informativo.</p>
+  </details>
+</section>
+
 <!-- ================= GLOSARIO ================= -->
 <section class="mod" id="glos">
   <div class="modhead">
@@ -2358,6 +2451,7 @@ VPP = 40 ÷ (40 + 190) = 40 ÷ 230 = 17,4 %</div>
       <tr><td class="k">Shapiro-Wilk</td><td>—</td><td>Prueba de normalidad; p&lt;0,05 → los datos NO son normales</td></tr>
       <tr><td class="k">Φ(z) acum.</td><td>"fi de zeta"</td><td>Lo que guarda el CUERPO de la tabla Z clásica (área a la izquierda)</td></tr>
       <tr><td class="k">valor crítico</td><td>—</td><td>El z o t que deja α en la(s) cola(s); lo buscas entrando por la probabilidad</td></tr>
+      <tr><td class="k">confianza</td><td>—</td><td>Nivel de confianza = 1 − α; el "adentro" (ej. 95%), frente a α que es el "afuera" (el error)</td></tr>
     </tbody>
   </table></div>
 
@@ -2614,6 +2708,46 @@ const nf=(v,d)=>v.toFixed(d).replace('.',',');
       '<text x="'+px(x0)+'" y="'+(H-4)+'" fill="#5f7fa8" font-size="9" font-family="JetBrains Mono">← test + (riesgo)   |   test − (típico) →</text>';
   }
   cut.addEventListener('input',draw);draw();
+})();
+
+/* ---------- lab confianza / error / frontera ---------- */
+(function(){
+  const sel=document.getElementById('confSel'),sv=document.getElementById('confplot');
+  if(!sel||!sv)return;
+  const Z={90:1.645,95:1.960,99:2.576};
+  function draw(){
+    const c=+sel.value, zc=Z[c], alpha=1-c/100;
+    document.getElementById('cfConf').textContent=c+'%';
+    document.getElementById('cfAlpha').textContent=nf(alpha*100,0)+'%';
+    document.getElementById('cfTail').textContent=nf(alpha/2*100,1)+'%';
+    document.getElementById('cfZ').textContent='±'+nf(zc,3);
+    const W=620,H=250,PL=24,PB=42,PT=18,gw=W-2*PL,gh=H-PB-PT;
+    const z0=-3.6,z1=3.6;
+    const px=z=>PL+((z-z0)/(z1-z0))*gw;
+    const maxp=pdf(0);
+    const py=v=>PT+gh-(v/maxp)*gh*0.9;
+    const curve=()=>{let d='';for(let z=z0;z<=z1;z+=0.04)d+=(d?'L':'M')+px(z).toFixed(1)+','+py(pdf(z)).toFixed(1);return d;};
+    const area=(a,b)=>{let d='M'+px(a).toFixed(1)+','+py(0).toFixed(1);for(let z=a;z<=b+1e-9;z+=0.04)d+='L'+px(z).toFixed(1)+','+py(pdf(z)).toFixed(1);return d+'L'+px(Math.min(b,z1)).toFixed(1)+','+py(0).toFixed(1)+'Z';};
+    let ticks='';
+    for(let z=-3;z<=3;z++)ticks+='<line x1="'+px(z)+'" y1="'+py(0)+'" x2="'+px(z)+'" y2="'+(py(0)+5)+'" stroke="#5f7fa8"/>'+
+      '<text x="'+px(z)+'" y="'+(py(0)+18)+'" fill="#8ea0bd" font-size="10" text-anchor="middle" font-family="JetBrains Mono">'+z+'</text>';
+    sv.innerHTML=
+      '<path d="'+area(-zc,zc)+'" fill="rgba(163,230,53,.22)"/>'+
+      '<path d="'+area(z0,-zc)+'" fill="rgba(251,191,36,.40)"/>'+
+      '<path d="'+area(zc,z1)+'" fill="rgba(251,191,36,.40)"/>'+
+      '<path d="'+curve()+'" fill="none" stroke="#dbe6f5" stroke-width="1.8"/>'+
+      '<line x1="'+px(z0)+'" y1="'+py(0)+'" x2="'+px(z1)+'" y2="'+py(0)+'" stroke="#5f7fa8"/>'+ticks+
+      '<line x1="'+px(-zc)+'" y1="'+PT+'" x2="'+px(-zc)+'" y2="'+py(0)+'" stroke="#fff" stroke-width="2" stroke-dasharray="5 4"/>'+
+      '<line x1="'+px(zc)+'" y1="'+PT+'" x2="'+px(zc)+'" y2="'+py(0)+'" stroke="#fff" stroke-width="2" stroke-dasharray="5 4"/>'+
+      '<text x="'+px(-zc)+'" y="'+(PT-4)+'" fill="#fff" font-size="10" text-anchor="middle" font-family="JetBrains Mono">−'+nf(zc,2)+'</text>'+
+      '<text x="'+px(zc)+'" y="'+(PT-4)+'" fill="#fff" font-size="10" text-anchor="middle" font-family="JetBrains Mono">+'+nf(zc,2)+'</text>'+
+      '<text x="'+px(0)+'" y="'+(py(pdf(0))+20)+'" fill="#a3e635" font-size="13" text-anchor="middle" font-family="Sora" font-weight="700">'+c+'%</text>'+
+      '<text x="'+px(0)+'" y="'+(py(pdf(0))+36)+'" fill="#a3e635" font-size="9" text-anchor="middle" font-family="Inter">confianza (adentro)</text>'+
+      '<text x="'+px((z0-zc)/2-0.2)+'" y="'+(py(0)-8)+'" fill="#fbbf24" font-size="10" text-anchor="middle" font-family="JetBrains Mono">'+nf(alpha/2*100,1)+'%</text>'+
+      '<text x="'+px((z1+zc)/2+0.2)+'" y="'+(py(0)-8)+'" fill="#fbbf24" font-size="10" text-anchor="middle" font-family="JetBrains Mono">'+nf(alpha/2*100,1)+'%</text>'+
+      '<text x="'+px(0)+'" y="'+(H-6)+'" fill="#5f7fa8" font-size="9" text-anchor="middle" font-family="JetBrains Mono">ámbar = α (el error, lo que queda afuera)   ·   verde = confianza</text>';
+  }
+  sel.addEventListener('change',draw);draw();
 })();
 </script>
 </body>

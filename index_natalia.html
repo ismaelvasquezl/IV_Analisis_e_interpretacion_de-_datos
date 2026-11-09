@@ -160,7 +160,7 @@ mark{background:rgba(34,211,238,.22);color:#fff;padding:1px 4px;border-radius:4p
   <div class="wrap">
     <div class="kicker">Guía visual · Bioestadística aplicada</div>
     <h1>Estadística para la práctica clínica</h1>
-    <p class="hero-sub">Veintidós módulos en tres bloques —y una caja de preguntas que crece—: entender qué <b style="color:var(--txt)">calculas</b>, aprender a <b style="color:var(--txt)">decidir y a dudar</b>, y por fin <b style="color:var(--txt)">leer un estudio real</b> de principio a fin, con ejemplos de rehabilitación.</p>
+    <p class="hero-sub">Un recorrido en tres bloques —más una caja de preguntas y ampliaciones que crecen con cada clase—: entender qué <b style="color:var(--txt)">calculas</b>, aprender a <b style="color:var(--txt)">decidir y a dudar</b>, <b style="color:var(--txt)">leer un estudio real</b> y <b style="color:var(--txt)">elegir bien la prueba</b>, siempre con ejemplos de rehabilitación.</p>
     <div class="dedic">🧠 Hecha para <b>Natalia</b> · terapia ocupacional &amp; rehabilitación comunitaria</div>
     <div class="chips">
       <span class="chip">descriptiva</span><span class="chip">probabilidad</span><span class="chip">DE vs EE</span>
@@ -214,6 +214,10 @@ mark{background:rgba(34,211,238,.22);color:#fff;padding:1px 4px;border-radius:4p
     <a href="#b4" style="color:var(--cy)">● Caja de preguntas</a>
     <a href="#m23">23 · Afuera o adentro</a>
     <a href="#m24">24 · ¿El 0,05 es el error?</a>
+    <a href="#b5" style="color:var(--vi)">● Comparar medias</a>
+    <a href="#m25">25 · Independiente o pareado</a>
+    <a href="#m26">26 · El árbol de decisión</a>
+    <a href="#m27">27 · Supuestos</a>
     <a href="#glos">Glosario</a>
   </div>
 </nav>
@@ -2407,6 +2411,224 @@ Busco 0,95 ADENTRO → leo en los bordes la reja:</div>
   </details>
 </section>
 
+<!-- ================= DIVISOR BLOQUE 5 · COMPARAR MEDIAS ================= -->
+<section class="mod" id="b5" style="border-top:1px solid var(--vi);margin-top:60px">
+  <div style="text-align:center;padding:30px 0 6px">
+    <div class="kicker" style="color:var(--vi)">Semana 6 en profundidad · comparar medias bien</div>
+    <h2 style="font-size:clamp(1.6rem,5.5vw,2.3rem);background:linear-gradient(100deg,#fff,var(--vi) 70%);-webkit-background-clip:text;background-clip:text;color:transparent">Elegir la prueba correcta, sin angustia</h2>
+    <p class="hero-sub" style="margin:14px auto 0">Esta es la ampliación del "¿qué prueba uso?" (módulo 11) para el caso más común en rehabilitación: <b style="color:var(--txt)">comparar promedios</b>. Todo se reduce a <b style="color:var(--txt)">tres preguntas</b>, y las tres las puedes responder mirando tu propia planilla.</p>
+  </div>
+
+  <div class="card" style="border-color:rgba(167,139,250,.3);background:rgba(167,139,250,.06)">
+    <h3><span class="dot" style="background:var(--vi);box-shadow:0 0 12px var(--vi)"></span>Para ti que estás leyendo esto</h3>
+    <p>Si llegaste hasta acá, respira: este es de los temas que más intimidan, con una lista de nombres raros (ANOVA, Mann-Whitney, Wilcoxon, Kruskal-Wallis…) que parecen un idioma aparte. Pero aquí va el secreto: <b>no necesitas memorizar los nombres</b>. Necesitas responder tres preguntas sencillas, y el nombre aparece solo.</p>
+    <p>Y tienes una ventaja enorme: <b>esto ya lo haces en tu trabajo.</b> Cada vez que mediste a un usuario antes y después de una intervención y te preguntaste <i>"¿mejoró de verdad o fue casualidad?"</i>, hiciste la pregunta central de esta clase. La estadística solo le pone apellido a lo que tu clínica ya hace todos los días.</p>
+  </div>
+
+  <div class="idea" style="border-color:rgba(167,139,250,.35);background:rgba(167,139,250,.07)">
+    <b style="color:var(--vi)">El mapa mental de todo el bloque — tres preguntas:</b><br>
+    <b>1.</b> ¿Son las <b>mismas personas</b> medidas dos veces (<b>pareado</b>) o <b>grupos distintos</b> (<b>independiente</b>)? &nbsp;·&nbsp;
+    <b>2.</b> ¿Comparo <b>2</b> grupos/momentos o <b>3 o más</b>? &nbsp;·&nbsp;
+    <b>3.</b> ¿Los datos son <b>normales</b> o no?<br>
+    Responde esas tres y ya sabes qué prueba usar. Nada más.
+  </div>
+</section>
+
+<!-- ================= M25 INDEPENDIENTE O PAREADO ================= -->
+<section class="mod" id="m25">
+  <div class="modhead">
+    <div class="modnum" style="background:linear-gradient(140deg,var(--vi),var(--mg))">25</div>
+    <div><h2>Independiente o pareado: la pregunta que lo cambia todo</h2><div class="modtag" style="color:var(--vi)">Pregunta 1 — y la más importante</div></div>
+  </div>
+
+  <div class="card escena">
+    <h3><span class="dot"></span>La escena</h3>
+    <p>Tienes dos planillas sobre la mesa. En la primera, mediste la fuerza de prensión de <b>20 usuarios distintos</b>: 10 que hicieron terapia presencial y 10 que la hicieron por tele-rehabilitación. En la segunda, mediste a <b>los mismos 10 usuarios</b>, antes y después de un programa de mano. Parecen el mismo problema ("comparar fuerzas"), pero exigen <b>pruebas distintas</b>. Saber cuál es cuál es el primer paso, y el que más gente salta.</p>
+  </div>
+
+  <div class="idea">
+    <b>La idea en una frase:</b> si cada fila es una <b>persona diferente</b>, los grupos son <b>independientes</b>. Si la <b>misma persona</b> aparece dos veces (o más), los datos son <b>pareados</b>. Lo delata el ID: si un mismo ID se repite, es pareado.
+  </div>
+
+  <div class="tw"><table>
+    <thead><tr><th></th><th>Independiente</th><th>Pareado</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Quién está en cada grupo</td><td>Personas <b>distintas</b></td><td>Las <b>mismas</b> personas, dos veces</td></tr>
+      <tr><td class="k">El ID…</td><td>No se repite (20 IDs)</td><td>Se repite (10 IDs × 2)</td></tr>
+      <tr><td class="k">Ejemplo en rehabilitación</td><td>Presencial vs tele (grupos distintos)</td><td>Pre vs post del mismo programa</td></tr>
+      <tr><td class="k">Otro ejemplo</td><td>Fuerza entre 3 diagnósticos</td><td>Brazo derecho vs izquierdo del mismo usuario</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--mg);box-shadow:0 0 12px var(--mg)"></span>Por qué pareado es más poderoso: cada quien es su propio control</h3>
+    <p>En un diseño independiente, parte de la diferencia entre grupos puede venir de que son <b>personas distintas</b> (una más fuerte de entrada, otra más débil). En un diseño pareado, <b>cada usuario se compara consigo mismo</b>: su fuerza de ayer contra la de hoy. Como es la misma persona, eliminas de un plumazo toda la variabilidad "entre personas" y queda solo el efecto de la intervención.</p>
+    <p class="small">Analogía: medir si creciste no comparándote con tu vecino, sino con tu propia marca en el marco de la puerta. Tú eres tu mejor punto de comparación.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--cy);box-shadow:0 0 12px var(--cy)"></span>El truco del pareado: se trabaja con las diferencias individuales</h3>
+    <p>Aquí está el corazón del caso pareado. <b>No</b> comparas "promedio antes" contra "promedio después". Para cada persona calculas su <b>cambio (d = después − antes)</b>, y después te preguntas si el promedio de esos cambios es distinto de 0.</p>
+    <p class="small">Fuerza de prensión (kg) en un programa de mano, 6 usuarios:</p>
+    <div class="tw"><table>
+      <thead><tr><th>Usuario</th><th>Pre</th><th>Post</th><th>d = Post − Pre</th></tr></thead>
+      <tbody>
+        <tr><td class="k">1</td><td>18</td><td>22</td><td>+4</td></tr>
+        <tr><td class="k">2</td><td>20</td><td>21</td><td>+1</td></tr>
+        <tr><td class="k">3</td><td>15</td><td>20</td><td>+5</td></tr>
+        <tr><td class="k">4</td><td>22</td><td>24</td><td>+2</td></tr>
+        <tr><td class="k">5</td><td>17</td><td>19</td><td>+2</td></tr>
+        <tr><td class="k">6</td><td>19</td><td>20</td><td>+1</td></tr>
+        <tr><td colspan="3" style="text-align:right"><b>promedio de los cambios (d̄) =</b></td><td class="hl">+2,5 kg</td></tr>
+      </tbody>
+    </table></div>
+    <p>La hipótesis pareada mira esa última columna:</p>
+    <div class="calc">H₀:  la media de las diferencias = 0   (la intervención no cambió nada)
+H₁:  la media de las diferencias ≠ 0   (sí cambió)</div>
+    <p class="small">Sobre esa columna de diferencias corres una <b>t de Student pareada</b> (su mecánica completa, paso a paso, está en el módulo 8: ahí da t = 4,35, p = 0,002). Lo esencial aquí es <i>qué</i> columna usas: la de los deltas, no los promedios totales.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--vi);box-shadow:0 0 12px var(--vi)"></span>Cómo se ve en tu planilla: dos formatos válidos</h3>
+    <ul class="neo">
+      <li><b>"Hacia el lado" (ancho):</b> una fila por persona, y las mediciones en columnas distintas (<code>ID · pre · post</code>). El ID aparece una sola vez.</li>
+      <li><b>"Hacia abajo" (largo):</b> una fila por medición, con una columna que marca el momento (<code>ID · momento · valor</code>). El mismo ID se repite.</li>
+    </ul>
+    <p class="small">Los dos son correctos; algunos programas piden uno u otro. Lo importante: en ambos registras <b>n, promedio y DE</b> de cada momento.</p>
+  </div>
+
+  <div class="card trampa">
+    <h3><span class="dot"></span>Trampa frecuente — tratar datos pareados como independientes</h3>
+    <p>Si comparas pre y post con una t <b>independiente</b>, ignoras que es la misma persona y <b>tiras a la basura</b> la ventaja de que cada uno sea su propio control. El resultado: pierdes potencia y puedes no detectar una mejora que sí existe. La clase lo dice directo: "mantener la correlación interna de los datos pareados" es obligatorio. Primero pregunta si el ID se repite.</p>
+  </div>
+
+  <details class="q">
+    <summary>Recupera: mides destreza manual en el brazo dominante y el no dominante de 15 usuarios. ¿Independiente o pareado?</summary>
+    <p><b>Pareado.</b> Son dos medidas sobre la <b>misma persona</b> (su brazo derecho y su izquierdo), así que están correlacionadas: un usuario fuerte lo será en ambos. Se analiza con la columna de diferencias (derecho − izquierdo) y una prueba pareada, no con una t independiente.</p>
+  </details>
+</section>
+
+<!-- ================= M26 ARBOL DE DECISION ================= -->
+<section class="mod" id="m26">
+  <div class="modhead">
+    <div class="modnum" style="background:linear-gradient(140deg,var(--vi),var(--mg))">26</div>
+    <div><h2>El árbol de decisión completo</h2><div class="modtag" style="color:var(--vi)">Tres preguntas → una prueba</div></div>
+  </div>
+
+  <div class="card escena">
+    <h3><span class="dot"></span>La escena</h3>
+    <p>Ya tienes la pregunta 1 (independiente/pareado). Sumas la 2 (¿2 o 3+ grupos?) y la 3 (¿normal o no?), y el árbol te entrega <b>exactamente una</b> prueba. Ocho combinaciones, ocho pruebas — pero nunca tienes que recordarlas: las deduces.</p>
+  </div>
+
+  <div class="idea">
+    <b>La idea en una frase:</b> las tres preguntas son tres bifurcaciones. Cada respuesta corta la mitad de las opciones, hasta dejar una sola. No memorizas pruebas; <b>navegas un árbol</b>.
+  </div>
+
+  <h3 style="margin-top:24px">El cuadro maestro (para comparar medias)</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Tipo de datos</th><th>Distribución</th><th>2 grupos / momentos</th><th>3 o más</th></tr></thead>
+    <tbody>
+      <tr><td class="k" rowspan="2">Independiente<br><span class="small">(grupos distintos)</span></td><td>Normal</td><td>t de Student independiente</td><td>ANOVA (un factor)</td></tr>
+      <tr><td>No normal</td><td>Mann-Whitney (U)</td><td>Kruskal-Wallis</td></tr>
+      <tr><td class="k" rowspan="2">Pareado<br><span class="small">(mismas personas)</span></td><td>Normal</td><td>t de Student pareada</td><td>ANOVA de medidas repetidas</td></tr>
+      <tr><td>No normal</td><td>Wilcoxon (rangos signados)</td><td>Friedman *</td></tr>
+    </tbody>
+  </table></div>
+  <p class="small">* Friedman completa el cuadro por simetría; el curso se centra en las otras siete. <b>Fíjate en el patrón:</b> la fila "no normal" es la versión no paramétrica de la fila "normal" de arriba. Si aprendes la mitad de arriba, la de abajo es su reflejo.</p>
+
+  <!-- LAB SELECTOR AMPLIADO -->
+  <div class="lab" style="border-color:rgba(167,139,250,.35);background:linear-gradient(160deg,rgba(167,139,250,.07),rgba(244,114,182,.05))">
+    <div class="labttl" style="color:var(--vi)">Laboratorio · recorre el árbol</div>
+    <p class="small" style="margin-top:-6px">Responde las tres preguntas y te digo la prueba, con un ejemplo de rehabilitación.</p>
+    <div class="ctrls">
+      <div class="ctrl"><label>1 · Tipo de datos</label>
+        <select id="tdTipo"><option value="ind">Independiente (grupos distintos)</option><option value="par">Pareado (mismas personas)</option></select>
+      </div>
+      <div class="ctrl"><label>2 · ¿Cuántos?</label>
+        <select id="tdN"><option value="2">2 grupos / momentos</option><option value="3">3 o más</option></select>
+      </div>
+      <div class="ctrl"><label>3 · Distribución</label>
+        <select id="tdDist"><option value="norm">Normal</option><option value="no">No normal</option></select>
+      </div>
+    </div>
+    <div class="out" style="flex-direction:column">
+      <div style="flex:1 1 100%"><span>Prueba recomendada</span><b id="tdTest" style="color:var(--vi);font-size:1.2rem">—</b></div>
+      <div style="flex:1 1 100%;background:transparent;border:none;padding:4px 0"><span style="margin-bottom:6px">Ejemplo en rehabilitación</span><span id="tdEx" style="color:var(--txt);text-transform:none;letter-spacing:0;font-family:Inter;font-size:.92rem">—</span></div>
+      <div style="flex:1 1 100%;background:transparent;border:none;padding:0"><span style="margin-bottom:6px">Si sale significativo y hay 3+…</span><span id="tdPost" style="color:var(--li);text-transform:none;letter-spacing:0;font-size:.85rem">—</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--li);box-shadow:0 0 12px var(--li)"></span>Cuando hay 3+ y sale significativo: los test post-hoc</h3>
+    <p>ANOVA (o Kruskal-Wallis) solo te dice <i>"al menos un par de grupos difiere"</i>, pero no <b>cuál</b>. Para encontrar el par culpable se usa un <b>test de comparaciones múltiples (post-hoc)</b>:</p>
+    <ul class="neo">
+      <li>Después de <b>ANOVA</b>: Tukey o Bonferroni.</li>
+      <li>Después de <b>Kruskal-Wallis</b>: test de Dunn.</li>
+    </ul>
+    <p class="small">Analogía: ANOVA es la alarma que suena diciendo "alguien entró a la casa"; el post-hoc es revisar cuarto por cuarto para saber en cuál está.</p>
+  </div>
+
+  <div class="card trampa">
+    <h3><span class="dot"></span>Trampa frecuente — hacer muchas t en vez de ANOVA</h3>
+    <p>Con 3 grupos, es tentador hacer 3 comparaciones t (A-B, A-C, B-C). No lo hagas: cada t extra vuelve a arriesgar el error tipo I, y el riesgo total se dispara muy por encima del 5%. ANOVA compara los tres de una vez con un solo α, y <i>luego</i> el post-hoc localiza la diferencia controlando ese riesgo.</p>
+  </div>
+
+  <details class="q">
+    <summary>Recupera: comparas el puntaje de independencia (Barthel) basal, a 3 y a 6 meses en los mismos 40 usuarios, y los datos son normales. ¿Qué prueba?</summary>
+    <p>Tres preguntas: <b>pareado</b> (mismas personas), <b>3+ momentos</b>, <b>normal</b> → <b>ANOVA de medidas repetidas</b>. Si sale significativo, un post-hoc (Tukey/Bonferroni) te dice entre cuáles momentos está el cambio: ¿basal vs 3 meses? ¿basal vs 6? ¿3 vs 6?</p>
+  </details>
+</section>
+
+<!-- ================= M27 SUPUESTOS ================= -->
+<section class="mod" id="m27">
+  <div class="modhead">
+    <div class="modnum" style="background:linear-gradient(140deg,var(--vi),var(--mg))">27</div>
+    <div><h2>Los supuestos: ¿puedo usar la prueba paramétrica?</h2><div class="modtag" style="color:var(--vi)">Pregunta 3, explicada en serio</div></div>
+  </div>
+
+  <div class="card escena">
+    <h3><span class="dot"></span>La escena</h3>
+    <p>La t de Student y el ANOVA son pruebas <b>paramétricas</b>: potentes, pero piden una condición para funcionar bien. La pregunta 3 del árbol —"¿los datos son normales?"— es justo revisar esa condición. Y hay una noticia excelente que te va a quitar un peso de encima.</p>
+  </div>
+
+  <div class="idea">
+    <b>La idea en una frase (y la buena noticia):</b> lo que debe ser normal no son <b>tus datos crudos</b>, sino el <b>promedio</b>. Y por el Teorema Central del Límite (módulo 5), <mark>si tu muestra es grande (regla práctica: n &gt; 30), el promedio ya es normal aunque los datos no lo sean.</mark> Con muestras grandes, casi siempre puedes usar las pruebas paramétricas.
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--vi);box-shadow:0 0 12px var(--vi)"></span>El supuesto que de verdad importa: normalidad del promedio</h3>
+    <p>Un promedio se puede considerar normal en dos situaciones:</p>
+    <ul class="neo">
+      <li>La <b>variable de origen</b> ya es normal (ej. muchas medidas antropométricas).</li>
+      <li>O la <b>muestra es grande</b> (n &gt; 30): el TCL hace normal al promedio sin importar la forma original.</li>
+    </ul>
+    <p>¿Cuándo preocuparte entonces? Cuando tienes <b>muestra chica Y datos no normales</b> a la vez. Ahí no puedes apoyarte en el TCL, y conviene pasar a la versión <b>no paramétrica</b> (la fila de abajo del cuadro del módulo 26).</p>
+    <p class="small">Ejemplo de la clase: un estudio con 25 por grupo no alcanza para el TCL, así que ahí sí habría que demostrar normalidad de la variable antes de usar t.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--cy);box-shadow:0 0 12px var(--cy)"></span>El otro supuesto: homocedasticidad (y por qué no te angusties)</h3>
+    <p><b>Homocedasticidad</b> = las varianzas de los grupos son parecidas (dispersiones similares). Suena temible, pero la propia clase lo baja a tierra: <i>"la relevancia es pequeña"</i>. Siempre puedes trabajar <b>asumiendo varianzas distintas</b> (es la opción segura); asumirlas iguales solo hace la prueba un poquito más potente. En duda, varianzas distintas y listo.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--li);box-shadow:0 0 12px var(--li)"></span>Dos salidas cuando los datos no son normales</h3>
+    <ul class="neo">
+      <li><b>Transformar los datos:</b> aplicar logaritmo o raíz cuadrada suele "centrar" una distribución asimétrica y volverla más simétrica (la clase lo muestra con triglicéridos: el log los normaliza). Luego usas la prueba paramétrica sobre los datos transformados.</li>
+      <li><b>Usar una prueba no paramétrica:</b> Mann-Whitney, Wilcoxon, Kruskal-Wallis o Dunn. No piden normalidad porque trabajan con <b>rangos</b> (el orden), no con los valores crudos.</li>
+    </ul>
+  </div>
+
+  <div class="idea" style="border-color:rgba(167,139,250,.35);background:rgba(167,139,250,.07)">
+    <b style="color:var(--vi)">El cierre tranquilizador:</b> no tienes que dominar cada prueba de memoria. Tienes que responder tres preguntas —pareado o no, 2 o 3+, normal o no— y revisar un supuesto que, con muestra grande, casi siempre se cumple solo. Lo demás es consultar el cuadro. Eso es todo. De verdad.
+  </div>
+
+  <details class="q">
+    <summary>Recupera: tienes 120 usuarios y quieres comparar el TUG (algo sesgado) entre presencial y tele. ¿Puedes usar t de Student?</summary>
+    <p><b>Sí.</b> Aunque el TUG sea algo asimétrico, con n = 120 (mucho mayor que 30) el <b>promedio</b> es normal por el TCL, así que la condición de la t se cumple. Son grupos distintos y son 2 → <b>t de Student independiente</b>. Solo recurrirías a Mann-Whitney si la muestra fuera chica <i>y</i> claramente no normal.</p>
+  </details>
+</section>
+
 <!-- ================= GLOSARIO ================= -->
 <section class="mod" id="glos">
   <div class="modhead">
@@ -2447,11 +2669,18 @@ Busco 0,95 ADENTRO → leo en los bordes la reja:</div>
       <tr><td class="k">VP·FP·FN·VN</td><td>—</td><td>Verdaderos/falsos positivos y negativos (las 4 casillas del test)</td></tr>
       <tr><td class="k">crudo / ajustado</td><td>—</td><td>OR univariante (solo) vs multivariante (descontando otras variables)</td></tr>
       <tr><td class="k">confusión</td><td>confounding</td><td>Un factor que hace parecer efecto propio lo que es de otra variable</td></tr>
-      <tr><td class="k">Mann-Whitney</td><td>U</td><td>Prueba no paramétrica (sin supuesto de normalidad) para 2 grupos</td></tr>
       <tr><td class="k">Shapiro-Wilk</td><td>—</td><td>Prueba de normalidad; p&lt;0,05 → los datos NO son normales</td></tr>
       <tr><td class="k">Φ(z) acum.</td><td>"fi de zeta"</td><td>Lo que guarda el CUERPO de la tabla Z clásica (área a la izquierda)</td></tr>
       <tr><td class="k">valor crítico</td><td>—</td><td>El z o t que deja α en la(s) cola(s); lo buscas entrando por la probabilidad</td></tr>
       <tr><td class="k">confianza</td><td>—</td><td>Nivel de confianza = 1 − α; el "adentro" (ej. 95%), frente a α que es el "afuera" (el error)</td></tr>
+      <tr><td class="k">independiente</td><td>—</td><td>Grupos de personas distintas (los ID no se repiten)</td></tr>
+      <tr><td class="k">pareado</td><td>—</td><td>Mismas personas medidas 2+ veces (el ID se repite); se analiza con las diferencias</td></tr>
+      <tr><td class="k">ANOVA</td><td>—</td><td>Compara 3+ medias independientes a la vez (medidas repetidas si es pareado)</td></tr>
+      <tr><td class="k">Mann-Whitney</td><td>U</td><td>No paramétrica para 2 grupos independientes (en vez de t independiente)</td></tr>
+      <tr><td class="k">Wilcoxon</td><td>rangos signados</td><td>No paramétrica para 2 medidas pareadas (en vez de t pareada)</td></tr>
+      <tr><td class="k">Kruskal-Wallis</td><td>—</td><td>No paramétrica para 3+ grupos independientes (en vez de ANOVA)</td></tr>
+      <tr><td class="k">post-hoc</td><td>—</td><td>Comparaciones múltiples tras un ANOVA/KW significativo (Tukey, Bonferroni, Dunn)</td></tr>
+      <tr><td class="k">homocedasticidad</td><td>—</td><td>Varianzas parecidas entre grupos; en duda, asume varianzas distintas</td></tr>
     </tbody>
   </table></div>
 
@@ -2748,6 +2977,30 @@ const nf=(v,d)=>v.toFixed(d).replace('.',',');
       '<text x="'+px(0)+'" y="'+(H-6)+'" fill="#5f7fa8" font-size="9" text-anchor="middle" font-family="JetBrains Mono">ámbar = α (el error, lo que queda afuera)   ·   verde = confianza</text>';
   }
   sel.addEventListener('change',draw);draw();
+})();
+
+/* ---------- lab árbol de decisión (comparar medias) ---------- */
+(function(){
+  const tipo=document.getElementById('tdTipo'),num=document.getElementById('tdN'),dist=document.getElementById('tdDist');
+  if(!tipo||!num||!dist)return;
+  const M={
+    'ind-2-norm':  ['t de Student para muestras independientes','Fuerza de prensión entre dos grupos distintos de usuarios: presencial vs tele-rehabilitación.','—'],
+    'ind-2-no':    ['Mann-Whitney (U)','Dolor EVA (ordinal, sesgado) entre dos grupos distintos de usuarios.','—'],
+    'ind-3-norm':  ['ANOVA de un factor','Fuerza de prensión entre tres diagnósticos distintos (ACV, artrosis, Parkinson).','Post-hoc: Tukey o Bonferroni'],
+    'ind-3-no':    ['Kruskal-Wallis','Tiempo TUG (sesgado) entre tres niveles de actividad física (baja/media/alta).','Post-hoc: test de Dunn'],
+    'par-2-norm':  ['t de Student pareada','Fuerza de prensión pre y post de un programa de mano, en los MISMOS usuarios.','—'],
+    'par-2-no':    ['Wilcoxon de rangos signados','Dolor EVA (ordinal) antes y después, en los mismos usuarios.','—'],
+    'par-3-norm':  ['ANOVA de medidas repetidas','Función cognitiva basal, a 3 y a 6 meses, en los mismos usuarios.','Post-hoc para medidas repetidas (Bonferroni)'],
+    'par-3-no':    ['Friedman','Puntaje ordinal de independencia en tres momentos, en los mismos usuarios.','Post-hoc: Dunn / Nemenyi']
+  };
+  function run(){
+    const key=tipo.value+'-'+num.value+'-'+dist.value;
+    const r=M[key]||['—','—','—'];
+    document.getElementById('tdTest').textContent=r[0];
+    document.getElementById('tdEx').textContent=r[1];
+    document.getElementById('tdPost').textContent=r[2];
+  }
+  [tipo,num,dist].forEach(e=>e.addEventListener('change',run));run();
 })();
 </script>
 </body>

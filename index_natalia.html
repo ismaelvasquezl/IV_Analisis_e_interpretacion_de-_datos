@@ -229,6 +229,9 @@ mark{background:rgba(34,211,238,.22);color:#fff;padding:1px 4px;border-radius:4p
     <a href="#m29">29 · Leer la tabla χ²</a>
     <a href="#m30">30 · RR, OR y forest plots</a>
     <a href="#m31" style="color:var(--cy)">31 · ¿t o normal?</a>
+    <a href="#b7" style="color:var(--mg)">● Tarea 3 resuelta</a>
+    <a href="#m32">32 · Tarea 3 · Tabla 2</a>
+    <a href="#m33">33 · Tarea 3 · Tabla 6</a>
     <a href="#glos">Glosario</a>
     <a href="formulario.html" style="color:var(--li)">📋 Fórmulas</a>
   </div>
@@ -2937,6 +2940,238 @@ H₁:  al menos un par pᵢ, pⱼ es distinto</div>
     <summary>Recupera: calculas el IC 95% de la proporción de usuarios que mejoró (n = 80). ¿Usas t o z, y qué valor?</summary>
     <p><b>z = 1,96.</b> Es una <b>proporción</b>, así que vive en el mundo de la normal, no de la t —sin importar el tamaño de muestra—. Usarías p̂ ± 1,96·√(p̂(1−p̂)/n). La t solo entra cuando comparas o estimas <b>medias</b> con σ desconocido.</p>
   </details>
+</section>
+
+<!-- ================= DIVISOR BLOQUE 7 · TAREA 3 RESUELTA ================= -->
+<section class="mod" id="b7" style="border-top:1px solid var(--mg);margin-top:60px">
+  <div style="text-align:center;padding:30px 0 6px">
+    <div class="kicker" style="color:var(--mg)">Capstone · todo converge aquí</div>
+    <h2 style="font-size:clamp(1.6rem,5.5vw,2.3rem);background:linear-gradient(100deg,#fff,var(--mg) 70%);-webkit-background-clip:text;background-clip:text;color:transparent">Tarea 3 (Inferencia), paso a paso</h2>
+    <p class="hero-sub" style="margin:14px auto 0">Esta es la prueba de fuego: ocho preguntas sobre el paper de prematuros tardíos, y <b style="color:var(--txt)">cada una usa algo que ya aprendiste</b>. Vamos a resolverlas conectando cada paso con su módulo —y con las dudas que tú misma fuiste preguntando—.</p>
+  </div>
+
+  <div class="card" style="border-color:rgba(244,114,182,.3);background:rgba(244,114,182,.06)">
+    <h3><span class="dot" style="background:var(--mg);box-shadow:0 0 12px var(--mg)"></span>Cómo usar este capstone</h3>
+    <p>El objetivo no es copiar, es <b>entender cómo se construye cada respuesta</b>. Por eso cada pregunta trae tres cosas: <b>con qué conecta</b> (el módulo y, cuando aplica, la duda que preguntaste), el <b>desarrollo</b> razonado, y el <b>resultado</b>. Cuando lo entiendas, escribe tu entrega <b>con tus palabras</b>: ahí es donde de verdad se fija el aprendizaje.</p>
+    <p class="small">Nota de método: el paper entrega porcentajes, no conteos, así que la tabla 2×2 se <b>reconstruye</b> (40% de 195, etc.); por eso el χ² y el OR pueden variar en el segundo decimal según el redondeo. El procedimiento es lo que importa.</p>
+  </div>
+</section>
+
+<!-- ================= M32 TAREA 3 · TABLA 2 ================= -->
+<section class="mod" id="m32">
+  <div class="modhead">
+    <div class="modnum" style="background:linear-gradient(140deg,var(--mg),var(--vi))">32</div>
+    <div><h2>Tarea 3 · Tabla 2 (preguntas 1 a 5)</h2><div class="modtag" style="color:var(--mg)">Medias, errores y proporciones</div></div>
+  </div>
+
+  <!-- P1 -->
+  <div class="card">
+    <h3><span class="dot" style="background:var(--cy);box-shadow:0 0 12px var(--cy)"></span>Pregunta 1 · Edad materna</h3>
+    <p class="small"><i>Identifica parámetros, H₀ y H₁ (bilateral, α = 5%) y concluye con los valores muestrales y el valor-p.</i></p>
+    <p><b>Conecta con:</b> módulo 12 (plantear H₀/H₁), módulos 25–26 (comparar medias) y módulo 31 (tu duda: medias → tabla t).</p>
+    <div class="pasos">
+      <div class="paso">
+        <h4>¿Qué tipo de variable y qué prueba?</h4>
+        <p class="small">Edad materna es <b>numérica</b>; comparas su promedio entre dos grupos <b>independientes</b> (madres de PT vs de RNAT). → comparación de dos medias → <b>t de Student independiente</b>.</p>
+      </div>
+      <div class="paso">
+        <h4>Parámetros e hipótesis</h4>
+        <p class="small">Parámetros: las <b>medias poblacionales</b> de edad materna, μ(PT) y μ(RNAT). La hipótesis se escribe para la población, no para la muestra.</p>
+        <div class="calc">H₀:  μ(PT) = μ(RNAT)   (misma edad materna promedio)
+H₁:  μ(PT) ≠ μ(RNAT)   (bilateral)      α = 0,05</div>
+      </div>
+      <div class="paso">
+        <h4>Los datos y la decisión</h4>
+        <div class="calc">PT:   32,6 ± 6,1 años      RNAT: 32,4 ± 5,3 años
+valor-p = 0,53</div>
+        <p>Como <b>p = 0,53 &gt; 0,05</b>, <b>no se rechaza H₀</b>.</p>
+      </div>
+      <div class="paso">
+        <h4>Conclusión en contexto</h4>
+        <span class="res">No hay evidencia de diferencia en la edad materna promedio</span>
+        <p class="small" style="margin-top:8px">Las madres de prematuros tardíos y las de recién nacidos a término tienen una edad promedio estadísticamente igual (32,6 vs 32,4 años). La edad materna no se asocia a ser PT en esta muestra.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- P2 -->
+  <div class="card">
+    <h3><span class="dot" style="background:var(--cy);box-shadow:0 0 12px var(--cy)"></span>Pregunta 2 · Qué significan α, β, 1−α y 1−β</h3>
+    <p class="small"><i>Interpreta los cuatro en el contexto de la hipótesis de la pregunta 1.</i></p>
+    <p><b>Conecta con:</b> módulo 13 (los dos errores) y <b>módulo 24</b> — ¿recuerdas cuando preguntaste <i>"el 0,05, ¿es el error?"</i>? Esta pregunta es exactamente esa respuesta, aplicada.</p>
+    <div class="tw"><table>
+      <thead><tr><th>Símbolo</th><th>Qué es</th><th>En esta tarea (edad materna)</th></tr></thead>
+      <tbody>
+        <tr><td class="k">α = 0,05</td><td>Error tipo I (falso positivo)</td><td>Probabilidad de concluir que las edades <b>difieren</b> cuando en realidad son <b>iguales</b></td></tr>
+        <tr><td class="k">β</td><td>Error tipo II (falso negativo)</td><td>Probabilidad de concluir que <b>no difieren</b> cuando en realidad <b>sí</b> difieren</td></tr>
+        <tr><td class="k">1−α = 0,95</td><td>Nivel de confianza</td><td>Probabilidad de <b>acertar</b> no declarando diferencia cuando de verdad no la hay</td></tr>
+        <tr><td class="k">1−β</td><td>Potencia</td><td>Probabilidad de <b>detectar</b> la diferencia de edad cuando sí existe</td></tr>
+      </tbody>
+    </table></div>
+    <p class="small">Tal como viste en el módulo 24: el <b>0,05 ES el error</b> (lo que queda "afuera" del 95% de confianza, el riesgo de error tipo I). Y α y β se tironean: bajar uno sube el otro (módulo 13).</p>
+  </div>
+
+  <!-- P3 -->
+  <div class="card">
+    <h3><span class="dot" style="background:var(--cy);box-shadow:0 0 12px var(--cy)"></span>Pregunta 3 · Patología materna</h3>
+    <p class="small"><i>Parámetros, H₀ y H₁ (bilateral, α = 5%) y conclusión con el valor-p.</i></p>
+    <p><b>Conecta con:</b> módulo 28 (plantear hipótesis para proporciones) y módulo 11 (¿qué prueba? categórica-categórica → χ²).</p>
+    <div class="pasos">
+      <div class="paso">
+        <h4>Tipo de variable y prueba</h4>
+        <p class="small">Patología materna es <b>categórica</b> (sí/no). Comparas una <b>proporción</b> entre dos grupos → la hipótesis es sobre proporciones, y el test es <b>chi-cuadrado</b>.</p>
+      </div>
+      <div class="paso">
+        <h4>Parámetros e hipótesis</h4>
+        <p class="small">Parámetros: las <b>proporciones poblacionales</b> de patología materna, P(PT) y P(RNAT).</p>
+        <div class="calc">H₀:  P(PT) = P(RNAT)   (misma proporción → no asociación)
+H₁:  P(PT) ≠ P(RNAT)   (bilateral)      α = 0,05</div>
+      </div>
+      <div class="paso">
+        <h4>Datos y decisión</h4>
+        <div class="calc">PT: 40%      RNAT: 21,5%      valor-p < 0,001</div>
+        <p>Como <b>p &lt; 0,001 &lt; 0,05</b>, <b>se rechaza H₀</b>.</p>
+      </div>
+      <div class="paso">
+        <h4>Conclusión en contexto</h4>
+        <span class="res">Sí hay asociación: la patología materna es más frecuente en PT</span>
+        <p class="small" style="margin-top:8px">La proporción de patología materna difiere significativamente entre grupos, siendo mayor en madres de prematuros tardíos (40%) que de término (21,5%).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- P4 -->
+  <div class="card">
+    <h3><span class="dot" style="background:var(--li);box-shadow:0 0 12px var(--li)"></span>Pregunta 4 · Tabla de contingencia y chi-cuadrado</h3>
+    <p class="small"><i>Construye la tabla 2×2, calcula el χ² y concluye. Deja el cálculo explícito.</i></p>
+    <p><b>Conecta con:</b> módulos 15 y 28 (χ² paso a paso) y módulo 29 — la tabla χ² se lee como la t (entras por el borde, tu duda de los módulos 23 y 29).</p>
+    <div class="pasos">
+      <div class="paso">
+        <h4>Reconstruir la tabla desde los porcentajes</h4>
+        <p class="small">PT: 40% × 195 = 78 con patología (117 sin). RNAT: 21,5% × 390 ≈ 84 con (306 sin).</p>
+        <div class="tw"><table>
+          <thead><tr><th></th><th>Patología +</th><th>Patología −</th><th>Total</th></tr></thead>
+          <tbody>
+            <tr><td class="k">PT</td><td>78 (a)</td><td>117 (b)</td><td>195</td></tr>
+            <tr><td class="k">RNAT</td><td>84 (c)</td><td>306 (d)</td><td>390</td></tr>
+            <tr><td class="k">Total</td><td>162</td><td>423</td><td>585</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="paso">
+        <h4>Frecuencias esperadas bajo H₀ (fila×columna ÷ n)</h4>
+        <div class="calc">E(PT,+)   = 195×162÷585 = 54      E(PT,−)   = 195×423÷585 = 141
+E(RNAT,+) = 390×162÷585 = 108     E(RNAT,−) = 390×423÷585 = 282</div>
+      </div>
+      <div class="paso">
+        <h4>Sumar (O − E)² ÷ E</h4>
+        <div class="calc">(78−54)²/54  + (117−141)²/141 + (84−108)²/108 + (306−282)²/282
+= 10,67 + 4,09 + 5,33 + 2,04</div>
+        <span class="res">χ² = 22,13</span>
+        <p class="small" style="margin-top:8px">Verificación con la fórmula reducida: χ² = 585(78·306 − 117·84)² / (195·390·162·423) = <b>22,13</b> ✓</p>
+      </div>
+      <div class="paso">
+        <h4>Comparar con el valor de tabla y concluir</h4>
+        <div class="calc">gl = (2−1)(2−1) = 1   →   χ² crítico (0,05) = 3,84
+22,13 > 3,84   →   se rechaza H₀</div>
+        <span class="res">Asociación significativa (coherente con p &lt; 0,001)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- P5 -->
+  <div class="card">
+    <h3><span class="dot" style="background:var(--li);box-shadow:0 0 12px var(--li)"></span>Pregunta 5 · OR crudo de patología materna</h3>
+    <p class="small"><i>Recalcula el OR crudo con la tabla de la pregunta 4. Deja el cálculo explícito.</i></p>
+    <p><b>Conecta con:</b> módulos 16 y 30 (OR = producto cruzado, regla del 1).</p>
+    <div class="calc">OR = (a·d) ÷ (b·c) = (78 · 306) ÷ (117 · 84) = 23.868 ÷ 9.828</div>
+    <span class="res">OR = 2,43</span>
+    <p style="margin-top:10px">Interpretación: las madres de prematuros tardíos tienen <b>2,43 veces las chances</b> de patología materna en el embarazo, comparadas con las de término. OR &gt; 1 → factor de riesgo, <b>coherente</b> con el χ² significativo de la pregunta 4 (módulo 30: el test y la magnitud siempre concuerdan).</p>
+  </div>
+</section>
+
+<!-- ================= M33 TAREA 3 · TABLA 6 ================= -->
+<section class="mod" id="m33">
+  <div class="modhead">
+    <div class="modnum" style="background:linear-gradient(140deg,var(--mg),var(--vi))">33</div>
+    <div><h2>Tarea 3 · Tabla 6 (preguntas 6 a 8)</h2><div class="modtag" style="color:var(--mg)">Regresión logística: crudo vs ajustado</div></div>
+  </div>
+
+  <div class="card" style="border-color:rgba(167,139,250,.25)">
+    <h3><span class="dot" style="background:var(--vi);box-shadow:0 0 12px var(--vi)"></span>Lo que dice la Tabla 6 (los números que vas a usar)</h3>
+    <div class="tw"><table>
+      <thead><tr><th>Variable</th><th>OR crudo (univariante)</th><th>OR ajustado (multivariante)</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Sexo (varón)</td><td>4,4 [1,1 – 19,7] · p=0,04</td><td>4,1 [0,8 – 19,9] · p=0,08</td></tr>
+        <tr><td class="k">CIR</td><td>7,4 [1,7 – 32,3] · p&lt;0,01</td><td>5,3 [1,1 – 26,4] · p=0,04</td></tr>
+        <tr><td class="k">Prematuridad tardía</td><td>2,7 [0,8 – 9,7] · p=0,1</td><td>1,9 [0,5 – 7,6] · p=0,3</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <!-- P6 -->
+  <div class="card">
+    <h3><span class="dot" style="background:var(--cy);box-shadow:0 0 12px var(--cy)"></span>Pregunta 6 · Sexo (varón): estimador puntual e IC</h3>
+    <p class="small"><i>Interpreta el OR crudo (4,4 [1,1–19,7]) y su IC. ¿Es significativo como magnitud del efecto?</i></p>
+    <p><b>Conecta con:</b> módulo 16/30 (leer el OR con su IC, la regla del 1) y módulo 14 (significativo ≠ magnitud confiable).</p>
+    <div class="pasos">
+      <div class="paso">
+        <h4>El estimador puntual (4,4)</h4>
+        <p class="small">Los varones tendrían <b>4,4 veces las chances</b> de riesgo de déficit del DPM comparados con las mujeres.</p>
+      </div>
+      <div class="paso">
+        <h4>El intervalo [1,1 – 19,7] y la regla del 1</h4>
+        <p class="small">El IC 95% <b>no incluye el 1</b> (arranca en 1,1), así que es <b>estadísticamente significativo</b> — coherente con p = 0,04.</p>
+      </div>
+      <div class="paso">
+        <h4>¿Significativo como magnitud? Con matiz</h4>
+        <p>Sí es significativo, <b>pero apenas y con mucha incertidumbre</b>: el límite inferior roza el 1 (1,1) y el intervalo es <b>enorme</b> (de 1,1 a 19,7). Con solo 11 niños con déficit en todo el estudio, el OR es significativo pero <b>muy impreciso</b>: como medida de magnitud es poco fiable.</p>
+        <span class="res">Significativo, pero de magnitud imprecisa (IC muy ancho)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- P7 -->
+  <div class="card">
+    <h3><span class="dot" style="background:var(--cy);box-shadow:0 0 12px var(--cy)"></span>Pregunta 7 · ¿Cuál variable tiene la magnitud más significativa?</h3>
+    <p class="small"><i>Identifica y justifica.</i></p>
+    <p><b>Conecta con:</b> módulo 20 (crudo vs ajustado) y módulo 30 (magnitud + IC).</p>
+    <span class="res">El CIR (crecimiento intrauterino restringido)</span>
+    <p style="margin-top:10px"><b>Justificación (tres razones):</b></p>
+    <ul class="neo">
+      <li>Tiene el <b>OR crudo más alto</b> (7,4) — la mayor magnitud de efecto.</li>
+      <li>Su IC [1,7 – 32,3] excluye el 1 <b>con más holgura</b> que el del sexo (p &lt; 0,01, más contundente que p = 0,04).</li>
+      <li>Es la <b>única que sigue siendo significativa tras el ajuste</b> multivariante (5,3 [1,1 – 26,4], p = 0,04): el factor independiente más robusto.</li>
+    </ul>
+  </div>
+
+  <!-- P8 -->
+  <div class="card">
+    <h3><span class="dot" style="background:var(--mg);box-shadow:0 0 12px var(--mg)"></span>Pregunta 8 · Sexo (varón): ¿qué pasa al ajustar?</h3>
+    <p class="small"><i>¿Qué cambia en el OR de "Sexo (varón)" al pasar a multivariado? ¿Cambia su significancia? Justifica.</i></p>
+    <p><b>Conecta con:</b> módulo 20 — este es, literalmente, el ejemplo estrella de la confusión (confounding).</p>
+    <div class="pasos">
+      <div class="paso">
+        <h4>Qué cambia en el número</h4>
+        <div class="calc">OR crudo (univariante):   4,4 [1,1 – 19,7]  · p = 0,04  (significativo)
+OR ajustado (multivariante): 4,1 [0,8 – 19,9]  · p = 0,08  (NO significativo)</div>
+        <p class="small">El estimador puntual casi no se mueve (4,4 → 4,1), pero el IC se desplaza y <b>ahora incluye el 1</b> (baja a 0,8).</p>
+      </div>
+      <div class="paso">
+        <h4>¿Cambia la significancia? Sí</h4>
+        <p>Al incluir el 1, <b>pierde la significación</b> (p pasa de 0,04 a 0,08). El sexo deja de ser un factor de riesgo significativo cuando se ajusta por las demás variables.</p>
+      </div>
+      <div class="paso">
+        <h4>Por qué: confusión</h4>
+        <p>Casi todos los niños con déficit eran varones <b>y</b> tenían CIR. El sexo "viajaba a caballo" del CIR: parecía predecir el riesgo, pero su efecto aparente lo explicaba en buena parte el CIR. Al descontar el CIR en el modelo multivariante, al sexo no le queda efecto propio → deja de ser significativo (módulo 20).</p>
+        <span class="res">Pierde significancia por confusión; el factor real es el CIR</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="idea" style="border-color:rgba(244,114,182,.35);background:rgba(244,114,182,.07)">
+    <b style="color:var(--mg)">La síntesis de la tarea:</b> recorriste toda la cadena de inferencia sobre un paper real. Comparaste medias (edad, pregunta 1) y proporciones (patología, 3–5), interpretaste los errores (2), calculaste un χ² y un OR a mano (4–5), leíste magnitudes con su IC (6–7) y entendiste por qué un factor se desvanece al ajustar (8). <b>Eso es pensar como investigadora</b>, no como calculadora. Ahora escríbelo con tus palabras. 💪
+  </div>
 </section>
 
 <!-- ================= GLOSARIO ================= -->

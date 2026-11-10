@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fórmulas y glosario · Consulta rápida</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060911;--panel:rgba(16,24,43,.72);--line:rgba(120,160,220,.16);
+  --txt:#dbe6f5;--dim:#8ea0bd;--cy:#22d3ee;--vi:#a78bfa;--mg:#f472b6;
+  --li:#a3e635;--am:#fbbf24;--mono:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:'Inter',system-ui,sans-serif;
+  line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-1;
+  background:
+   radial-gradient(800px 500px at 15% -5%, rgba(163,230,53,.1), transparent 60%),
+   radial-gradient(800px 600px at 85% 5%, rgba(34,211,238,.1), transparent 60%),
+   var(--bg)}
+h1,h2,h3{font-family:'Sora',sans-serif;margin:0}
+a{color:var(--cy)}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+
+header.top{padding:40px 0 10px;text-align:center}
+.kicker{font-family:var(--mono);font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--li);margin-bottom:14px}
+header.top h1{font-size:clamp(1.8rem,6vw,2.6rem);font-weight:800;
+  background:linear-gradient(100deg,#fff 10%,var(--li) 55%,var(--cy) 90%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+header.top p{color:var(--dim);max-width:560px;margin:10px auto 0;font-size:1rem}
+.back{display:inline-block;margin-top:16px;font-size:.85rem;color:var(--dim);text-decoration:none;
+  border:1px solid var(--line);padding:7px 15px;border-radius:999px}
+.back:hover{color:var(--txt);border-color:var(--cy)}
+
+/* search */
+.searchbar{position:sticky;top:0;z-index:20;padding:16px 0;margin-top:18px;
+  backdrop-filter:blur(14px);background:rgba(6,9,17,.85);border-bottom:1px solid var(--line)}
+.searchbar input{width:100%;background:#070c16;border:1px solid var(--line);color:var(--txt);
+  border-radius:12px;padding:14px 18px;font-size:1rem;font-family:'Inter'}
+.searchbar input:focus{outline:none;border-color:var(--cy);box-shadow:0 0 0 3px rgba(34,211,238,.12)}
+.searchbar .hint{font-size:.74rem;color:var(--dim);margin-top:8px;font-family:var(--mono)}
+#nores{display:none;text-align:center;color:var(--dim);padding:40px 0;font-size:1rem}
+
+.group{margin:34px 0}
+.group>h2{font-size:1.15rem;color:#fff;margin-bottom:4px;display:flex;align-items:center;gap:10px}
+.group>h2 .bar{width:4px;height:20px;border-radius:3px;background:linear-gradient(var(--cy),var(--vi))}
+.group>.sub{font-size:.8rem;color:var(--dim);margin:0 0 14px 14px}
+
+/* items */
+.item{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+  padding:14px 16px;margin:10px 0}
+.item .iname{font-weight:700;font-size:.98rem;color:#fff;margin-bottom:8px}
+.item .iform{font-family:var(--mono);font-size:.9rem;background:#070c16;border:1px solid var(--line);
+  border-radius:9px;padding:10px 13px;overflow-x:auto;white-space:pre;color:#cfe4f7;margin-bottom:8px}
+.item .idesc{font-size:.88rem;color:var(--dim)}
+.item .idesc b{color:var(--txt)}
+
+/* reference tables */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:6px 0}
+table{border-collapse:collapse;width:100%;font-size:.86rem;min-width:360px}
+th,td{padding:8px 11px;text-align:center;border-bottom:1px solid rgba(120,160,220,.1)}
+th{background:rgba(255,255,255,.035);font-family:var(--mono);font-size:.72rem;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--dim)}
+td.k{font-family:var(--mono);color:var(--cy);font-weight:700;text-align:left}
+td.l{text-align:left}
+.hl{background:rgba(163,230,53,.16)!important;color:#fff;font-weight:700}
+.tag{display:inline-block;font-family:var(--mono);font-size:.68rem;padding:2px 8px;border-radius:999px;
+  border:1px solid var(--line);color:var(--dim);margin-left:8px}
+footer{margin-top:50px;padding:30px 0 60px;border-top:1px solid var(--line);text-align:center;color:var(--dim);font-size:.82rem}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="kicker">Consulta rápida · bioestadística</div>
+    <h1>Fórmulas &amp; Glosario</h1>
+    <p>Todo lo esencial en una sola página, para tener a mano en el estudio o en plena prueba. Escribe y filtra al instante.</p>
+    <a class="back" href="index.html">← Volver a la guía completa</a>
+  </div>
+</header>
+
+<div class="searchbar">
+  <div class="wrap">
+    <input id="q" type="search" placeholder="Buscar… (ej.: sensibilidad, chi-cuadrado, error estándar, OR)" autocomplete="off">
+    <div class="hint">Busca por nombre, símbolo o palabra clave. Sin tildes también funciona.</div>
+  </div>
+</div>
+
+<main class="wrap">
+<div id="nores">Sin resultados para esa búsqueda. Prueba con otra palabra.</div>
+
+<!-- ========== FÓRMULAS: DESCRIPTIVA ========== -->
+<section class="group">
+  <h2><span class="bar"></span>Fórmulas · Descriptiva</h2>
+  <p class="sub">Resumir un grupo de datos: su centro y su dispersión.</p>
+
+  <div class="item" data-text="media promedio x barra centro">
+    <div class="iname">Media (promedio) — x̄</div>
+    <div class="iform">x̄ = Σxᵢ ÷ n</div>
+    <div class="idesc">El centro: suma todos los valores y divide por cuántos son.</div>
+  </div>
+  <div class="item" data-text="mediana valor central percentil 50">
+    <div class="iname">Mediana</div>
+    <div class="iform">valor que deja 50% a cada lado (datos ordenados)</div>
+    <div class="idesc">Centro robusto: no la mueven los valores extremos. Mejor que la media si hay outliers.</div>
+  </div>
+  <div class="item" data-text="varianza muestral s cuadrado dispersion">
+    <div class="iname">Varianza muestral — s²</div>
+    <div class="iform">s² = Σ(xᵢ − x̄)² ÷ (n − 1)</div>
+    <div class="idesc">Promedio de las distancias al cuadrado. Se divide por <b>n−1</b> (corrige el sesgo al estimar).</div>
+  </div>
+  <div class="item" data-text="desviacion estandar s de dispersion">
+    <div class="iname">Desviación estándar — s</div>
+    <div class="iform">s = √s²</div>
+    <div class="idesc">Cuánto se aleja en promedio cada dato del promedio, en las unidades originales.</div>
+  </div>
+  <div class="item" data-text="error estandar EE SE media precision">
+    <div class="iname">Error estándar — EE</div>
+    <div class="iform">EE = s ÷ √n</div>
+    <div class="idesc">Qué tan precisa es tu <b>media</b> (no los datos). Baja al crecer n.</div>
+  </div>
+  <div class="item" data-text="coeficiente de variacion CV">
+    <div class="iname">Coeficiente de variación — CV</div>
+    <div class="iform">CV = (s ÷ x̄) × 100</div>
+    <div class="idesc">Dispersión relativa (%). Permite comparar variabilidad entre variables con unidades distintas.</div>
+  </div>
+  <div class="item" data-text="rango intercuartilico RIC IQR cuartiles">
+    <div class="iname">Rango intercuartílico — RIC</div>
+    <div class="iform">RIC = Q3 − Q1</div>
+    <div class="idesc">El ancho del 50% central de los datos. Dispersión robusta que ignora las colas.</div>
+  </div>
+  <div class="item" data-text="razon de variacion V nominal moda">
+    <div class="iname">Razón de variación — V</div>
+    <div class="iform">V = (casos fuera de la moda ÷ n) × 100</div>
+    <div class="idesc">Dispersión para variables <b>nominales</b> (sin orden): qué tan mezclado está el grupo.</div>
+  </div>
+</section>
+
+<!-- ========== FÓRMULAS: PROBABILIDAD ========== -->
+<section class="group">
+  <h2><span class="bar"></span>Fórmulas · Probabilidad</h2>
+  <p class="sub">El lenguaje de la incertidumbre: proporciones entre 0 y 1.</p>
+
+  <div class="item" data-text="probabilidad simple casos favorables posibles">
+    <div class="iname">Probabilidad — P(A)</div>
+    <div class="iform">P(A) = casos favorables ÷ casos posibles</div>
+    <div class="idesc">Entre 0 y 1. Una proporción, nada más místico que eso.</div>
+  </div>
+  <div class="item" data-text="complemento probabilidad no A">
+    <div class="iname">Complemento — P(no A)</div>
+    <div class="iform">P(no A) = 1 − P(A)</div>
+    <div class="idesc">Lo que no ocurre. Siempre suman 1.</div>
+  </div>
+  <div class="item" data-text="probabilidad condicional dado que P A dado B">
+    <div class="iname">Probabilidad condicional — P(A|B)</div>
+    <div class="iform">P(A|B) = P(A y B) ÷ P(B)</div>
+    <div class="idesc">"A dado que ocurrió B". Cambias el denominador: miras solo el subgrupo B. Ojo: P(A|B) ≠ P(B|A).</div>
+  </div>
+  <div class="item" data-text="regla multiplicacion interseccion y">
+    <div class="iname">Regla de la multiplicación — P(A y B)</div>
+    <div class="iform">P(A y B) = P(B) × P(A|B)</div>
+    <div class="idesc">Probabilidad de que ocurran ambos.</div>
+  </div>
+  <div class="item" data-text="regla suma union o">
+    <div class="iname">Regla de la suma — P(A o B)</div>
+    <div class="iform">P(A o B) = P(A) + P(B) − P(A y B)</div>
+    <div class="idesc">Se resta la intersección para no contarla dos veces.</div>
+  </div>
+  <div class="item" data-text="independencia eventos independientes">
+    <div class="iname">Independencia</div>
+    <div class="iform">A y B independientes  ⟺  P(A y B) = P(A) × P(B)</div>
+    <div class="idesc">Si no se cumple, un evento cambia la probabilidad del otro (están asociados).</div>
+  </div>
+</section>
+
+<!-- ========== FÓRMULAS: ESTANDARIZACIÓN ========== -->
+<section class="group">
+  <h2><span class="bar"></span>Fórmulas · Estandarización (z)</h2>
+  <p class="sub">Traducir cualquier escala a "cuántas desviaciones del promedio".</p>
+
+  <div class="item" data-text="z score puntaje estandar estandarizacion">
+    <div class="iname">z-score de un dato</div>
+    <div class="iform">z = (x − μ) ÷ σ</div>
+    <div class="idesc">A qué distancia del centro está el dato, medida en desviaciones estándar. Borra las unidades.</div>
+  </div>
+  <div class="item" data-text="z de un promedio media tcl">
+    <div class="iname">z de un promedio</div>
+    <div class="iform">z = (x̄ − μ) ÷ EE      (EE = σ ÷ √n)</div>
+    <div class="idesc">Para preguntas sobre un <b>promedio</b> (no un individuo): usa el error estándar, no σ.</div>
+  </div>
+  <div class="item" data-text="regla 68 95 99.7 empirica normal">
+    <div class="iname">Regla 68–95–99,7</div>
+    <div class="iform">±1σ → 68%   ·   ±2σ → 95%   ·   ±3σ → 99,7%</div>
+    <div class="idesc">Cuánto cae dentro de 1, 2 y 3 desviaciones en una distribución normal.</div>
+  </div>
+  <div class="item" data-text="teorema central limite TCL error estandar medias">
+    <div class="iname">Teorema Central del Límite</div>
+    <div class="iform">media de las medias = μ   ·   dispersión = σ ÷ √n</div>
+    <div class="idesc">Aunque los datos no sean normales, el <b>promedio de muestras</b> sí lo es (con n grande). Es el motor de toda la inferencia.</div>
+  </div>
+</section>
+
+<!-- ========== FÓRMULAS: INTERVALOS ========== -->
+<section class="group">
+  <h2><span class="bar"></span>Fórmulas · Intervalos de confianza</h2>
+  <p class="sub">Tu estimación, más su margen de error honesto.</p>
+
+  <div class="item" data-text="intervalo confianza media t student IC">
+    <div class="iname">IC 95% para una media</div>
+    <div class="iform">IC = x̄ ± t · (s ÷ √n)</div>
+    <div class="idesc">Usa el valor <b>t</b> (gl = n−1). Con n grande, t ≈ z = 1,96.</div>
+  </div>
+  <div class="item" data-text="intervalo confianza proporcion z porcentaje IC">
+    <div class="iname">IC 95% para una proporción</div>
+    <div class="iform">IC = p̂ ± z · √( p̂(1−p̂) ÷ n )</div>
+    <div class="idesc">Las proporciones usan la <b>normal (z = 1,96)</b>, no la t.</div>
+  </div>
+  <div class="item" data-text="margen de error valor critico error estandar">
+    <div class="iname">Margen de error</div>
+    <div class="iform">margen = valor crítico × error estándar</div>
+    <div class="idesc">La estructura común de todo IC: estimación ± (crítico × EE).</div>
+  </div>
+  <div class="item" data-text="regla del 1 OR RR intervalo significativo">
+    <div class="iname">Regla del 1 (para OR y RR)</div>
+    <div class="iform">IC contiene 1  → NO significativo
+IC no contiene 1 → SÍ significativo</div>
+    <div class="idesc">Para diferencias el valor nulo es 0; para OR/RR es <b>1</b>.</div>
+  </div>
+</section>
+
+<!-- ========== FÓRMULAS: COMPARAR MEDIAS ========== -->
+<section class="group">
+  <h2><span class="bar"></span>Fórmulas · Comparar medias</h2>
+  <p class="sub">Inferencia sobre promedios (ver "¿Qué prueba uso?" más abajo).</p>
+
+  <div class="item" data-text="t student pareada diferencias pre post">
+    <div class="iname">t de Student pareada</div>
+    <div class="iform">t = d̄ ÷ (s_d ÷ √n)        gl = n − 1</div>
+    <div class="idesc">d = diferencia individual (post − pre). Se testea si la media de las diferencias ≠ 0.</div>
+  </div>
+  <div class="item" data-text="grados de libertad gl df">
+    <div class="iname">Grados de libertad (gl)</div>
+    <div class="iform">1 muestra o pareada:  gl = n − 1
+2 grupos independientes: gl = n₁ + n₂ − 2</div>
+    <div class="idesc">La fila por la que entras a la tabla t.</div>
+  </div>
+  <div class="item" data-text="tamaño del efecto d de cohen magnitud">
+    <div class="iname">Tamaño del efecto — d de Cohen</div>
+    <div class="iform">d = diferencia de medias ÷ s</div>
+    <div class="idesc">Cuán grande es el efecto (0,2 pequeño · 0,5 medio · 0,8 grande). Complementa al valor p.</div>
+  </div>
+</section>
+
+<!-- ========== FÓRMULAS: ASOCIACIÓN CATEGÓRICA ========== -->
+<section class="group">
+  <h2><span class="bar"></span>Fórmulas · Asociación categórica-categórica</h2>
+  <p class="sub">Comparar proporciones con la tabla 2×2 (celdas a, b, c, d).</p>
+
+  <div class="item" data-text="chi cuadrado general observado esperado">
+    <div class="iname">Chi-cuadrado (general)</div>
+    <div class="iform">χ² = Σ (O − E)² ÷ E</div>
+    <div class="idesc">Suma de distancias entre lo observado (O) y lo esperado bajo H₀ (E). Grande → asociación.</div>
+  </div>
+  <div class="item" data-text="chi cuadrado 2x2 reducido producto">
+    <div class="iname">Chi-cuadrado 2×2 (reducido)</div>
+    <div class="iform">χ²₀ = n(ad − bc)² ÷ [(a+b)(c+d)(a+c)(b+d)]</div>
+    <div class="idesc">Atajo para tablas 2×2. Equivale a la fórmula general.</div>
+  </div>
+  <div class="item" data-text="frecuencia esperada E margenes">
+    <div class="iname">Frecuencia esperada — E</div>
+    <div class="iform">E = (total de fila × total de columna) ÷ n</div>
+    <div class="idesc">Cuántos habría en cada celda si no hubiera asociación. Si algún E &lt; 5 → usa test de Fisher.</div>
+  </div>
+  <div class="item" data-text="grados libertad chi cuadrado filas columnas">
+    <div class="iname">gl del chi-cuadrado</div>
+    <div class="iform">gl = (filas − 1) × (columnas − 1)</div>
+    <div class="idesc">Para una 2×2 → gl = 1 → corte 3,84.</div>
+  </div>
+  <div class="item" data-text="riesgo relativo RR prospectivo incidencia">
+    <div class="iname">Riesgo relativo — RR</div>
+    <div class="iform">RR = [a ÷ (a+b)] ÷ [c ÷ (c+d)]</div>
+    <div class="idesc">Razón de riesgos (probabilidades). Estudios prospectivos. RR=1 sin efecto, &gt;1 riesgo, &lt;1 protector.</div>
+  </div>
+  <div class="item" data-text="odds ratio OR razon de chance producto cruzado">
+    <div class="iname">Odds ratio — OR</div>
+    <div class="iform">OR = (a · d) ÷ (b · c)   ("producto cruzado")</div>
+    <div class="idesc">Razón de chances. Caso-control y regresión logística. Exagera al RR si el evento es frecuente.</div>
+  </div>
+  <div class="item" data-text="expresar magnitud OR RR porcentaje veces">
+    <div class="iname">Cómo expresar la magnitud</div>
+    <div class="iform">entre 1 y 2 → %  (1,65 = "65% más")
+mayor que 2 → veces (3,0 = "3 veces más")
+menor que 1 → diferencia con 1 (0,65 = "35% menos")</div>
+    <div class="idesc">Regla para poner un OR/RR en palabras.</div>
+  </div>
+</section>
+
+<!-- ========== FÓRMULAS: PRUEBAS DIAGNÓSTICAS ========== -->
+<section class="group">
+  <h2><span class="bar"></span>Fórmulas · Pruebas diagnósticas</h2>
+  <p class="sub">Tabla 2×2 del test contra el patrón de oro (VP, FP, FN, VN).</p>
+
+  <div class="item" data-text="sensibilidad Se detecta enfermos">
+    <div class="iname">Sensibilidad — Se</div>
+    <div class="iform">Se = VP ÷ (VP + FN)</div>
+    <div class="idesc">De los enfermos, cuántos detecta. Alta Se = no se le escapan casos (buena para cribado).</div>
+  </div>
+  <div class="item" data-text="especificidad Sp descarta sanos">
+    <div class="iname">Especificidad — Sp</div>
+    <div class="iform">Sp = VN ÷ (VN + FP)</div>
+    <div class="idesc">De los sanos, cuántos descarta bien. Alta Sp = pocas falsas alarmas.</div>
+  </div>
+  <div class="item" data-text="valor predictivo positivo VPP prevalencia">
+    <div class="iname">Valor predictivo positivo — VPP</div>
+    <div class="iform">VPP = VP ÷ (VP + FP)</div>
+    <div class="idesc">Si el test da +, probabilidad de estar enfermo. <b>Depende de la prevalencia.</b></div>
+  </div>
+  <div class="item" data-text="valor predictivo negativo VPN">
+    <div class="iname">Valor predictivo negativo — VPN</div>
+    <div class="iform">VPN = VN ÷ (VN + FN)</div>
+    <div class="idesc">Si el test da −, probabilidad de estar sano. También depende de la prevalencia.</div>
+  </div>
+  <div class="item" data-text="razon de verosimilitud LR mas menos likelihood">
+    <div class="iname">Razones de verosimilitud — LR</div>
+    <div class="iform">LR+ = Se ÷ (1 − Sp)
+LR− = (1 − Se) ÷ Sp</div>
+    <div class="idesc">Cuánto cambia la probabilidad del diagnóstico. <b>No dependen de la prevalencia.</b></div>
+  </div>
+  <div class="item" data-text="prevalencia exactitud accuracy">
+    <div class="iname">Prevalencia y exactitud</div>
+    <div class="iform">Prevalencia = (VP + FN) ÷ total
+Exactitud   = (VP + VN) ÷ total</div>
+    <div class="idesc">Prevalencia = cuántos enfermos hay. Exactitud = proporción total de aciertos.</div>
+  </div>
+</section>
+
+<!-- ========== VALORES CRÍTICOS ========== -->
+<section class="group">
+  <h2><span class="bar"></span>Valores críticos de referencia</h2>
+  <p class="sub">Los cortes que más vas a usar.</p>
+
+  <div class="item" data-text="valores z normal 90 95 99 confianza critico 1.96 1.645 2.576">
+    <div class="iname">Normal (z) — por nivel de confianza</div>
+    <div class="tw"><table>
+      <thead><tr><th>Confianza</th><th>α</th><th>z crítico (bilateral)</th></tr></thead>
+      <tbody>
+        <tr><td class="k">90%</td><td>0,10</td><td>1,645</td></tr>
+        <tr><td class="k">95%</td><td>0,05</td><td class="hl">1,96</td></tr>
+        <tr><td class="k">99%</td><td>0,01</td><td>2,576</td></tr>
+      </tbody>
+    </table></div>
+    <div class="idesc">Para proporciones, y para medias con muestra grande.</div>
+  </div>
+  <div class="item" data-text="valores t student critico grados libertad convergencia">
+    <div class="iname">t de Student (α = 0,05 bilateral)</div>
+    <div class="tw"><table>
+      <thead><tr><th>gl</th><th>t</th><th>gl</th><th>t</th></tr></thead>
+      <tbody>
+        <tr><td class="k">1</td><td>12,71</td><td class="k">15</td><td>2,131</td></tr>
+        <tr><td class="k">5</td><td>2,571</td><td class="k">20</td><td>2,086</td></tr>
+        <tr><td class="k">8</td><td>2,306</td><td class="k">30</td><td>2,042</td></tr>
+        <tr><td class="k">9</td><td>2,262</td><td class="k">60</td><td>2,000</td></tr>
+        <tr><td class="k">10</td><td>2,228</td><td class="k">∞ (z)</td><td>1,960</td></tr>
+      </tbody>
+    </table></div>
+    <div class="idesc">Para medias con σ desconocido. Fíjate cómo baja hacia 1,96 al crecer gl.</div>
+  </div>
+  <div class="item" data-text="valores chi cuadrado critico grados libertad 3.84">
+    <div class="iname">Chi-cuadrado (α = 0,05)</div>
+    <div class="tw"><table>
+      <thead><tr><th>gl</th><th>tabla</th><th>χ² crítico</th></tr></thead>
+      <tbody>
+        <tr><td class="k">1</td><td>2×2</td><td class="hl">3,84</td></tr>
+        <tr><td class="k">2</td><td>3×2</td><td>5,99</td></tr>
+        <tr><td class="k">3</td><td>4×2</td><td>7,81</td></tr>
+        <tr><td class="k">4</td><td>5×2 · 3×3</td><td>9,49</td></tr>
+        <tr><td class="k">5</td><td>6×2</td><td>11,07</td></tr>
+      </tbody>
+    </table></div>
+    <div class="idesc">Para asociación entre categóricas. Si χ²₀ supera el corte → hay asociación.</div>
+  </div>
+</section>
+
+<!-- ========== QUÉ PRUEBA USO ========== -->
+<section class="group">
+  <h2><span class="bar"></span>¿Qué prueba uso?</h2>
+  <p class="sub">Clasifica tus dos variables y la prueba aparece sola.</p>
+
+  <div class="item" data-text="que prueba uso grilla tipo variable categorica numerica chi t anova pearson">
+    <div class="iname">Según el tipo de las dos variables</div>
+    <div class="tw"><table>
+      <thead><tr><th>Variable Y</th><th>Variable X</th><th>Prueba</th></tr></thead>
+      <tbody>
+        <tr><td class="l">Categórica</td><td class="l">Categórica</td><td>Chi-cuadrado (χ²)</td></tr>
+        <tr><td class="l">Numérica</td><td class="l">Categórica (2)</td><td>t de Student</td></tr>
+        <tr><td class="l">Numérica</td><td class="l">Categórica (3+)</td><td>ANOVA</td></tr>
+        <tr><td class="l">Numérica</td><td class="l">Numérica</td><td>Correlación (r)</td></tr>
+      </tbody>
+    </table></div>
+    <div class="idesc">La rejilla madre del módulo 11.</div>
+  </div>
+  <div class="item" data-text="comparar medias independiente pareado anova mann whitney wilcoxon kruskal wallis friedman arbol">
+    <div class="iname">Comparar medias — el árbol completo</div>
+    <div class="tw"><table>
+      <thead><tr><th>Datos</th><th>Distribución</th><th>2 grupos</th><th>3 o más</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Independiente</td><td>Normal</td><td>t independiente</td><td>ANOVA</td></tr>
+        <tr><td class="k">Independiente</td><td>No normal</td><td>Mann-Whitney</td><td>Kruskal-Wallis</td></tr>
+        <tr><td class="k">Pareado</td><td>Normal</td><td>t pareada</td><td>ANOVA med. repetidas</td></tr>
+        <tr><td class="k">Pareado</td><td>No normal</td><td>Wilcoxon</td><td>Friedman</td></tr>
+      </tbody>
+    </table></div>
+    <div class="idesc">3 preguntas: ¿pareado o independiente? ¿2 o 3+? ¿normal o no? Post-hoc: Tukey/Bonferroni (ANOVA), Dunn (Kruskal-Wallis).</div>
+  </div>
+  <div class="item" data-text="que tabla t z chi cuadrado normal cuando usar">
+    <div class="iname">¿Qué tabla uso?</div>
+    <div class="tw"><table>
+      <thead><tr><th>Comparas…</th><th>Tabla</th></tr></thead>
+      <tbody>
+        <tr><td class="l">Promedios (σ desconocido)</td><td>t de Student (≈ z si n grande)</td></tr>
+        <tr><td class="l">Proporciones / RR / OR</td><td>Normal (z)</td></tr>
+        <tr><td class="l">Asociación entre categóricas</td><td>Chi-cuadrado</td></tr>
+      </tbody>
+    </table></div>
+    <div class="idesc">Tres tablas distintas según qué compares.</div>
+  </div>
+</section>
+
+<!-- ========== GLOSARIO ========== -->
+<section class="group">
+  <h2><span class="bar"></span>Glosario de términos y símbolos</h2>
+  <p class="sub">Cada etiqueta, traducida a castellano.</p>
+  <div class="tw" id="glostable"><table>
+    <thead><tr><th>Símbolo / término</th><th>Qué es</th></tr></thead>
+    <tbody>
+      <tr class="gitem" data-text="x barra media muestra"><td class="k">x̄</td><td class="l">Media de tu <b>muestra</b> ("equis barra").</td></tr>
+      <tr class="gitem" data-text="mu media poblacion parametro"><td class="k">μ</td><td class="l">Media de la <b>población</b> (casi nunca la conoces).</td></tr>
+      <tr class="gitem" data-text="s desviacion estandar muestra"><td class="k">s</td><td class="l">Desviación estándar de la muestra.</td></tr>
+      <tr class="gitem" data-text="sigma desviacion estandar poblacion"><td class="k">σ</td><td class="l">Desviación estándar poblacional ("sigma").</td></tr>
+      <tr class="gitem" data-text="varianza s sigma cuadrado"><td class="k">s² · σ²</td><td class="l">Varianza (la DE al cuadrado).</td></tr>
+      <tr class="gitem" data-text="n numero observaciones tamaño muestra"><td class="k">n</td><td class="l">Número de observaciones (tamaño de muestra).</td></tr>
+      <tr class="gitem" data-text="sumatoria suma sigma mayuscula"><td class="k">Σ</td><td class="l">Sumatoria: suma todo lo que viene después.</td></tr>
+      <tr class="gitem" data-text="error estandar EE SE"><td class="k">EE / SE</td><td class="l">Error estándar = s ÷ √n. Precisión de la media.</td></tr>
+      <tr class="gitem" data-text="grados de libertad gl df"><td class="k">gl / df</td><td class="l">Grados de libertad (normalmente n − 1).</td></tr>
+      <tr class="gitem" data-text="alfa significancia error tipo I"><td class="k">α</td><td class="l">Significancia; riesgo de error tipo I (usual 0,05). Lo que queda "afuera" del IC.</td></tr>
+      <tr class="gitem" data-text="beta error tipo II potencia"><td class="k">β</td><td class="l">Riesgo de error tipo II; potencia = 1 − β.</td></tr>
+      <tr class="gitem" data-text="p gorro proporcion muestral"><td class="k">p̂</td><td class="l">Proporción observada en la muestra ("p gorro").</td></tr>
+      <tr class="gitem" data-text="P proporcion poblacional parametro"><td class="k">P</td><td class="l">Proporción poblacional (parámetro).</td></tr>
+      <tr class="gitem" data-text="hipotesis nula alternativa H0 H1"><td class="k">H₀ / H₁</td><td class="l">Hipótesis nula (no pasa nada) / alternativa (sí).</td></tr>
+      <tr class="gitem" data-text="phi fi z acumulada area izquierda"><td class="k">Φ(z)</td><td class="l">Proporción acumulada a la izquierda de z (cuerpo de la tabla Z).</td></tr>
+      <tr class="gitem" data-text="IC intervalo de confianza"><td class="k">IC</td><td class="l">Intervalo de confianza.</td></tr>
+      <tr class="gitem" data-text="confianza nivel 1 menos alfa"><td class="k">confianza</td><td class="l">Nivel de confianza = 1 − α; el "adentro" (ej. 95%).</td></tr>
+      <tr class="gitem" data-text="valor critico z t corte"><td class="k">valor crítico</td><td class="l">El z o t que deja α en la(s) cola(s); la "frontera" del IC.</td></tr>
+      <tr class="gitem" data-text="RIC IQR rango intercuartilico"><td class="k">RIC / IQR</td><td class="l">Rango intercuartílico (Q3 − Q1).</td></tr>
+      <tr class="gitem" data-text="V razon de variacion nominal"><td class="k">V</td><td class="l">Razón de variación (dispersión de una variable nominal).</td></tr>
+      <tr class="gitem" data-text="MCID minima diferencia clinicamente importante relevancia"><td class="k">MCID</td><td class="l">Mínima diferencia clínicamente importante (umbral de relevancia, no de significación).</td></tr>
+      <tr class="gitem" data-text="chi cuadrado ji asociacion categorica"><td class="k">χ²</td><td class="l">Prueba para asociación categórica-categórica ("ji" o "chi cuadrado").</td></tr>
+      <tr class="gitem" data-text="anova F comparar medias"><td class="k">ANOVA / F</td><td class="l">Compara 3+ medias a la vez (medidas repetidas si es pareado).</td></tr>
+      <tr class="gitem" data-text="r correlacion pearson numerica"><td class="k">r</td><td class="l">Correlación de Pearson (numérica-numérica).</td></tr>
+      <tr class="gitem" data-text="independiente grupos distintos"><td class="k">independiente</td><td class="l">Grupos de personas distintas (los ID no se repiten).</td></tr>
+      <tr class="gitem" data-text="pareado mismas personas pre post diferencias"><td class="k">pareado</td><td class="l">Mismas personas medidas 2+ veces; se analiza con las diferencias.</td></tr>
+      <tr class="gitem" data-text="mann whitney U no parametrica independiente"><td class="k">Mann-Whitney</td><td class="l">No paramétrica para 2 grupos independientes (en vez de t independiente).</td></tr>
+      <tr class="gitem" data-text="wilcoxon rangos signados pareada no parametrica"><td class="k">Wilcoxon</td><td class="l">No paramétrica para 2 medidas pareadas (en vez de t pareada).</td></tr>
+      <tr class="gitem" data-text="kruskal wallis no parametrica anova"><td class="k">Kruskal-Wallis</td><td class="l">No paramétrica para 3+ grupos independientes (en vez de ANOVA).</td></tr>
+      <tr class="gitem" data-text="friedman no parametrica medidas repetidas"><td class="k">Friedman</td><td class="l">No paramétrica para 3+ medidas pareadas.</td></tr>
+      <tr class="gitem" data-text="post hoc comparaciones multiples tukey bonferroni dunn"><td class="k">post-hoc</td><td class="l">Comparaciones múltiples tras un ANOVA/KW significativo (Tukey, Bonferroni, Dunn).</td></tr>
+      <tr class="gitem" data-text="shapiro wilk normalidad"><td class="k">Shapiro-Wilk</td><td class="l">Prueba de normalidad; p &lt; 0,05 → los datos NO son normales.</td></tr>
+      <tr class="gitem" data-text="homocedasticidad varianzas iguales"><td class="k">homocedasticidad</td><td class="l">Varianzas parecidas entre grupos; en duda, asume varianzas distintas.</td></tr>
+      <tr class="gitem" data-text="OR odds ratio razon chance"><td class="k">OR</td><td class="l">Odds ratio (razón de chances); OR = 1 → sin asociación.</td></tr>
+      <tr class="gitem" data-text="RR riesgo relativo"><td class="k">RR</td><td class="l">Riesgo relativo (razón de riesgos); RR = 1 → sin asociación.</td></tr>
+      <tr class="gitem" data-text="sensibilidad especificidad Se Sp"><td class="k">Se / Sp</td><td class="l">Sensibilidad (detecta enfermos) / Especificidad (descarta sanos).</td></tr>
+      <tr class="gitem" data-text="VPP VPN valor predictivo prevalencia"><td class="k">VPP / VPN</td><td class="l">Valor predictivo positivo / negativo (dependen de la prevalencia).</td></tr>
+      <tr class="gitem" data-text="LR razon verosimilitud likelihood"><td class="k">LR+ / LR−</td><td class="l">Razones de verosimilitud (no dependen de la prevalencia).</td></tr>
+      <tr class="gitem" data-text="ROC AUC curva area discriminacion"><td class="k">ROC / AUC</td><td class="l">Curva Se vs 1−Sp / área bajo ella (0,5 a 1).</td></tr>
+      <tr class="gitem" data-text="VP FP FN VN verdaderos falsos positivos negativos"><td class="k">VP·FP·FN·VN</td><td class="l">Verdaderos/falsos positivos y negativos (las 4 casillas del test).</td></tr>
+      <tr class="gitem" data-text="crudo ajustado univariante multivariante"><td class="k">crudo / ajustado</td><td class="l">OR univariante (solo) vs multivariante (descontando otras variables).</td></tr>
+      <tr class="gitem" data-text="confusion confounding variable"><td class="k">confusión</td><td class="l">Un factor que hace parecer efecto propio lo que es de otra variable (confounding).</td></tr>
+      <tr class="gitem" data-text="tabla 2x2 contingencia celdas a b c d"><td class="k">tabla 2×2</td><td class="l">Evento (Y) en columnas, exposición (X) en filas; celdas a, b, c, d.</td></tr>
+      <tr class="gitem" data-text="prospectivo cohorte RR hacia el lado"><td class="k">prospectivo</td><td class="l">Cohorte: sigues expuestos/no expuestos hacia adelante; usa RR.</td></tr>
+      <tr class="gitem" data-text="caso control retrospectivo OR hacia abajo"><td class="k">caso-control</td><td class="l">Retrospectivo: partes de casos/controles y miras atrás; usa OR.</td></tr>
+      <tr class="gitem" data-text="transversal prevalencia foto"><td class="k">transversal</td><td class="l">Una foto en el tiempo; se puede leer en cualquier sentido.</td></tr>
+      <tr class="gitem" data-text="producto cruzado OR ad bc"><td class="k">producto cruzado</td><td class="l">Atajo del OR: (a·d) ÷ (b·c).</td></tr>
+      <tr class="gitem" data-text="forest plot grafico OR RR referencia 1"><td class="k">forest plot</td><td class="l">Gráfico de varios RR/OR con línea de referencia en 1 (riesgo &gt;1, protector &lt;1).</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>🧠 Página de consulta rápida · complemento de la <a href="index.html">guía visual de bioestadística</a></p>
+    <p style="font-size:.78rem;opacity:.7">Los valores críticos son los estándar; los ejemplos de la guía son ilustrativos.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const input=document.getElementById('q');
+  const items=[...document.querySelectorAll('.item')];
+  const gitems=[...document.querySelectorAll('.gitem')];
+  const groups=[...document.querySelectorAll('.group')];
+  const glostable=document.getElementById('glostable');
+  const nores=document.getElementById('nores');
+  const norm=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+  function filter(){
+    const q=norm(input.value.trim());
+    let anyGlobal=false;
+    items.forEach(it=>{
+      const show=!q || norm(it.dataset.text).includes(q) || norm(it.textContent).includes(q);
+      it.style.display=show?'':'none';
+    });
+    gitems.forEach(r=>{
+      const show=!q || norm(r.dataset.text).includes(q) || norm(r.textContent).includes(q);
+      r.style.display=show?'':'none';
+    });
+    groups.forEach(g=>{
+      const visItems=[...g.querySelectorAll('.item')].some(it=>it.style.display!=='none');
+      const visG=[...g.querySelectorAll('.gitem')].some(r=>r.style.display!=='none');
+      const show=visItems||visG;
+      g.style.display=show?'':'none';
+      if(show)anyGlobal=true;
+    });
+    nores.style.display=anyGlobal?'none':'block';
+  }
+  input.addEventListener('input',filter);
+})();
+</script>
+</body>
+</html>

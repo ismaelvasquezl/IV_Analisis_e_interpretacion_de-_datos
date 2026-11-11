@@ -232,6 +232,7 @@ mark{background:rgba(34,211,238,.22);color:#fff;padding:1px 4px;border-radius:4p
     <a href="#b7" style="color:var(--mg)">● Tarea 3 resuelta</a>
     <a href="#m32">32 · Tarea 3 · Tabla 2</a>
     <a href="#m33">33 · Tarea 3 · Tabla 6</a>
+    <a href="#m34" style="color:var(--cy)">34 · ¿Orden de la tabla 2×2?</a>
     <a href="#glos">Glosario</a>
     <a href="formulario.html" style="color:var(--li)">📋 Fórmulas</a>
   </div>
@@ -3171,6 +3172,83 @@ OR ajustado (multivariante): 4,1 [0,8 – 19,9]  · p = 0,08  (NO significativo)
 
   <div class="idea" style="border-color:rgba(244,114,182,.35);background:rgba(244,114,182,.07)">
     <b style="color:var(--mg)">La síntesis de la tarea:</b> recorriste toda la cadena de inferencia sobre un paper real. Comparaste medias (edad, pregunta 1) y proporciones (patología, 3–5), interpretaste los errores (2), calculaste un χ² y un OR a mano (4–5), leíste magnitudes con su IC (6–7) y entendiste por qué un factor se desvanece al ajustar (8). <b>Eso es pensar como investigadora</b>, no como calculadora. Ahora escríbelo con tus palabras. 💪
+  </div>
+</section>
+
+<!-- ================= M34 ¿ORDEN DE LA TABLA? (CAJA DE PREGUNTAS) ================= -->
+<section class="mod" id="m34" style="border-top:1px solid var(--cy);margin-top:60px">
+  <div style="text-align:center;padding:24px 0 2px">
+    <div class="kicker" style="color:var(--cy)">Caja de preguntas · sigue creciendo</div>
+  </div>
+  <div class="modhead" style="margin-top:10px">
+    <div class="modnum" style="background:linear-gradient(140deg,var(--cy),var(--vi))">34</div>
+    <div><h2>¿Importa cómo oriento la tabla 2×2?</h2><div class="modtag" style="color:var(--cy)">Filas, columnas, outcome y diseño del estudio</div></div>
+  </div>
+
+  <div class="card escena">
+    <h3><span class="dot"></span>La duda</h3>
+    <p><i>"En la pregunta 4 no planteé la tabla igual que en el HTML. Yo tenía la idea de poner el <b>outcome hacia el lado</b> (columnas), pero en bioestadística lo plantearon como variable dependiente/independiente… y si lo pienso desde la metodología, al ser un estudio retrospectivo, partiría del outcome y terminaría con la patología materna."</i></p>
+    <p class="small">Esta observación es de las más finas de todo el curso: estás conectando la <b>estadística</b> con el <b>diseño metodológico</b>. Y tienes razón en lo esencial. Vamos a ordenarlo.</p>
+  </div>
+
+  <div class="idea">
+    <b>La tranquilidad primero:</b> tu tabla da <b>exactamente el mismo resultado</b>. No hay un único orden "correcto" para el test: el <b>χ² no cambia</b> si transpones la tabla o la giras. Planteaste bien.
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--li);box-shadow:0 0 12px var(--li)"></span>El χ² es invariante: míralo en las dos orientaciones</h3>
+    <p class="small">Tu versión (patología en columnas) y la transpuesta (patología en filas) dan el mismo número:</p>
+    <div style="display:flex;gap:14px;flex-wrap:wrap">
+      <div style="flex:1 1 240px">
+        <p class="small" style="margin:0 0 4px"><b>Orientación A</b> (grupo en filas)</p>
+        <div class="tw"><table>
+          <thead><tr><th></th><th>Pat +</th><th>Pat −</th></tr></thead>
+          <tbody><tr><td class="k">PT</td><td>78</td><td>117</td></tr><tr><td class="k">RNAT</td><td>84</td><td>306</td></tr></tbody>
+        </table></div>
+        <p class="small" style="text-align:center;margin-top:6px">χ² = <b style="color:var(--li)">22,13</b> · OR = <b style="color:var(--li)">2,43</b></p>
+      </div>
+      <div style="flex:1 1 240px">
+        <p class="small" style="margin:0 0 4px"><b>Orientación B</b> (patología en filas)</p>
+        <div class="tw"><table>
+          <thead><tr><th></th><th>PT</th><th>RNAT</th></tr></thead>
+          <tbody><tr><td class="k">Pat +</td><td>78</td><td>84</td></tr><tr><td class="k">Pat −</td><td>117</td><td>306</td></tr></tbody>
+        </table></div>
+        <p class="small" style="text-align:center;margin-top:6px">χ² = <b style="color:var(--li)">22,13</b> · OR = <b style="color:var(--li)">2,43</b></p>
+      </div>
+    </div>
+    <p class="small" style="margin-top:10px">El χ² mide si las dos variables son <b>independientes</b>, y eso es una propiedad simétrica: no importa cuál llames "fila" y cuál "columna". Idéntico resultado.</p>
+  </div>
+
+  <div class="card trampa">
+    <h3><span class="dot"></span>El OR sí tiene un matiz de orden (el único cuidado real)</h3>
+    <p>El OR también es invariante al <b>transponer</b> (2,43 en las dos de arriba). Pero <b>se invierte</b> si cambias el orden de <i>una sola</i> dimensión — por ejemplo, si pones "Pat −" antes que "Pat +":</p>
+    <div class="calc">OR en la dirección "riesgo":   2,43   (chances de TENER patología)
+OR si inviertes una columna:   0,41   (= 1 ÷ 2,43, chances de NO tenerla)</div>
+    <p class="small">Son el <b>mismo resultado</b> leído al revés (2,43 y 0,41 son recíprocos). <mark>Por eso existe la convención</mark>: poner el evento "+" y la exposición "+" primero asegura que el OR salga &gt; 1 en la dirección de riesgo que esperas. El χ², en cambio, no se inmuta con nada de esto.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--vi);box-shadow:0 0 12px var(--vi)"></span>Vocabulario: "dependiente/independiente" = "evento/exposición"</h3>
+    <p>Lo que en metodología llamas <b>variable dependiente</b> (el outcome, la respuesta) es lo mismo que en la tabla llamamos <b>evento (Y)</b>. Y la <b>independiente</b> (el factor) es la <b>exposición (X)</b>. La convención del curso —<b>evento Y en columnas, exposición X en filas</b>— <b>coincide con tu instinto</b> de poner el outcome "hacia el lado". No estabas en contra de la convención: estabas aplicándola.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--cy);box-shadow:0 0 12px var(--cy)"></span>Y tu intuición metodológica: correcta</h3>
+    <p>Pensaste bien: como es un <b>estudio retrospectivo</b>, conceptualmente se "parte del outcome" y se mira hacia atrás la exposición. Eso es exactamente lo del módulo 28 ("hacia el lado vs hacia abajo"). Pero fíjate en el reparto de tareas:</p>
+    <ul class="neo">
+      <li>El <b>diseño</b> (retrospectivo) decide <b>cómo interpretas</b> las proporciones y <b>qué medida de magnitud</b> usas → <b>OR</b> (no RR). Por eso la pregunta 5 pedía OR.</li>
+      <li>El <b>diseño NO cambia</b> el valor del <b>χ²</b> ni el valor del <b>OR</b>. El test de asociación es el mismo en prospectivo, retrospectivo o transversal (módulo 28).</li>
+    </ul>
+    <p class="small">O sea: tu forma de ordenar la tabla refleja bien el diseño, y además da el mismo resultado. Dos aciertos en una.</p>
+  </div>
+
+  <details class="q">
+    <summary>Recupera: un compañero arma la tabla transpuesta respecto a la tuya. ¿Tendrán distinto χ²? ¿Y distinto OR?</summary>
+    <p><b>Mismo χ²</b> (es invariante a transponer) y <b>mismo OR</b> (transponer no lo cambia). Solo diferirían si uno de los dos invierte el <i>orden</i> de una fila o columna (ej. "no evento" primero): ahí el OR saldría como su recíproco (2,43 vs 0,41), que es la misma asociación leída al revés. El χ² seguiría idéntico.</p>
+  </details>
+
+  <div class="idea" style="border-color:rgba(34,211,238,.35);background:rgba(34,211,238,.07)">
+    <b style="color:var(--cy)">En una frase:</b> orienta la tabla como te resulte natural (tu instinto del outcome en columnas es correcto y es la convención). El <b>χ² da igual siempre</b>; en el <b>OR</b> solo cuida el <i>orden</i> para leerlo en la dirección de riesgo. Y conectar la tabla con el diseño del estudio, como hiciste, es pensar como investigadora. 👏
   </div>
 </section>
 
